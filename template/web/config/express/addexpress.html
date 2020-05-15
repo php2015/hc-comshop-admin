@@ -1,0 +1,48 @@
+{template '_header'}
+<div class="page-header">
+    当前位置：
+    <span class="text-primary">
+        {if !empty($item['id'])}编辑{else}添加{/if}快递 <small>{if !empty($item['id'])}修改【{$item['name']}】{/if}</small>
+    </span>
+</div>
+<div class="page-content">
+    <div class="page-sub-toolbar">
+        <span class=''>
+            <a class="btn btn-primary btn-sm" href="{php echo shopUrl('config.express.addexpress')}">添加快递</a>
+		</span>
+    </div>
+    <form action="" method="post" class="form-horizontal form-validate" enctype="multipart/form-data" >
+		<input type="hidden" name="data[id]" value="{$item['id']}" />
+        <div class="form-group">
+            <label class="col-lg control-label must">快递名称</label>
+            <div class="col-sm-9 col-xs-12">
+                <input type="text" name="data[name]" class="form-control" value="{$item['name']}" data-rule-required="true" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg control-label must">快递简码</label>
+            <div class="col-sm-9 col-xs-12">
+                <input type="text" name="data[simplecode]" class="form-control" value="{$item['simplecode']}" data-rule-required="true" />
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="col-lg control-label"></label>
+            <div class="col-sm-9 col-xs-12">
+                
+                <input type="submit" value="提交" class="btn btn-primary"  />
+				<a href="{php echo shopUrl('config.express.config')}" style='margin-left:10px;' value="返回列表" class="btn btn-default">返回列表</a>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+
+    
+    require(['jquery.ui'],function(){
+        $('#tbody-items').sortable();
+    })
+    
+
+</script>
+{template '_footer'}

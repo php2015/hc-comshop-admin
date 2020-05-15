@@ -1,0 +1,17 @@
+<div style='max-height:500px;overflow:auto;min-width:850px;'>
+    <div class="active" id="sut_shop">
+        <div style="padding:0;margin-top:10px;">
+            {loop $labels $row}
+                <nav class="btn btn-default btn-sm" data-id="{$row['id']}" onclick='biz.selector.set(this, {php echo json_encode(array("id"=>$row["id"],"tagname"=>$row["tagname"]))})' data-title="{$row['tagname']}">
+                    {$row['tagname']}
+                </nav>
+            {/loop}
+        </div>
+
+        {if count($labels)<=0}
+        <tr>
+            <td colspan='2' align='center'>未找到</td>
+        </tr>
+        {/if}
+    </div>
+</div>

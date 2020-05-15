@@ -1,0 +1,166 @@
+{template '_header'}
+<div class="page-header">
+    当前位置：<span class="text-primary">批量发货</span>
+</div>
+<div class="page-content">
+	<div class="tabs-container tab-goods page-toolbar">
+        <div class="tabs-left">
+            <ul class="nav nav-tabs" id="myTab" >
+                <li  {if empty($_GPC['type']) || $_GPC['type']=='normal'}class="active"{/if}><a href="{php echo shopUrl('order/ordersendall', array('type' => 'normal'))}">批量发货到团长</a></li>
+                <li  {if $_GPC['type']=='mult'}class="active"{/if} ><a href="{php echo shopUrl('order/ordersendall', array('type' => 'mult'))}">快递导入方式</a></li>
+				<li  {if $_GPC['type']=='mult_send_tuanz'}class="active"{/if} ><a href="{php echo shopUrl('order/ordersendall', array('type' => 'mult_send_tuanz'))}">订单批量团长签收</a></li>
+				<li  {if $_GPC['type']=='mult_member_receive_order'}class="active"{/if} ><a href="{php echo shopUrl('order/ordersendall', array('type' => 'mult_member_receive_order'))}">订单批量确认收货</a></li>
+				
+			</ul>
+        </div>
+    </div>
+	
+    <div class="summary_box">
+        
+		{if empty($_GPC['type']) || $_GPC['type']=='normal'}
+		<div class="summary_title">
+            <span class=" title_inner">批量发货到团长</span>
+        </div>
+        <div class="summary_lg">
+            功能介绍: 使用excel快速导入进行订单发货
+            <p>如重复导入数据将以最新导入数据为准，请谨慎使用</p>
+            <p>数据导入订单状态自动修改为配送中</p>
+            <p>一次导入的数据不要太多,大量数据请分批导入,建议在服务器负载低的时候进行</p>
+            使用方法:
+            <p>1. 下载Excel模板文件并录入信息</p>
+            <p>2. 上传Excel导入</p>
+            格式要求：  Excel第一列必须为订单编号
+        </div>
+		{/if}
+		
+		{if $_GPC['type']=='mult_send_tuanz'}
+		<div class="summary_title">
+            <span class=" title_inner">订单批量团长签收</span>
+        </div>
+        <div class="summary_lg">
+            功能介绍: 使用excel快速导入配送中订单进行团长批量签收
+            <p>如重复导入数据将以最新导入数据为准，请谨慎使用</p>
+            <p>数据导入订单状态自动修改为已送达团长</p>
+            <p>一次导入的数据不要太多,大量数据请分批导入,建议在服务器负载低的时候进行</p>
+            使用方法:
+            <p>1. 下载Excel模板文件并录入信息</p>
+            <p>2. 上传Excel导入</p>
+            格式要求：  Excel第一列必须为订单编号
+        </div>
+		{/if}
+		
+		{if $_GPC['type']=='mult_member_receive_order'}
+		<div class="summary_title">
+            <span class=" title_inner">订单批量确认收货</span>
+        </div>
+        <div class="summary_lg">
+            功能介绍: 使用excel快速导入 <span class="text-primary">待收货的订单</span>进行批量用户确认收货
+            <p>如重复导入数据将以最新导入数据为准，请谨慎使用</p>
+            <p>数据导入订单状态自动修改为确认收货，并进行<span class="text-primary">团长佣金结算</span></p>
+            <p>一次导入的数据不要太多,大量数据请分批导入,建议在服务器负载低的时候进行</p>
+            使用方法:
+            <p>1. 下载Excel模板文件并录入信息</p>
+            <p>2. 上传Excel导入</p>
+            格式要求：  Excel第一列必须为订单编号
+        </div>
+		{/if}
+		
+		
+		{if $_GPC['type']=='mult'}
+		<div class="summary_title">
+            <span class=" title_inner">批量快递发货到会员</span>
+        </div>
+		<div class="summary_lg" >
+            功能介绍: 使用excel快速导入进行订单发货
+            <p>如重复导入数据将以最新导入数据为准，请谨慎使用</p>
+            <p>数据导入订单状态自动修改为已发货</p>
+            <p>一次导入的数据不要太多,大量数据请分批导入,建议在服务器负载低的时候进行</p>
+            使用方法:
+            <p>1. 下载Excel模板文件并录入信息</p>
+            <p>2. 选择快递公司</p>
+            <p>3. 上传Excel导入</p>
+            格式要求：  Excel第一列必须为订单编号，第二列必须为快递单号，第三列必须为快递编号
+        </div>
+		{/if}
+    </div>
+    <form id="importform" class="form-horizontal form" action="" method="post" enctype="multipart/form-data">
+
+        <input type="hidden" name="type" value="{$_GPC['type']}"/>
+        <div class='form-group'>
+			{if !empty($_GPC['type']) && $_GPC['type']=='mult'}
+            <div class="form-group" >
+                <label class="col-lg control-label must">快递公司</label>
+                <div class="col-sm-5 goodsname"  style="padding-right:0;" >
+                    <select class="form-control" name="express" id="express">
+                        <option value="" data-name="">其他快递</option>
+
+                        {loop $express_list $value}
+                        <option value="{$value['id']}" data-name="{$value['name']}">{$value['name']}</option>
+                        {/loop}
+
+                    </select>
+                    <input type='hidden' name='expresscom' id='expresscom' value=""/>
+                </div>
+            </div>
+			{/if}
+
+            <div class="form-group">
+                <label class="col-lg control-label must">EXCEL</label>
+
+                <div class="col-sm-5 goodsname"  style="padding-right:0;" >
+                    <input type="file" name="excelfile" class="form-control" />
+                    <span class="help-block">如果遇到数据重复则将进行数据更新</span>
+                </div>
+            </div>
+
+        </div>
+        <div class='form-group'>
+            <div class="col-sm-12">
+				{if empty($_GPC['type']) || $_GPC['type']=='normal' || $_GPC['type']=='mult_send_tuanz' || $_GPC['type']=='mult_member_receive_order'}
+                <div class="modal-footer" style="text-align: left">
+                    <button type="submit" class="btn btn-primary" name="cancelsend" value="yes">确认导入</button>
+                    <a class="btn btn-primary" href="{php echo shopUrl('order/batchsend_import', array('type' => 'normal'))}" >
+						<i class="fa fa-download" title=""></i> 下载Excel模板文件
+					</a>
+                </div>
+				{/if}
+				{if $_GPC['type']=='mult'}
+				<div class="modal-footer" style="text-align: left">
+                    <button type="submit" class="btn btn-primary" name="cancelsend" value="yes">确认导入</button>
+                    <a class="btn btn-primary" href="{php echo shopUrl('order/batchsend_import', array('type' => 'mult'))}" >
+						<i class="fa fa-download" title=""></i> 下载Excel模板文件
+					</a>
+					<a class="btn btn-primary" style="display:none;" href="{php echo shopUrl('order/batchsend_express', array('type' => 'mult'))}" >
+						<i class="fa fa-download" title=""></i> 下载快递编号文件
+					</a>
+                </div>
+				{/if}
+            </div>
+        </div>
+		
+		
+    </form>
+</div>
+
+<script language='javascript'>
+    $(function(){
+
+        $('#importform').submit(function(){
+            if(!$(":input[name=excelfile]").val()){
+                tip.msgbox.err("您还未选择Excel文件哦~");
+                return false;
+            }
+        })
+
+        $("#express").change(function () {
+            var obj = $(this);
+            var sel = obj.find("option:selected").attr("data-name");
+            $("#expresscom").val(sel);
+        });
+
+    })
+
+</script>
+
+{template '_footer'}
+

@@ -1,0 +1,334 @@
+{template '_header'}
+<style>
+    .popover{
+        width:170px;
+        font-size:12px;
+        line-height: 21px;
+        color: #0d0706;
+    }
+    .popover span{
+        color: #b9b9b9;
+    }
+    .nickname{
+        display: inline-block;
+        max-width:200px;
+        overflow: hidden;
+        text-overflow:ellipsis;
+        white-space: nowrap;
+        vertical-align: middle;
+    }
+    .tooltip-inner{
+        border:none;
+    }
+</style>
+<div class="page-header">
+    当前位置：<span class="text-primary">会员列表</span>
+</div>
+<div class="page-content">
+    <form action="" method="get" class="form-horizontal form-search" role="form">
+		<input type="hidden" name="c" value="site" />
+        <input type="hidden" name="a" value="entry" />
+        <input type="hidden" name="m" value="lionfish_comshop" />
+        <input type="hidden" name="do" value="admin" />
+        <input type="hidden" name="controller"  value="user.user" />
+        <div class="page-toolbar">
+             <div class="col-sm-8">
+                <div class="input-group">
+					
+                      <input type="text" class="input-sm form-control" name='keyword' value="{$_GPC['keyword']}" placeholder="请输入昵称">
+					
+					<span class="input-group-select">
+						<select name="level_id" class="form-control">
+							<option value="">会员等级</option>
+							{loop $level_list $level}
+							<option value="{$level['id']}" {if $_GPC['level_id'] == $level['id']}selected{/if}>{$level['levelname']}</option>
+							{/loop}
+						</select>
+					</span>
+					<span class="input-group-select">
+						<select name="groupid" class="form-control">
+							<option value="">会员分组</option>
+							{loop $group_list $group}
+							<option value="{$group['id']}" {if $_GPC['groupid'] == $group['id']}selected{/if}>{$group['groupname']}</option> 
+							{/loop}
+						</select>
+					</span>
+					<span class="input-group-select">
+						<span class="input-group-btn">
+							<button class="btn btn-primary" type="submit"> 搜索</button>
+						</span>
+					</span>
+                </div>
+            </div>
+        </div>
+    </form>
+    <form action="" method="post" >
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-table-header">
+                    <input type='checkbox' />
+					<span class="pull-right" style="display:None;">
+						<a data-toggle="ajaxModal" href="{php echo shopUrl('user/adduserjia')}" class="btn btn-primary"><i class="fa fa-plus"></i> 添加机器人</a>
+					</span>
+                    <div class="btn-group">
+                        <button class="btn btn-default btn-sm btn-operation" type="button" data-toggle='batch-remove' data-confirm="确认要删除?" data-href="{php echo shopUrl('user/deleteuser')}">
+                            <i class="icow icow-shanchu1"></i>删除
+                        </button>
+						<button class="btn btn-default btn-sm btn-operation" type="button" data-toggle="batch-group" disabled="disabled"> <i class="icow icow-fenzuqunfa"></i>修改分组</button>
+						<button class="btn btn-default btn-sm btn-operation" type="button" data-toggle="batch-level" disabled="disabled"><i class="icow icow-cengjiguanli"></i> 修改等级</button>
+                    </div>
+                </div>
+                <table class="table table-responsive">
+                    <thead>
+                    <tr>
+						<th style="width:25px;"></th>
+						<th style="width:60px;">ID</th>
+                        <th style="width: 250px;">用户名</th>
+                        <th style="">等级/分组</th>
+                        <th  >积分/余额</th>
+                        <th style="">订单情况</th>
+                        <th style="">注册时间</th>
+                        <th style="width: 300px;text-align: center;">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+					{loop $list $row}
+						<tr>
+                            <td style="position: relative; ">
+                                <input type='checkbox' value="{$row['member_id']}" class="checkone"/>
+							</td>
+							<td>
+								{$row['member_id']}
+							</td>
+                            <td style="overflow: visible">
+                                <div rel="pop" style="display: flex"  data-content=" <span>推荐人：</span> 
+								{if empty($row['agentid'])}
+                                  {if $row['isagent']==0}
+                                      总店
+                                      {else}
+                                     暂无
+                                      {/if}
+                                {else}
+
+                                {if !empty($row['agentavatar'])}
+                                 <img src='{$row['agentavatar']}' style='width:20px;height:20px;padding1px;border:1px solid #ccc' />
+                               {/if}
+                               [{$row['agentid']}]{if empty($row['agentnickname'])}未更新{else}{$row['agentnickname']}{/if}
+                               {/if}
+                               <br/>
+                                 <span>真实姓名：</span> {if empty($row['realname'])}未填写{else}{$row['realname']}{/if}
+                                <br/>
+                               <span>手机号：</span>{if !empty($row['telephone'])}{$row['telephone']}{else}未绑定{/if} <br/>
+                               <span>状态:</span>  {if $row['isblack']==1}未启用{else}正常{/if} ">
+
+                                   <img class="img-40" src="{php echo tomedia($row['avatar'])}" style='border-radius:50%;border:1px solid #efefef;' />
+                                   <span style="display: flex;flex-direction: column;justify-content: center;align-items: flex-start;padding-left: 5px">
+                                       <span class="nickname">
+                                           {if empty($row['username'])}未更新{else}{$row['username']}{/if}
+                                       </span>
+                                       {if $row['isblack']==1}
+                                            <span class="text-danger">未启用<i class="icow icow-heimingdan1"style="color: #db2228;margin-left: 2px;font-size: 13px;"></i></span>
+                                       {/if}
+                                   </span>
+
+                                </div>
+                            </td>
+
+                            <td> 
+							{if empty($row['levelname'])}普通会员{else}{$row['levelname']}{/if}<br/>
+							{if empty($row['groupname'])}默认分组{else}{$row['groupname']}{/if}
+                            </td>
+
+                            <td 
+                            	<span >积分:  <span style="color: #5097d3">{php echo intval($row['score'])}</span> </span>
+                                <br/><span>余额: <span class="text-warning">{php echo price_format($row['account_money'],2)} </span></span>
+                            </td>
+
+                            <td><span>订单: {php echo intval($row['ordercount'])}</span>
+                                <br/><span> 金额: <span class="text-warning">{php echo floatval($row['ordermoney'])}</span></span>
+							</td>
+                           
+							<td>{php echo date("Y-m-d",$row['create_time'])}<br/>{php echo date("H:i:s",$row['create_time'])}</td>
+                            <td style="overflow:visible;text-align: center;">
+                                <div class="btn-group">
+									<a class="btn  btn-op btn-operation" href="{php echo shopUrl('user/detail',array('id' => $row['member_id']));}" title="">
+										<span data-toggle="tooltip" data-placement="top" title="" data-original-title="会员详情">
+											<i class='icow icow-bianji2'></i>会员详情
+										</span>
+									</a>
+									<a class="btn  btn-op btn-operation" href="{php echo shopUrl('order/order', array('searchfield'=>'member','keyword'=>$row['username']))}"
+									   title=''>
+										   <span data-toggle="tooltip" data-placement="top" title="" data-original-title="会员订单">
+											   会员订单
+											</span>
+									</a>
+									<a class="btn  btn-op btn-operation" data-toggle="ajaxModal"
+										   href="{php echo shopUrl('user/recharge', array('type'=>'score','id'=>$row['member_id']))}"
+										   title='' style="display:none;">
+										<span data-toggle="tooltip" data-placement="top" title="" data-original-title="充值">
+										   <i class='icow icow-31'></i>充值
+										</span>
+									</a>
+									<a class="btn btn-op btn-operation" data-toggle='ajaxRemove' href="{php echo shopUrl('user/deleteuser',array('id' => $row['member_id']));}" data-confirm="确定要删除该会员吗？">
+										 <span data-toggle="tooltip" data-placement="top" title="" data-original-title="删除会员">
+										   <i class='icow icow-shanchu1'></i>删除会员
+										</span>
+									</a>
+                                </div>
+                            </td>
+                        </tr>
+					{/loop}
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="5">
+                            <input type="checkbox">
+                            <div class="btn-group">
+								<button class="btn btn-default btn-sm btn-operation" type="button" data-toggle='batch-remove' data-confirm="确认要删除?" data-href="{php echo shopUrl('user/deleteuser')}">
+									<i class="icow icow-shanchu1"></i>删除
+								</button>
+								<button class="btn btn-default btn-sm btn-operation" type="button" data-toggle="batch-group" disabled="disabled"> <i class="icow icow-fenzuqunfa"></i>修改分组</button>
+								<button class="btn btn-default btn-sm btn-operation" type="button" data-toggle="batch-level" disabled="disabled"><i class="icow icow-cengjiguanli"></i> 修改等级</button>
+							</div>
+                        </td>
+                        <td colspan="2" style="text-align: right">
+                            {$pager}
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<div id="modal-change"  class="modal fade form-horizontal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">{if !empty($group['id'])}编辑{else}添加{/if}标签组</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-group batch-level" style="display: none;">
+                    <label class="col-sm-2 control-label must">会员等级</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <select name="batch-level" class="form-control">
+                            <option value="0">普通等级</option>
+                            {loop $level_list $level}
+                                <option value="{$level['id']}">{$level['levelname']}</option>
+                            {/loop}
+                        </select>
+                    </div>
+                </div>		
+                <div class="form-group batch-group" style="display: none;">
+                    <label class="col-sm-2 control-label must">会员分组</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <select name="batch-group[]" class="form-control select2" placeholder="会员会被加入指定的分组中" multiple style="position:absolute;">
+							<option value="0">默认分组</option>
+                            {loop $group_list $group}
+                                <option value="{$group['id']}">{$group['groupname']}</option>
+                            {/loop}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="submit" id="modal-change-btn">提交</button>
+                <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script language="javascript">
+    
+    require(['bootstrap'], function () {
+        $("[rel=pop]").popover({
+            trigger: 'manual',
+            placement: 'right',
+            title: $(this).data('title'),
+            html: 'true',
+            content: $(this).data('content'),
+            animation: false
+        }).on("mouseenter", function () {
+            var _this = this;
+            $(this).popover("show");
+            $(this).siblings(".popover").on("mouseleave", function () {
+                $(_this).popover('hide');
+            });
+        }).on("mouseleave", function () {
+            var _this = this;
+            setTimeout(function () {
+                if (!$(".popover:hover").length) {
+                    $(_this).popover("hide")
+                }
+            }, 100);
+        });
+    });
+   
+
+    $("[data-toggle='batch-group'], [data-toggle='batch-level']").click(function () {
+        var toggle = $(this).data('toggle');
+        $("#modal-change .modal-title").text(toggle=='batch-group'?"批量修改分组":"批量修改会员等级");
+        $("#modal-change").find("."+toggle).show().siblings().hide();
+        $("#modal-change-btn").attr('data-toggle', toggle=='batch-group'?'group':'level');
+        $("#modal-change").modal();
+    });
+    $("#modal-change-btn").click(function () {
+        var _this = $(this);
+        if(_this.attr('stop')){
+            return;
+        }
+        var toggle = $(this).data('toggle');
+        var ids = [];
+        $(".checkone").each(function () {
+            var checked = $(this).is(":checked");
+            var id = $(this).val();
+            if(checked && id){
+                ids.push(id);
+            }
+        });
+        if(ids.length<1){
+            tip.msgbox.suc("请选择要批量操作的会员");
+            return;
+        }
+        var option = $("#modal-change .batch-"+toggle+" option:selected");
+        level = '';
+        if (toggle=='group'){
+            for(i=0;i<option.length;i++){
+                if (level == ''){
+                    level += $(option[i]).val();
+                }else{
+                    level += ','+$(option[i]).val();
+                }
+            }
+        }else{
+            var level = option.val();
+        }
+
+        var levelname = option.text();
+        tip.confirm("确定要将选中会员移动到 "+levelname+" 吗？", function () {
+            _this.attr('stop', 1).text("操作中...");
+            $.post(biz.url('user/changelevel'),{
+                level: level,
+                ids: ids,
+                toggle: toggle
+            }, function (ret) {
+                $("#modal-change").modal('hide');
+                if(ret.status==1){
+                    tip.msgbox.suc("操作成功");
+                    setTimeout(function () {
+                        location.reload();
+                    },1000);
+                }else{
+                    tip.msgbox.err(ret.result.message);
+                }
+            }, 'json')
+        });
+    });
+</script>
+{template '_footer'}
+

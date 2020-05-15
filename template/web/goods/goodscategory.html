@@ -1,0 +1,220 @@
+{template '_header'}
+
+<style type='text/css' xmlns="http://www.w3.org/1999/html">
+    .dd-handle { height: 40px; line-height: 30px}
+    .dd-list { width:860px;}
+    .dd-handle span {
+        font-weight: normal;
+    }
+</style>
+
+<div class="page-header">
+    当前位置：<span class="text-primary">商品分类</span>
+</div>
+<div class="page-content">
+    <div class="page-toolbar">
+            <span class="pull-left">
+                <button  style="display:none;" type="button" id='btnExpand' class="btn btn-default" data-action='expand'><i class='fa fa-angle-up'></i> 折叠所有</button>
+                					
+                <a href="{php echo shopUrl('goods/addcategory')}" data-toggle="ajaxModal" class="btn btn-primary"><i class="fa fa-plus"></i> 添加分类</a>
+               
+            </span>
+        <div class="input-group"></div>
+    </div>
+    <form action="" method="post" class="form-validate">
+
+        <div class="dd" id="div_nestable">
+            <ol class="dd-list">
+
+                {loop $category $row}
+                {if empty($row['pid'])}
+                <li class="dd-item full" data-id="{$row['id']}">
+
+                    <div class="dd-handle" >
+                        [ID: {$row['id']}] {$row['name']}
+                        <span class="pull-right">
+
+                            <div class='label {if $row['is_show']==1}label-primary{else}label-default{/if}'
+                                 data-toggle='ajaxSwitch'
+                                 data-switch-value='{$row['is_show']}'
+                                 data-switch-value0='0|隐藏|label label-default|{php echo shopUrl('goods/category_enabled',array('enabled'=>1,'id'=>$row['id']))}'
+                                 data-switch-value1='1|显示|label label-primary|{php echo shopUrl('goods/category_enabled',array('enabled'=>0,'id'=>$row['id']))}'
+                                >
+                                 {if $row['is_show']==1}显示{else}隐藏{/if}</div>
+
+                                 
+                                <a class='btn btn-default btn-sm btn-operation btn-op' data-toggle="ajaxModal" href="{php echo shopUrl('goods/addcategory', array('pid' => $row['id']))}" title='' >
+                                     <span data-toggle="tooltip" data-placement="top" title="" data-original-title="添加子分类">
+                                        <i class="icow icow-tianjia"></i>
+                                         </span>
+
+                                </a>
+                   
+                                  
+                                   <a class='btn btn-default btn-sm btn-operation btn-op' data-toggle="ajaxModal" href="{php echo shopUrl('goods/addcategory', array('id' => $row['id']))}"  >
+                                       <span data-toggle="tooltip" data-placement="top"  data-original-title="修改">
+                                        <i class="icow icow-bianji2"></i>
+                                         </span>
+                                   </a>
+                                  
+                                   
+                                        <a class='btn btn-default btn-sm btn-operation btn-op' data-toggle='ajaxPost' href="{php echo shopUrl('goods/category_delete', array('id' => $row['id']))}" data-confirm='确认删除此分类吗？'>
+                                            <span data-toggle="tooltip" data-placement="top" title="" data-original-title="删除">
+                                                <i class="icow icow-shanchu1"></i>
+                                            </span>
+                                        </a>
+                                    
+                            </span>
+                        </div>
+                        {if count($children[$row['id']])>0}
+
+                        <ol class="dd-list">
+                            {loop $children[$row['id']] $child}
+                            <li class="dd-item full" data-id="{$child['id']}">
+                                <div class="dd-handle" style="width:100%;">
+                                    <img src="{php echo tomedia($child['thumb']);}" width='30' height="30" onerror="$(this).remove()" style='padding:1px;border: 1px solid #ccc;float:left;' /> &nbsp;
+                                    [ID: {$child['id']}] {$child['name']}
+                                    <span class="pull-right">
+                                        <div class='label {if $child['is_show']==1}label-primary{else}label-default{/if}'
+                                             
+                                             data-toggle='ajaxSwitch'
+                                             data-switch-value='{$child['is_show']}'
+                                             data-switch-value0='0|隐藏|label label-default|{php echo shopUrl('goods/category_enabled',array('enabled'=>1,'id'=>$child['id']))}'
+                                             data-switch-value1='1|显示|label label-primary|{php echo shopUrl('goods/category_enabled',array('enabled'=>0,'id'=>$child['id']))}'
+                                            
+                                             >
+                                             {if $child['is_show']==1}显示{else}隐藏{/if}</div>
+
+                                              
+												<a class='btn btn-default btn-sm btn-operation btn-op' data-toggle="ajaxModal" href="{php echo shopUrl('goods/addcategory', array('pid' => $child['id']))}" title='添加子分类' >
+												   <span data-toggle="tooltip" data-placement="top" title="" data-original-title="添加子分类">
+													<i class="icow icow-tianjia"></i>
+												   </span>
+												</a>
+                                               
+                                               
+                                              <a class='btn btn-default btn-sm btn-operation btn-op' data-toggle="ajaxModal" href="{php echo shopUrl('goods/addcategory', array('id' => $child['id']))}" title="修改" >
+                                                      <span data-toggle="tooltip" data-placement="top" title="" data-original-title="修改">
+                                                            <i class="icow icow-bianji2"></i>
+                                                     </span>
+                                                </a>
+                                              
+                                                    <a class='btn btn-default btn-sm btn-operation btn-op'  data-toggle='ajaxPost'  title="删除" href="{php echo shopUrl('goods/category_delete', array('id' => $child['id']))}" data-confirm="确认删除此分类吗？">
+                                                      <span data-toggle="tooltip" data-placement="top"  data-original-title="删除">
+                                                            <i class="icow icow-shanchu1"></i>
+                                                        </span>
+                                                    </a>
+                                                
+                                        </span>
+                                    </div>
+                                    {if count($children[$child['id']])>0 }
+
+                                    <ol class="dd-list"  style='width:100%;'>
+                                        {loop $children[$child['id']] $third}
+                                        <li class="dd-item" data-id="{$third['id']}">
+                                            <div class="dd-handle">
+                                                <img src="{php echo tomedia($third['thumb']);}" width='30' height="30" onerror="$(this).remove()" style='padding:1px;border: 1px solid #ccc;float:left;' /> &nbsp;
+                                                [ID: {$third['id']}] {$third['name']}
+                                                <span class="pull-right">
+                             <div class='label {if $third['is_show']==1}label-primary{else}label-default{/if}' 
+                                                data-toggle='ajaxSwitch'
+                                                data-switch-value='{$third['is_show']}'
+                                                data-switch-value0='0|隐藏|label label-default|{php echo shopUrl('goods/category_enabled',array('enabled'=>1,'id'=>$third['id']))}'
+                                                data-switch-value1='1|显示|label label-primary|{php echo shopUrl('goods/category_enabled',array('enabled'=>0,'id'=>$third['id']))}'
+                                                >
+                                                {if $third['is_show']==1}显示{else}隐藏{/if}</div>
+
+                                                    <a class='btn btn-default btn-sm btn-operation btn-op' data-toggle="ajaxModal" href="{php echo shopUrl('goods/addcategory', array('id' => $third['id']))}" title="添加子分类" >
+                                                     <span data-toggle="tooltip" data-placement="top" title="" data-original-title="添加子分类">
+                                                        <i class="icow icow-bianji2"></i>
+                                                         </span>
+                                                    </a>
+                                                        <a class='btn btn-default btn-sm btn-operation btn-op'  data-toggle='ajaxPost' title="删除"  href="{php echo shopUrl('goods/category_delete', array('id' => $third['id']))}" data-confirm="确认删除此分类吗？">
+                                                            <span data-toggle="tooltip" data-placement="top"  data-original-title="删除">
+                                                                <i class="icow icow-shanchu1"></i>
+                                                            </span>
+                                                        </a>
+                                                </span>
+                                            </div>
+                                        </li>
+                                        {/loop}
+                                    </ol>
+                                    {/if}
+                                </li>
+                                {/loop}
+                            </ol>
+                            {/if}
+
+                        </li>
+                        {/if}
+                        {/loop}
+
+            </ol>
+            <table class='table'>
+                <tr>
+                    <td>
+
+                        
+                        <input id="save_category" type="submit" class="btn btn-primary" value="保存">
+                        
+                        <input type="hidden" name="token" value="{$_W['token']}" />
+                        <input type="hidden" name="datas" value="" />
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+    </form>
+</div>
+
+        <script language='javascript'>
+            myrequire(['jquery.nestable'], function () {
+
+                $('#btnExpand').click(function () {
+                    var action = $(this).data('action');
+                    if (action === 'expand') {
+                        $('#div_nestable').nestable('collapseAll');
+                        $(this).data('action', 'collapse').html('<i class="fa fa-angle-up"></i> 展开所有');
+
+                    } else {
+                        $('#div_nestable').nestable('expandAll');
+                        $(this).data('action', 'expand').html('<i class="fa fa-angle-down"></i> 折叠所有');
+                    }
+                })
+                var depth = {php echo intval($_W['shopset']['category']['level'])};
+                if (depth <= 0) {
+                    depth = 3;
+                }
+                $('#div_nestable').nestable({maxDepth: depth});
+
+                $('.dd-item').addClass('full');
+
+                $(".dd-handle a,.dd-handle div").mousedown(function (e) {
+
+                    e.stopPropagation();
+                });
+                var $expand = false;
+                $('#nestableMenu').on('click', function (e)
+                {
+                    if ($expand) {
+                        $expand = false;
+                        $('.dd').nestable('expandAll');
+                    } else {
+                        $expand = true;
+                        $('.dd').nestable('collapseAll');
+                    }
+                });
+
+                $('form').submit(function(){
+                    var json = window.JSON.stringify($('#div_nestable').nestable("serialize"));
+                    $(':input[name=datas]').val(json);
+                });
+
+            })
+        </script>
+
+        {template '_footer'}
+
+

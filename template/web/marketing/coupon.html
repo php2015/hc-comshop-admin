@@ -1,0 +1,175 @@
+{template '_header'}
+<div class='page-header'>
+	当前位置：<span class="text-primary">优惠券管理 </span>
+</div>
+<div class="page-content">
+	<form action="./index.php" method="get" class="form-horizontal table-search" role="form" id="form1">
+		<input type="hidden" name="c" value="site" />
+		<input type="hidden" name="a" value="entry" />
+		<input type="hidden" name="m" value="lionfish_comshop" />
+		<input type="hidden" name="do" value="admin" />
+		<input type="hidden" name="controller" value="marketing.coupon" />
+		<div class="page-toolbar">
+
+			<div class="col-sm-8">
+				<div class='input-group input-group-sm' style='float:left;'   >
+					{php echo tpl_daterange('time', array('placeholder'=>'创建时间'),true);}
+				</div>
+
+				<div class="input-group">
+					<span class="input-group-select">
+						<select name='gettype'  class='form-control  input-sm select-md'   style="width:100px;padding:0 5px;"  >
+							<option value=''>首页显示</option>
+							<option value='0' {if $_GPC['gettype']=='0'}selected{/if}>不显示</option>
+							<option value='1' {if $_GPC['gettype']=='1'}selected{/if}>显示</option>
+						</select>
+					</span>
+					<span class="input-group-select" style="display:none;">
+						<select name='type' class='form-control  input-sm select-md'   style="width:100px;"  >
+							<option value=''>类型</option>
+							<option value='0' {if $_GPC['type']=='0'}selected{/if}>购物</option>
+							<option value='1' {if $_GPC['type']=='1'}selected{/if}>充值</option>
+						</select>
+					</span>
+					<span class="input-group-select">
+							<select name='catid' class='form-control  input-sm select-md'   style="width:100px;"  >
+								<option value=''>分类</option>
+								{loop $category $k $c}
+								<option value='{$k}' {if $_GPC['catid']==$k}selected{/if}>{$c['name']}</option>
+								{/loop}
+							</select>
+					</span>
+					<input type="text" class="form-control" name='keyword' value="{$_GPC['keyword']}" placeholder="优惠券名称"> 
+					<span class="input-group-btn">
+						<button class="btn btn-primary" type="submit"> 搜索</button> 
+					</span>
+				</div>
+
+			</div>
+		</div>
+	</form>
+
+	
+	
+	<div class="page-table-header">
+		<input type="checkbox">
+		<span class="pull-right">
+			<a class='btn btn-primary btn-sm' href="{php echo shopUrl('marketing.addcoupon')}"><i class='fa fa-plus'></i> 添加优惠券</a>
+		</span>
+		<span class="btn-group">
+			<button class="btn btn-default btn-sm dropdown-toggle btn-operation" type="button" data-toggle='batch-remove' data-confirm="确认要删除?" data-href="{php echo shopUrl('marketing/deletecoupon')}">
+				<i class='icow icow-shanchu1'></i>删除
+			</button>
+		</span>
+	</div>
+	{if count($list)>0}
+	<table class="table table-hover table-responsive">
+		<thead class="navbar-inner" >
+		<tr>
+			<th style="width:25px;"><input type='checkbox' /></th>
+			<th style="width:50px;">ID</th>
+			<th style="width:50px;">排序</th>
+			<th style="">优惠券名称</th>
+			<th style=" ">优惠<br/>使用条件</th>
+			<th style=" ">剩余数量/已使用/已发出</th>
+			<th style="">首页领券</th>
+			<th style="width:150px;">创建时间</th>
+			<th style="width: 230px;">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		{loop $list $row}
+		<tr>
+			<td>
+				<input type='checkbox'   value="{$row['id']}"/>
+			</td>
+			<td>
+				{$row['id']}
+				
+			</td>
+			<td>
+				<a href='javascript:;' data-toggle='ajaxEdit' data-href="{php echo shopUrl('marketing/displayordercoupon',array('id'=>$row['id']))}" >{$row['displayorder']}</a>
+				
+			</td>
+			<td>
+				<p style="line-height:30px;">{$row['voucher_title']}</p>
+				<label class='label label-success'>购物</label>
+				{if !empty($row['catid'])}
+				<label class='label label-primary'>{$category[$row['catid']]['name']}</label>
+				{/if}
+				
+			</td>
+			<td>
+			{$row['credit']} 元<br/> 
+				{if $row['limit_money']>0}
+				<span class="text-danger">满{$row['limit_money']}可用</span>
+				{else}
+				<span class="text-warning">不限</span>
+				{/if}
+				
+				
+			</td>
+			<td>
+				{if $row['total_count']==-1}无限{else}剩余：{php echo ($row['total_count'] -  $row['send_count']) < 0 ? 0:$row['total_count'] -  $row['send_count'] }{/if}
+				&nbsp;&nbsp;已使用: {$row['usetotal']}&nbsp;&nbsp;已发出: {$row['send_count']}
+			</td>
+			<td>
+					<span class='label a {if $row['is_index_show']==1}label-primary{else}label-default{/if}'
+					  data-toggle='ajaxSwitch'
+					  data-switch-refresh='false'
+					  data-switch-value='{$row['is_index_show']}'
+					  data-switch-value0='0|隐藏|label label-default|{php echo shopUrl('marketing/change',array('type'=>'is_index_show','value'=>1,'id'=>$row['id']))}'
+					  data-switch-value1='1|显示|label label-success|{php echo shopUrl('marketing/change',array('type'=>'is_index_show','value'=>0,'id'=>$row['id']))}'
+					  >
+					  {if $row['is_index_show']==1}显示{else}隐藏{/if}
+					</span>
+				
+			</td>
+			<td>{php echo date('Y-m-d',$row['add_time'])}<br/>{php echo date('H:i',$row['add_time'])}</td>
+			<td>
+
+				<div class="btn-group">
+					<a class='btn btn-default btn-operation btn-op' href="{php echo shopUrl('marketing/addcoupon',array('id' => $row['id']));}">
+						 <span data-toggle="tooltip" data-placement="top" title="" data-original-title="编辑">
+								<i class='icow icow-bianji2'></i>编辑
+						 </span>
+					</a>
+					<a class='btn btn-default btn-operation btn-op' data-toggle='ajaxRemove' href="{php echo shopUrl('marketing/deletecoupon',array('id' => $row['id']))}" data-confirm="确定要删除该优惠券吗？">
+						 <span data-toggle="tooltip" data-placement="top" title="" data-original-title="删除">
+								<i class='icow icow-shanchu1'></i>删除
+						 </span>
+					</a>
+
+				</div>
+
+
+			</td>
+		</tr>
+		{/loop}
+		</tbody>
+	<tfoot>
+		<tr>
+			<td colspan="3">
+				<input type="checkbox">
+				<span class="btn-group">
+					
+					<button class="btn btn-default btn-sm dropdown-toggle btn-operation" type="button" data-toggle='batch-remove' data-confirm="确认要删除?" data-href="{php echo shopUrl('marketing/deletecoupon')}">
+						<i class='icow icow-shanchu1'></i>删除
+					</button>
+					
+				</span>
+			</td>
+			<td colspan="5" style="text-align: right">{$pager}</td>
+		</tr>
+	</tfoot>
+	</table>
+	{else}
+	<div class='panel panel-default'>
+		<div class='panel-body' style='text-align: center;padding:30px;'>
+			暂时没有任何优惠券!
+		</div>
+	</div>
+	{/if}
+	</form>
+</div>
+{template '_footer'}

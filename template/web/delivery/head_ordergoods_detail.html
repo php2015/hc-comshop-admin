@@ -1,0 +1,58 @@
+<style>
+    .recharge_info{
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 10px;
+    }
+    .recharge_info>div{
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        border:1px solid #efefef;
+        margin: 0 10px;
+        padding:10px 22px;
+        line-height: 25px;
+        color: #333;
+    }
+</style>
+<form action="{php echo shopUrl('delivery/sub_delivery_list')}" method="post" class="form-horizontal form-validate" enctype="multipart/form-data">
+
+	<input type="hidden" name="head_id" value="{$head_id}" /> 
+	<input type="hidden" name="searchtime" value="{$_GPC['searchtime']}" /> 
+	<input type="hidden" name="starttime" value="{$starttime}" /> 
+	<input type="hidden" name="endtime" value="{$endtime}" /> 
+	
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">商品清单</h4>
+            </div>
+            <div class="modal-body">
+				<table class="table table-responsive">
+					<tr>
+						<th>商品标题</th>
+						<th>规格</th>
+						<th>数量</th>
+					</tr>
+					<?php foreach($show_goods_list as $val){ ?>
+					<tr>
+						<td><?php echo $val['name']; ?></td>
+						<td><?php echo $val['sku_name']; ?></td>
+						<td><?php echo $val['quantity']; ?></td>
+					</tr>
+					<?php } ?>
+				</table>
+            </div> 
+			<div class="modal-footer">
+            <button class="btn btn-primary btn-submit" type="submit">生成清单</button>
+            <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+        </div>
+        </div>
+    </div>
+
+</form>

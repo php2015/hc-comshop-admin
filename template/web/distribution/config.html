@@ -1,0 +1,121 @@
+{template '_header'}
+<div class="page-header">当前位置：<span class="text-primary">分销设置</span></div>
+<div class="page-content">
+	<form action="" method="post" class="form-horizontal form-validate" enctype="multipart/form-data" >
+		<div class="form-group">
+			<label class="col-lg control-label">分销</label>
+			<div class="col-sm-8">
+				<label class="radio-inline"><input type="radio"  name="data[commiss_level]" value="0" {if $data['commiss_level'] ==0} checked="checked"{/if} /> 不开启</label>
+				<label class="radio-inline"><input type="radio"  name="data[commiss_level]" value="1" {if $data['commiss_level'] ==1} checked="checked"{/if} /> 一级分销</label>
+				<label class="radio-inline"><input type="radio"  name="data[commiss_level]" value="2" {if $data['commiss_level'] ==2} checked="checked"{/if} /> 二级分销</label>
+				<label class="radio-inline"><input type="radio"  name="data[commiss_level]" value="3" {if $data['commiss_level'] ==3} checked="checked"{/if} /> 三级分销</label>
+				<div class='help-block'>默认佣金比例请到<a href='{php echo shopUrl('commission/level')}' target='_blank'>【分销商等级】</a>进行设置</div>
+			</div>
+		</div> 
+		<div class="form-group">
+			<label class="col-lg control-label">分销内购</label>
+			<div class="col-sm-9 col-xs-12">
+				<label class="radio-inline"><input type="radio"  name="data[commiss_selfbuy]" value="1" {if $data['commiss_selfbuy'] ==1} checked="checked"{/if} /> 开启</label>
+				<label class="radio-inline"><input type="radio"  name="data[commiss_selfbuy]" value="0" {if $data['commiss_selfbuy'] ==0} checked="checked"{/if} /> 关闭</label>
+				<span class='help-block'>开启分销内购，分销商自己购买商品，享受一级佣金，上级享受二级佣金，上上级享受三级佣金</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg control-label">佣金计算方式</label>
+			<div class="col-sm-9 col-xs-12">
+				<label class="radio-inline"><input type="radio"  name="data[commiss_commissiontype]" value="0" {if $data['commiss_commissiontype'] ==0} checked="checked"{/if} /> 默认方式</label>
+				<label class="radio-inline"><input type="radio"  name="data[commiss_commissiontype]" value="1" {if $data['commiss_commissiontype'] ==1} checked="checked"{/if} /> 实际支付方式</label>
+				<span class="help-block">默认方式: 除运费和会员折扣(或促销折扣)外其他所有费用全部计算佣金<br>实际支付方式: 只计算实际支付和余额抵扣部分的佣金(包括余额支付)</span>
+				
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-lg control-label">消费自动成为分销商</label>
+			<div class="col-sm-9 col-xs-12 fixmore-input-group">
+				<div class='input-group' >
+					<input type="text" name="data[commiss_buy_money_update]" class="form-control" value="{php echo empty($data['commiss_buy_money_update'])?1:$data['commiss_buy_money_update']}"  />
+					<div class="input-group-addon">元</div>
+				</div>
+				<span class="help-block">消费满指定金额会自动成为分销商，0元表示不自动</span>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-lg control-label">成为分销商条件</label>
+			<div class="col-sm-9 col-xs-12">
+				
+				<label class="radio-inline"><input type="radio"  name="data[commiss_become_condition]" value="0" {if $data['commiss_become_condition'] ==0} checked="checked"{/if} /> 审核</label>
+				<label class="radio-inline"><input type="radio"  name="data[commiss_become_condition]" value="1" {if $data['commiss_become_condition'] ==1} checked="checked"{/if} /> 不审核</label>
+				<span class="help-block"></span>
+				
+			</div>
+        </div>
+		<div class="form-group" style="display:none;">
+			<label class="col-lg control-label">分销商必须完善资料</label>
+			<div class="col-sm-9 col-xs-12">
+				
+				<label class="radio-inline"><input type="radio"  name="data[commiss_become_reg]" value="0" {if $data['commiss_become_reg'] ==0} checked="checked"{/if} /> 需要</label>
+				<label class="radio-inline"><input type="radio"  name="data[commiss_become_reg]" value="1" {if $data['commiss_become_reg'] ==1} checked="checked"{/if} /> 不需要</label>
+				<span class="help-block">分销商在分销或提现时是否必须完善资料</span>
+			   
+			</div>
+        </div>
+		
+		<div class="form-group" >
+            <label class="col-lg control-label">团长二维码背景</label>
+            <div class="col-sm-9 col-xs-12">
+            	{php echo tpl_form_field_image2('data[user_qrcode_image]', $data['user_qrcode_image'])}
+            	<span class='help-block'>超级团长二维码，用于分享邀请会员&nbsp;&nbsp;<a href="javascript:;" id="clear_member_qrcode" class="btn btn-primary">清空会员二维码</a></span>
+            </div>
+        </div>
+		<div class="form-group">
+			<label class="col-lg control-label">二维码X坐标</label>
+			<div class="col-sm-9 col-xs-12 fixmore-input-group">
+				<div class='input-group' >
+					<input type="text" name="data[user_qrcode_x]" class="form-control" value="{php echo empty($data['user_qrcode_x'])?0:$data['user_qrcode_x']}"  />
+					
+				</div>
+				<span class="help-block">背景图中放置的二维码位置，距离左上角的X坐标</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg control-label">二维码Y坐标</label>
+			<div class="col-sm-9 col-xs-12 fixmore-input-group">
+				<div class='input-group' >
+					<input type="text" name="data[user_qrcode_y]" class="form-control" value="{php echo empty($data['user_qrcode_y'])?0:$data['user_qrcode_y']}"  />
+					
+				</div>
+				<span class="help-block">背景图中放置的二维码位置，距离左上角的Y坐标</span>
+			</div>
+		</div>
+		
+		
+		 
+		  
+		
+		<div class="form-group">
+			<label class="col-lg control-label"></label>
+			<div class="col-sm-9 col-xs-12">
+				<input type="submit" value="提交" class="btn btn-primary"  />
+			</div>
+		</div>
+	</form>
+</div>
+<script>
+$(function(){
+	
+	
+	$('#clear_member_qrcode').click(function(){
+		$.ajax({
+			url:"{php echo shopUrl('distribution/clear_user_member_qrcode')}",
+			type:'get',
+			dataType:'json',
+			success:function(){
+				tip.msgbox.suc('清空成功');
+			}
+		})
+	})
+})
+</script>
+{template '_footer'}

@@ -1,0 +1,129 @@
+{template '_header'}
+<style>
+    .popover{
+        width:170px;
+        font-size:12px;
+        line-height: 21px;
+        color: #0d0706;
+    }
+    .popover span{
+        color: #b9b9b9;
+    }
+    .nickname{
+        display: inline-block;
+        max-width:200px;
+        overflow: hidden;
+        text-overflow:ellipsis;
+        white-space: nowrap;
+        vertical-align: middle;
+    }
+    .tooltip-inner{
+        border:none;
+    }
+</style>
+<div class="page-header">
+    当前位置：<span class="text-primary">资金流水列表</span>
+</div>
+<div class="page-content">
+    
+    <form action="" method="post" >
+        <div class="row">
+            <div class="col-md-12">
+                
+                <table class="table table-responsive">
+                    <thead>
+                    <tr>
+						<th style="width:25px;"></th>
+						<th style="width:60px;">ID</th>
+						<th style="">订单id</th>
+						<th style="">商品名称</th>
+						<th style="">总金额</th>
+						<th style="">团长佣金</th>
+						<th style="">服务费比例/服务费</th>
+						<th style="">实收金额</th>
+						<th style='width:100px;'>状态</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+					{loop $list $row}
+						<tr>
+                            <td style="position: relative; ">
+                               
+							</td>
+							<td>
+								{$row['id']}
+							</td>
+							<td> 
+								{$row['order_id']}
+                            </td>
+							<td>
+								{$row['goods_name']} {$row['option_sku']}
+							</td>
+							<td> 
+								￥{$row['total_money']}
+                            </td>
+							<td> 
+								-￥{$row['head_commiss_money']}
+                            </td>
+							<td> 
+								{$row['comunity_blili']}%&nbsp;&nbsp;-￥<?php echo round($row['total_money']*$row['comunity_blili']/100,2); ?>
+                            </td>
+							<td> 
+								￥{$row['money']}
+                            </td>
+							<td>
+								{if $row[state] ==2 }
+									订单取消
+								{elseif $row[state] ==1 }
+									<text class='text-danger'>已结算</text>
+								{else}
+									待结算
+								{/if}
+							<br/>
+							</td>
+                        </tr>
+					{/loop}
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="8" style="text-align: right">
+                            {$pager}
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script language="javascript">
+    
+    require(['bootstrap'], function () {
+        $("[rel=pop]").popover({
+            trigger: 'manual',
+            placement: 'right',
+            title: $(this).data('title'),
+            html: 'true',
+            content: $(this).data('content'),
+            animation: false
+        }).on("mouseenter", function () {
+            var _this = this;
+            $(this).popover("show");
+            $(this).siblings(".popover").on("mouseleave", function () {
+                $(_this).popover('hide');
+            });
+        }).on("mouseleave", function () {
+            var _this = this;
+            setTimeout(function () {
+                if (!$(".popover:hover").length) {
+                    $(_this).popover("hide")
+                }
+            }, 100);
+        });
+    });
+   
+
+</script>
+{template '_footer'}
+

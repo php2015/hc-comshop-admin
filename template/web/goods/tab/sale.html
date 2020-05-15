@@ -1,0 +1,75 @@
+
+<div class="region-goods-details row">
+    <div class="region-goods-left col-sm-2">
+        满返设置
+    </div>
+    <div class="region-goods-right col-sm-10">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">
+                积分赠送
+            </label>
+            <div class="col-sm-9 col-xs-12">
+                
+                <div class="input-group fixsingle-input-group">
+                    <input type="text" name="credit" id="credit" class="form-control" value="{$item['credit']}"/>
+                <span class="input-group-addon">
+                                分
+                            </span>
+                </div>
+                <p class="help-block">
+                    会员购物赠送的积分, 如果不填写或填写0，则默认为不赠送积分，如果带%则为按成交价格的比例计算积分
+                </p>
+                <p class="help-block">
+                    如: 购买2件，设置10 积分, 不管成交价格是多少， 则购买后获得20积分
+                </p>
+                <p class="help-block">
+                    如: 购买2件，设置10%积分, 成交价格2 * 200= 400， 则购买后获得 40 积分（400*10%）
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--重复购买-->
+<div class="region-goods-details row">
+    <div class="region-goods-left col-sm-2">
+        重复购买
+    </div>
+    <div class="region-goods-right col-sm-10">
+        {template 'goods/tab/repeat'}
+    </div>
+</div>
+
+<script>
+   
+    $(document).ready(function() {
+       
+    });
+    function showTime(obj) {
+        if (obj.checked) {
+            $('#timediv').show();
+            $('#isdiscount_time').hide();
+            $('input[name="isdiscount"]').removeAttr('checked');
+            $('#isdiscount_true').hide();
+        } else {
+            $('#timediv').hide();
+        }
+    }
+
+  
+    function isdiscount_change() {
+        var html = '<table class="table table-bordered table-condensed"><thead><tr class="active">{loop $levels $level}<th><div class=""><div style="padding-bottom:10px;text-align:center;">{$level["levelname"]}</div></div></th>{/loop}</tr></thead><tbody><tr>{loop $levels $level}{if $level["key"]=="default"}<td><input name="isdiscount_discounts_level_{$level["key"]}_default" type="text" class="form-control isdiscount_discounts_{$level["key"]} isdiscount_discounts_{$level["key"]}_default" value="{php echo is_array($isdiscount_discounts[$level["key"]]["option0"]) ? '' : $isdiscount_discounts[$level["key"]]["option0"];}" placeholder="会员促销价格单位: 元"></td>{else}<td><input name="isdiscount_discounts_level_{$level["id"]}_default" type="text" class="form-control isdiscount_discounts_level{$level["id"]} isdiscount_discounts_level{$level["id"]}_default" value="{php echo is_array($isdiscount_discounts["level".$level["id"]]["option0"]) ? '' : $isdiscount_discounts["level".$level["id"]]["option0"];}" placeholder="会员促销价格单位: 元"></td>{/if}{/loop}</tr></tbody></table>';
+        if ($("#isdiscount_discounts").html()=='')
+        {
+            $("#isdiscount_discounts_default").html(html);
+        }
+        else
+        {
+            $("#isdiscount_discounts_default").html('');
+        }
+    }
+
+    isdiscount_change();
+   
+</script>

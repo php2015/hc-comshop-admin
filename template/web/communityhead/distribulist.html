@@ -1,0 +1,284 @@
+{template '_header'}
+<style>
+    .popover{
+        width:170px;
+        font-size:12px;
+        line-height: 21px;
+        color: #0d0706;
+    }
+    .popover span{
+        color: #b9b9b9;
+    }
+    .nickname{
+        display: inline-block;
+        max-width:200px;
+        overflow: hidden;
+        text-overflow:ellipsis;
+        white-space: nowrap;
+        vertical-align: middle;
+    }
+    .tooltip-inner{
+        border:none;
+    }
+</style>
+<div class="page-header">
+    当前位置：<span class="text-primary">佣金申请列表</span>
+</div>
+<div class="page-content">
+    <form action="" method="get" class="form-horizontal form-search" role="form">
+		<input type="hidden" name="c" value="site" />
+        <input type="hidden" name="a" value="entry" />
+        <input type="hidden" name="m" value="lionfish_comshop" />
+        <input type="hidden" name="do" value="admin" />
+        <input type="hidden" name="controller"  value="communityhead.distribulist" />
+        <div class="page-toolbar m-b-sm m-t-sm">
+            <span class="pull-left">{php echo tpl_daterange('time', array('sm'=>true, 'placeholder'=>'申请时间'),true);}</span>
+            <div class="input-group">
+				<div class="input-group-select">
+					<select name='comsiss_state' class='form-control' style="width:80px;"  >
+						<option value=''>状态</option>
+						<option value='0' {if $_GPC['comsiss_state']=='0'}selected{/if}>未审核</option>
+						<option value='1' {if $_GPC['comsiss_state']=='1'}selected{/if}>已打款</option>
+						<option value='2' {if $_GPC['comsiss_state']=='2'}selected{/if}>拒绝通过</option>
+					</select>
+				</div>
+				<input type="text" class="form-control input-sm"  name="keyword" value="{$_GPC['keyword']}" placeholder="申请订单id"/>
+				<span class="input-group-btn">
+					<button class="btn  btn-primary" type="submit"> 搜索</button>
+					<button type="submit" name="export" value="1" class="btn btn-success ">导出</button>
+				</span>
+			</div>
+        </div>
+    </form>
+    <form action="" method="post" >
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-table-header">
+                    <input type='checkbox' />
+					
+                    <div class="btn-group">
+								
+						<a class='btn btn-default btn-sm btn-op btn-operation'  data-toggle='batch' data-href="{php echo shopUrl('communityhead/agent_check_apply',array('state'=>1))}"  data-confirm='确认要审核通过，已打款?'>
+							<i class="icow icow-shenhetongguo"></i>审核通过
+						</a>
+						<a class='btn btn-default btn-sm btn-op btn-operation'  data-toggle='batch' data-href="{php echo shopUrl('communityhead/agent_check_apply',array('state'=>2))}" data-confirm='确认要拒绝通过?'>
+							<i class="icow icow-yiquxiao"></i>拒绝通过</a>
+						
+						
+					</div>
+                </div>
+                <table class="table table-responsive">
+                    <thead>
+                    <tr>
+						<th style="width:25px;"></th>
+						<th style="width:60px;">ID</th>
+						<th style="">小区名称</th>
+                        <th style="width: 150px;">团长</th>
+                        <th style="">联系方式</th>
+						 <th style="">打款银行</br>打款账户</br>真实姓名</th>
+                       
+						<th style=''>申请提现金额</br>手续费</br>到账金额</th>
+                        <th style="">申请时间</br>审核时间</th>
+						<th style='width:70px;'>状态</th>
+                        <th style="width: 300px;text-align: center;">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+					{loop $list $row}
+						<tr>
+                            <td style="position: relative; ">
+                                <input type='checkbox' value="{$row['id']}" class="checkone"/>
+							</td>
+							<td>
+								{$row['id']}
+							</td>
+							<td> 
+							{$row['community_head']['community_name']}
+                            </td>
+                            <td style="overflow: visible">
+                                <div rel="pop" style="display: flex"  data-content=" 
+                                 <span>会员昵称：</span> {$row['member_info']['username']}
+                                ">
+                                   <img class="img-40" src="{$row['member_info']['avatar']}" style='border-radius:50%;border:1px solid #efefef;' />
+                                   <span style="display: flex;flex-direction: column;justify-content: center;align-items: flex-start;padding-left: 5px">
+                                       <span class="nickname">
+                                           {$row['community_head']['head_name']}
+                                       </span>
+                                   </span>
+                                </div>
+                            </td>
+                            <td> 
+							{$row['community_head']['head_mobile']}
+                            </td>
+							<td>
+								{$row['community_head_commiss']['bankname']}<br/>
+								<text class='text-primary'>{$row['community_head_commiss']['bankaccount']}</text><br/>
+								<text class='text-danger'>{$row['community_head_commiss']['bankusername']}</text>
+							</td>
+							<td> 
+							{$row['money']}<br/><text class='text-primary'>{$row['service_charge']}</text><br/>
+							<text class='text-danger'>{php echo $row['money']-$row['service_charge']}</text>
+                            </td>
+                            
+							<td>{php echo date("Y-m-d",$row['addtime'])}<br/>{php echo date("H:i:s",$row['addtime'])}
+                            <br/>
+							{if !empty($row['shentime'])}
+								{php echo date("Y-m-d",$row['shentime'])}<br/>{php echo date("H:i:s",$row['shentime'])}
+							{/if}
+							</td>
+							
+							<td>
+								{if $row[state] ==2 }
+									已拒绝
+								{elseif $row[state] ==1 }
+									<text class='text-danger'>已打款</text>
+								{else}
+								<span class='label {if $row['state']==1}label-primary{else}label-default{/if}'
+										  data-toggle='ajaxSwitch'   data-confirm ='确认要{if $row['state']==1 }取消审核{else}审核通过?已经打款给团长{/if}?'
+										  data-switch-value='{$row['state']}'
+										  data-switch-value0='0|未审核|label label-default|{php echo shopUrl('communityhead/agent_check_apply',array('state'=>1,'id'=>$row['id']))}'  
+										  data-switch-value1='1|已审核|label label-primary|{php echo shopUrl('communityhead/agent_check_apply',array('state'=>0,'id'=>$row['id']))}'
+										 
+										>
+										  {if $row['state']==1}已审核{elseif $row['state']==2}已拒绝{else}未审核{/if}</span>
+								{/if}
+							
+							<br/>
+							</td>
+							
+							<td style="overflow:visible;text-align: center;">
+                                <div class="btn-group">
+									
+								
+									<a class="btn  btn-op btn-operation" href="{php echo shopUrl('order/order',array('headid' => $row['head_id']));}"  target='_blank'>
+										<span data-toggle="tooltip" data-placement="top" title="" data-original-title="推广订单">
+											<i class='icow icow-tuiguang'></i>推广订单
+										</span>
+									</a>
+									<a class="btn  btn-op btn-operation" href="{php echo shopUrl('communityhead/goodslist',array('head_id' => $row['head_id']));}"  target='_blank'>
+										<span data-toggle="tooltip" data-placement="top" title="" data-original-title="查看在售商品">
+											查看在售商品
+										</span>
+									</a>
+									
+                                </div>
+                            </td>
+                        </tr>
+					{/loop}
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="5">
+                            <input type="checkbox">
+							<div class="btn-group">
+								
+								<a class='btn btn-default btn-sm btn-op btn-operation'  data-toggle='batch' data-href="{php echo shopUrl('communityhead/agent_check_apply',array('state'=>1))}"  data-confirm='确认要审核通过?'>
+									<i class="icow icow-shenhetongguo"></i>审核通过
+								</a>
+								<a class='btn btn-default btn-sm btn-op btn-operation'  data-toggle='batch' data-href="{php echo shopUrl('communityhead/agent_check_apply',array('state'=>2))}" data-confirm='确认要拒绝通过?'>
+									<i class="icow icow-yiquxiao"></i>拒绝通过</a>
+								
+								
+							</div>
+			
+                        </td>
+                        <td colspan="4" style="text-align: right">
+                            {$pager}
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script language="javascript">
+    
+    require(['bootstrap'], function () {
+        $("[rel=pop]").popover({
+            trigger: 'manual',
+            placement: 'right',
+            title: $(this).data('title'),
+            html: 'true',
+            content: $(this).data('content'),
+            animation: false
+        }).on("mouseenter", function () {
+            var _this = this;
+            $(this).popover("show");
+            $(this).siblings(".popover").on("mouseleave", function () {
+                $(_this).popover('hide');
+            });
+        }).on("mouseleave", function () {
+            var _this = this;
+            setTimeout(function () {
+                if (!$(".popover:hover").length) {
+                    $(_this).popover("hide")
+                }
+            }, 100);
+        });
+    });
+   
+
+    $("[data-toggle='batch-group'], [data-toggle='batch-level']").click(function () {
+        var toggle = $(this).data('toggle');
+        $("#modal-change .modal-title").text(toggle=='batch-group'?"批量修改分组":"批量修改会员等级");
+        $("#modal-change").find("."+toggle).show().siblings().hide();
+        $("#modal-change-btn").attr('data-toggle', toggle=='batch-group'?'group':'level');
+        $("#modal-change").modal();
+    });
+    $("#modal-change-btn").click(function () {
+        var _this = $(this);
+        if(_this.attr('stop')){
+            return;
+        }
+        var toggle = $(this).data('toggle');
+        var ids = [];
+        $(".checkone").each(function () {
+            var checked = $(this).is(":checked");
+            var id = $(this).val();
+            if(checked && id){
+                ids.push(id);
+            }
+        });
+        if(ids.length<1){
+            tip.msgbox.suc("请选择要批量操作的会员");
+            return;
+        }
+        var option = $("#modal-change .batch-"+toggle+" option:selected");
+        level = '';
+        if (toggle=='group'){
+            for(i=0;i<option.length;i++){
+                if (level == ''){
+                    level += $(option[i]).val();
+                }else{
+                    level += ','+$(option[i]).val();
+                }
+            }
+        }else{
+            var level = option.val();
+        }
+
+        var levelname = option.text();
+        tip.confirm("确定要将选中会员移动到 "+levelname+" 吗？", function () {
+            _this.attr('stop', 1).text("操作中...");
+            $.post(biz.url('user/changelevel'),{
+                level: level,
+                ids: ids,
+                toggle: toggle
+            }, function (ret) {
+                $("#modal-change").modal('hide');
+                if(ret.status==1){
+                    tip.msgbox.suc("操作成功");
+                    setTimeout(function () {
+                        location.reload();
+                    },1000);
+                }else{
+                    tip.msgbox.err(ret.result.message);
+                }
+            }, 'json')
+        });
+    });
+</script>
+{template '_footer'}
+

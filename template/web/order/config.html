@@ -1,0 +1,257 @@
+{template '_header'}
+<style>
+.fixsingle-input-group {
+    width: 600px;
+}
+</style>
+<div class="page-header">当前位置：<span class="text-primary">订单设置</span></div>
+<div class="page-content">
+	<form action="" method="post" class="form-horizontal form-validate" enctype="multipart/form-data" >
+		
+		
+		<div class="form-group" style="display: none;">
+            <label class="col-lg control-label">自动确认收货时间：</label>
+            <div class="col-sm-9 col-xs-12">
+                <div class="input-group fixsingle-input-group">
+						
+                    <label class='radio-inline'><input type='radio' name='data[open_auto_receive]' value='1' {if $data['open_auto_receive']=='1'}checked{/if} onclick="$('#receive').show()"/> 开启</label>
+
+					<label class='radio-inline'><input type='radio' name='data[open_auto_receive]' value='0' {if empty($data['open_auto_receive'])}checked{/if}  onclick="$('#receive').hide()"/> 关闭</label>
+					<span class='help-block'>订单发货后 ，用户在x天内未收货，系统自动收货</span>
+                </div>
+            </div>
+        </div>
+		<div class="form-group" style="display: none;"> id="receive" style="<?php if( empty($data['open_auto_receive']) ){ ?>display:none;<?php } ?>">
+            <label class="col-lg control-label"></label>
+            <div class="col-sm-9 col-xs-12">
+				<div class="input-group fixsingle-input-group">
+                    <input type="text" name="data[auto_receive_time]" class="form-control" value="{$data['auto_receive_time']}" />
+                    <div class="input-group-addon">天</div>
+                </div>
+            </div>
+        </div>
+		
+		<div class="form-group" >
+			<label class="col-lg control-label">限制购买距离</label>
+			<div class="col-sm-10 col-xs-12" id="radPickupDateTip">  
+				<label class="radio-inline"><input type="radio"  name="data[shop_limit_buy_distance]" {if !isset($data['shop_limit_buy_distance']) || $data['shop_limit_buy_distance'] ==0 } checked {/if} value="0" /><span class="fake-radio"></span>不限制</label>
+				<label  class="radio-inline"><input type="radio"  name="data[shop_limit_buy_distance]" {if isset($data['shop_limit_buy_distance']) && $data['shop_limit_buy_distance'] ==1 } checked {/if} value="1" /><span class="fake-radio"></span>限制</label>
+			</div>
+		</div>
+		<div class="form-group" id="txtPickupDateTip" style="{if isset($data['shop_buy_distance']) && $data['shop_limit_buy_distance'] ==1}display:block;{else}display: none;{/if}">
+            <label class="col-lg control-label"></label>
+            <div class="col-sm-9 col-xs-12">
+				<div class="input-group fixsingle-input-group">
+                    <input class="form-control" name="data[shop_buy_distance]" type="text" placeholder="填写限制距离" value="{$data['shop_buy_distance']}">
+					<div class="input-group-addon">KM</div>
+                </div>
+            </div>
+        </div>
+		
+		<div class="form-group">
+            <label class="col-lg control-label">自动取消未支付订单：</label>
+            <div class="col-sm-9 col-xs-12">
+                <div class="input-group fixsingle-input-group">
+						
+                    <label class='radio-inline'><input type='radio' name='data[open_auto_delete]' value='1' {if $data['open_auto_delete']=='1'}checked{/if} onclick="$('#cancle_order').show()"/> 开启</label>
+
+					<label class='radio-inline'><input type='radio' name='data[open_auto_delete]' value='0' {if empty($data['open_auto_delete'])}checked{/if}  onclick="$('#cancle_order').hide()"/> 关闭</label>
+					<span class='help-block'>订单生成后 ，用户在x小时内未支付，系统自动取消</span>
+                </div>
+            </div>
+        </div>
+		<div class="form-group" id="cancle_order" style="<?php if( empty($data['open_auto_delete']) ){ ?>display:none;<?php } ?>">
+            <label class="col-lg control-label"></label>
+            <div class="col-sm-9 col-xs-12">
+				<div class="input-group fixsingle-input-group">
+                    <input type="text" name="data[auto_cancle_order_time]" class="form-control" value="{$data['auto_cancle_order_time']}" />
+                    <div class="input-group-addon">小时</div>
+                </div>
+            </div>
+        </div>
+		
+		<div class="form-group">
+            <label class="col-lg control-label">减库存方式：</label>
+            <div class="col-sm-9 col-xs-12">
+                <div class="input-group fixsingle-input-group">
+					<label class='radio-inline'><input type='radio' name='data[kucun_method]' value='0' {if empty($data['kucun_method']) || $data['kucun_method'] ==0}checked{/if}  /> 下单减库存</label>
+					<label class='radio-inline'><input type='radio' name='data[kucun_method]' value='1' {if $data['kucun_method']=='1'}checked{/if} /> 付款后减库存</label>
+					<span class='help-block'>用户下单减库存，取消订单将返还库存数量</span>
+                </div>
+            </div>
+        </div>
+		
+		
+		<div class="form-group">
+            <label class="col-lg control-label">满多少可以下单：</label>
+            <div class="col-sm-9 col-xs-12">
+                <div class="input-group fixsingle-input-group">
+						
+                    <label class='radio-inline'><input type='radio' name='data[open_man_orderbuy]' value='1' {if $data['open_man_orderbuy']=='1'}checked{/if} onclick="$('#manbuy_order').show()"/> 开启</label>
+
+					<label class='radio-inline'><input type='radio' name='data[open_man_orderbuy]' value='0' {if empty($data['open_man_orderbuy'])}checked{/if}  onclick="$('#manbuy_order').hide()"/> 关闭</label>
+					<span class='help-block'>购物车满多少才可以下单购买</span>
+                </div>
+            </div>
+        </div>
+		<div class="form-group" id="manbuy_order" style="<?php if( empty($data['open_man_orderbuy']) ){ ?>display:none;<?php } ?>">
+            <label class="col-lg control-label"></label>
+            <div class="col-sm-9 col-xs-12">
+				<div class="input-group fixsingle-input-group">
+                    <input type="text" name="data[man_orderbuy_money]" class="form-control" value="{$data['man_orderbuy_money']}" />
+                    <div class="input-group-addon">元</div>
+                </div>
+            </div>
+        </div>
+		
+		<div class="form-group" style="display:none;">
+            <label class="col-lg control-label">满多少免运费：</label>
+            <div class="col-sm-9 col-xs-12">
+                <div class="input-group fixsingle-input-group">
+						
+                    <label class='radio-inline'><input type='radio' name='data[open_man_free_shipping]' value='1' {if $data['open_man_free_shipping']=='1'}checked{/if} onclick="$('#freeshipping_order').show()"/> 开启</label>
+
+					<label class='radio-inline'><input type='radio' name='data[open_man_free_shipping]' value='0' {if empty($data['open_man_free_shipping'])}checked{/if}  onclick="$('#freeshipping_order').hide()"/> 关闭</label>
+					<span class='help-block'>团长配送或快递模式下，满多少免运费</span>
+                </div>
+            </div>
+        </div>
+		<div class="form-group" id="freeshipping_order" style="<?php if( empty($data['open_man_free_shipping']) ){ ?>display:none;<?php } ?>">
+            <label class="col-lg control-label"></label>
+            <div class="col-sm-9 col-xs-12">
+				<div class="input-group fixsingle-input-group">
+                    <input type="text" name="data[man_free_shipping_money]" class="form-control" value="{$data['man_free_shipping_money']}" />
+                    <div class="input-group-addon">元</div>
+                </div>
+            </div>
+        </div>
+		
+		
+        <div class="form-group">
+            <label class="col-lg control-label">订单提醒开关：</label>
+            <div class="col-sm-9 col-xs-12">
+                <div class="input-group fixsingle-input-group">
+					<label class='radio-inline'><input type='radio' name='data[order_notify_switch]' value='0' {if empty($data['order_notify_switch']) || $data['order_notify_switch'] ==0}checked{/if}  /> 关闭</label>
+					<label class='radio-inline'><input type='radio' name='data[order_notify_switch]' value='1' {if $data['order_notify_switch']=='1'}checked{/if} /> 开启</label>
+					<span class='help-block'>首页、商品详情页订单提醒开关</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg control-label">付款后分享：</label>
+            <div class="col-sm-9 col-xs-12">
+                <div class="input-group fixsingle-input-group">
+					<label class='radio-inline'><input type='radio' name='data[order_pay_after_share]' value='0' {if empty($data['order_pay_after_share']) || $data['order_pay_after_share'] ==0}checked{/if}  /> 关闭</label>
+					<label class='radio-inline'><input type='radio' name='data[order_pay_after_share]' value='1' {if $data['order_pay_after_share']=='1'}checked{/if} /> 开启</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" >
+            <label class="col-lg control-label">付款后分享图片</label>
+            <div class="col-sm-9 col-xs-12">
+                {php echo tpl_form_field_image2('data[order_pay_after_share_img]', $data['order_pay_after_share_img'])}
+                <span class='help-block'>不传则使用默认商品分享图，比列：5：4</span>
+            </div>
+        </div>
+		
+		<div class="form-group">
+            <label class="col-lg control-label">小票打印：</label>
+            <div class="col-sm-9 col-xs-12">
+                <div class="input-group fixsingle-input-group">
+						
+                    <label class='radio-inline'><input type='radio' name='data[open_feier_print]' value='1' {if $data['open_feier_print']=='1'}checked{/if} onclick="$('#feier_print').show();$('#yilianyun_print').hide();"/> 开启飞蛾打印机</label>
+                    <label class='radio-inline'><input type='radio' name='data[open_feier_print]' value='2' {if $data['open_feier_print']=='2'}checked{/if} onclick="$('#yilianyun_print').show();$('#feier_print').hide();"/> 开启易联云打印机</label>
+
+					<label class='radio-inline'><input type='radio' name='data[open_feier_print]' value='0' {if empty($data['open_feier_print'])}checked{/if}  onclick="$('#feier_print').hide();$('#yilianyun_print').hide();"/> 关闭</label>
+					<span class='help-block'>开启后，系统将自动打印新订单</span>
+                </div>
+            </div>
+        </div>
+		<div class="form-group" id="feier_print" style="<?php if( empty($data['open_feier_print']) || $data['open_feier_print'] ==2 ){ ?>display:none;<?php } ?>">
+            <label class="col-lg control-label"></label>
+            <div class="col-sm-9 col-xs-12">
+				<div class="input-group fixsingle-input-group">
+					<div class="input-group-addon"><b>sn:</b></div>
+                    <input type="text" name="data[feier_print_sn]" class="form-control" value="{$data['feier_print_sn']}" />
+                    <div class="input-group-addon"><b>key:</b></div>    
+                    <input type="text" name="data[feier_print_key]" class="form-control" value="{$data['feier_print_key']}" />
+                    <div class="input-group-addon"><b>打印联数：</b></div>    
+                    <input type="text" name="data[feier_print_lian]" class="form-control" value="{$data['feier_print_lian']}" />
+                    
+                </div>
+				<span class='help-block'>支持飞鹅打印机 (sn,key在机子底部)，打印联数最小为1</span>
+            </div>
+        </div>
+		<div class="form-group" id="yilianyun_print" style="<?php if( empty($data['open_feier_print']) || $data['open_feier_print'] == 1 ){ ?>display:none;<?php } ?>">
+            <label class="col-lg control-label"></label>
+            <div class="col-sm-9 col-xs-12">
+				
+				<div class="input-group fixsingle-input-group">
+					<div class="input-group-addon"><b>应用id:</b></div>
+                    <input type="text" name="data[yilian_client_id]" class="form-control" value="{$data['yilian_client_id']}" />
+					<div class="input-group-addon"><b>应用密钥:</b></div>
+                    <input type="text" name="data[yilian_client_key]" class="form-control" value="{$data['yilian_client_key']}" />
+                </div>
+				<div class="input-group fixsingle-input-group">
+					<div class="input-group-addon"><b>打印机终端号:</b></div>    
+                    <input type="text" name="data[yilian_machine_code]" class="form-control" value="{$data['yilian_machine_code']}" />
+					<div class="input-group-addon"><b>终端密钥:</b></div>    
+                    <input type="text" name="data[yilian_msign]" class="form-control" value="{$data['yilian_msign']}" />
+					 <div class="input-group-addon"><b>打印联数：</b></div>    
+                    <input type="text" name="data[yilian_print_lian]" class="form-control" value="{$data['yilian_print_lian']}" />
+                 </div>    
+				<span class='help-block'>支持易联云K4、K5、K6打印机 (打印机终端号,终端密钥在机子底部,开发者中心应用类型选择： 自有型应用)，没有开发者账号<a href="https://dev.yilianyun.net/" target="_blank">请点击申请</a></span>
+				
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg control-label">订单留言：</label>
+            <div class="col-sm-9 col-xs-12">
+                <div class="input-group fixsingle-input-group">
+                    <label class='radio-inline'><input type='radio' name='data[is_open_order_message]' value='0' {if
+                            empty($data['is_open_order_message']) || $data['is_open_order_message']==0}checked{/if} /> 关闭</label>
+                    <label class='radio-inline'><input type='radio' name='data[is_open_order_message]' value='1' {if
+                            $data['is_open_order_message']=='1' }checked{/if} /> 开启</label>
+                </div>
+            </div>
+        </div>
+		
+		<div class="form-group">
+            <label class="col-lg control-label">开启余额支付：</label>
+            <div class="col-sm-9 col-xs-12">
+                <div class="input-group fixsingle-input-group">
+                    <label class='radio-inline'><input type='radio' name='data[is_open_yue_pay]' value='0' {if
+                            empty($data['is_open_yue_pay']) || $data['is_open_yue_pay']==0}checked{/if} /> 关闭</label>
+                    <label class='radio-inline'><input type='radio' name='data[is_open_yue_pay]' value='1' {if
+                            $data['is_open_yue_pay']=='1' }checked{/if} /> 开启</label>
+                </div>
+				<span class='help-block'>开启后会员中心默认开启余额充值</span>
+				
+            </div>
+        </div>
+		
+		<div class="form-group">
+			<label class="col-lg control-label"> </label>
+			<div class="col-sm-9 col-xs-12">
+				<input type="submit" value="提交" class="btn btn-primary"  />
+			</div>
+		</div>
+	</form>
+</div>
+<script>
+
+$(function(){
+$('#radPickupDateTip input[type=radio]').click(function(){
+	var s_val = $(this).val();
+	if(s_val == 1)
+	{
+		$('#txtPickupDateTip').show();
+	}else{
+		$('#txtPickupDateTip').hide();
+	}
+ })
+ 
+ })
+</script>
+{template '_footer'}

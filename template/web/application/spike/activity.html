@@ -1,0 +1,114 @@
+ {template '_header'}
+ <div class="page-header">
+     当前位置：<span class="text-primary">秒杀活动表</span>
+</div>
+ <div class="page-content">
+ 
+     <div class="page-table-header">
+     	 <input type='checkbox' />
+         <span class='pull-right'>
+            <a class='btn btn-primary btn-sm' href="{php echo shopUrl('application.spike.addactivity')}"><i class="fa fa-plus"></i> 添加新活动</a>
+		 </span>
+		 <div class="btn-group">
+				<button class="btn btn-default btn-sm  btn-operation" type="button" data-toggle='batch' data-href="{php echo shopUrl('application.spike.changeactivity',array('state'=>1))}">
+	                   <i class='icow icow-shangjia2'></i> 启用
+	            </button>
+	            <button class="btn btn-default btn-sm  btn-operation" type="button" data-toggle='batch'  data-href="{php echo shopUrl('application.spike.changeactivity',array('state'=>0))}">
+	                   <i class='icow icow-xiajia3'></i> 禁用
+	            </button>      
+	            <button class="btn btn-default btn-sm  btn-operation" type="button" data-toggle='batch-remove' data-confirm="确认要删除吗?" data-href="{php echo shopUrl('application.spike.delactivity')}">
+						<i class='icow icow-shanchu1'></i> 删除
+				</button>  	
+	      </div>
+      </div>
+    
+            <table class="table table-responsive table-hover">
+                <thead>
+                    <tr>
+                    	<th style="width:25px;"></th>
+                       <th style='width:160px;'>活动标题</th>
+                       <th>活动状态</th>
+                       <th>开始时间</th>
+                       <th>结束时间</th>
+                      
+                       <th>状态</th>
+                       <th style="width: 265px;">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {loop $list $row}
+                    <tr >
+                    	<td>
+							<input type='checkbox'  value="{$row['id']}"/>
+						</td>
+                        <td>{$row['title']}</td>
+                        <td>
+                        	<?php if($row['begin_time'] > time()){ ?>
+                        		未开始
+                        	<?php }else if($row['begin_time'] < time() && $row['end_tme'] > time() ){ ?>
+                        		进行中
+                        	<?php }else if($row['end_tme'] < time()){ ?>
+                        		已过期
+                        	<?php } ?>
+                        </td>
+                        <td>{php echo date('Y-m-d H:i:s', $row['begin_time'])}</td>
+                        <td>{php echo date('Y-m-d H:i:s', $row['end_tme'])}</td>
+                        <td>	
+                          	<span class='label a {if $row['state']==1}label-primary{else}label-default{/if}'
+	                          data-toggle='ajaxSwitch'
+	                          data-confirm = "确认是{if $row['state']==0}启用{else}禁用{/if}？"
+	                          data-switch-refresh='false'
+	                          data-switch-value='{$row['state']}'
+	                          data-switch-value0='0|禁用|label label-default|{php echo shopUrl('application.spike.changeactivity',array('state'=>1,'id'=>$row['id']))}'
+	                          data-switch-value1='1|启用|label label-success|{php echo shopUrl('application.spike.changeactivity',array('state'=>0,'id'=>$row['id']))}'
+	                          >
+	                          {if $row['state']==1}启用{else}禁用{/if}
+							</span>
+                        </td>
+                        <td>
+                            <a class='btn btn-default btn-sm btn-op btn-operation'  href="{php echo shopUrl('application.spike.addactivity', array('id' => $row['id']))}">
+                                <span data-toggle="tooltip" data-placement="top" title="" data-original-title="编辑">
+                                    <i class='icow icow-bianji2'></i>编辑活动
+                               </span>
+                            </a>
+							<a class='btn btn-default btn-sm btn-op btn-operation' data-toggle='ajaxRemove'  href="{php echo shopUrl('application.spike.delactivity', array('id' => $row['id']))}" data-confirm="确认删除吗？">
+                               <span data-toggle="tooltip" data-placement="top" title="" data-original-title="删除">
+                                    <i class='icow icow-shanchu1'></i>
+                               </span>
+                            </a>
+						</td>
+                    </tr>
+                    {/loop}
+                
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5">
+							<div class="page-table-header">
+								<input type="checkbox">
+								<div class="btn-group">
+									<button class="btn btn-default btn-sm  btn-operation" type="button" data-toggle='batch' data-href="{php echo shopUrl('application.spike.changeactivity',array('state'=>1))}">
+										<i class='icow icow-shangjia2'></i> 启用
+									</button>
+									<button class="btn btn-default btn-sm  btn-operation" type="button" data-toggle='batch'  data-href="{php echo shopUrl('application.spike.changeactivity',array('state'=>1))}">
+										<i class='icow icow-xiajia3'></i> 禁用
+									</button>
+									
+									   
+									<button class="btn btn-default btn-sm  btn-operation" type="button" data-toggle='batch-remove' data-confirm="确认要删除吗?" data-href="{php echo shopUrl('application.spike.delactivity')}">
+										<i class='icow icow-shanchu1'></i> 删除
+									</button>
+											
+								</div>
+							</div>
+                        </td>
+                        <td colspan="2" style="text-align: right">
+                            {$pager}
+                        </td>
+                    </tr>
+                    </tfoot>
+            </table>
+ </div>
+ {template '_footer'}
+
+

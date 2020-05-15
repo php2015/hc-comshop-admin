@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <?php $shoname_name = load_model_class('Front')->get_config_by_name('shoname'); ?>
+  <title>{if !empty($shoname_name)}{$shoname_name}{/if}</title>
+  <link rel="shortcut icon" href="{$_W['siteroot']}{$_W['config']['upload']['attachdir']}/{if !empty($_W['setting']['copyright']['icon'])}{$_W['setting']['copyright']['icon']}{else}images/global/wechat.jpg{/if}" />
+        
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+  <link rel="stylesheet" href="{php echo SNAILFISH_LOCAL}/template/layuiadmin/style/admin.css" media="all">
+ 
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+      <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->  
+
+    <link href="./resource/css/bootstrap.min.css?v=201903260001" rel="stylesheet">
+    <link href="./resource/css/common.css?v=201903260001" rel="stylesheet">
+    <script type="text/javascript">
+        window.sysinfo = {
+            {if !empty($_W['uniacid'])}'uniacid': '{$_W['uniacid']}',{/if}
+            {if !empty($_W['acid'])}'acid': '{$_W['acid']}',{/if}
+            {if !empty($_W['openid'])}'openid': '{$_W['openid']}',{/if}
+            {if !empty($_W['uid'])}'uid': '{$_W['uid']}',{/if}
+            'isfounder': {if !empty($_W['isfounder'])}1{else}0{/if},
+            'siteroot': '{$_W['siteroot']}',
+            'siteurl': '{$_W['siteurl']}',
+            'attachurl': '{$_W['attachurl']}',
+            'attachurl_local': '{$_W['attachurl_local']}',
+            'attachurl_remote': '{$_W['attachurl_remote']}',
+            'module' : {'url' : '{if defined('MODULE_URL')}{MODULE_URL}{/if}', 'name' : '{if defined('IN_MODULE')}{IN_MODULE}{/if}'},
+            'cookie' : {'pre': '{$_W['config']['cookie']['pre']}'},
+            'account' : {php echo json_encode($_W['account'])},
+        };
+    </script>
+            
+    <script type="text/javascript" src="./resource/js/lib/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="./resource/js/lib/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./resource/js/app/util.js?v=201903260001"></script>
+    <script type="text/javascript" src="./resource/js/app/common.min.js?v=201903260001"></script>
+	<script src="{php echo SNAILFISH_LOCAL}/static/js/vue.min.js"></script>
+	<script src="{php echo SNAILFISH_LOCAL}/static/js/Sortable.min.js"></script>
+    <script type="text/javascript" src="./resource/js/require.js?v=201903260001"></script>
+    <script type="text/javascript" src="./resource/js/lib/jquery.nice-select.js?v=201903260001"></script>
+    <link rel="stylesheet" href="{php echo SNAILFISH_LOCAL}/template/layuiadmin/layui/css/layui.css" media="all">
+    <link href="{php echo SNAILFISH_LOCAL}static/css/snailfish.css" rel="stylesheet">
+	
+	<link href="{php echo SNAILFISH_LOCAL}static/css/themes.css" rel="stylesheet">
+	<link href="{php echo SNAILFISH_LOCAL}static/css/diy.css" rel="stylesheet">
+<style>
+		.form-control {
+			height:28px;
+		}
+		.text-danger{
+			color:#d9534f!important;
+		}
+		.col-form-label{line-height:20px;padding:3.9px;}
+		.pdl15{padding-left:15px;}
+		.layui-row{margin-bottom:14px;}
+		
+		.modules-name {
+			height: 34px;
+			line-height: 34px;
+			border: 1px solid #eee;
+			border-bottom: 0;
+			padding-left: 15px;
+			background-color: rgb(247,247,247);
+			margin-top: 14px;
+			width: 283px;
+		}
+		.d-flex {
+			display: -webkit-box!important;
+			display: -webkit-flex!important;
+			display: -ms-flexbox!important;
+			display: flex!important;
+		}
+		.flex-row {
+			-webkit-box-orient: horizontal!important;
+			-webkit-box-direction: normal!important;
+			-webkit-flex-direction: row!important;
+			-ms-flex-direction: row!important;
+			flex-direction: row!important;
+		}
+		.flex-wrap {
+			-webkit-flex-wrap: wrap!important;
+			-ms-flex-wrap: wrap!important;
+			flex-wrap: wrap!important;
+		}
+		.modules {
+			width: 94px;
+			text-align: center;
+			cursor: pointer;
+			border-right: 1px solid #eee;
+			border-bottom: 1px solid #eee;
+			padding: 12px;
+			
+		}
+		.modules .img{
+		    width: 40px;
+			height: 40px;
+			margin-bottom: 14px;
+		}
+		.w283{width:283px;}
+		.temp-2 {
+			background-color: #f5f7f9;
+			max-height: 100%;
+			overflow-y: auto;
+			height: 798px;
+		}
+		.block {
+			width: 100%;
+			height: auto;
+			position: relative;
+		}
+		.border-block {
+			width: 60px;
+			height: 30px;
+			border: 1px #eee solid;
+			padding: 5px;
+			cursor: pointer;
+			margin-left: 15px;
+			position: relative;
+		}
+		.block-header img {
+			width: 375px;
+			height: 68px;
+		}
+		.justify-content-center {
+			-webkit-box-pack: center!important;
+			-webkit-justify-content: center!important;
+			-ms-flex-pack: center!important;
+			justify-content: center!important;
+		}
+		.align-items-center {
+			-webkit-box-align: center!important;
+			-webkit-align-items: center!important;
+			-ms-flex-align: center!important;
+			align-items: center!important;
+		}
+		.block-empty {
+			width: 100%;
+			margin-top: 40px;
+		}
+		.mt-4 {
+			margin-top: 20px;
+		}
+		.d-flex {
+			display: -webkit-box!important;
+			display: -webkit-flex!important;
+			display: -ms-flexbox!important;
+			display: flex!important;
+		}
+		.p-2 {
+			padding: 7px;
+		}
+		.col {
+			-webkit-flex-basis: 0;
+			-ms-flex-preferred-size: 0;
+			flex-basis: 0;
+			-webkit-box-flex: 1;
+			-webkit-flex-grow: 1;
+			-ms-flex-positive: 1;
+			flex-grow: 1;
+			max-width: 100%;
+		}
+		.col-3 {
+			-webkit-box-flex: 0;
+			-webkit-flex: 0 0 25%;
+			-ms-flex: 0 0 25%;
+			flex: 0 0 25%;
+			max-width: 25%;
+		}
+</style>
+</head>
+<body layadmin-themealias="default">
+
+    <div class="layui-fluid">
+        <div class="layui-card">
+            <div class="layui-card-header layui-elem-quote">当前位置：<span class="line-text">{if !empty($item['id'])}编辑{else}添加{/if}模板{if !empty($item['id'])}({$item['title']}){/if}</span></div>
+            <div class="layui-card-body" style="padding:15px;">
+                <form>
+					<input value="395" type="hidden" name="id" />
+					<div class="layui-row layui-col-space15" id="appdiy">
+						 <div class="layui-col-xs6 layui-col-sm6 layui-col-md3 ">
+							<div class="layui-row">
+								<div class="layui-col-md4">
+									<label class="col-form-label required"><font color="red">*&nbsp;</font>模板名称</label>
+								</div>
+								<div class="layui-col-md6">
+									<input class="form-control">
+								</div>
+							</div>
+							<div class="layui-row ">
+								<div class="layui-col-md4">
+									<label class="col-form-label pdl15 text-danger">温馨提示：</label>
+								</div>
+								<div class="layui-col-md6">
+									<label class="col-form-label text-danger">最多添加30个组件</label>
+								</div>
+							</div>
+							<div class="layui-row">
+								<template v-for="(item,index) in modules_list">
+									<div class="modules-name">{{item.name}}</div>
+									<div class="d-flex flex-row flex-wrap w283"
+										 style="border-top: 1px solid rgb(238, 238, 238); border-left: 1px solid rgb(238, 238, 238);">
+										<template v-for="(value,key) in item.sub">
+											<div class="modules" :data-type="value.type">
+												<div>
+													<img :src="'{php echo SNAILFISH_LOCAL}/static/images/diy/' + value.type + '.png'"  class="img">
+												</div>
+												<div>{{value.name}}</div>
+												<div v-if="value.type == 'ad' || value.type== 'float'"
+													 class="fs-sm text-danger">只能添加一个
+												</div>
+											</div>
+										</template>
+									</div>
+								</template>
+							</div>
+						 </div>
+						 <div class="layui-col-xs6 layui-col-sm6 layui-col-md5">
+							<div class="layui-row temp-2">
+								<div style="height: 100%;">
+									<div class="d-flex justify-content-center" style="width: 100%; height: 100%;">
+										<div style="width: 375px;">
+											<div class="block">
+												<div class="block-header">
+													<img src="{php echo SNAILFISH_LOCAL}/static/images/diy/phone-header.png">
+												</div>
+											</div>
+											<div id="sortList">
+												
+													<template v-if="temp_list.length == 0">
+														<div class="d-flex justify-content-center align-items-center block-empty">
+															<div style="text-align: center">
+																<img src="{php echo SNAILFISH_LOCAL}/static/images/diy/empty.png">
+																<div class="mt-4" style="color:#bbb">模板空空如也<br>快添加组件吧</div>
+															</div>
+														</div>
+													</template>
+													<template v-else>
+														<template v-for="(item,index) in temp_list">
+															 <div :class="(index == temp_index) ? 'block active' : 'block'">
+																
+																<template v-if="item.type == 'banner'">
+																	<template v-if="item.param.list.length == 0">
+																		<div class="block-default block-default-img d-flex justify-content-center align-items-center"
+																			 :data-index="index">
+																			<div class="pic-list d-flex align-items-center"
+																				 :class="'pic-list-' + item.param.style">
+																				<div :class="'fill-' + item.param.fill"
+																					 :style="{'backgroundImage':'url({php echo SNAILFISH_LOCAL}/static/images/diy/default.png)','height':item.param.height/2+'px'}">
+																				</div>
+																			</div>
+																		</div>
+																	</template>
+																	<template v-else>
+																		<div class="block-default block-default-img"
+																			 :data-index="index">
+																			<div :class="'pic-list d-flex align-items-center banner-carousel ' + 'pic-list-' + item.param.style"
+																				 :data-style="item.param.style">
+																				<template v-for="(value,key) in item.param.list">
+																					<div :class="'fill-' + item.param.fill"
+																						 :style="{'backgroundImage':'url(' + value.pic_url + ')','height':item.param.height/2+'px'}"
+																						 :data-count="key">
+																						<img @load="imagesLoad" class="pic-list-img" :src="value.pic_url"
+																							 style="display:block; visibility: hidden;">
+																					</div>
+																				</template>
+																			</div>
+																		</div>
+																	</template>
+																</template>
+
+																<template v-if="item.type == 'search'">
+																	<div class="block-default block-default-search d-flex justify-content-center align-items-center" :data-index="index"
+																		 :style="{backgroundColor:item.param.backgroundColorW}">
+																		<div
+																			:class="'search d-flex align-items-center ' + (item.param.textPosition == 'center' ? 'text-center' : '')"
+																			:style="{backgroundColor:item.param.backgroundColor,borderRadius:item.param.borderRadius/2 + 'px',color:item.param.color}">
+																			<div class="d-flex align-items-center w-100" :class="item.param.textPosition == 'center' ? 'justify-content-center' : ''">
+																				<img src="{php echo SNAILFISH_LOCAL}/static/images/diy/icon-search.png">
+																				<div class="text text-more">{{item.param.text}}</div>
+																			</div>
+																		</div>
+																	</div>
+																</template>
+
+																
+																<template v-if="item.type == 'nav'">
+																	<div class="block-default block-default-nav d-flex" :data-index="index">
+																		<div class="nav d-flex"
+																			 :style="{backgroundColor:item.param.backgroundColor,overflowX:(item.param.is_slide == 'true' ? 'auto' : 'hidden'),'min-height':(item.param.list.length > 0 ? 'auto' : '100px')}">
+																			<template v-for="(value,key) in item.param.default_list">
+																				<div class="d-flex h-100 flex-wrap" style="flex-shrink: 0;width: auto;max-width: 100%;">
+																					<template v-for="(v,k) in value">
+																						<div :class="'nav-block nav-item-' + (item.param.count >= 5 ? 5 : item.param.count)">
+																							<img :src="v.pic_url" v-if="v.pic_url">
+																							<div v-else style="width: 42px;height: 42px;"></div>
+																							<div class="text-more">{{v.name}}</div>
+																						</div>
+																					</template>
+																				</div>
+																			</template>
+																		</div>
+																	</div>
+																</template>
+
+																<template v-if="item.type == 'notice'">
+																	<div class="block-default block-default-notice d-flex justify-content-center align-items-center"
+																		 :data-index="index">
+																		<div class="notice d-flex align-items-center"
+																			 :style="{backgroundColor:item.param.bg_color,color:item.param.color}">
+																			<div class="">
+																				<img :src="item.param.icon ? item.param.icon : defaultList.notice.icon">
+																				<span class="text">{{item.param.name}}</span>
+																			</div>
+																			<div class="col" style="padding-left: 20px;overflow: hidden;white-space: nowrap">{{item.param.content}}
+																			</div>
+																			<img style="width: 5px;height: 9px;margin-right: 0;margin-left: 8px;"
+																				 src="/web/statics/wxapp/images/icon-notice-jiantou.png">
+																		</div>
+																	</div>
+																</template>
+
+																<template v-if="index == temp_index">
+																	<div class="block-handle block-handle-left">
+																		<div class="handle delete" title="删除组件">
+																			<img src="{php echo SNAILFISH_LOCAL}/static/images/diy/x.png">
+																		</div>
+																		<div class="handle copy" title="复制组件" v-if="item.type != 'ad'">
+																			<img src="{php echo SNAILFISH_LOCAL}/static/images/diy/copy.png">
+																		</div>
+																	</div>
+																	<div class="block-handle block-handle-right">
+																		<div class="handle up" v-if="index > 0" title="上移组件">
+																			<img src="{php echo SNAILFISH_LOCAL}/static/images/diy/up.png">
+																		</div>
+																		<div class="handle down" v-if="index < temp_list.length-1"
+																			 title="下移组件">
+																			<img src="{php echo SNAILFISH_LOCAL}/static/images/diy/up.png">
+																		</div>
+																	</div>
+																</template>
+
+															</div>
+														</template>
+													</template>
+													
+												
+												
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+						 </div>
+						 <div class="layui-col-xs6 layui-col-sm6 layui-col-md4">
+							<div class="layui-row pb-4">
+								
+								
+								<template v-for="(item,index) in temp_list">
+									<template v-if="temp_index == index">
+										<template v-if="item.type == 'search'">
+											<div>
+												<div class="d-flex p-2">
+													<div class="col">搜索</div>
+												</div>
+												<div class="d-flex p-2">
+													<div class="d-flex col-3 align-items-center"><span>框内颜色</span></div>
+													<div class="border-block start_click" data-param="backgroundColor">
+														<div :style="{backgroundColor:item.param.backgroundColor}"></div>
+													</div>
+													<div>
+														<input v-model="item.param.backgroundColor" class="form-control" style="width: 7rem;">
+													</div>
+												</div>
+												<div class="d-flex p-2">
+													<div class="d-flex col-3 align-items-center"><span>背景颜色</span></div>
+													<div class="border-block start_click" data-param="backgroundColorW">
+														<div :style="{backgroundColor:item.param.backgroundColorW}"></div>
+													</div>
+													<div>
+														<input v-model="item.param.backgroundColorW" class="form-control" style="width: 7rem;">
+													</div>
+												</div>
+												<div class="d-flex p-2">
+													<div class="d-flex col-3 align-items-center"><span>边框圆角</span></div>
+													<div class="input-block col-6">
+														<div class="input-group">
+															<input class="form-control input-num" type="number" min="1" max="30"
+																   v-model="item.param.borderRadius" data-param="borderRadius">
+															<span class="input-group-addon">px</span>
+														</div>
+														<div class="text-danger">最大圆角30px</div>
+													</div>
+												</div>
+												<div class="d-flex p-2">
+													<div class="d-flex col-3 align-items-center"><span>文本內容</span></div>
+													<div class="input-block col-6">
+														<input class="form-control" type="text"
+															   v-model="item.param.text" data-param="text">
+													</div>
+												</div>
+												<div class="d-flex p-2">
+													<div class="d-flex col-3 align-items-center"><span>文本颜色</span></div>
+													<div class="border-block start_click" data-param="color">
+														<div :style="{backgroundColor:item.param.color}"></div>
+													</div>
+													<div>
+														<input v-model="item.param.color" class="form-control" style="width: 7rem;">
+													</div>
+												</div>
+												<div class="d-flex p-2">
+													<div class="d-flex col-3 align-items-center"><span>文本位置</span></div>
+													<div :class="'border-block radio-block ' + (item.param.textPosition == 'center' ? '' : 'active')"
+														 data-param="textPosition" data-item="left">
+														<div>靠左</div>
+													</div>
+													<div :class="'border-block radio-block ml-4 ' + (item.param.textPosition == 'center' ? 'active' : '')"
+														 data-param="textPosition" data-item="center">
+														<div>居中</div>
+													</div>
+												</div>
+
+											</div>
+										</template>
+									</template>
+								</template>
+
+							</div>
+						 </div>
+						
+					</div>
+				</form>
+            </div>
+        </div>
+    </div>
+
+	
+<script src="{php echo SNAILFISH_LOCAL}/template/layuiadmin/layui/layui.js"></script>
+
+<script>
+  layui.config({
+    base: '{php echo SNAILFISH_LOCAL}/template/layuiadmin/' //静态资源所在路径
+  }).extend({
+    index: 'lib/index' //主入口模块
+  }).use('index');
+</script>
+
+<script>
+//由于模块都一次性加载，因此不用执行 layui.use() 来加载对应模块，直接使用即可：
+var layer = layui.layer;
+var $;
+
+layui.use(['jquery', 'layer','form'], function(){ 
+  $ = layui.$;
+  var form = layui.form;
+  
+  
+  //监听提交
+  form.on('submit(formDemo)', function(data){
+  
+   $.ajax({
+    url: data.form.action,
+    type: data.form.method,
+    data: data.field,
+    dataType:'json',
+    success: function (info) {
+      
+      if(info.status == 0)
+      {
+        layer.msg(info.result.message,{icon: 1,time: 2000});
+      }else if(info.status == 1){
+        var go_url = location.href;
+        if( info.result.hasOwnProperty("url") )
+        {
+          go_url = info.result.url;
+        }
+        
+        layer.msg('操作成功',{time: 1000,
+          end:function(){
+            location.href = info.result.url;
+          }
+        }); 
+      }
+    }
+  });
+  
+    return false;
+  });
+})
+
+</script>  
+<script>
+
+var app = new Vue({
+		el:'#appdiy',
+		data:{
+			modules_list: [
+            {
+                name: '基础组件',
+                class: 'pb-4',
+                sub: [
+					{
+						name: '搜索',
+						type: 'search'
+					},
+					{
+						name: '导航图标',
+						type: 'nav'
+					},
+					{
+						name: '轮播广告',
+						type: 'banner'
+					},
+					{
+						name: '公告',
+						type: 'notice'
+					},
+					{
+						name: '专题',
+						type: 'topic'
+					},
+					{
+						name: '关联链接',
+						type: 'link'
+					},
+					{
+						name: '图片广告',
+						type: 'rubik'
+					},
+					{
+						name: '视频',
+						type: 'video'
+					},
+					{
+						name: '商品',
+						type: 'goods'
+					},
+					{
+						name: '门店',
+						type: 'shop'
+					},
+				]
+			},
+			{
+				name: '营销组件',
+				class: 'pb-4',
+				sub: [
+					{
+						name: '优惠券',
+						type: 'coupon'
+					},
+					{
+						name: '倒计时',
+						type: 'time'
+					},
+					{
+						name: '拼团',
+						type: 'pintuan'
+					},
+					{
+						name: '秒杀',
+						type: 'miaosha'
+					},
+					{
+						name: '预约',
+						type: 'book'
+					},
+					{
+						name: '好店推荐',
+						type: 'mch'
+					},
+					{
+						name: '砍价',
+						type: 'bargain'
+					},
+					{
+						name: '积分商城',
+						type: 'integral'
+					},
+					{
+						name: '抽奖',
+						type: 'lottery'
+					},
+				]
+			},
+			{
+				name: '其他组件',
+				class: 'pb-4',
+				sub: [
+					{
+						name: '空白占位',
+						type: 'line'
+					},
+					{
+						name: '流量主',
+						type: 'ad'
+					},
+					{
+						name: '弹窗广告',
+						type: 'modal'
+					},
+					{
+						name: '快捷导航',
+						type: 'float'
+					},
+				]
+			}],
+			temp_list: [],
+			temp_index: -1,
+			param: {
+            search: {
+                backgroundColorW: '#eeeeee',
+                backgroundColor: '#ffffff',
+                borderRadius: 4,
+                color: '#b2b2b2',
+                textPosition: 'left',
+                text: '搜索'
+            },
+            banner: {
+                style: 1,
+                fill: 1,
+                list: [],
+                height: 360
+            },
+            nav: {
+                backgroundColor: '#ffffff',
+                count: 3,
+                col: 1,
+                list: [],
+                default_list: [],
+                is_slide: 'true'
+            },
+            notice: {
+                bg_color: '#f67f79',
+                color: '#ffffff',
+                icon: '',
+                name: '公告',
+                content: ''
+            },
+            topic: {
+                count: 1,
+                logo_1: '',
+                logo_2: '',
+                heated: '',
+                style: 0,
+                list: [],
+                is_cat: 0,
+
+            },
+            link: {
+                backgroundColor: '#ffffff',
+                color: '#353535',
+                name: '',
+                icon: '',
+                is_icon: 1,
+                url: '',
+                left: 0,
+                is_jiantou: 1,
+                page_name: '',
+                position: 0
+            },
+            line: {
+                backgroundColor: '#eeeeee',
+                height: 1
+            },
+            ad: {
+                id: ''
+            },
+            rubik: {
+                style: 0,
+                fill: 1,
+                space: 0,
+                width: 4,
+                height: 4,
+                minHeight: 360,
+                list: []
+            },
+            video: {
+                url: '',
+                pic_url: ''
+            },
+            coupon: {
+                bg: '/images/home-page/icon-coupon-index.png',
+                bg_1: '/images/home-page/icon-coupon-no.png',
+                color: '#ffffff'
+            },
+            goods: {
+                is_cat: 0,
+                cat_position: 0,
+                cat_style: 0,
+                list: [],
+                list_style: 0,
+                fill: 1,
+                per: 0,
+                style: 0,
+                name: 1,
+                price: 1,
+                buy: 1,
+                buy_list: 0,
+                buy_content: '/mch/images/cat.png',
+                mark: 0,
+                mark_list: 0,
+                mark_url: '/mch/images/rx.png',
+                cat_index: 0,
+                buy_default: '购买'
+            },
+            time: {
+                pic_url: '',
+                url: '',
+                open_type: '',
+                start_time: '',
+                end_time: '',
+                pic_url_1: '/mch/images/countdown_bg1.png'
+            },
+            modal: {
+                show: 0,
+                pic_url: '',
+                url: '',
+                open_type: '',
+                status: 0,
+                pic_width: 650,
+                pic_height: 700,
+                list: [
+                    {
+                        pic_width: 650,
+                        pic_height: 700,
+                        pic_url: '',
+                        url: '',
+                        open_type: '',
+                    },
+                    {
+                        pic_width: 650,
+                        pic_height: 700,
+                        pic_url: '',
+                        url: '',
+                        open_type: '',
+                    },
+                    {
+                        pic_width: 650,
+                        pic_height: 700,
+                        pic_url: '',
+                        url: '',
+                        open_type: '',
+                    },
+                ]
+            },
+            shop: {
+                list: [],
+                name: 1,
+                score: 1,
+                mobile: 1,
+                distance: 1
+            },
+            mch: {
+                is_goods: 0,
+                list: [],
+                price: 1,
+            },
+            integral: {
+                bg_1: '/images/home-page/icon-coupon-index.png',
+                color: '#ffffff',
+                is_coupon: 1,
+                is_goods: 1,
+                is_cat: 0,
+                cat_position: 0,
+                cat_style: 0,
+                list: [],
+                list_style: 0,
+                fill: 1,
+                per: 0,
+                style: 0,
+                name: 1,
+                price: 1,
+                buy: 1,
+                buy_list: 0,
+                buy_content: '',
+                mark: 0,
+                mark_list: 0,
+                mark_url: '/mch/images/rx.png',
+                cat_index: 0,
+                buy_default: '立即兑换'
+            },
+            float: {
+                style: 0,
+                cat_style: 0,
+                home_img: '',
+                show_customer_service: 0,
+                service: '',
+                dial: 0,
+                dial_pic: '',
+                dial_tel: '',
+                web_service_status: 0,
+                web_service_url: '',
+                web_service: '',
+                quick_map_status: 0,
+                icon: '',
+                address: '',
+                lal: '',
+                wxapp_status: 0,
+                appid: '',
+                path: '',
+                pic_url: '',
+                open: '',
+                close: ''
+            }
+        },
+			
+		}
+		
+		
+	});
+	
+// 拖拽
+var sort = Sortable.create(document.getElementById('sortList'), {
+    animation: 250,
+    onUpdate: function (event) {
+        var $ul = document.getElementById('sortList');
+        var newIndex = event.newIndex,
+            oldIndex = event.oldIndex,
+            $li = $ul.children[newIndex],
+            $oldLi = $ul.children[oldIndex];
+        // 先删除移动的节点
+        $ul.removeChild($li)
+        // 再插入移动的节点到原有节点，还原了移动的操作
+        if (newIndex > oldIndex) {
+            $ul.insertBefore($li, $oldLi)
+        } else {
+            $ul.insertBefore($li, $oldLi.nextSibling)
+        }
+        var item = app.temp_list.splice(oldIndex, 1);
+        app.temp_list.splice(newIndex, 0, item[0]);
+        app.temp_index = newIndex;
+    }
+}); // That's all.
+
+
+	
+// 选择组件添加到模板
+$(document).on('click', '.modules', function () {
+    var that = $(this);
+    var type = that.data('type');
+    var param = {};
+	
+    
+	param = JSON.parse(JSON.stringify(app.param[type]));
+	if (type == 'integral') {
+		param.buy_content = '';
+		param.buy_list = 2;
+		param.buy_default = '立即兑换'
+	}
+    
+    var temp = {
+        type: type,
+        id: 0,
+        param: param,
+    };
+    
+    var modal_bool = false;
+   
+	if (app.temp_list.length >= 30 && 30 > 0) {
+		$.alert({
+			content: '组件最多添加'+30+'个'
+		});
+		return;
+	}
+	app.temp_list.push(JSON.parse(JSON.stringify(temp)));
+    
+});
+
+// 选择具体的组件修改参数
+$(document).on('click', '.block-default', function () {
+    var index = $(this).data('index');
+    app.temp_index = index;
+});	
+</script>
+	
+</body>
+</html>

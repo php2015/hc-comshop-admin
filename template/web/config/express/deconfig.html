@@ -1,0 +1,66 @@
+{template '_header'}
+<style>
+input[type=checkbox], input[type=radio]{margin:0px;}
+</style>
+<div class="page-header">当前位置：<span class="text-primary">配送方式设置</span></div>
+<div class="page-content">
+	<form action="" method="post" class="form-horizontal form-validate" enctype="multipart/form-data" >
+		
+		<div class="form-group">
+            <label class="col-lg control-label">自提</label>
+            <div class="col-sm-9 col-xs-12">
+				<label class='radio-inline'>
+                    <input type='radio' name='parameter[delivery_type_ziti]' value='2' {if isset($data['delivery_type_ziti']) && $data['delivery_type_ziti'] ==2 }checked {/if} /> 关闭
+                </label>
+				<label class='radio-inline'>
+                    <input type='radio' name='parameter[delivery_type_ziti]' value='1' {if !isset($data['delivery_type_ziti']) || $data['delivery_type_ziti'] ==1 }checked {/if} /> 开启
+                </label>
+            </div>
+        </div>
+		<div class="form-group">
+            <label class="col-lg control-label">快递</label>
+            <div class="col-sm-9 col-xs-12">
+				<label class='radio-inline'>
+                    <input type='radio' name='parameter[delivery_type_express]' value='2' {if !isset($data['delivery_type_express']) || $data['delivery_type_express'] ==2 }checked {/if} /> 关闭
+                </label>
+				<label class='radio-inline'>
+                    <input type='radio' name='parameter[delivery_type_express]' value='1' {if isset($data['delivery_type_express']) && $data['delivery_type_express'] ==1 }checked {/if} /> 开启
+                </label>
+            </div>
+        </div>
+		<div class="form-group">
+            <label class="col-lg control-label">团长配送</label>
+            <div class="col-sm-9 col-xs-12">
+				<label class='radio-inline'>
+                    <input type='radio' id="close_tuanz" name='parameter[delivery_type_tuanz]' value='2' {if !isset($data['delivery_type_tuanz']) ||  $data['delivery_type_tuanz'] ==2 }checked {/if} /> 关闭
+                </label>
+				<label class='radio-inline'>
+                    <input type='radio' id="open_tuanz" name='parameter[delivery_type_tuanz]' value='1' {if isset($data['delivery_type_tuanz']) && $data['delivery_type_tuanz'] ==1 }checked {/if} /> 开启
+				
+				</label>
+				<input class="form-control" id="txtPickupDateTip" name="parameter[delivery_tuanz_money]" style="vertical-align: sub;{if isset($data['delivery_type_tuanz']) && $data['delivery_type_tuanz'] ==1} display: inline-block;{else} display: none;{/if} width: 120px;" type="text" value="{$data['delivery_tuanz_money']}" aria-invalid="false">
+				
+				<span class="help-block">开启请填写团长配送每单配送费(元)</span>
+            </div>
+        </div>
+
+		<div class="form-group">
+			<label class="col-lg control-label"> </label>
+			<div class="col-sm-9 col-xs-12">
+				<input type="submit" value="提交" class="btn btn-primary"  />
+			</div>
+		</div>
+	</form>
+</div>
+
+<script language="javascript">
+    $(function(){
+		$('#close_tuanz').click(function(){
+			$('#txtPickupDateTip').hide();
+		})
+		$('#open_tuanz').click(function(){
+			$('#txtPickupDateTip').css('display','inline-block');
+		})
+	})
+</script>
+{template '_footer'}

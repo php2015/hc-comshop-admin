@@ -1,0 +1,574 @@
+{template '_header'}
+<style type='text/css'>
+    .ordertable { width:100%;position: relative;margin-bottom:10px}
+    .ordertable tr td:first-child { text-align: right }
+    .ordertable tr td {padding:10px 5px 0;vertical-align: top}
+    .ordertable1 tr td { text-align: right; }
+    .ops .btn { padding:5px 10px;}
+    .order-container{
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+    .order-container-left{
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+    }
+    .order-container-static{
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        padding: 30px 50px 20px;
+    }
+    .font18{
+        font-size:20px;
+        font-weight:bold;;
+    }
+    .trbagpack span{
+        margin: 0 10px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .trbagpack span.address{
+        width:150px;
+        overflow: hidden;
+        text-overflow:ellipsis;
+        white-space: nowrap;
+    }
+    tfoot .price{
+        float: right;
+    }
+    tfoot .price-inner{
+        display: inline-block;
+        vertical-align: middle;
+        width:100px;
+        text-align: right;
+    }
+    .packbag-group{
+        border:1px solid #efefef;
+    }
+    .packbag{
+        padding: 0 30px;
+    }
+    .packbag-title{
+    line-height: 33px;
+    }
+    .packbag-group .packbag-list{
+        padding: 20px 33px;
+        border-bottom: 1px solid #efefef;
+        display: flex;
+       align-items: center;
+    }
+    .packbag-list .packbag-media{
+        width:100px;
+    }
+    .packbag-list .packbag-inner{
+        border-left:1px solid #efefef;
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+    }
+    .packbag-goods-list{
+        display: flex;
+        flex-wrap: wrap;
+        width:100%;
+    }
+    .packbag-goods{
+        width:25%;
+        display: flex;
+        display: -webkit-flex;
+        margin: 10px 0 5px;
+    }
+    .packbag-goods-media{
+        width:52px;
+        height: 52px;
+        margin-right: 10px;
+    }
+   .packbag-goods-media img{
+       width:52px;
+       height: 52px;
+       border: 1px solid #efefef;
+    }
+    .packbag-goods-inner{
+        flex:1;
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        overflow: hidden;
+    }
+    .packbag-goods-inner p{
+    color: #999;
+    }
+    .packbag-goods-inner .title{
+        width:100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .table .trorder td{
+        border-right:1px solid #efefef;
+    }
+    .table .trorder td:nth-of-type(1){
+        border:none;
+    }
+</style>
+<div class="page-header">
+    当前位置：<span class="text-primary">订单详情</span>
+</div>
+<div class="page-content">
+    {if $item['order_status_id']!=3}
+    <div class="step-region" >
+        <ul class="ui-step ui-step-4" >
+            <li {if 0<=$item['order_status_id']}class="ui-step-done"{/if}>
+				<div class="ui-step-number" >1</div>
+				<div class="ui-step-title" >买家下单</div>
+				<div class="ui-step-meta" >{if 3 != $item['order_status_id']}{php echo date('Y-m-d',$item['date_added'])}<br/>{php echo date('H:i:s',$item['date_added'])}{/if}</div>
+            </li {if 1<=$item['status']}class="ui-step-done"{/if}>
+            
+			<li {if in_array($item['order_status_id'], array(1,2,4,6,7,8,9,10,11,14))}class="ui-step-done"{/if}>
+            <div class="ui-step-number">2</div>
+            <div class="ui-step-title">买家付款</div>
+            <div class="ui-step-meta">{if in_array($item['order_status_id'], array(1,2,4,6,7,8,9,10,11,14))}{php echo date('Y-m-d',$item['pay_time'])}<br/>{php echo date('H:i:s',$item['pay_time'])}{/if}</div>
+            </li>
+            <li {if in_array($item['order_status_id'], array(4,6,11,14))}class="ui-step-done"{/if}>
+            <div class="ui-step-number" >3</div>
+            <div class="ui-step-title">
+                商家发货
+            </div>
+            <div class="ui-step-meta" >
+               {if in_array($item['order_status_id'], array(4,6,11,14))}{php echo date('Y-m-d',$item['express_time'])}<br/>{php echo date('H:i:s',$item['express_time'])}{/if}
+            </div>
+            </li>
+            <li {if in_array($item['order_status_id'], array(11))}class="ui-step-done"{/if}>
+            <div class="ui-step-number" >4</div>
+            <div class="ui-step-title">订单完成</div>
+            <div class="ui-step-meta">{if in_array($item['order_status_id'], array(11))}{php echo date('Y-m-d',$item['finishtime'])}<br/>{php echo date('H:i:s',$item['finishtime'])}{/if}</div>
+            </li>
+        </ul>
+    </div>
+    {/if}
+    <form class="form-horizontal form" action="" method="post">
+        <input type="hidden" name="id" value="{$item['order_id']}" />
+        <input type="hidden" name="dispatchid" value="{$express_info['id']}" />
+
+        <!--<h3 class="order-title">订单信息</h3>-->
+        <div class="row order-container">
+            <div class="order-container-left" style="border-right: 1px solid #efefef">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="">
+                            <li class="text"><span class="col-sm">订单编号：</span><span class="text-default">{$item['order_num_alias']}</span></li>
+                            {if !empty($coupon)}
+                            <li class="text">
+                                <span class="col-sm">优惠券：</span>
+                                <span class="text-default">{$coupon['voucher_title']} &nbsp;&nbsp;<a data-toggle='popover' data-html='true' data-placement='right'
+                                                                                                                                                                                                                                                               data-content="<table style='width:100%;'>
+
+                    <tr>
+                        <td style='border:none;text-align:right;'>优惠方式：</td>
+                        <td style='border:none;text-align:right;'>
+                            立减 {$item['voucher_credit']} 元
+                        </td>
+                    </tr>
+                </table>
+    "><i class='fa fa-question-circle'></i></a></span>
+                            </li>
+                            {/if}
+							
+                            <li class="text">
+                                <span class="col-sm">付款方式：</span>
+                                <span class="text-default">
+                                    {if $item['payment_code'] == ''}未付款{/if}
+                                    {if $item['payment_code'] == 'yuer'}余额支付{/if}
+                                    {if $item['payment_code'] == 'admin'}后台付款{/if}
+                                    {if $item['payment_code'] == 'weixin'}微信支付{/if}
+                                </span>
+                            </li>
+                            <li class="text">
+                                <span class="col-sm">买　　家：</span>
+                                <span class="text-default">
+									<?php if( $_W['role'] == 'agenter' ){ ?>
+									 {$member['username']}
+									<?php }else{ ?>
+									 <a href="{php echo shopUrl('user/detail',array('id'=>$member['member_id']))}" target='_blank' class="text-primary">{$member['username']}</a> 
+									<?php } ?>
+									&nbsp;&nbsp;
+									<a data-toggle='popover' data-html='true' data-trigger='hover' data-placement='right' data-content="<table style='width:100%;'>
+                    <tr>
+                        <td  style='border:none;text-align:right;' colspan='2'><img src='{$member['avatar']}' style='width:100px;height:100px;padding:1px;border:1px solid #ccc' /></td>
+                    </tr>
+                    <tr>
+                        <td  style='border:none;text-align:right;'>ID：</td>
+                        <td  style='border:none;text-align:right;'>{$member['member_id']}</td>
+                    </tr>
+                    <tr>
+                        <td  style='border:none;text-align:right;'>昵称</td>
+                        <td  style='border:none;text-align:right;'>
+                        {if empty($member['username'])}未填写{else} {$member['username']}{/if}
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td  style='border:none;text-align:right;'>姓名：</td>
+                        <td  style='border:none;text-align:right;'>
+                         {if empty($member['realname'])}未填写{else}{$member['realname']}{/if}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td  style='border:none;text-align:right;'>手机号：</td>
+
+                        <td  style='border:none;text-align:right;'> {if empty($member['telephone'])}未填写{else}{$member['telephone']}{/if}</td>
+                    </tr>
+                    </table>
+    "><i class='icow icow-help' style="font-size: 13px;color: #2f3434;margin-left: -3px"></i></a>
+                                </span>
+                            </li>
+                            
+                            <li class="text">
+                                <span class="col-sm">配送方式：</span>
+                                <span class="text-default">
+                                    {if $item['delivery'] == 'pickup'}
+                                        自提
+                                    {elseif $item['delivery'] == 'express' }
+                                        快递{if !empty($express_info['name'])}({$express_info['name']} {if !empty($item['shipping_no'])}快递单号：{$item['shipping_no']}{/if}){/if} 
+									{elseif $item['delivery'] == 'tuanz_send' }
+										团长配送
+									{else}
+                                        其他
+                                    {/if}
+                                </span>
+                            </li>
+                            <li class="text">
+                                <span class="col-sm">收 货 人：</span>
+                                <span class="text-default">
+                                    {$item['shipping_name']} {$item['shipping_tel']} 
+                                </span>
+                            </li>
+							<li class="text">
+                                <span class="col-sm">团　　长：</span>
+                                <span class="text-default">
+                                    {$item['ziti_name']} {$item['ziti_mobile']}
+                                </span>
+                            </li>
+							
+							{if $item['delivery'] == 'tuanz_send'}
+							<li class="text">
+                                <span class="col-sm">送货地址：</span>
+                                <span class="text-default">
+                                    {$item['tuan_send_address']}
+                                </span>
+                            </li>
+							{/if}
+							{if $item['delivery'] == 'pickup'}
+							<li class="text">
+                                <span class="col-sm">取货地址：</span>
+                                <span class="text-default">
+                                    {$item['shipping_address']}
+                                </span>
+                            </li>
+							{/if}
+							
+							
+                            {if !empty($item['address_id'])}
+                            <li class="text">
+                                <span class="col-sm">收货人：</span>
+                                <span class="text-default">
+                                    {$province_info['name']}{$city_info['name']}{$area_info['name']}{$item['shipping_address']}, {$item['shipping_name']}, {$item['shipping_tel']} 
+									<a class='text-primary op js-clip' data-url="{$province_info['name']}{$city_info['name']}{$area_info['name']}{$item['shipping_address']}, {$item['shipping_name']}, {$item['shipping_tel']}">复制</a>
+                                </span>
+                            </li>
+
+                            {/if}
+
+                            {if !empty($item['comment'])}
+                            <li class="text"><span class="col-sm">买家备注：</span><span class="text-default">{$item['comment']}</span></li>
+                            {/if}
+                        </ul>
+                    </div>
+					
+                    {if !empty($item['address_id'])}
+                    <div class="col-md-12 ops">
+                        <a class="btn btn-primary" style="margin-left: 10px" data-toggle="ajaxModal" href="{php echo shopUrl('order/opchangeaddress', array('id' => $item['order_id']))}">修改订单收货信息</a>
+                    </div>
+                    {/if}
+					
+                </div>
+
+            </div>
+            <div class=" order-container-static">
+                <div class=" status">
+                    <span class="text"> 订单状态：</span>
+                    {if $item['order_status_id'] == 1}
+					<span class="text-warning font18">待发货</span> 
+					{/if}
+					{if $item['order_status_id'] == 3}
+					<span class="text-warning font18">待付款</span> 
+					{/if}
+					{if $item['order_status_id'] == 4}
+					<span class="text-warning font18">待收货</span>
+					{/if}
+					{if $item['order_status_id'] == 14}
+					<span class="text-warning font18">配送中</span>
+					{/if}
+                    {if $item['order_status_id'] == 11}
+					<span class="text-success font18">交易完成</span>
+					{/if}
+                    {if $item['order_status_id'] == 5}
+                    <span class="text-default font18">已关闭</span>
+                    {/if}
+					
+                    <i>
+						{if $item['order_status_id'] == 3}
+						   （ 等待买家付款）
+                        {/if}
+						
+                        {if $item['order_status_id'] == 1 }（买家已经付款，请商家尽快发货）{/if}
+						
+                        {if $item['order_status_id'] == 4}（商家已发货，等待买家收货并交易完成）{/if}
+						{if $item['order_status_id'] == 14}（商家已发货，正在配送给团长途中）{/if}
+                        
+						{if $item['order_status_id'] == 12}
+								（  <span class="label label-default">已维权</span> {if !empty($refund['refundtime'])}维权时间: {php echo date('Y-m-d H:i:s',$refund['refundtime'])}{/if}）
+							
+                        {/if}
+                    </i>
+                </div>
+				{if !empty($item['transaction_id'])}
+				<div>
+                    <ul>
+                        <li class="text">交易单号：<span class="text-default">{$item['transaction_id']}</span></li>
+                    </ul>
+                </div>
+                {/if}
+
+                {if !empty($item['expresssn']) && $item['delivery']=='express' && !empty($item['shipping_method'])}
+                <div>
+                    <ul>
+                        <li class="text">快递公司：<span class="text-default">{if empty($express_info['name'])}其他快递{else}{$express_info['name']}{/if}</span></li>
+                        <li class="text">快递单号：<span class="text-default">{$item['shipping_no']}</span>&nbsp;<a class="text-primary op" data-toggle="ajaxModal" href="{php echo shopUrl('util/express', array('id' => $item['id'],'express'=>$item['express'],'expresssn'=>$item['expresssn']))}">查看物流</a></li>
+                        <li class="text">发货时间：<span class="text-default">{php echo date('Y-m-d H:i:s',$item['express_time'])}</span></li>
+                    </ul>
+                </div>
+                {/if}
+				
+				{if $item['delivery']=='pickup' }
+                <div>
+                    <ul>
+						{if !empty($item['express_time'])}
+                       <li class="text">发货时间：<span class="text-default">{php echo date('Y-m-d H:i:s',$item['express_time'])}</span></li>
+					   {/if}
+					   {if !empty($item['express_tuanz_time'])}
+                       <li class="text">团长接货时间：<span class="text-default">{php echo date('Y-m-d H:i:s',$item['express_tuanz_time'])}</span></li>
+					   {/if}
+                    </ul>
+                </div>
+                {/if}
+				
+				
+				
+                <div class="ops  col-md-12" style="padding: 0;">
+                   
+				    <?php 
+					$is_ops_show = true;
+					if( $_W['role'] == 'agenter' )
+					{
+						$supper_info = json_decode(base64_decode($_GPC['__lionfish_comshop_agent']), true);
+						if( $supper_info['type'] != 1)
+						{
+							$is_ops_show = false;
+						}
+					} 
+					?>
+					<?php if($is_ops_show){ ?>
+                    {template 'order/ops'}
+					<?php } ?>
+                    
+                    <a class="text-primary" data-toggle="ajaxModal" href="{php echo shopUrl('order/opremarksaler', array('id' => $item['order_id']))}"  >
+                        {if !empty($item['remarksaler'])}查看备注
+                         {else}
+                        添加备注
+                        {/if}
+                    </a>
+                   
+                    
+                </div>
+                {if $item['order_status_id'] != 3}
+                <div class="order-container-footer text col-md-12" style="border: none;padding: 0">
+                    {if $item['order_status_id'] == 1}
+                    友情提示：如果无法进行发货，请及时联系买家进行妥善处理;
+                    {/if}
+                    {if $item['order_status_id'] == 4}
+					友情提示：
+						请及时关注物流状态，确保买家及时收到商品;
+						如果买家未收到货物或有退换货请求，请及时联系买家妥善处理
+                    {/if}
+                    {if $item['order_status_id']==11}
+					友情提示：
+                    交易成功，如买家有售后申请，请与买家进行协商，妥善处理
+                    {/if}
+                </div>
+                {/if}
+            </div>
+            
+        </div>
+
+        
+        <h3 class="order-title">商品信息</h3>
+        <table class="table ">
+            <thead>
+            <tr class="trorder" style="background: #fff">
+                <th class="" style="width: 75px;text-align: right;padding-right: 0">
+                    商品标题
+                </th>
+                <th style="">
+
+                </th>
+                <th style="padding-left: 20px">规格、编号</th>
+                <th style="padding-left: 20px">团长佣金</th>
+				<th style="">供应商</th>
+                <th style="text-align: center;width: 15%">单价</th>
+                <th style="text-align: center;width: 10%">数量</th>
+               
+                <th  style="text-align: center;width: 20%;">价格</th>
+                
+            </tr>
+            </thead>
+            <tbody>
+
+            {php $i=0;}
+            {loop $order_goods $goods}
+                <tr class="trorder" style="background: #fff">
+                    <td style="text-align: right;padding-right: 0">
+                        <img src="{php echo tomedia($goods['goods_images'])}" style='width:52px;height:52px;border:1px solid #efefef; padding:1px;' >
+                    </td>
+                    <td style="min-width: 300px">
+                        <a target="_blank" href="{php echo shopUrl('goods/edit', array('id' => $goods['goods_id']))}"title="查看" style="display: block;line-height: 22px;max-width: 250px;white-space: nowrap;
+        overflow: hidden;text-overflow: ellipsis;">{$goods['name']}</a>
+                        
+                      
+                    </td>
+                    <td style="padding: 10px 20px">
+                        <p style="white-space:normal;">
+                        规格：{if !empty($goods['option_sku'])}<span class="label label-primary" data-container="body" data-toggle="popover" data-placement="right" data-content="{$goods['option_sku']}">{$goods['option_sku']}</span>{else}无{/if}
+                        </p>
+                        <p>
+                            编码：{if !empty($goods['model'])}<span>{$goods['model']}</span>{else}无{/if}
+                        </p>
+                        
+                    </td>
+					 <td style="padding: 10px 20px">
+                        <p style="white-space:normal;">
+							{if $item['delivery']=='tuanz_send' }
+								{if !empty($goods['head_commission_order_info'])} 
+									{php echo round($goods['head_commission_order_info']['money'] - $goods['head_commission_order_info']['add_shipping_fare'],2)} +{$goods['head_commission_order_info']['add_shipping_fare']}={$goods['head_commission_order_info']['money']}
+								{else}
+									--
+								{/if}	
+							{else}
+								{if !empty($goods['head_commission_order_info'])}￥{$goods['head_commission_order_info']['money']}{else}--{/if}
+							{/if}
+							
+                        </p>
+                    </td>
+					<td>
+					<span>{$goods['supply_name']}</span>
+					</td>
+					
+                    <td style="text-align: center">
+                        <p>￥{php echo number_format($goods['oldprice']/$goods['quantity'],2)}</p>
+                    </td>
+                    <td style="text-align: center">
+                        <p>{$goods['quantity']}个</p>
+                    </td>
+                    <td  style="text-align: center">&yen;{php echo number_format($goods['oldprice'],2)}</td>
+                    
+                </tr>
+                
+
+                {php $i++;}
+            {/loop}
+            </tbody>
+
+            <tfoot style="padding-top: 20px">
+            <tr class="trorder">
+                <td colspan="2" style="padding-left: 20px"> 
+                </td>
+                
+
+                <td colspan="6" style="padding-right: 60px">
+                    <div class="price">
+					 <p><span class="price-inner">运费：</span>￥{$item['shipping_fare']}</p>
+                        <p> <span class="price-inner">商品小计：</span><span style="font-weight: bold">￥{php echo number_format($item['total'],2)}</span></p>
+                       
+                      
+						{if $item['voucher_id']>0 }
+                        <p><span class="price-inner">优惠券优惠：</span><span class="text-danger">-￥{$item['voucher_credit']}</span></p>
+                        {/if}
+						{if $item['fullreduction_money']>0 }
+                        <p><span class="price-inner">满减优惠：</span><span class="text-danger">-￥{$item['fullreduction_money']}</span></p>
+                        {/if}
+						
+                        {if ($item['changedtotal'])!=0}
+                        <p>
+                            <span class="price-inner">卖家改价：</span>
+                            <span style='{if 0<$item['changedtotal']}color:green{else}color:red{/if}'>{if 0<$item['changedtotal']}+{else}-{/if}￥{php echo number_format(abs($item['changedtotal']),2)}</span>
+                        </p>
+                        {/if}
+
+                        {if ($item['changedshipping_fare'])!=0}
+                        <p>
+                            <span class="price-inner">卖家改运费：</span>
+                            <span style='{if 0<$item['changedshipping_fare']}color:green{else}color:red{/if}'>{if 0<$item['changedshipping_fare']}+{else}-{/if}￥{php echo abs($item['changedshipping_fare'])}</span>
+                        </p>
+                        {/if}
+						<?php 
+							$free_tongji = $item['total']+$item['shipping_fare']-$item['voucher_credit']-$item['fullreduction_money'];
+							if($free_tongji < 0){
+								$free_tongji = 0;
+							}
+						?>
+                        <p><span class="price-inner">实付款：</span><span style="font-size: 14px;font-weight: bold;color: #e4393c">￥{php echo $free_tongji}</span></p>
+                    </div>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </form>
+</div>
+
+<script language='javascript'>
+    $(function () {
+        $("#showdiymore1").click(function () {
+            $(".diymore1").show();
+            $(".diymore11").hide();
+        });
+
+        $("#showdiymore2").click(function () {
+            $(".diymore2").show();
+            $(".diymore22").hide();
+        });
+    });
+
+    function showDiyInfo(obj){
+        var data = $(obj).attr('data');
+        var id = "diyinfo_" + data;
+        var hide = $(obj).attr('hide');
+        if(hide=='1'){
+            $("#"+id).show();
+            $(obj).text('点击收起');
+        }else{
+            $("#"+id).hide();
+            $(obj).text('点击展开');
+        }
+        $(obj).attr('hide',hide=='1'?'0':'1');
+    }
+</script>
+
+{template '_footer'}
+

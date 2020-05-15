@@ -1,0 +1,182 @@
+{template '_header'}
+<div class="page-header">
+	当前位置：<span class="text-primary">{if !empty($item['id'])}编辑{else}添加{/if}优惠券 <small>{if !empty($item['id'])}修改【{$item['couponname']}】{/if}</small></span>
+
+</div>
+
+<div class="page-content">
+	
+	<form action="" method='post' class='form-horizontal form-validate'>
+	<input type="hidden" name="id" value="{$item['id']}">
+
+
+	<div class="page-content">
+		<div class="page-content">
+			<div class="form-group">
+				<label class="col-lg control-label">排序</label>
+				<div class="col-sm-9 col-xs-12">
+					<input type="text" name="displayorder" class="form-control" value="{$item['displayorder']}"  />
+					<span class='help-block'>数字越大越靠前</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg control-label must"> 优惠券名称</label>
+				<div class="col-sm-9 col-xs-12">
+					<input type="text" name="voucher_title" class="form-control" value="{$item['voucher_title']}" data-rule-required="true"  />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg control-label">分类</label>
+				<div class="col-sm-9 col-xs-12">
+					
+					<select name='catid' class='form-control select2'>
+						<option value=''></option>
+						{loop $category $k $c}
+						<option value='{$k}' {if $item['catid']==$k}selected{/if}>{$c['name']}</option>
+						{/loop}
+					</select>
+					
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg control-label">缩略图</label>
+				<div class="col-sm-9 col-xs-12">
+					
+					{php echo tpl_form_field_image2('thumb', $item['thumb'])}
+					
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg control-label must">使用条件</label>
+				<div class="col-sm-9 col-xs-12">
+					
+					<input type="text" name="limit_money" data-rule-required="true" class="form-control" value="{if empty($item)}1{else}{$item['limit_money']}{/if}"  />
+					<span class='help-block' >消费满多少可用, 空或0 不限制</span>
+					
+				</div>
+			</div>
+
+
+			<div class="form-group">
+				<label class="col-lg control-label">使用时间限制</label>
+				<div class="col-sm-7">
+					<div class='input-group'>
+						<span class='input-group-addon'>
+							<label class="radio-inline" style='margin-top:-5px;' ><input type="radio" name="timelimit" value="0" {if $item['timelimit']==0}checked{/if}>获得后</label>
+						</span>
+						<input type='text' class='form-control' name='get_over_hour' value="{if empty($item) }1{else}{$item['get_over_hour']}{/if}" />
+						<span class='input-group-addon'>天内有效(空为不限时间使用)</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-lg control-label"></label>
+				<div class="col-sm-3">
+					<div class='input-group'>
+						<span class='input-group-addon'>
+							<label class="radio-inline" style='margin-top:-5px;' ><input type="radio" name="timelimit" value="1" {if $item['timelimit']==1}checked{/if}>在日期</label>
+						</span>
+						{php echo tpl_form_field_daterange('time', array('starttime'=>date('Y-m-d', $starttime),'endtime'=>date('Y-m-d', $endtime)));}
+						<span class='input-group-addon'>内有效</span>
+					</div>
+				</div>
+			</div>
+			
+			
+			
+			<div class="form-group">
+				<label class="col-lg control-label">首页领取</label>
+				<div class="col-sm-9 col-xs-12" >
+					
+					<label class="radio-inline coupon-radio">
+						<input type="radio" name="is_index_show" value="1" {if empty($item) || $item['is_index_show'] == 1}checked="true"{/if}  /> 是
+					</label>
+					<label class="radio-inline coupon-radio">
+						<input type="radio" name="is_index_show" value="0" {if !empty($item) && $item['is_index_show'] == 0}checked="true"{/if}  /> 否
+					</label>
+					
+				</div>
+			</div>
+
+			<div class="form-group">
+                <label class="col-lg control-label">优惠方式</label>
+                <div class="col-sm-9 col-xs-12">
+					<input type="hidden" name="coupontype" value="0"/>
+                   
+                     <label class="radio-inline " ><input type="radio" name="backtype" checked>立减</label>
+                      
+                </div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg control-label"></label>
+				<div class="col-sm-9 col-xs-12 backtype backtype0" >
+					<div class='input-group fixsingle-input-group'>
+						<span class='input-group-addon'>立减</span>
+						<input type='text' class='form-control' name='credit' value="{if empty($item)}1{else}{$item['credit']}{/if}"/>
+						<span class='input-group-addon'>元</span>
+					 </div>
+				</div>
+             </div>
+			
+			 <div class="form-group">
+				<label class="col-lg control-label">每人限领</label>
+				<div class="col-sm-9 col-xs-12">
+					
+					<input type="text" name="person_limit_count" class="form-control" value="{if empty($item)}1{else}{$item['person_limit_count']}{/if}"  />
+					<span class='help-block' >优惠券每人限制领取数量，0不限制张数</span>
+					
+				</div>
+			 </div>
+			 <div class="form-group">
+				<label class="col-lg control-label">发放总数</label>
+				<div class="col-sm-9 col-xs-12">
+					
+					<input type="text" name="total_count" class="form-control" value="{if empty($item)}1{else}{$item['total_count']}{/if}"  />
+					<span class='help-block' >优惠券总数量，没有不能领取或发放,-1 为不限制张数</span>
+					
+				</div>
+			 </div>
+
+		</div>
+		
+	</div>
+
+
+	<div class="form-group"></div>
+	<div class="form-group">
+		<label class="col-lg control-label"></label>
+		<div class="col-sm-9 col-xs-12">
+			
+			<input type="submit" name="submit" value="提交" class="btn btn-primary col-lg-1"  />
+
+			
+			<input type="button" name="back" onclick='history.back()' style='margin-left:10px;' value="返回列表" class="btn btn-default" />
+		</div>
+	</div>
+
+
+	</form>
+</div>
+<script language='javascript'>
+      require(['bootstrap'],function(){
+             $('#myTab a').click(function (e) {
+                 e.preventDefault();
+                $('#tab').val( $(this).attr('href'));
+                 $(this).tab('show');
+             })
+     });
+
+    function showbacktype(type){
+
+        $('.backtype').hide();
+        $('.backtype' + type).show();
+    }
+	$(function(){
+
+		
+
+	})
+</script>
+
+{template '_footer'}

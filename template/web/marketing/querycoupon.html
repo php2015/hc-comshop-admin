@@ -1,0 +1,33 @@
+<div style='max-height:500px;overflow:auto;min-width:850px;'>
+<table class="table table-hover" style="min-width:850px;">
+    <thead>
+        <th style='width:40px;'></th>
+        <th>优惠券</th>
+        <th>使用条件</th>
+        <th>优惠</th>
+        <th style="width: 100px;">剩余数量</th>
+        <th style="width:120px;">领券中心领取</th>
+        <th style="width: 60px;">选择</th>
+    </thead>
+    <tbody>   
+        {loop $ds $row}
+        <tr>
+			<td><img src="{php echo tomedia($row['thumb'])}" style="width:30px;height:30px;padding:1px solid #ccc" /></td>
+            <td>
+				  <label class='label label-success'>购物</label>
+					 [{$row['id']}]{$row['voucher_title']}
+			</td>
+	  <td><?php if($row['limit_money'] <= 0){ ?>不限<?php }else{ ?>消费满{$row['limit_money']} <?php } ?></td>
+	  <td>  
+			立减 {$row['credit']} 元
+	</td>
+	  <td><?php if($row['total_count']-$row['send_count'] >0){ echo $row['total_count']-$row['send_count'];}else{echo 0;} ?>
+	  </td>
+      <td>可以</td>
+            <td style="width:80px;"><a href="javascript:;" onclick='biz.selector.set(this, {php echo json_encode($row)})'>选择</a></td>
+        </tr>
+        {/loop}
+        
+    </tbody>
+</table>
+</div>

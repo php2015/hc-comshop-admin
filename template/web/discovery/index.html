@@ -1,0 +1,144 @@
+{template '_header'}
+<div class="page-header">
+    当前位置：<span class="text-primary">动态管理</span>
+</div>
+<div class="page-content">
+	
+    <form action="" method="get" class="form-horizontal form-search" role="form">
+		<input type="hidden" name="c" value="site" />
+        <input type="hidden" name="a" value="entry" />
+        <input type="hidden" name="m" value="lionfish_comshop" />
+        <input type="hidden" name="do" value="admin" />
+        <input type="hidden" name="controller"  value="discovery.index" />
+        <div class="page-toolbar">
+             <div class="col-sm-4">
+                <div class="input-group">
+                      <input type="text" class="input-sm form-control" name='keyword' value="{$_GPC['keyword']}" placeholder="请输入关键词">
+                      <span class="input-group-btn">
+                          <button class="btn btn-primary" type="submit"> 搜索</button>
+                      </span>
+                </div>
+            </div>
+        </div>
+    </form>
+    <form action="" method="post" >
+       
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-table-header">
+                    <input type='checkbox' />
+					
+                    <div class="btn-group">
+                        
+                        <button style="display:none;" class="btn btn-default btn-sm btn-operation" type="button" data-toggle='batch' data-href="{php echo shopUrl('goods/commentstate',array('state'=>1))}">
+                            <i class='icow icow-qiyong'></i>启用
+                        </button>
+                        <button style="display:none;" class="btn btn-default btn-sm btn-operation" type="button" data-toggle='batch'  data-href="{php echo shopUrl('goods/commentstate',array('state'=>0))}">
+                            <i class='icow icow-jinyong'></i> 禁用
+                        </button>
+                        
+                        
+                        <button class="btn btn-default btn-sm btn-operation" type="button" data-toggle='batch-remove' data-confirm="确认要删除?" data-href="{php echo shopUrl('goods/deletecomment')}">
+                            <i class="icow icow-shanchu1"></i>删除
+                         
+                    </div>
+					
+                </div>
+                <table class="table table-responsive">
+                    <thead>
+                    <tr>
+                        <th style="width:25px;"></th>
+                        <th style="width:250px;">标题</th>
+                        <th style="">内容</th>
+                        <th >发布人</th>
+                        <th >点赞数</th>
+						<th >回复数</th>
+                        <th >发布时间</th>
+                        <th style="width:65px;text-align: center;">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {loop $list $row}
+                    <tr>
+                        <td>
+                            <input type='checkbox' value="{$row['id']}"/>
+                        </td>
+						<td>
+							{$row['title']}         
+						</td>
+						
+                        <td>
+							<div rel="pop" style="display: flex" title="">
+								<?php 
+									$content = unserialize($row['content']);
+									
+									$content_arr = explode(',', $content);
+								?>
+								<?php foreach($content_arr as $vv){  ?>
+								<a href="<?php echo tomedia($vv) ?>" target="_blank">
+									<img class="img-60" src="{php echo tomedia(file_image_thumb_resize($vv, 60));}" style="width:60px;">&nbsp;&nbsp;
+								</a>
+							   <?php } ?>
+							</div>
+						</td>
+						<td>
+							<div rel="pop" style="display: flex" title="">
+							   <img class="img-40" src="{php echo $row['avatar'];}" style="border-radius:50%;border:1px solid #efefef;">
+							   <span style="display: flex;flex-direction: column;justify-content: center;align-items: flex-start;padding-left: 5px">
+									<span class="nickname">
+									  {$row['user_name']}                                       
+									</span>
+								</span>
+							</div>
+						</td>
+						<td>
+							{$row['fav_count']}         
+						</td>
+						<td>
+							{$row['reply_count']}
+						</td>
+						
+						<td>
+							{php echo date('Y-m-d H:i:s',$row['create_time']);}
+						</td>
+                        <td style="text-align: center;">
+							<a data-toggle='ajaxRemove' href="{php echo shopUrl('discovery/delete', array('id' => $row['id']))}"class="btn btn-default btn-sm btn-operation btn-op" data-confirm='确认要删除此动态吗?'>
+								<span data-toggle="tooltip" data-placement="top" title="" data-original-title="删除">
+								 <i class="icow icow-shanchu1"></i>
+							</span>
+							</a>
+                        </td>
+                    </tr>
+                    {/loop}
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="2">
+                            <input type="checkbox">
+                            <div class="btn-group">
+                               
+                                <button style="display:none;" class="btn btn-default btn-sm btn-operation" type="button" data-toggle='batch' data-href="{php echo shopUrl('discovery/commentstate',array('state'=>1))}">
+                                    <i class='icow icow-qiyong'></i>启用
+                                </button>
+                                <button style="display:none;" class="btn btn-default btn-sm btn-operation" type="button" data-toggle='batch'  data-href="{php echo shopUrl('discovery/commentstate',array('state'=>0))}">
+                                    <i class='icow icow-jinyong'></i> 禁用
+                                </button>
+                                <button class="btn btn-default btn-sm btn-operation" type="button" data-toggle='batch-remove' data-confirm="确认要删除此动态吗?" data-href="{php echo shopUrl('discovery/delete')}">
+                                    <i class="icow icow-shanchu1"></i>删除
+								</button>
+                            </div>
+                        </td>
+                        <td colspan="2" style="text-align: right">
+                            {$pager}
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        
+    </form>
+</div>
+
+{template '_footer'}
+

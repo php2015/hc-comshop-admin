@@ -1,0 +1,20 @@
+---------------------------------------------------------------
+[2020-04-11T07:12:45+08:00] 36.18.53.20 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007901s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.006485s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 241 LIMIT 1 [ RunTime:0.005855s ]
+---------------------------------------------------------------
+[2020-04-11T07:12:47+08:00] 36.18.53.20 POST chengzhenzixun.zx-xcx.com/api/indexs/index
+[ sql ] [ DB ] CONNECT:[ UseTime:0.008021s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005865s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 241 LIMIT 1 [ RunTime:0.005295s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007369s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_banner` [ RunTime:0.005938s ]
+[ sql ] [ SQL ] SELECT `id`,cover img FROM `consult_banner` WHERE  `type` = '2'  AND `status` = '1'  AND `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇' ORDER BY `sort` DESC [ RunTime:0.005775s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007720s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_cls` [ RunTime:0.005940s ]
+[ sql ] [ SQL ] SELECT `id`,`title`,`icon` FROM `consult_cls` WHERE  `type` = '2'  AND `pid` = 0  AND `status` = '1'  AND `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇'  AND `town_show` = 1 ORDER BY `sort` DESC [ RunTime:0.006259s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007922s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `pid` IN (548)  AND `status` = '1'  AND `type` = '2'  AND `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇'  AND `town_show` = 1 [ RunTime:0.005517s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007466s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `type` = '2'  AND `pid` = 0  AND `fg` = '1'  AND `fg_type` = '4'  AND `shows` = '1' [ RunTime:0.005920s ]

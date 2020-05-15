@@ -1,0 +1,532 @@
+{template '_header'}
+<style type='text/css'>
+    .trhead td {  background:#efefef;text-align: center}
+    .trbody td {  text-align: center; vertical-align:top;border-left:1px solid #f2f2f2;overflow: hidden; font-size:12px;}
+    .trorder { background:#f8f8f8;border:1px solid #f2f2f2;text-align:left;}
+    .ops { border-right:1px solid #f2f2f2; text-align: center;}
+    .ops a,.ops span{
+        margin: 3px 0;
+    }
+    .table-top .op:hover{
+        color: #000;
+    }
+    .tables{
+        border:1px solid #e5e5e5;
+        font-size: 12px;
+        line-height: 18px;
+    }
+    .tables:hover{
+        border:1px solid #b1d8f5;
+    }
+    .table-row,.table-header,.table-footer,.table-top{
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        justify-content: center;
+        -webkit-justify-content: center;
+        -webkit-align-content: space-around;
+        align-content: space-around;
+    }
+    .tables  .table-row>div{
+        padding: 14px 0 !important;
+    }
+    .tables  .table-row.table-top>div{
+        padding: 11px 0;
+    }
+    .tables    .table-row .ops.list-inner{
+        border-right:none;
+    }
+    .tables .list-inner{
+       border-right: 1px solid #efefef;
+        vertical-align: middle;
+    }
+    .table-row .goods-des .title{
+        width:180px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .table-row .goods-des{
+        width:300px;
+        border-right: 1px solid #efefef;
+        vertical-align: middle;
+    }
+    .table-row .list-inner{
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        text-align: center;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-align-items: center;
+        align-items: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-flex-direction: column;
+        flex-direction: column;
+    }
+    .saler>div{
+        width:130px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .table-row .list-inner.ops,  .table-row .list-inner.paystyle{
+        -webkit-flex-direction: column;
+        flex-direction: column;
+       -webkit-justify-content: center;
+       justify-content: center;
+    }
+    .table-header .others{
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        text-align: center;
+    }
+    .table-footer{
+        border-top: 1px solid #efefef;
+    }
+    .table-footer>div, .table-top>div{
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        height:100%;
+    }
+    .fixed-header div{
+        padding:0;
+    }
+    .fixed-header.table-header{
+        display: none;
+    }
+    .fixed-header.table-header.active{
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+    .shop{
+        display: inline-block;
+        width:48px;
+        height:18px;
+        text-align: center;
+        border:1px solid #1b86ff;
+        color: #1b86ff;
+        margin-right: 10px;
+    }
+    .min_program{
+        display: inline-block;
+        width:48px;
+        height:18px;
+        text-align: center;
+        border:1px solid #ff5555;
+        color: #ff5555;
+        margin-right: 10px;
+    }
+</style>
+
+<div class="page-header">
+    当前位置：<span class="text-primary">订单管理</span>
+    <span>订单数:  <span class='text-danger'>{$total}</span> 订单金额:  <span class='text-danger'>{$total_money}</span> 
+	</span>
+</div>
+<div class="page-content">
+	
+	<?php if($_GPC['order_status_id'] != 12){ ?>
+	<div class="tabs-container tab-goods page-toolbar">
+        <div class="tabs-left">
+            <ul class="nav nav-tabs" id="myTab">
+				<?php if($_GPC['is_community'] == 1){ ?>
+					<li  {if empty($_GPC['order_status_id']) || $_GPC['order_status_id']=='0'}class="active"{/if}><a href="{php echo shopUrl($cur_controller, array('order_status_id' => 0,'headid'=>$_GPC['headid']))}">全部订单（{$all_count}）</a></li>
+					<li  {if $_GPC['order_status_id']=='3'}class="active"{/if} ><a href="{php echo shopUrl($cur_controller, array('order_status_id' => 3,'headid'=>$_GPC['headid']))}">待付款（{$count_status_3}）</a></li>
+					<li  {if $_GPC['order_status_id']=='1'}class="active"{/if} ><a href="{php echo shopUrl($cur_controller, array('order_status_id' => 1,'headid'=>$_GPC['headid']))}">待发货（{$count_status_1}）</a></li>
+					<li  {if $_GPC['order_status_id']=='14'}class="active"{/if} ><a href="{php echo shopUrl($cur_controller, array('order_status_id' => 14,'headid'=>$_GPC['headid']))}">配送中（{$count_status_14}）</a></li>
+					<li  {if $_GPC['order_status_id']=='4'}class="active"{/if} ><a href="{php echo shopUrl($cur_controller, array('order_status_id' => 4,'headid'=>$_GPC['headid']))}">待收货（{$count_status_4}）</a></li>
+					<li  {if $_GPC['order_status_id']=='11'}class="active"{/if} ><a href="{php echo shopUrl($cur_controller, array('order_status_id' => 11,'headid'=>$_GPC['headid']))}">已完成（{$count_status_11}）</a></li>
+					<li  {if $_GPC['order_status_id']=='5'}class="active"{/if} ><a href="{php echo shopUrl($cur_controller, array('order_status_id' => 5,'headid'=>$_GPC['headid']))}">已取消（{$count_status_5}）</a></li>
+					<li  {if $_GPC['order_status_id']=='7'}class="active"{/if} ><a href="{php echo shopUrl($cur_controller, array('order_status_id' => 7,'headid'=>$_GPC['headid']))}">已退款（{$count_status_7}）</a></li>
+				<?php } else { ?>
+					<li  {if empty($_GPC['order_status_id']) || $_GPC['order_status_id']=='0'}class="active"{/if}><a href="{php echo shopUrl($cur_controller, array('order_status_id' => 0))}">全部订单（{$all_count}）</a></li>
+					<li  {if $_GPC['order_status_id']=='3'}class="active"{/if} ><a href="{php echo shopUrl($cur_controller, array('order_status_id' => 3))}">待付款（{$count_status_3}）</a></li>
+					<li  {if $_GPC['order_status_id']=='1'}class="active"{/if} ><a href="{php echo shopUrl($cur_controller, array('order_status_id' => 1))}">待发货（{$count_status_1}）</a></li>
+					<li  {if $_GPC['order_status_id']=='14'}class="active"{/if} ><a href="{php echo shopUrl($cur_controller, array('order_status_id' => 14))}">配送中（{$count_status_14}）</a></li>
+					<li  {if $_GPC['order_status_id']=='4'}class="active"{/if} ><a href="{php echo shopUrl($cur_controller, array('order_status_id' => 4))}">待收货（{$count_status_4}）</a></li>
+					<li  {if $_GPC['order_status_id']=='11'}class="active"{/if} ><a href="{php echo shopUrl($cur_controller, array('order_status_id' => 11))}">已完成（{$count_status_11}）</a></li>
+					<li  {if $_GPC['order_status_id']=='5'}class="active"{/if} ><a href="{php echo shopUrl($cur_controller, array('order_status_id' => 5))}">已取消（{$count_status_5}）</a></li>
+					<li  {if $_GPC['order_status_id']=='7'}class="active"{/if} ><a href="{php echo shopUrl($cur_controller, array('order_status_id' => 7))}">已退款（{$count_status_7}）</a></li>
+				<?php } ?>
+				
+				
+			</ul>
+        </div>
+    </div>
+    <?php } ?>
+    <form action="<?php if( $_W['role'] == 'agenter' ){ ?>./lmerchant.php<?php }else{ ?>./index.php<?php } ?>" method="get" class="form-horizontal table-search" role="form"  id="search">
+        <input type="hidden" name="c" value="site" />
+        <input type="hidden" name="a" value="entry" />
+        <input type="hidden" name="m" value="lionfish_comshop" />
+        <input type="hidden" name="do" value="admin" />
+		<?php if($_GPC['order_status_id'] != 12 && !isset($_GPC['is_fenxiao']) && !isset($_GPC['is_pintuan']) && !isset($_GPC['is_spike']) && !isset($_GPC['is_community'])){ ?>
+        <input type="hidden" name="controller" value="order.order" />
+		
+		 <?php }else if($_GPC['is_fenxiao'] == 1){ ?>
+		 <input type="hidden" name="controller" value="distribution.distributionorder" />
+		 
+		 <?php }else if($_GPC['is_community'] == 1){ ?>
+			<input type="hidden" name="headid" value="{$_GPC['headid']}" />
+		 	<input type="hidden" name="controller" value="communityhead.distributionorder" />
+		  <?php }else if($_GPC['is_spike'] == 1){ ?>
+		  <input type="hidden" name="controller" value="application.spike.order" />
+		 <?php }else if($_GPC['is_pintuan'] == 1){ ?>
+		 <input type="hidden" name="controller" value="pin.pinorder" />
+		 <?php }else{ ?>
+		 <input type="hidden" name="controller" value="order.orderaftersales" />
+		 <?php } ?>
+        <input type="hidden" name="order_status_id" value="{$_GPC['order_status_id']}" />
+      
+        <div class="page-toolbar">
+			
+            <div class="input-group">
+                <span class="input-group-select">
+					<select name='type'  class='form-control'   style="width:100px;padding:0 5px;"  id="type">
+                        <option value=''>订单类型</option>
+						<?php if($_GPC['is_pintuan'] ==1){ ?>
+						<option value='pintuan' {if $_GPC['type']=='pintuan'}selected{/if}>拼团订单</option>
+						<?php }else if($_GPC['is_community'] ==1){ ?>
+						
+						<?php }else if($_GPC['is_spike'] ==1){ ?>
+						<option value='pintuan' {if $_GPC['type']=='spike'}selected{/if}>秒杀订单</option>
+						<?php }else{ ?>
+							<option value='normal' {if $_GPC['type']=='normal'}selected{/if}>普通订单</option>
+						<?php } ?>
+                    </select>
+				</span>
+                <span class="input-group-select">
+                    <select name='searchtime'  class='form-control'   style="width:100px;padding:0 5px;"  id="searchtime">
+                        <option value=''>不按时间</option>
+                        <option value='create' {if $_GPC['searchtime']=='create'}selected{/if}>下单时间</option>
+                        <option value='pay' {if $_GPC['searchtime']=='pay'}selected{/if}>付款时间</option>
+                        <option value='send' {if $_GPC['searchtime']=='send'}selected{/if}>发货时间</option>
+                        <option value='finish' {if $_GPC['searchtime']=='finish'}selected{/if}>完成时间</option>
+                    </select>
+                </span>
+                <span class="input-group-btn">
+                    {php echo tpl_form_field_daterange('time', array('starttime'=>date('Y-m-d H:i', $starttime),'endtime'=>date('Y-m-d H:i', $endtime)),true);}
+                </span>
+				<span class="input-group-select">
+					<select name='delivery'  class='form-control'   style="width:100px;padding:0 5px;"  id="type">
+                        <option value=''>配送方式</option>
+						<option value='pickup' {if $_GPC['delivery']=='pickup'}selected{/if}>自提</option>
+						<option value='tuanz_send' {if $_GPC['delivery']=='tuanz_send'}selected{/if}>团长配送</option>
+						<option value='express' {if $_GPC['delivery']=='express'}selected{/if}>快递</option>
+                    </select>
+				</span>
+                <span class="input-group-select">
+                    <select name='searchfield'  class='form-control'   style="width:110px;padding:0 5px;"  >
+                        <option value='ordersn' {if $_GPC['searchfield']=='ordersn'}selected{/if}>订单号</option>
+                        <option value='member' {if $_GPC['searchfield']=='member'}selected{/if}>会员信息</option>
+						<option value='mobile' {if $_GPC['searchfield']=='mobile'}selected{/if}>手机号</option>
+                        <option value='address' {if $_GPC['searchfield']=='address'}selected{/if}>收件人信息</option>
+                        <option value='location' {if $_GPC['searchfield']=='location'}selected{/if}>地址信息</option>
+                        <option value='shipping_no' {if $_GPC['searchfield']=='shipping_no'}selected{/if}>快递单号</option>
+                        <option value='goodstitle' {if $_GPC['searchfield']=='goodstitle'}selected{/if}>商品名称</option>
+                        <option value='trans_id' {if $_GPC['searchfield']=='trans_id'}selected{/if}>微信支付单号</option>
+						<?php if($_GPC['is_community'] != 1){ ?>
+                        <option value='head_name' {if $_GPC['searchfield']=='head_name'}selected{/if}>团长姓名</option>
+						<option value='head_address' {if $_GPC['searchfield']=='head_address'}selected{/if}>小区名称</option>
+						<?php } ?>
+						<?php 
+							if( $_W['role'] != 'agenter' )
+							{
+						?>
+						<option value='supply_name' {if $_GPC['searchfield']=='supply_name'}selected{/if}>供应商名称</option>
+						<?php } ?>
+                        <!--<option value='goodssn' {if $_GPC['searchfield']=='goodssn'}selected{/if}>商品编码</option>-->
+                       
+                    </select>
+                </span>
+                <input type="text" class="form-control input-sm"  name="keyword" id="keyword" value="{$_GPC['keyword']}" placeholder="请输入关键词"/>
+                <input type="hidden" name="export" id="export" value="0">
+                <span class="input-group-btn">
+                        <button type="button" data-export="0" class="btn btn-primary btn-submit"> 搜索</button>
+                        <button type="button" data-export="1" class="btn btn-success btn-submit">导出</button>
+                </span>
+            </div>
+
+        </div>
+
+    </form>
+
+
+    {if count($list)>0}
+    <div class="row">
+        <div class="col-md-12">
+            <div  class="">
+                <div class="table-header" style='background:#f8f8f8;height: 35px;line-height: 35px;padding: 0 20px'>
+                    <div style='border-left:1px solid #f2f2f2;width: 350px;text-align: left;'>商品</div>
+                    <div class="others">买家</div>
+                    <div class="others">支付/配送</div>
+                    <div class="others">小区/团长</div>
+                    <div class="others">价格</div>
+                    <div class="others">操作</div>
+                    <div class="others">状态</div>
+                </div>
+            {loop $list $item}
+            <div class="table-row"><div style='height:20px;padding:0;border-top:none;'>&nbsp;</div></div>
+                <div class="tables">
+                    <div class='table-row table-top' style="padding:0  20px;background: #f7f7f7">
+                        <div style="text-align: left;color: #8f8e8e;">
+                            <span style="font-weight: bold;margin-right: 10px;color: #2d2d31">
+                                {if $item['from_type']=='weixin'}<span class="shop">商城</span>{else}<span class="min_program">小程序</span>{/if}{php echo date('Y-m-d',$item['date_added'])}&nbsp {php echo date('H:i:s',$item['date_added'])}
+                            </span>
+                            订单编号:  {$item['order_num_alias']}
+							{if in_array($item['order_status_id'], array(1,2,4,6,11))}&nbsp;<span class="label label-success">{$order_status_arr[$item['order_status_id']]}</span>{/if}
+                            
+							{if in_array($item['order_status_id'], array(7,8,9))}<label class='label label-danger'>{$order_status_arr[$item['order_status_id']]}</label>{/if}
+                            
+							{if in_array($item['order_status_id'], array(3,5,10,12,13))}<label class='label label-default'>{$order_status_arr[$item['order_status_id']]}</label>{/if}
+							
+							
+                        </div>
+                        <div style='text-align:right;font-size:12px;' class='aops'>
+                            
+							<a class='op'  data-toggle="ajaxModal" href="{php echo shopUrl('order/opremarksaler', array('id' => $item['order_id']))}" >
+								{if !empty($item['remarksaler'])}
+								<i class="icow icow-flag-o" style="color: #df5254;display: inline-block;vertical-align: middle" title="  查看备注"></i>
+								备注
+								&nbsp
+								{else}
+								<i class="icow icow-yibiaoji" style="color: #999;display: inline-block;vertical-align: middle" title="  添加备注" ></i>
+								备注
+								&nbsp
+								{/if}
+							</a>
+						
+							{if ( in_array($item['order_status_id'], array(1,4,7)) && $item['delivery']== 'delivery') }
+							   
+								<a class="op" data-toggle="ajaxModal"  href="{php echo shopUrl('order/op/changeexpress', array('id' => $item['order_id']))}">
+									<i class="icow icow-wuliu" title="修改物流" style="color: #999;display: inline-block;vertical-align: middle"></i>
+									修改物流
+									&nbsp
+								</a>
+							   
+							{/if}
+							{if $item['order_status_id'] == 3}
+								
+								<a class='op'  data-toggle='ajaxModal' style="display:none;" href="{php echo shopUrl('order/opchangeprice',array('id'=>$item['order_id']))}">
+									<i class="icow icow-gaijia" title="订单改价"  style="color: #999;display: inline-block;vertical-align: middle"></i>
+									订单改价
+									&nbsp
+								</a>
+								<a class='op'  data-toggle='ajaxModal' href="{php echo shopUrl('order/opclose',array('id'=>$item['order_id']))}" >
+									<i class="icow icow-shutDown" title="关闭订单"  style="color: #999;margin-right: 3px;display: inline-block;vertical-align: middle"></i>
+									关闭订单
+									&nbsp
+								</a>
+							{/if}
+                        </div>
+                    </div>
+                    <div class='table-row' style="margin:0  20px">
+                        <div class="goods-des" style='width:350px;text-align: left'>
+                            {loop $item['goods'] $k $g}
+                            <div style="display: -webkit-box;display: -webkit-flex;display: -ms-flexbox;display: flex;margin: 10px 0">
+                                <img src="{php echo tomedia($g['goods_images'])}" style='width:70px;height:70px;border:1px solid #efefef; padding:1px;'>
+                                <div style="-webkit-box-flex: 1;-webkit-flex: 1;-ms-flex: 1;flex: 1;margin-left: 10px;text-align: left;display: flex;align-items: center">
+                                    <div>
+                                        <div class="title">
+                                           {$g['name']}<br/>
+                                           <span style="color: #999"> {if !empty($g['option_sku'])}{$g['option_sku']}{/if}</span>
+
+                                        </div>
+										<div style="display:none;">
+											<span class="label label-danger">商品标签，先隐藏</span>
+											<span class="label label-primary">未来可以用</span>
+										</div>
+                                    </div>
+                                    <span style="float: right;text-align: right;display: inline-block;width:80px;">
+                                        ￥{php echo number_format($g['total']/$g['quantity'],2)}<br/>
+                                    x{$g['quantity']}
+                                    </span>
+                                </div>
+                            </div>
+							<?php if(!empty($g['commisson_info'])){ ?>
+							<div class="table-footer table-row" style="margin:0 20px">
+								
+								<div  style='text-align:right'>
+									<?php foreach( $g['commisson_info'] as $key => $commission ){ ?>
+									<b><?php echo $commission['level']; ?>级佣金:</b> <?php echo $commission['money']; ?> 元 
+									<?php } ?>
+								
+									<a class="text-primary" data-toggle="ajaxModal"  href="{php echo shopUrl('distribution/changecommission', array('order_id' => $item['order_id'],'order_goods_id' => $g['order_goods_id']))}">修改佣金</a>
+									
+								</div>
+							</div>
+							<?php } ?>
+                            {/loop}
+                        </div>
+
+                        <div class="list-inner saler"   style='text-align: center;' >
+                            <div>
+                                <font style="color: #999;">{$item['shipping_name']}</font><br/><font style="color: #999;">{$item['shipping_tel']}</font>
+                                <br/>
+								<?php if( $_W['role'] == 'agenter' ){ ?>
+								<font style="color: #999;">会员名：</font>{$item['nickname']}
+								<?php }else{ ?>
+								<a class="text-primary" href="{php echo shopUrl('user/detail',array('id'=>$item['member_id']))}"><font style="color: #999;">会员名：</font>{$item['nickname']}</a>
+								<?php } ?>
+                                
+                            </div>
+                        </div>
+                        <div class="list-inner paystyle"  style='text-align:center;' >
+
+                            <!-- 已支付 -->
+                            {if $item['order_status_id'] != 3 && $item['order_status_id'] != 5}
+                                {if $item['payment_code']=='yuer'}
+                                   <span> <i class="icow icow-yue text-warning" style="font-size: 17px;"></i><span>余额支付</span></span>
+                                {elseif $item['payment_code']=='admin'}
+                                   <span> <i class="icow icow-kuajingzhifuiconfukuan text-danger" style="font-size: 17px"></i>后台付款</span>
+                                {else}
+                                   <span> <i class="icow icow-weixinzhifu text-success" style="font-size: 17px"></i>微信支付</span>
+                                {/if}
+                            {elseif $item['order_status_id'] == 3 || $item['order_status_id'] == 5}
+                                <!-- 未支付 -->
+                                {if $item['paytypevalue']!=3}
+                                    <label class='label label-default'>未支付</label>
+                                {else}
+                                       <span> <i class="text-primary icow icow-icon" style="font-size: 17px"></i>货到付款</span>
+                                {/if}
+                            {/if}
+
+                            {if $item['delivery']=='pickup'}<font class="text-danger">(自提)</font>{/if}
+							{if $item['delivery']=='express'}<font class="text-danger">(快递)</font>{/if}
+							{if $item['delivery']=='tuanz_send'}<font class="text-danger">(团长配送)</font>{/if}
+							
+                        </div>
+
+                        <div class="list-inner" style='text-align:left;'>
+                            <div style='margin-top:5px;display:block;float:left;'>
+                                {$item['head_name']}
+                            </div>
+                            <div style='margin-top:5px;display:block;float:left;'>
+                                电话：{$item['head_mobile']}
+                            </div>
+                             <div style='margin-top:5px;display:block;float:left;cursor: pointer;' class="text-primary" data-container="body" data-toggle="popover" data-placement="right" data-content="{$item['province']} {$item['city']}">
+                                <font style="color: #999;">小区：</font>  {$item['community_name']}
+                            </div>
+                        </div>
+
+                       <div  class="list-inner " style='text-align:center' >
+							<span style='margin-top:5px;margin-left:5px;display:block;'>
+							运　费：+{php echo number_format( $item['shipping_fare'],2)}
+							</span>
+							<?php if($item['fullreduction_money'] >0){ ?>
+							<span style='margin-top:5px;margin-left:5px;display:block;'>
+							满　减：-{php echo number_format( $item['fullreduction_money'],2)}
+							</span>
+							<?php } ?>
+							<?php if($item['voucher_credit'] >0){ ?>
+							<span style='margin-top:5px;margin-left:5px;display:block;'>
+							优惠券：-{php echo number_format( $item['voucher_credit'],2)}
+							</span>
+							<?php } ?>
+							<span style='margin-top:5px;margin-left:5px;display:block;'>
+                            商品小计：{php echo number_format($item['total'],2)}
+							</span>
+							
+							<span style='margin-top:5px;margin-left:5px;display:block;'>
+							<?php $free_tongji = $item['total']+$item['shipping_fare']-$item['voucher_credit']-$item['fullreduction_money'];
+								if($free_tongji < 0){
+									$free_tongji = 0;
+								}
+							?>
+							应收总款：{php echo number_format($free_tongji ,2)}
+							</span>
+                            
+                        </div>
+                         
+
+                        <div  class="list-inner"  style='text-align:center' >
+                            <a class='op text-primary'  href="{php echo shopUrl('order/detail', array('id' => $item['order_id']))}" >查看详情</a>
+                            
+                            {if $item['order_status_id'] == 12 || $item['order_status_id'] == 10}
+                            <a class='op  text-primary'  href="{php echo shopUrl('order/oprefund', array('id' => $item['order_id']))}" >维权处理</a>
+                            {/if}
+							
+                           
+                            {if $item['addressid']!=0 && $item['statusvalue']>=2 && $item['sendtype']==0}
+                            <a class='op  text-primary'  data-toggle="ajaxModal" href="{php echo shopUrl('util/express', array('id' => $item['order_id'],'express'=>$item['express'],'expresssn'=>$item['expresssn']))}"   >物流信息</a>
+                            {/if}
+                        </div>
+						 
+
+                        <div  class='ops list-inner' style='line-height:20px;text-align:center' >
+                            <span class='text-{$item[order_status_id]}'>{$order_status_arr[$item['order_status_id']]}</span>
+							<?php 
+							$is_ops_show = true;
+							if( $_W['role'] == 'agenter' )
+							{
+								$supper_info = json_decode(base64_decode($_GPC['__lionfish_comshop_agent']), true);
+								if( $supper_info['type'] != 1)
+								{
+									$is_ops_show = false;
+								}
+							} 
+							?>
+							<?php if($is_ops_show){ ?>
+							{template 'order/ops'}
+							<?php } ?>
+                        </div>
+
+                    </div>
+					{if !empty($item['comment'])}
+					<div class="table-row"><div  style='background:#fdeeee;color:red;flex: 1;;'>买家备注: {$item['comment']}</div></div>
+					{/if}
+
+					
+				
+            </div>
+            {/loop}
+                <div style="padding: 20px;text-align: right" >
+                        {$pager}
+                </div>
+            </div>
+        </div>
+    </div>
+    {else}
+    <div class="panel panel-default">
+        <div class="panel-body empty-data">暂时没有任何订单!</div>
+    </div>
+    {/if}
+</div>
+
+<script>
+    //没有选中时间段不能导出
+    $(function () {
+        $('.btn-submit').click(function () {
+            var e = $(this).data('export');
+            if(e==1 ){
+                if($('#keyword').val() !='' ){
+                    $('#export').val(1);
+                    $('#search').submit();
+                }else if($('#searchtime').val()!=''){
+                    $('#export').val(1);
+                    $('#search').submit();
+                }else{
+                   $('#export').val(1);
+                    $('#search').submit();
+                    return;
+                }
+            }else{
+                $('#export').val(0);
+                $('#search').submit();
+            }
+        })
+    })
+</script>
+{template '_footer'}
+

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<?php $shoname_hd = load_model_class('Front')->get_config_by_name('shoname'); ?>
+        <title>{if !empty($shoname_hd)}{$shoname_hd}{/if}</title>
+        <link rel="shortcut icon" href="{$_W['siteroot']}{$_W['config']['upload']['attachdir']}/{if !empty($_W['setting']['copyright']['icon'])}{$_W['setting']['copyright']['icon']}{else}images/global/wechat.jpg{/if}" />
+        <link href="{php echo SNAILFISH_LOCAL}static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+        <link href="{php echo SNAILFISH_LOCAL}static/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+        <link href="{php echo SNAILFISH_LOCAL}static/css/animate.css" rel="stylesheet">
+        <link href="{php echo SNAILFISH_LOCAL}static/css/v3.css?v=4.1.0" rel="stylesheet">
+        <link href="{php echo SNAILFISH_LOCAL}static/css/common_v3.css?v=2.0.0" rel="stylesheet">
+		
+        <link href="{php echo SNAILFISH_LOCAL}static/css/snailfish.css?v=2.0.0" rel="stylesheet">
+        <link href="{php echo SNAILFISH_LOCAL}static/css/weizan.common.css" rel="stylesheet">
+		
+		
+        <link rel="stylesheet" type="text/css" href="{php echo SNAILFISH_LOCAL}static/fonts/v3/iconfont.css?v=2016070717">
+        <link rel="stylesheet" type="text/css" href="{php echo SNAILFISH_LOCAL}static/fonts/iconfont.css?v=2016070717">
+        <script src="{php echo SNAILFISH_LOCAL}static/fonts/iconfont.js"></script>
+
+        <script src="./resource/js/lib/jquery-1.11.1.min.js"></script>
+        <script src="{php echo SNAILFISH_LOCAL}static/js/dist/jquery/jquery.gcjs.js"></script>
+
+
+        <script type="text/javascript">
+            window.sysinfo = {
+            {if !empty($_W['uniacid'])}'uniacid': '{$_W['uniacid']}',{/if}
+            {if !empty($_W['acid'])}'acid': '{$_W['acid']}',{/if}
+            {if !empty($_W['openid'])}'openid': '{$_W['openid']}',{/if}
+            {if !empty($_W['uid'])}'uid': '{$_W['uid']}',{/if}
+            'isfounder': {if !empty($_W['isfounder'])}1{else}0{/if},
+            'siteroot': '{$_W['siteroot']}',
+                    'siteurl': '{$_W['siteurl']}',
+                    'attachurl': '{$_W['attachurl']}',
+                    'attachurl_local': '{$_W['attachurl_local']}',
+                    'attachurl_remote': '{$_W['attachurl_remote']}',
+                    'module' : {'url' : '{if defined('MODULE_URL')}{MODULE_URL}{/if}', 'name' : '{if defined('IN_MODULE')}{IN_MODULE}{/if}'},
+            'cookie' : {'pre': '{$_W['config']['cookie']['pre']}'},
+            'account' : {php echo json_encode($_W['account'])},
+            };
+        </script>
+
+		
+       
+        <script type="text/javascript" src="./resource/js/lib/bootstrap.min.js"></script>
+        
+
+
+        <script src="{php echo SNAILFISH_LOCAL}static/js/require.js"></script>
+
+        <script src="./resource/js/app/config.js"></script>
+     
+
+        <script>
+            require.config({
+                waitSeconds: 0
+            });
+        </script>
+        <script src="{php echo SNAILFISH_LOCAL}static/js/myconfig.js"></script>
+        <script type="text/javascript">
+                if (navigator.appName == 'Microsoft Internet Explorer') {
+                    if (navigator.userAgent.indexOf("MSIE 5.0") > 0 || navigator.userAgent.indexOf("MSIE 6.0") > 0 || navigator.userAgent.indexOf("MSIE 7.0") > 0) {
+                        alert('您使用的 IE 浏览器版本过低, 推荐使用 Chrome 浏览器或 IE8 及以上版本浏览器.');
+                    }
+                }
+                myrequire.path = "{$_W['siteroot']}addons/lionfish_comshop/static/js/";
+
+            function preview_html(txt)
+            {
+                var win = window.open("", "win", "width=300,height=600"); // a window object
+                win.document.open("text/html", "replace");
+                win.document.write($(txt).val());
+                win.document.close();
+            }
+        </script>
+    
+
+    <body>
+<style>
+	*{box-sizing: border-box;margin: 0;padding: 0;font-weight: 300;}
+	html,body{font-family: "微软雅黑";color: white;font-weight: 300;}
+	html {overflow-y:hidden; }
+	body ::-webkit-input-placeholder{/* WebKit browsers*/font-family: 'Source Sans Pro', sans-serif;color: white;font-weight: 300;}
+	body :-moz-placeholder{/* Mozilla Firefox 4 to 18*/font-family: 'Source Sans Pro', sans-serif;color: white;opacity: 1;font-weight: 300;}
+	body ::-moz-placeholder{/* Mozilla Firefox 19+*/font-family: 'Source Sans Pro', sans-serif;color: white;opacity: 1;font-weight: 300;}
+	body :-ms-input-placeholder{/* Internet Explorer 10+*/font-family: 'Source Sans Pro', sans-serif;color: white;font-weight: 300;}
+	.wrapper{background: #50a3a2;background: -webkit-linear-gradient(top left, #50a3a2 0%, #53e3a6 100%);background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);/*opacity: 0.8;*/position: absolute;top: 0;left: 0;width: 100%;height: 100%;overflow: hidden;}
+	.wrapper.form-success .container h1{-webkit-transform: translateY(85px);-ms-transform: translateY(85px);transform: translateY(85px);}
+	.container{max-width: 600px;margin: 50px auto;padding: 180px 0;height: 400px;text-align: center;}
+	.container h1{font-size: 40px;-webkit-transition-duration: 1s;transition-duration: 1s;-webkit-transition-timing-function: ease-in-put;transition-timing-function: ease-in-put;font-weight: 200;}
+	form{padding: 50px 0;position: relative;z-index: 2;}
+	form input{-webkit-appearance: none;-moz-appearance: none;appearance: none;outline: 0;border: 1px solid rgba(255, 255, 255, 0.4);background-color: rgba(255, 255, 255, 0.2);width: 250px;border-radius: 3px;padding: 10px 15px;margin: 0 auto 10px auto;display: block;text-align: center;font-size: 18px;color: white;-webkit-transition-duration: 0.25s;transition-duration: 0.25s;font-weight: 300;}
+	/*form input:hover{background-color: rgba(255, 255, 255, 0.4);}
+	 form input:focus{background-color: white;width: 300px;color: #53e3a6;}*/
+	form input[type="submit"]{-webkit-appearance: none;-moz-appearance: none;appearance: none;outline: 0;background-color: white;border: 0;padding: 10px 15px;color: #53e3a6;border-radius: 3px;width: 250px;cursor: pointer;font-size: 18px;-webkit-transition-duration: 0.25s;transition-duration: 0.25s;}
+	/*form input[type="submit"]:hover{background-color: #f5f7f9;}*/
+	.bg-bubbles{position: absolute;top: 0;left: 0;width: 100%;height: 100%;z-index: 1;}
+	.bg-bubbles li{position: absolute;list-style: none;display: block;width: 40px;height: 40px;background-color: rgba(255, 255, 255, 0.15);bottom: -160px;-webkit-animation: square 25s infinite;animation: square 25s infinite;-webkit-transition-timing-function: linear;transition-timing-function: linear;}
+	.bg-bubbles li:nth-child(1){left: 10%;}
+	.bg-bubbles li:nth-child(2){left: 20%;width: 80px;height: 80px;-webkit-animation-delay: 2s;animation-delay: 2s;-webkit-animation-duration: 17s;animation-duration: 17s;}
+	.bg-bubbles li:nth-child(3){left: 25%;-webkit-animation-delay: 4s;animation-delay: 4s;}
+	.bg-bubbles li:nth-child(4){left: 40%;width: 60px;height: 60px;-webkit-animation-duration: 22s;animation-duration: 22s;background-color: rgba(255, 255, 255, 0.25);}
+	.bg-bubbles li:nth-child(5){left: 70%;}
+	.bg-bubbles li:nth-child(6){left: 80%;width: 120px;height: 120px;-webkit-animation-delay: 3s;animation-delay: 3s;background-color: rgba(255, 255, 255, 0.2);}
+	.bg-bubbles li:nth-child(7){left: 32%;width: 160px;height: 160px;-webkit-animation-delay: 7s;animation-delay: 7s;}
+	.bg-bubbles li:nth-child(8){left: 55%;width: 20px;height: 20px;-webkit-animation-delay: 15s;animation-delay: 15s;-webkit-animation-duration: 40s;animation-duration: 40s;}
+	.bg-bubbles li:nth-child(9){left: 25%;width: 10px;height: 10px;-webkit-animation-delay: 2s;animation-delay: 2s;-webkit-animation-duration: 40s;animation-duration: 40s;background-color: rgba(255, 255, 255, 0.3);}
+	.bg-bubbles li:nth-child(10){left: 90%;width: 160px;height: 160px;-webkit-animation-delay: 11s;animation-delay: 11s;}
+	@-webkit-keyframes square{0%{-webkit-transform: translateY(0);transform: translateY(0);}
+		100%{-webkit-transform: translateY(-700px) rotate(600deg);transform: translateY(-700px) rotate(600deg);}}
+	@keyframes square{0%{-webkit-transform: translateY(0);transform: translateY(0);}
+		100%{-webkit-transform: translateY(-700px) rotate(600deg);transform: translateY(-700px) rotate(600deg);}}
+</style>
+
+<div class="wrapper page-login">
+
+	<div class="container">
+		<h1>供应商管理平台</h1>
+		<form class="form form-login form-horizontal form-validate" onsubmit="return false;" enctype="multipart/form-data" action="{php echo shopUrl('supply/login_do', array('i' => $_GPC['i'] ))}" method="post">
+			<input type="text" placeholder="请输入登录账号" name="mobile">
+			<input type="password" placeholder="请输入登录密码" name="password">
+			<input type="submit" name="submit" value="登录">
+		</form>
+	</div>
+	<ul class="bg-bubbles">
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+</div>
+
+<script type="text/javascript">
+var s_url ="{php echo shopUrl('supply/login_do', array('i' => $_GPC['i'] ))}";
+
+$(function(){
+
+	$('.form-login').submit(function(){
+		var mobile = $.trim($(':text[name="mobile"]').val());
+		if(!mobile) {
+			alert('账户不能为空');
+			return false;
+		}
+		var password = $.trim($('input[name="password"]').val());
+		if(!password) {
+			alert('密码不能为空');
+			return false;
+		}
+		$.ajax({
+			url: s_url,
+			type:'post',
+			data:{mobile:mobile, password:password},
+			dataType:'json',
+			success:function(ret){
+				if(ret.code == 1)
+				{
+					alert(ret.msg);
+					return false;
+				}else if(ret.code == 0){
+					location.href = ret.url;
+					return false;
+				}
+			}
+		})
+		
+		return false;
+	});
+});
+</script>

@@ -1,0 +1,133 @@
+{template '_header'}
+<div class="page-header">
+    当前位置：
+    <span class="text-primary">
+        添加虚拟评价 
+    </span>
+</div>
+<div class="page-content">
+    <div class="page-sub-toolbar">
+        <span class=''>
+            <a class="btn btn-primary btn-sm" href="{php echo shopUrl('goods/addvircomment')}">添加虚拟评价</a>
+		</span>
+    </div>
+    <form action="" method="post" class="form-horizontal form-validate" enctype="multipart/form-data" >
+		
+		<div class="form-group">
+            <label class="col-lg control-label">评价内容</label>
+            <div class="col-sm-9 subtitle">
+                <textarea name="data[content]" id="content" rows="5"  class="form-control" data-parent=".subtitle" maxlength="200" data-rule-maxlength="200"></textarea>
+                <div class="help-block">评论内容请控制在200字以内</div>
+            </div>
+        </div>
+		
+		 <div class="form-group">
+            <label class="col-lg control-label">描述等级</label>
+            <div class="col-sm-9 col-xs-12" id="param-items">
+                <label class="radio-inline">
+                    <input type="radio" name='data[star]' value="1"  /> 1星
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name='data[star]' value="2"  /> 2星
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name='data[star]' value="3"  /> 3星
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name='data[star]' value="4"  /> 4星
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name='data[star]' value="5" checked /> 5星
+                </label>
+            </div>
+        </div>
+		<div class="form-group">
+            <label class="col-lg control-label">价格合理等级</label>
+            <div class="col-sm-9 col-xs-12" id="param-items">
+                <label class="radio-inline">
+                    <input type="radio" name='data[star2]' value="1"  /> 1星
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name='data[star2]' value="2"  /> 2星
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name='data[star2]' value="3"  /> 3星
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name='data[star2]' value="4"  /> 4星
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name='data[star2]' value="5" checked /> 5星
+                </label>
+            </div>
+        </div>
+		<div class="form-group">
+            <label class="col-lg control-label">质量满意等级</label>
+            <div class="col-sm-9 col-xs-12" id="param-items">
+                <label class="radio-inline">
+                    <input type="radio" name='data[star3]' value="1"  /> 1星
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name='data[star3]' value="2"  /> 2星
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name='data[star3]' value="3"  /> 3星
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name='data[star3]' value="4"  /> 4星
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name='data[star3]' value="5" checked /> 5星
+                </label>
+            </div>
+        </div>
+		
+		 <div class="form-group">
+			<label class="col-lg control-label must">选择机器人</label>
+			<div class="col-sm-9 col-xs-12">
+				{php echo tpl_selector('jiaid',array('key'=>'id',  'text'=>'nickname', 'thumb'=>'avatar','placeholder'=>'昵称','buttontext'=>'选择会员 ', 'items'=>$saler,'url'=>shopUrl('user/query') ))}
+				
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-lg control-label">选择评价商品</label>
+			<div class="col-sm-9 col-xs-12">
+			{php echo tpl_selector('goods_id',array('key'=>'gid',  'text'=>'goodsname', 'thumb'=>'thumb','placeholder'=>'选择商品','buttontext'=>'请输入商品标题 ', 'items'=>$saler,'url'=>shopUrl('goods/query_normal') ))}
+				
+				
+				  <span class='help-block'></span>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-lg control-label">评价图片</label>
+			<div class="col-sm-9 col-xs-12 gimgs">
+				{php echo tpl_form_field_multi_image3('goods_image')}
+				<span class="help-block">您可以拖动图片改变其显示顺序 </span>
+			</div>
+		</div>
+		
+		<div class="form-group" >
+			<label class="col-lg control-label">评价时间</label>
+			<div class="col-sm-9 col-xs-12"> 
+				<span class="input-group-btn">
+                    {php echo tpl_form_field_date('time', '',true);}
+                </span>
+			</div>
+		</div>
+		
+        <div class="form-group">
+            <label class="col-lg control-label"></label>
+            <div class="col-sm-9 col-xs-12">
+                
+                    <input type="submit" value="提交" class="btn btn-primary"  />
+               <a href="{php echo shopUrl('goods/goodsvircomment')}" style='margin-left:10px;' value="返回列表" class="btn btn-default">返回列表</a>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+
+</script>
+{template '_footer'}

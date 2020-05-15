@@ -1,0 +1,101 @@
+
+    <div id="page-loading">
+        <div class="page-loading-inner">
+            <div class="sk-three-bounce">
+                <div class="sk-child sk-bounce1"></div>
+                <div class="sk-child sk-bounce2"></div>
+                <div class="sk-child sk-bounce3"></div>
+            </div>
+        </div>
+    </div>
+
+    
+
+</div>
+
+
+
+
+<script language='javascript'>
+    require(['bootstrap'], function ($) {
+        $('[data-toggle="tooltip"]').tooltip("destroy").tooltip({
+            container: $(document.body)
+        });
+        $('[data-toggle="popover"]').popover("destroy").popover({
+            container: $(document.body)
+        });
+    });
+
+
+  {if  $_W['routes']!='system.auth_upgrade'}
+    function check_lionfish_comshop_upgrade() {
+        require(['util'], function (util) {
+            if (util.cookie.get('checksnailfishshopupgrade_sys')) {
+                return;
+            }
+            $.post('{php echo shopUrl("system/upgrade_check")}', function (ret) {
+                if (ret && ret.status == '1') {
+				
+                    var result = ret.result;
+                    if (result.filecount > 0 || result.database || result.upgrades) {
+						$('#auth_upgrade').show();
+                        $('#headingFive').find('.systips').show();
+                        if($('#headingFive').attr('aria-expanded')=='false'){
+                            $('#headingFive').click();
+                        }
+                        $('#collapseFive .nomsg').hide();
+                        $('#sysversion').text(result.version);
+                        $('#sysrelease').text(result.release);
+                        $('#collapseFive .upmsg').show();
+                    }
+                }
+            }, 'json');
+        });
+    }
+    function check_check_upgrade_hide() {
+        require(['util'], function (util) {
+            util.cookie.set('checkeweishopv2upgrade_sys', 1, 3600);
+			$('#auth_upgrade').hide();
+            $('#collapseFive .nomsg').show();
+            $('#collapseFive .upmsg').hide();
+            $('#headingFive').find('.systips').hide();
+        });
+    }
+    $(function () {
+		/**
+        setTimeout( function() {
+            check_lionfish_comshop_upgrade();
+        },4000);
+		**/
+    });
+	{/if}
+
+    $(function () {
+        //$('.page-content').show();
+		 $.getJSON("<?php echo $_W['siteroot'].'addons/lionfish_comshop/cron.php'; ?>");
+        $('.img-thumbnail').each(function () {
+            if ($(this).attr('src').indexOf('nopic.jpg') != -1) {
+               
+            }
+        })
+    });
+</script>
+<script language="javascript">
+    myrequire(['web/init']);
+    if( $('form.form-validate').length<=0){
+        window.formInited = true;
+    }
+    window.formInitTimer = setInterval(function () {
+        if (typeof(window.formInited ) !== 'undefined') {
+            $('#page-loading').remove();
+            clearInterval(window.formInitTimer);
+        }else{
+            //$('#page-loading').show();
+        }
+    }, 1);
+</script>
+
+
+</body>
+</html>
+

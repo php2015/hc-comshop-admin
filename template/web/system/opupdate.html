@@ -1,0 +1,100 @@
+{template '_header'}
+
+<style>
+	input[type=checkbox], input[type=radio]{margin:0px;}
+</style>
+<div class="page-heading">
+    <h2>版本一键更新 </h2>
+</div>
+<div class="clearfix">
+
+	<form action="" method="post" class="form-horizontal" role="form">
+		{if !empty($upgrade['result']['version'])}
+        <div class="form-group">
+			<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">当前</label>
+			<div class="col-sm-9 col-xs-12">
+				<div class="input-group">
+					<div class="input-group-addon" style="background:#f2f2f2">商城&nbsp;{$upgrade['result']['cur_version']}&nbsp;商业版</div>
+				  
+					<div class="input-group-btn">
+					</div>
+				</div>
+			</div>
+		</div>		
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">最新</label>
+		
+			<!-- 待更新的版本 -->
+			
+			<div class="col-sm-10">
+				<p class="form-control-static"> &nbsp; [待更新的版本]：<span style="color:#FF0019;">&nbsp;商城&nbsp;{$upgrade['result']['version']}&nbsp;商业版</p>
+				
+			</div>			 	
+			
+		</div>
+
+		{if !empty($upgrade['result']['version'])}
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">更新内容</label>
+			<div class="col-sm-10">
+				<div id='count' class="alert alert-info" style="line-height:20px;">
+					<div id="update_content" style="height:400px;overflow-y:auto;">
+						<p>更新马上开始....更新结束前请勿关闭该页面</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+
+		</div>
+		</div>
+		{/if}
+
+		{else}
+        <div class="form-group">
+			<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">当前</label>
+			<div class="col-sm-9 col-xs-12">
+				<div class="input-group">
+					<div class="input-group-addon" style="background:#f2f2f2">无更新内容</div>
+					
+					<div class="input-group-btn">
+					</div>
+				</div>
+			</div>
+		</div>
+			
+		</div>
+		{/if}
+	</form>
+</div>
+<script type="text/javascript">
+	var a;
+	
+	//util.message("更新完成！", '', 'success');
+	
+	$(function(){
+		setTimeout( function() {
+            load_next_updata();
+        },1000);
+	})
+	function load_next_updata()
+	{
+		$.post('{php echo shopUrl("system/do_update")}', function (ret) {
+                if(  ret.code == 0)
+				{
+					//msg update_content
+					$('#update_content').prepend("<p>"+ret.msg+"</p>");
+					$('#update_content').scrollTop(0);
+					setTimeout( function() {
+						load_next_updata();
+					},300);
+				}else if(ret.code ==2){
+					util.message("更新完成！", '', 'success');
+				}else{
+					util.message(ret.msg, '', 'error');
+				}
+            }, 'json');
+	}
+		
+</script>
+{template '_footer'}

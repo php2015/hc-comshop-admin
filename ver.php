@@ -1,0 +1,1 @@
+<?php if(!defined('IN_IA')) {exit('Access Denied');}if(!defined('LIONFISH_COMSHOP_VERSION')) {define('LIONFISH_COMSHOP_VERSION', 'V1.2.3');}if(!defined('LIONFISH_COMSHOP_RELEASE')) {define('LIONFISH_COMSHOP_RELEASE', '201811221057');}

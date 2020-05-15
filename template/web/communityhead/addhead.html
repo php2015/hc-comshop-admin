@@ -1,0 +1,360 @@
+{template '_header'}
+<style>
+.table-hd {
+    margin: 0;
+    line-height: 30px;
+    background: #f8f8f8;
+    padding: 0 20px;
+    font-size: 14px;
+    margin-top: 20px;
+    font-weight: bold;
+}
+.table-hd {
+    margin-bottom: 20px;
+}
+</style>
+<script type="text/javascript" src="../addons/lionfish_comshop/static/js/dist/area/cascade.js"></script>
+<script src="https://map.qq.com/api/js?v=2.exp&key=6R4BZ-WAB3W-JITRG-OE7GY-R2753-P3BZ2" type="text/javascript" charset="utf-8"></script>
+
+<div class="page-header">
+	当前位置：<span class="text-primary">{if !empty($item['id'])}编辑{else}添加{/if}团长 <small>{if !empty($item['id'])}修改【{$item['head_name']}】{/if}</small></span>
+
+</div>
+
+<div class="page-content">
+	
+	<form action="" method='post' class='form-horizontal form-validate'>
+	<input type="hidden" name="id" value="{$item['id']}">
+
+
+	<div class="page-content">
+		<div class="page-content">
+			
+			<div class="form-group">
+				<label class="col-lg control-label must">关联会员</label>
+				<div class="col-sm-9 col-xs-12">
+					{php echo tpl_selector('member_id',array('key'=>'member_id',  'text'=>'nickname', 'thumb'=>'avatar','placeholder'=>'昵称','buttontext'=>'选择会员 ', 'items'=>$saler,'url'=>shopUrl('user/zhenquery') ))}
+					
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-lg control-label must">团长名称</label>
+				<div class="col-sm-9 col-xs-12">
+					<input type="text" name="head_name" class="form-control" value="{$item['head_name']}" data-rule-required="true" />
+					<span class='help-block'></span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg control-label must"> 团长手机号</label>
+				<div class="col-sm-9 col-xs-12">
+					<input type="text" name="head_mobile" class="form-control" value="{$item['head_mobile']}" data-rule-required="true"  />
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-lg control-label must">小区名称</label>
+				<div class="col-sm-9 col-xs-12">
+					<input type="text" name="community_name" class="form-control" value="{$item['community_name']}"  data-rule-required="true" />
+					<span class='help-block'></span>
+				</div>
+			</div>
+			
+			<div class="form-group">
+	            <label class="col-lg control-label must">地址</label>
+	            <div class="col-sm-9 col-xs-12">
+		            <p>
+		                <select id="sel-provance" name="province_id" onChange="selectCity();" class="select form-control" style="width:130px;display:inline;">
+		                    <option value="" selected="true">省/直辖市</option>
+		                </select>
+		                <select id="sel-city" name="city_id" onChange="selectcounty(0)" class="select form-control" style="width:135px;display:inline;">
+		                    <option value="" selected="true">请选择</option>
+		                </select>
+		                <select id="sel-area" name="area_id" onChange="selectstreet(0)" class="select form-control" style="width:130px;display:inline;">
+		                    <option value="" selected="true">请选择</option>
+		                </select>
+		                 <select id="sel-street" name="country_id" class="select form-control" style="width:130px;display:inline;">
+		                    <option value="" selected="true">请选择</option>
+		                </select>
+		            </p>
+	            </div>
+	        </div>
+	        <div class="form-group">
+				<label class="col-lg control-label must"> 提货详细地址</label>
+				<div class="col-sm-9 col-xs-12">
+					
+					<div class="dEdit_1">
+                        <div class="col-sm-6 input-num-show" style="padding-right:0;margin-right:15px">
+                        	<input type="text" name="address" id="address"  data-val="true" data-val-required="请填写社区店所在详细地址" class="form-control" value="{$item['address']}" data-rule-required="true"  />
+                        	
+                        </div>
+                        <div class="col-sm-2" style="padding-left: 0;">
+                        	<a class="btn btn-default" id="js_search_pos" onclick="getResult()">搜索地图</a>
+                        </div>
+                    </div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg control-label must"> 经纬度</label>
+				<div class="col-sm-9 col-xs-12">
+					<div class="dEdit_1">
+		               <div class="col-sm-3">
+		                   <input class="form-control input-sm" data-val="true"   id="lon" name="lon" readonly="readonly" type="text" value="{$item['lon']}">
+		               </div>
+		               <div class="col-sm-3">
+		                   <input class="form-control input-sm" data-val="true" id="lat" name="lat" readonly="readonly" type="text" value="{$item['lat']}">
+		               </div>
+		            </div>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-lg control-label must"> 地图定位</label>
+				<div class="col-sm-9 col-xs-12">
+					<div class="map-box" id="container" style="width: 603px; height: 300px; float: left;"></div>
+                    <div class="des" id="map_des" style="display: none; float: left;">请选择一个地址并点击地图中的“导入经纬度”</div>
+                    <div class="info-box" id="infoDiv" style="display: none"></div>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-lg control-label">申请状态</label>
+				<div class="col-sm-9 col-xs-12" >
+					
+					<label class="radio-inline coupon-radio">
+						<input type="radio" name="state" value="1" {if $item['state'] == 1 || empty($item)}checked="true"{/if}  /> 通过
+					</label>
+					<label class="radio-inline coupon-radio">
+						<input type="radio" name="state" value="0" {if $item['state'] == 0 && !empty($item)}checked="true"{/if}  /> 未审核
+					</label>
+					<label class="radio-inline coupon-radio">
+						<input type="radio" name="state" value="2" {if $item['state'] == 2 && !empty($item)}checked="true"{/if}  /> 已拒绝
+					</label>
+					
+				</div>
+			</div>
+
+			<h3 class="table-hd">财务信息</h3>
+			
+			<div class="form-group">
+				<label class="col-lg control-label must">银行卡名称</label>
+				<div class="col-sm-9 col-xs-12">
+					<input type="text" name="bankname" class="form-control" value="{$item['bankname']}"   />
+					<span class='help-block'>例如农行、微信、支付宝，需有关联会员此处设置才有效</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg control-label must">卡号</label>
+				<div class="col-sm-9 col-xs-12">
+					<input type="text" name="bankaccount" class="form-control" value="{$item['bankaccount']}"   />
+					<span class='help-block'>需有关联会员此处设置才有效</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg control-label must">持卡人姓名</label>
+				<div class="col-sm-9 col-xs-12">
+					<input type="text" name="bankusername" class="form-control" value="{$item['bankusername']}"   />
+					<span class='help-block'>需有关联会员此处设置才有效</span>
+				</div>
+			</div>
+			
+
+
+		</div>
+		
+	</div>
+
+
+	<div class="form-group"></div>
+	<div class="form-group">
+		<label class="col-lg control-label"></label>
+		<div class="col-sm-9 col-xs-12">
+			
+			<input type="submit" name="submit" value="提交" class="btn btn-primary col-lg-1"  />
+
+			
+			<input type="button" name="back" onclick='history.back()' style='margin-left:10px;' value="返回列表" class="btn btn-default" />
+		</div>
+	</div>
+
+
+	</form>
+</div>
+<script>
+var map, searchService, marker, markers = [], infoWin = null;
+var initMap = function () {
+    var center = new qq.maps.LatLng(39.916527, 116.397128);
+    map = new qq.maps.Map(document.getElementById('container'), {
+        center: center,
+        zoom: 13
+    });
+    var scaleControl = new qq.maps.ScaleControl({
+        align: qq.maps.ALIGN.BOTTOM_LEFT,
+        margin: qq.maps.Size(85, 15),
+        map: map
+    });
+    //调用Poi检索类
+    searchService = new qq.maps.SearchService({
+        //检索成功的回调函数
+        complete: function (results) {
+            //设置回调函数参数
+            var pois = results.detail.pois;
+            infoWin = new qq.maps.InfoWindow({
+                map: map
+            });
+            var latlngBounds = new qq.maps.LatLngBounds();
+            for (var i = 0, l = pois.length; i < l; i++) {
+                var poi = pois[i];
+                //扩展边界范围，用来包含搜索到的Poi点
+                latlngBounds.extend(poi.latLng);
+                (function (n) {
+                    var marker = new qq.maps.Marker({
+                        map: map
+                    });
+                    marker.setPosition(pois[n].latLng);
+                    markers.push(marker);
+                    qq.maps.event.addListener(marker, 'click', function () {
+                        infoWin.open();
+                        infoWin.setContent('<div style = "width:200px;padding:10px 0;">' + pois[n].address + '<div class="map-import-btn"><input type="button" class="btn btn-xs btn-primary" value="导入经纬度" onclick="chooseShopLoc(this);" address=' + pois[n].address + ' lat =' + pois[n].latLng.getLat() + '  lng =' + pois[n].latLng.getLng() + ' /></div></div>');
+                        infoWin.setPosition(pois[n].latLng);
+                    });
+                })(i);
+            }
+            //调整地图视野
+            map.fitBounds(latlngBounds);
+        },
+        //若服务请求失败，则运行以下函数
+        error: function () {
+            alert("很抱歉，未搜索到此地址，请重新输入！");
+        }
+    });
+}
+function getSelectArea() {
+    var storeArr = [];
+    var s_province = $('#sel-provance').val();
+    var s_city = $('#sel-city').val();
+    var s_area = $('#sel-area').val();
+    var s_street = $('#sel-street').val();
+    
+    if('请选择省份' != s_province)
+    {
+    	storeArr.push(s_province);
+    }
+    if('请选择城市' != s_city)
+    {
+    	storeArr.push(s_city);
+    }
+    if('请选择区域' != s_area)
+    {
+    	storeArr.push(s_area);
+    }
+    if('请选择街道/镇' != s_street && '' != s_street)
+    {
+    	storeArr.push(s_street);
+    }
+    
+    
+    $("#area-selector select").each(function (i) {
+        if ($(this).find("option:selected").text() != '请选择') {
+            storeArr.push($(this).find("option:selected").text());
+        }
+    });
+    return storeArr;
+}
+//查询社区信息
+function chooseShopLoc(t) {
+    var address = $(t).attr("address");
+    var storeAreaArr = getSelectArea();
+    
+    for (var i = 3; i >= 0; i--) {
+        if (i == 0)
+        {
+            address = address.replace(storeAreaArr[0] + "市", '');
+        }
+        address = address.replace(storeAreaArr[i], '');
+    }
+    var lat = $(t).attr("lat");
+    var lng = $(t).attr("lng");
+    this.clearMarkers();
+    var position = new qq.maps.LatLng(lat, lng);
+    marker = new qq.maps.Marker({
+        map: map,
+        position: position,
+        draggable: true
+    });
+    map.panTo(position);
+    map.zoomTo(18);
+    $("#lon").val(lng);
+    $("#lat").val(lat);
+    qq.maps.event.addListener(marker, 'dragend', function () {
+        if (marker.getPosition()) {
+            $("#lon").val(marker.getPosition().getLng());
+            $("#lat").val(marker.getPosition().getLat());
+        }
+    });   
+    if (infoWin) {
+        infoWin.close();
+    }
+    $("#map_des").hide();
+}
+////删除所有标记
+function clearMarkers() {
+    if (markers) {
+        for (i = 0; i < markers.length; i++) {
+            markers[i].setMap(null);
+        }
+        markers.length = 0;
+    }
+}
+
+//搜索地址，这里需要判断是否选择了省市区
+function getResult() {
+    if ($("#AddressId").val() <= 0) {
+       // $.dialog.tips("请先选择店铺地址");
+        return;
+    }
+    if ($.trim($("#address").val()).length == 0) {
+        tip.msgbox.err('请先输入详细地址');
+        return;
+    }
+    if (marker != null) marker.setMap(null);
+    clearMarkers();
+    if (infoWin) {
+        infoWin.close();
+    }
+    var storeArr = getSelectArea();
+    var regions = storeArr[0] + storeArr[1] + storeArr[2];
+    var regionText = storeArr.join(',');
+    var poiText = regions + $.trim($("#address").val());
+    searchService.setLocation(regionText);
+    searchService.search(poiText);
+    $("#map_des").show();
+}
+
+</script>
+<script language='javascript'>
+	$(function(){
+	    cascdeInit("1","1","{php echo $item['province_name']}","{php echo $item['city_name']}","{php echo $item['area_name']}","{php echo $item['country_name']}");
+	    initMap();//初始化门店地图
+	});
+      require(['bootstrap'],function(){
+             $('#myTab a').click(function (e) {
+                 e.preventDefault();
+                $('#tab').val( $(this).attr('href'));
+                 $(this).tab('show');
+             })
+     });
+
+    function showbacktype(type){
+
+        $('.backtype').hide();
+        $('.backtype' + type).show();
+    }
+	$(function(){
+
+		
+
+	})
+</script>
+
+{template '_footer'}

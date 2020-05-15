@@ -1,0 +1,42 @@
+<div style='max-height:500px;overflow:auto;min-width:850px;'>
+<table class="table table-hover" style="min-width:850px;">
+    <tbody>   
+        {loop $need_data $row}
+        <tr>
+            <td>{$row['community_name']}</td>
+			<td>{$row['head_name']}</td>
+			<td>{$row['head_mobile']}</td>
+            <td>{$row['fullAddress']}</td>
+            <td style="width:80px;"><a href="javascript:;" class="choose_dan_head" data-json='{php echo json_encode($row);}'>选择</a></td>
+        </tr>
+        {/loop}
+        {if count($need_data)<=0}
+        <tr> 
+            <td colspan='4' align='center'>未找到可分配的小区</td>
+        </tr>
+        {/if}
+    </tbody>
+</table>
+</div>
+
+<script type="text/javascript">
+    $(document).undelegate(".choose_dan_head","click").delegate(".choose_dan_head","click",function(){
+        var json_obj = JSON.parse($(this).attr('data-json'));
+        var p_html = '';
+        p_html+= '<div class="multi-audio-item " data-id="'+json_obj.id+'">';
+        p_html+= '    <div class="input-group">';
+        p_html+= '       <input type="text" class="form-control img-textname" readonly="" value="'+json_obj.community_name+'">';
+        p_html+= '       <input type="hidden" value="'+json_obj.id+'" name="head_id[]">';
+        p_html+= '       <div class="input-group-btn">';
+        p_html+= '            <button class="btn btn-default" data-id="'+json_obj.id+'" onclick="cancle_head(this, '+json_obj.id+')" type="button"><i class="fa fa-remove"></i></button>';
+        p_html+= '       </div>';
+        p_html+= '    </div>';
+        p_html+= '</div>';
+
+        // $(cur_open_div).parent().siblings().remove();
+        $('.multi-audio-details').append(p_html);
+        
+        // $(cur_open_div).val( json_obj.id );
+        layer.close(layer.index); 
+    });
+</script>

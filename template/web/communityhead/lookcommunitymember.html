@@ -1,0 +1,233 @@
+{template '_header'}
+<style>
+    .popover{
+        width:170px;
+        font-size:12px;
+        line-height: 21px;
+        color: #0d0706;
+    }
+    .popover span{
+        color: #b9b9b9;
+    }
+    .nickname{
+        display: inline-block;
+        max-width:200px;
+        overflow: hidden;
+        text-overflow:ellipsis;
+        white-space: nowrap;
+        vertical-align: middle;
+    }
+    .tooltip-inner{
+        border:none;
+    }
+</style>
+<div class="page-header">
+    当前位置：<span class="text-primary">核销人员列表</span>
+</div>
+<div class="page-content">
+    <form action="" method="get" class="form-horizontal form-search" role="form">
+		<input type="hidden" name="c" value="site" />
+        <input type="hidden" name="a" value="entry" />
+        <input type="hidden" name="m" value="lionfish_comshop" />
+        <input type="hidden" name="do" value="admin" />
+        <input type="hidden" name="controller"  value="communityhead.lookcommunitymember" />
+        <div class="page-toolbar m-b-sm m-t-sm">
+            <div class="input-group">
+				<input type="text" class="form-control input-sm"  name="keyword" value="{$_GPC['keyword']}" placeholder="会员名称"/>
+				<span class="input-group-btn">
+					<button class="btn  btn-primary" type="submit"> 搜索</button>
+				</span>
+			</div>
+        </div>
+    </form>
+    <form action="" method="post" >
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-table-header">
+                    <input type='checkbox' />
+					<span class="pull-right">
+						<a href="{php echo shopUrl('communityhead.addcommunitymember', array('community_id' =>$community_id))}" class="btn btn-primary"><i class="fa fa-plus"></i> 添加核销会员</a>
+					</span>
+                    <div class="btn-group">
+								
+						<a class='btn btn-default btn-sm btn-op btn-operation'  data-toggle='batch' data-href="{php echo shopUrl('communityhead/agent_check_communitymember',array('state'=>1))}"  data-confirm='确认要启用?'>
+							<i class="icow icow-shenhetongguo"></i>启用
+						</a>
+						<a class='btn btn-default btn-sm btn-op btn-operation'  data-toggle='batch' data-href="{php echo shopUrl('communityhead/agent_check_communitymember',array('state'=>0))}" data-confirm='确认要禁用?'>
+							<i class="icow icow-yiquxiao"></i>禁用</a>
+						
+						
+					</div>
+                </div>
+                <table class="table table-responsive">
+                    <thead>
+                    <tr>
+						<th style="width:25px;"></th>
+						<th style="width:60px;">ID</th>
+						<th style="">会员名称</th>
+                        <th style="">状态</th>
+                        <th style="">核销数量</th>
+						 <th style="">备注</th>
+						 <th style="width:300px;">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+					{loop $list $row}
+						<tr>
+                            <td style="position: relative; ">
+                                <input type='checkbox' value="{$row['id']}" class="checkone"/>
+							</td>
+							<td>
+								{$row['id']}
+							</td>
+							<td>
+								{$row['username']}
+							</td>
+							<td>
+								
+								<span class='label {if $row['state']==1}label-primary{else}label-default{/if}'
+										  data-toggle='ajaxSwitch'   data-confirm ='确认要{if $row['state']==1 }禁用{else}审核通过?{/if}?'
+										  data-switch-value='{$row['state']}'
+										  data-switch-value0='0|禁用|label label-default|{php echo shopUrl('communityhead/agent_check_communitymember',array('state'=>1,'id'=>$row['id']))}'  
+										  data-switch-value1='1|启用|label label-primary|{php echo shopUrl('communityhead/agent_check_communitymember',array('state'=>0,'id'=>$row['id']))}'
+										 
+										>
+										  {if $row['state']==1}启用{else}禁用{/if}</span>
+							</td>
+							<td>
+								{$row['he_count']}
+							</td>
+							<td>
+								{$row['remark']}
+							</td>
+							<td>
+								<a class="btn  btn-op btn-operation" target="_blank" href="{php echo shopUrl('communityhead/look_piup_record',array('member_id' => $row['member_id']));}">
+									<span data-toggle="tooltip" data-placement="top" title="" data-original-title="查看核销记录">
+										查看核销记录
+									</span>
+								</a>
+								<a  class='btn  btn-op btn-operation' data-toggle='ajaxRemove' href="{php echo shopUrl('communityhead/deletecommunitymember',array('id' => $row['id']))}" data-confirm='确认要删除吗?'>
+									<span data-toggle="tooltip" data-placement="top" title="" data-original-title="删除">
+										<i class='icow icow-shanchu1'></i>删除
+									</span>
+								</a>
+							</td>
+                        </tr>
+					{/loop}
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="3">
+                            <input type="checkbox">
+							<div class="btn-group">
+								
+								<a class='btn btn-default btn-sm btn-op btn-operation'  data-toggle='batch' data-href="{php echo shopUrl('communityhead/agent_check_communitymember',array('state'=>1))}"  data-confirm='确认要启用?'>
+									<i class="icow icow-shenhetongguo"></i>启用
+								</a>
+								<a class='btn btn-default btn-sm btn-op btn-operation'  data-toggle='batch' data-href="{php echo shopUrl('communityhead/agent_check_communitymember',array('state'=>0))}" data-confirm='确认要禁用?'>
+									<i class="icow icow-yiquxiao"></i>禁用</a>
+								
+								
+							</div>
+			
+                        </td>
+                        <td colspan="4" style="text-align: right">
+                            {$pager}
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script language="javascript">
+    
+    require(['bootstrap'], function () {
+        $("[rel=pop]").popover({
+            trigger: 'manual',
+            placement: 'right',
+            title: $(this).data('title'),
+            html: 'true',
+            content: $(this).data('content'),
+            animation: false
+        }).on("mouseenter", function () {
+            var _this = this;
+            $(this).popover("show");
+            $(this).siblings(".popover").on("mouseleave", function () {
+                $(_this).popover('hide');
+            });
+        }).on("mouseleave", function () {
+            var _this = this;
+            setTimeout(function () {
+                if (!$(".popover:hover").length) {
+                    $(_this).popover("hide")
+                }
+            }, 100);
+        });
+    });
+   
+
+    $("[data-toggle='batch-group'], [data-toggle='batch-level']").click(function () {
+        var toggle = $(this).data('toggle');
+        $("#modal-change .modal-title").text(toggle=='batch-group'?"批量修改分组":"批量修改会员等级");
+        $("#modal-change").find("."+toggle).show().siblings().hide();
+        $("#modal-change-btn").attr('data-toggle', toggle=='batch-group'?'group':'level');
+        $("#modal-change").modal();
+    });
+    $("#modal-change-btn").click(function () {
+        var _this = $(this);
+        if(_this.attr('stop')){
+            return;
+        }
+        var toggle = $(this).data('toggle');
+        var ids = [];
+        $(".checkone").each(function () {
+            var checked = $(this).is(":checked");
+            var id = $(this).val();
+            if(checked && id){
+                ids.push(id);
+            }
+        });
+        if(ids.length<1){
+            tip.msgbox.suc("请选择要批量操作的会员");
+            return;
+        }
+        var option = $("#modal-change .batch-"+toggle+" option:selected");
+        level = '';
+        if (toggle=='group'){
+            for(i=0;i<option.length;i++){
+                if (level == ''){
+                    level += $(option[i]).val();
+                }else{
+                    level += ','+$(option[i]).val();
+                }
+            }
+        }else{
+            var level = option.val();
+        }
+
+        var levelname = option.text();
+        tip.confirm("确定要将选中会员移动到 "+levelname+" 吗？", function () {
+            _this.attr('stop', 1).text("操作中...");
+            $.post(biz.url('user/changelevel'),{
+                level: level,
+                ids: ids,
+                toggle: toggle
+            }, function (ret) {
+                $("#modal-change").modal('hide');
+                if(ret.status==1){
+                    tip.msgbox.suc("操作成功");
+                    setTimeout(function () {
+                        location.reload();
+                    },1000);
+                }else{
+                    tip.msgbox.err(ret.result.message);
+                }
+            }, 'json')
+        });
+    });
+</script>
+{template '_footer'}
+

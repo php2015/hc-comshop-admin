@@ -1,0 +1,652 @@
+{template '_header'}
+
+<div class="page-header">当前位置：<span class="text-primary">首页</span></div>
+
+<style>
+    .tab-content>.tab-pane {margin-top: 10px;}
+    .tab-content>.tab-pane>.fui-list-group {border-bottom: 0;}
+	.userNum, .goodsNum, .orderNum {
+		height: 4.5rem;
+		width: 4.5rem;
+		margin: 0 auto;
+		cursor: pointer;
+		color:#000;
+	}
+	.nav {
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		display: flex;
+		padding-left: 0;
+		margin-bottom: 0;
+		list-style: none;
+	}
+	.panel-1 .nav-left {
+		height: 4.8rem;
+		line-height: 4.8rem;
+		margin-left: 0.2rem;
+	}
+	.panel-1 .nav-left span{ 
+		font-size:14px;
+	}
+	.nav select {
+		width: 50%;
+		margin: 1rem 1rem;
+		
+	}
+	.panel-1 {
+		height: 13rem;
+	}
+	.panel {
+		padding: 0 1rem;
+		background: #fff;
+	}
+	.no-border{border:none;}
+</style>
+
+<style>
+    .flex-items {
+        display: flex;
+    }
+
+        .flex-items .flex-item {
+            flex: 1;
+        }
+
+    .todayboxs {
+        margin: 24px 0;
+    }
+
+        .todayboxs .flex-item {
+            background-color: #fff;
+            width: 100%;
+            height: 104px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            margin-right: 24px;
+            color: #333;
+            box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.05);
+        }
+
+            .todayboxs .flex-item:last-child {
+                margin-right: 0;
+            }
+
+        .todayboxs .icon {
+            width: 56px;
+            margin-right: 16px;
+        }
+
+        .todayboxs .num {
+            font-size: 24px;
+        }
+
+        .todayboxs .title {
+            color: #747474;
+        }
+
+    .row-panel {
+        margin-bottom: 24px;
+        display: flex;
+    }
+
+        .row-panel .row-panel-7 {
+            width: 50%;
+            flex-shrink: 1;
+        }
+
+        .row-panel .row-panel-5 {
+            width: 50%;
+            margin-left: 24px;
+            flex-shrink: 0;
+        }
+
+    .mypanel {
+        position: relative;
+        background-color: #fff;
+        padding: 0 20px;
+        box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.05);
+    }
+
+        .mypanel .mypanel-heading {
+            font-size: 15px;
+            font-weight: 600;
+            border-bottom: 1px solid #f0f0f0;
+            height: 48px;
+            line-height: 48px;
+        }
+
+    .tasks .flex-item {
+        height: 75px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-right: 20px;
+        border-bottom: 1px solid #f0f0f0;
+        color: #747474;
+    }
+
+        .tasks .flex-item:last-child {
+            margin-right: 0;
+        }
+
+    .tasks .num {
+        font-size: 15px;
+        color: #9e9e9e;
+        font-weight: 600;
+    }
+
+        .tasks .num.hasnum {
+            color: #436be6;
+        }
+
+    .chat-box {
+        width: 100%;
+        height: 192px;
+    }
+
+    .tasks-panel .tasks:last-child .flex-item {
+        border-bottom: none;
+    }
+
+    .quick-panel .mypanel-body, .total-panel .mypanel-body {
+        padding: 20px 0;
+    }
+
+    .quick-nav .flex-item, .total-mes .flex-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        height: 68px;
+        margin-bottom: 20px;
+        margin-right: 20px;
+        color: #747474;
+    }
+
+    .total-mes .flex-item {
+        margin-bottom: 20px;
+        height: 68px;
+    }
+
+        .quick-nav .flex-item:last-child, .total-mes .flex-item:last-child {
+            margin-right: 0;
+        }
+
+    .total-mes .num {
+        height: 48px;
+        line-height: 48px;
+        font-size: 15px;
+        color: #333;
+        font-weight: 600;
+    }
+
+    .quick-nav .flex-item:hover {
+        color: #436be6;
+    }
+
+    .quick-nav .iconfont {
+        height: 48px;
+        line-height: 48px;
+        font-size: 24px;
+        display: block;
+        transition: all 0.3s;
+    }
+
+    .quick-nav .flex-item:hover i {
+        font-size: 48px;
+    }
+</style>
+
+<div class="page-content transparent">
+
+	
+	<div class="flex-items todayboxs">
+		{if $_W['role'] != 'agenter' }
+        <a class="flex-item" href="{php echo shopUrl('user')}">
+            <img class="icon" src="../addons/lionfish_comshop/static/images/Block-1.png">
+            <div class="text">
+                <div class="num today_member_count"></div>
+                <div class="title">今日新增会员</div>
+            </div>
+        </a>
+		{/if}
+        <a class="flex-item" href="{php echo shopUrl('order')}">
+        <img class="icon" src="../addons/lionfish_comshop/static/images/Block-3.png">
+        <div class="text">
+        <div class="num today_pay_order_count"></div>
+        <div class="title">今日付款订单数</div>
+        </div>
+        </a>
+        <a class="flex-item" href="{php echo shopUrl('order')}"> 
+        <img class="icon" src="../addons/lionfish_comshop/static/images/Block-2.png">
+        <div class="text">
+        <div class="num today_pay_money"></div>
+        <div class="title">今日付款金额</div>
+        </div>
+        </a>
+    </div>  
+    <div class="row-panel">
+        <div class="row-panel-7">
+            <div class="mypanel tasks-panel">
+                <div class="mypanel-heading">待处理事务</div>
+                <div class="mypanel-body">
+                    <div class="flex-items tasks">
+						{if $_W['role'] != 'agenter' }
+                        <div class="flex-item">
+                            <div>商品库存报警</div>
+                            <a class="num hasnum goods_stock_notice_count" href="{php echo shopUrl('goods/goodslist', array('type' => 'stock_notice'))}"></a>
+                        </div>
+						{/if}
+                        <div class="flex-item"> 
+                            <div>待付款订单</div>
+                            <a class="num wait_pay_order_count" href="{php echo shopUrl('order.order', array('order_status_id' => 3))}"></a>
+                        </div>
+                        <div class="flex-item">
+                            <div>备货中订单</div>
+                            <a class="num hasnum wait_order_count" href="{php echo shopUrl('order.order', array('order_status_id' => 1))}"></a>
+                        </div>
+                    </div>
+					{if $_W['role'] != 'agenter' }
+					
+						<div class="flex-items tasks">
+							<div class="flex-item">
+								<div>待处理退款</div>
+								<a class="num hasnum after_sale_order_count" href="{php echo shopUrl('order.orderaftersales')}"></a>
+							</div> 
+							<div class="flex-item">
+								<div>待评价订单</div>
+								<a class="num wai_comment_order_count" href="{php echo shopUrl('order.order', array('order_status_id' => 6))}"></a>
+							</div>
+							<div class="flex-item">
+								<div>待审核评价</div>
+								<a class="num hasnum wait_shen_order_comment_count" href="{php echo shopUrl('order.ordercomment')}"></a>
+							</div>
+						</div>
+						<div class="flex-items tasks">
+							<div class="flex-item">
+								<div>仓库中商品</div>
+								<a class="num hasnum stock_goods_count" href="{php echo shopUrl('goods.goodslist', array('type' => 'warehouse'))}"></a>
+							</div> 
+							<div class="flex-item">
+								<div>待处理退货</div> 
+								<a class="num after_sale_order_count" href="{php echo shopUrl('order.orderaftersales')}"></a>
+							</div>
+							<div class="flex-item">
+								<div>团长提现</div>
+								<a class="num tixian_count" href="{php echo shopUrl('communityhead.distribulist')}">0</a>
+							</div>
+						</div>
+					{else}
+						<div class="flex-items tasks">
+							<div class="flex-item">
+								<div>待处理退款</div>
+								<a class="num hasnum after_sale_order_count" href="{php echo shopUrl('order.orderaftersales')}"></a>
+							</div> 
+							
+							<div class="flex-item">
+								<div>待处理退货</div> 
+								<a class="num after_sale_order_count" href="{php echo shopUrl('order.orderaftersales')}"></a>
+							</div>
+							
+						</div>
+					{/if}
+                    
+                </div>
+            </div>
+        </div>
+        <div class="row-panel-5">
+            <div class="mypanel">
+                <div class="mypanel-heading">交易统计</div>
+                <div class="mypanel-body">
+                	<div class="ibox-loading" id="echarts-line-chart-loading"></div>
+                    <div class="chat-box" id="main" _echarts_instance_="ec_1544147250596" style="-webkit-tap-highlight-color: transparent; user-select: none; position: relative;height: 225px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row-panel">
+        <div class="row-panel-7">
+            <div class="mypanel total-panel">
+                <div class="mypanel-heading">商城信息统计</div>
+                <div class="mypanel-body">
+					{if $_W['role'] != 'agenter' }
+					<div class="flex-items total-mes">
+                        <div class="flex-item">
+                            <div class="num member_count"></div>
+                            <div>会员总数</div>
+                        </div>
+                        <div class="flex-item">
+                            <div class="num goods_count"></div>
+                            <div>商品总数</div>
+                        </div>
+                        <div class="flex-item">
+                            <div class="num community_head_count"></div>
+                            <div>团长总数</div>
+                        </div>
+                    </div>
+                    <div class="flex-items total-mes">
+                        <div class="flex-item">
+                            <div class="num seven_order_count"></div>
+                            <div>近七天订单数</div>
+                        </div>
+                        <div class="flex-item">
+                            <div class="num seven_pay_money"></div>
+                            <div>近7天销售额（元）</div>
+                        </div>
+                        <div class="flex-item">
+                            <div class="num seven_refund_money"></div>
+                            <div>近7天退款金额（元）</div>
+                        </div>
+                    </div>
+					{else}
+					<div class="flex-items total-mes">
+                        <div class="flex-item">
+                            <div class="num seven_order_count"></div>
+                            <div>近七天订单数</div>
+                        </div>
+                        <div class="flex-item">
+                            <div class="num seven_pay_money"></div>
+                            <div>近7天销售额（元）</div>
+                        </div>
+						<div class="flex-item">
+                            <div class="num seven_refund_money"></div>
+                            <div>近7天退款金额（元）</div>
+                        </div>
+                        <div class="flex-item">
+                            <div class="num goods_count"></div>
+                            <div>商品总数</div>
+                        </div>
+                       
+                    </div>
+                   
+					{/if}
+                    
+                </div>
+            </div>
+        </div>
+        <div class="row-panel-5">
+            <div class="mypanel quick-panel">
+                <div class="mypanel-heading">快捷入口</div>
+                <div class="mypanel-body">
+					{if $_W['role'] != 'agenter' }
+					<div class="flex-items quick-nav">
+                        <a href="{php echo shopUrl('goods.addgoods')}" class="flex-item">
+                            <i class="iconfont icon-p"></i> 
+                            <div>发布商品</div>
+                        </a>
+                        <a href="{php echo shopUrl('order')}" class="flex-item">
+                            <i class="iconfont icon--clipboard"></i>
+                            <div>订单列表</div>
+                        </a>
+                        <a href="{php echo shopUrl('user')}" class="flex-item">
+                            <i class="iconfont icon--users"></i>
+                            <div>会员管理</div> 
+                        </a>
+                        <a href="{php echo shopUrl('communityhead')}" class="flex-item">
+                            <i class="iconfont icon--tree"></i>
+                            <div>团长管理</div>
+                        </a>
+                        <a href="{php echo shopUrl('supply')}" class="flex-item">
+                            <i class="iconfont icon--truck"></i> 
+                            <div>供应商管理</div>
+                        </a>
+                    </div>
+                    <div class="flex-items quick-nav">
+                        <a href="{php echo shopUrl('communityhead.distribulist')}" class="flex-item">
+                            <i class="iconfont icon-p5"></i>
+                            <div>提现申请</div>
+                        </a>
+                        <a href="{php echo shopUrl('communityhead.distributionpostal')}" class="flex-item">
+                            <i class="iconfont icon--coin-yen"></i>
+                            <div>提现设置</div>
+                        </a>
+                        <a href="{php echo shopUrl('user.userjia')}" class="flex-item">
+                            <i class="iconfont icon-p6"></i>
+                            <div>机器人管理</div> 
+                        </a>
+                        <a href="{php echo shopUrl('order.orderaftersales')}" class="flex-item">
+                            <i class="iconfont icon--stats-bars1"></i>
+                            <div>售后处理</div>
+                        </a>
+                        <a href="{php echo shopUrl('config.index')}" class="flex-item">
+                            <i class="iconfont icon-p7"></i>
+                            <div>站点设置</div>
+                        </a>
+                    </div>
+					{else}
+					<div class="flex-items quick-nav">
+                        <a href="{php echo shopUrl('goods.addgoods')}" class="flex-item">
+                            <i class="iconfont icon-p"></i> 
+                            <div>发布商品</div>
+                        </a>
+                        <a href="{php echo shopUrl('order')}" class="flex-item">
+                            <i class="iconfont icon--clipboard"></i>
+                            <div>订单列表</div>
+                        </a>
+                        <a href="{php echo shopUrl('order.orderaftersales')}" class="flex-item">
+                            <i class="iconfont icon--stats-bars1"></i>
+                            <div>售后处理</div>
+                        </a>
+                    </div>
+					{/if}
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<script>
+$(function(){
+	loadC();
+})
+
+function loadC() {
+	myrequire(['echarts'], function () {
+		
+		var hasLineChart = $("#main").length>0;
+		if(hasLineChart){
+			var lineChart = echarts.init(document.getElementById("main"));
+		}
+		window.onresize = function () {
+			if(hasLineChart) {
+				lineChart.resize();
+			}
+		};
+		
+		$.ajax({
+	    type: "GET",
+	    url: "{php echo shopUrl('statistics/load_goods_chart')}",
+		data:{type:cur_type},
+	    dataType: "json",
+	    success: function (json) {
+	        var option = {
+	        	    title: {
+	        	        text: ''
+	        	    },
+	        	    tooltip: {
+	        	        trigger: 'axis',
+	        	        formatter: function (a) {
+	        	            var str = '';
+	        	            a.forEach(function (item) {
+	        	                str += item.seriesName + ':' + item.value + (item.seriesIndex > 2 ? '%' : '') + '<br/>';
+	        	            });
+	        	            return str;
+	        	        }
+	        	    },
+	        	    legend: {
+	        	        data: []
+	        	    },
+	        	    grid: {
+	        	        left: 50,
+	        	        right: 20,
+	        	        top: 40,
+	        	        bottom: 10,
+	        	        containLabel: true
+	        	    },
+
+	        	    xAxis: {
+	        	        type: 'category',
+	        	        axisLabel: {
+	        	            rotate: 30
+	        	        },
+	        	        boundaryGap: false,
+	        	        data: []
+	        	    },
+	        	    yAxis: [
+	        	        {
+	        	            type: 'value',
+	        	            name: '金额',
+	        	        }
+	        	    ],
+	        	    series: [
+	        	        {
+	        	            areaStyle: { normal: {} },
+	        	        },
+	        	    ]
+	        	};
+			if(hasLineChart) {
+				
+				//var json = {"success":true,"data":{"date":"0001-01-01 00:00:00","visits":3080,"orderUsers":24,"orderCount":52,"orderProducts":69,"orderAmount":14986.83,"payUsers":16,"payOrders":25,"payProducts":36,"payAmount":4380.31,"refundProducts":4,"refundOrderCounts":8,"refundAmount":1899.04,"refundRate":32.00,"preOrderRate":175.21,"preProductRate":121.68,"jointRate":1.44,"orderRate":1.69,"payRate":48.08,"tradeRate":0.81,"payAmountRank":1,"brokerageAmount":0.00,"lines":{"payAmountLine":{"xAxisData":["12-01","12-02","12-03","12-04","12-05","12-06","12-07","12-08"],"seriesData":[{"data":[0.00,3196.00,0.20,162.14,379.01,642.96,0.00,0.0]}]},"payUserLine":{"xAxisData":["12-01","12-02","12-03","12-04","12-05","12-06","12-07","12-08"],"seriesData":[{"data":[0,1,2,2,6,5,0,0]}]},"payProductLine":{"xAxisData":["12-01","12-02","12-03","12-04","12-05","12-06","12-07","12-08"],"seriesData":[{"data":[0,3,2,13,10,8,0,0]}]},"orderRateLine":{"xAxisData":["12-01","12-02","12-03","12-04","12-05","12-06","12-07","12-08"],"seriesData":[{"data":[0.0,4.00,1.22,1.53,2.74,1.52,1.00,0.0]}]},"payRateLine":{"xAxisData":["12-01","12-02","12-03","12-04","12-05","12-06","12-07","12-08"],"seriesData":[{"data":[0.0,75.00,33.33,77.78,35.00,50.0,0.0,0.0]}]},"tradeRateLine":{"xAxisData":["12-01","12-02","12-03","12-04","12-05","12-06","12-07","12-08"],"seriesData":[{"data":[0.0,3.00,0.41,1.19,0.96,0.76,0.0,0.0]}]}}}};
+				var lines = json.data.lines;
+				
+		        option.xAxis.data = lines.payAmountLine.xAxisData;
+		        option.series = [];
+		        option.series.push(buildLine("付款金额", lines.payAmountLine, 0));
+		        
+		        lineChart.setOption(option);
+				lineChart.resize(); 
+			}
+			$("#echarts-line-chart-loading").hide();
+			$("#main").show();	
+		}
+		})
+		
+	})
+}
+
+function buildLine(name, data, yIndex) {
+    return {
+        name: name,
+        type: "line",
+        areaStyle: { normal: {} },
+        smooth: true,
+        data: data.seriesData[0].data,
+        yAxisIndex: yIndex
+    };
+}
+
+</script>
+</div>
+
+
+<script type="text/javascript">
+    var  cur_type = 'normal';
+	$(function(){
+		load_data();
+		
+		$('#orderinfo li').click(function(){
+			$(this).addClass('active').siblings().removeClass('active');
+			load_order_buy_data();
+		})
+		$('#sale li').click(function(){
+			$(this).addClass('active').siblings().removeClass('active');
+			load_goods_paihang();
+		})
+	})
+	
+	function load_goods_paihang()
+	{
+		var s_index = $('#sale li.active').index();
+		
+		$.ajax({
+            type: "GET",
+            url: "{php echo shopUrl('statistics/load_goods_paihang')}",
+			data:{type:cur_type,s_index:s_index},
+            dataType: "json",
+            success: function (data) {
+				$('#sale_div .ibox-loading').hide();
+				if(data.code ==0 )
+				{
+					$('#goods_rank_0 tbody').html( data.html );
+				}
+			}
+		})
+	}
+	
+	function load_order_buy_data()
+	{
+		var s_index = $('#orderinfo li.active').index();
+		
+		$.ajax({
+            type: "GET",
+            url: "{php echo shopUrl('statistics/order_buy_data')}",
+			data:{type:cur_type,s_index:s_index},
+            dataType: "json",
+            success: function (data) {
+				$('#order_info_div .ibox-loading').hide();
+				if(data.code ==0 )
+				{
+					$('.order_count_0').html( data.data.count );
+					$('.order_price_0').html( data.data.total );
+					$('.order_avg_0').html( data.data.per_money );
+				}
+			}
+		})
+	}
+	function load_data()
+	{
+		cur_type = $('#select_type').val();
+	
+		$.ajax({
+            type: "GET",
+            url: "{php echo shopUrl('statistics/index_data')}",
+			data:{type:cur_type},
+            dataType: "json",
+            success: function (data) {
+				
+				if(data.code ==0 )
+				{
+					
+					$('.today_member_count').html( data.data.today_member_count );
+					$('.today_pay_order_count').html( data.data.today_pay_order_count );
+					$('.today_pay_money').html( '<em>￥</em>'+data.data.today_pay_money );
+					
+					$('.goods_stock_notice_count').html( data.data.goods_stock_notice_count );
+					$('.wait_pay_order_count').html( data.data.wait_pay_order_count );
+					$('.wait_order_count').html( data.data.wait_order_count );
+					$('.after_sale_order_count').html( data.data.after_sale_order_count );
+					$('.wai_comment_order_count').html( data.data.wai_comment_order_count );
+					
+					$('.wait_shen_order_comment_count').html( data.data.wait_shen_order_comment_count );
+					$('.stock_goods_count').html( data.data.stock_goods_count );
+					$('.seven_order_count').html( data.data.seven_order_count );
+					$('.seven_pay_money').html(data.data.seven_pay_money);
+					$('.seven_refund_money').html(data.data.seven_refund_money);
+					
+					$('.community_head_count').html(data.data.community_head_count);
+					$('.seven_order_count').html(data.data.seven_order_count);
+					
+					
+					$('.member_count').html( data.data.member_count );
+					$('.goods_count').html( data.data.goods_count );
+					$('.order_count').html( data.data.order_count );
+					$('.tixian_count').html( data.data.apply_count );
+					
+					
+					
+					$('.goods_totals').html( data.data.goods_stock_notice_count );
+				}
+			}
+		})
+		load_order_buy_data();
+		load_goods_paihang();
+		
+		
+	}
+</script>
+
+{template '_footer'}

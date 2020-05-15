@@ -1,0 +1,61 @@
+{template '_header'}
+<div class="page-header">当前位置：<span class="text-primary">供应商设置</span></div>
+<div class="page-content">
+	<form action="" method="post" class="form-horizontal form-validate" enctype="multipart/form-data" >
+		
+		
+		<div class="form-group">
+            <label class="col-lg control-label">供应商后台入口</label>
+            <div class="col-sm-9 col-xs-12">
+				
+				<div class="form-control-static js-clip text-primary" data-url='<?php echo $_W['siteroot'].'web/lmerchant.php?i='.$_W['uniacid']; ?>'><?php echo $_W['siteroot'].'web/lmerchant.php?i='.$_W['uniacid']; ?></div>
+
+
+            </div>
+        </div>
+		
+		<div class="form-group">
+            <label class="col-lg control-label">前端申请</label>
+            <div class="col-sm-9 col-xs-12">
+                <label class='radio-inline'>
+                    <input type='radio' name='data[enabled_front_supply]' value=1 {if $data['enabled_front_supply']==1 || empty($data)}checked{/if} /> 开启
+                </label>
+                <label class='radio-inline'>
+                    <input type='radio' name='data[enabled_front_supply]' value=0 {if $data['enabled_front_supply']==0 && !empty($data) }checked{/if} /> 关闭
+                </label>
+            </div>
+        </div>
+		
+		<div class="form-group">
+            <label class="col-lg control-label">上架商品需要审核</label>
+            <div class="col-sm-9 col-xs-12">
+                <label class='radio-inline'>
+                    <input type='radio' name='data[supply_add_goods_shenhe]' value=0 {if $data['supply_add_goods_shenhe']==0 || empty($data)}checked{/if} /> 不需要
+                </label>
+                <label class='radio-inline'>
+                    <input type='radio' name='data[supply_add_goods_shenhe]' value=1 {if $data['supply_add_goods_shenhe']==1 && !empty($data) }checked{/if} /> 需要
+                </label>
+            </div>
+        </div>
+		<div class="form-group">
+            <label class="col-lg control-label">编辑商品需要审核</label>
+            <div class="col-sm-9 col-xs-12">
+                <label class='radio-inline'>
+                    <input type='radio' name='data[supply_edit_goods_shenhe]' value=0 {if $data['supply_edit_goods_shenhe']==0 || empty($data)}checked{/if} /> 不需要
+                </label>
+                <label class='radio-inline'>
+                    <input type='radio' name='data[supply_edit_goods_shenhe]' value=1 {if $data['supply_edit_goods_shenhe']==1 && !empty($data) }checked{/if} /> 需要
+                </label>
+            </div>
+        </div>
+		
+		<div class="form-group">
+			<label class="col-lg control-label"></label>
+			<div class="col-sm-9 col-xs-12">
+				<input type="submit" value="提交" class="btn btn-primary"  />
+			</div>
+		</div>
+	</form>
+</div>
+
+{template '_footer'}

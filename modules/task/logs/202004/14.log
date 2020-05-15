@@ -1,0 +1,1490 @@
+---------------------------------------------------------------
+[2020-04-14T09:35:58+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007809s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.006029s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005373s ]
+---------------------------------------------------------------
+[2020-04-14T09:35:59+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007630s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005621s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005056s ]
+---------------------------------------------------------------
+[2020-04-14T09:36:00+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/information/information
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007574s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005646s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.007512s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007626s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_information` [ RunTime:0.005881s ]
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005983s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007390s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_cls` [ RunTime:0.005469s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  ( pid <> "" )  AND `status` = '1'  AND `type` = '2'  AND `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇'  AND `town_show` = 1 ORDER BY `sort` DESC [ RunTime:0.006268s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007536s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `type` = '2'  AND `fg` = '1'  AND `fg_type` = '4'  AND `shows` = '1' [ RunTime:0.006386s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007751s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1'  AND `c`.`cid` IN ('549','550','39839','39840','39841','39842','39843','39844','39845','39846','39847','39848','39857','39858','39859','39860','39861','39862','39863','39864','39865','39866','39867','39868')  AND `c`.`province` = '浙江省'  AND `c`.`market` = '嘉兴市'  AND `c`.`area` = '桐乡市'  AND `c`.`town` = '濮院镇' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.006197s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007415s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_collect` [ RunTime:0.005752s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_collect` WHERE  `uid` = 870  AND `type` = '2'  AND `status` = '1'  AND `cid` IN (356,353,349,333,332) [ RunTime:0.005196s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007598s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_system` [ RunTime:0.005656s ]
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` WHERE  `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇' LIMIT 1 [ RunTime:0.005207s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007606s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` WHERE  `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇' LIMIT 1 [ RunTime:0.005163s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007718s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` WHERE  `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇' LIMIT 1 [ RunTime:0.005111s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007798s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` WHERE  `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇' LIMIT 1 [ RunTime:0.005241s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007357s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` WHERE  `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇' LIMIT 1 [ RunTime:0.004948s ]
+---------------------------------------------------------------
+[2020-04-14T09:36:13+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007500s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005555s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005031s ]
+---------------------------------------------------------------
+[2020-04-14T09:43:36+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007812s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005672s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005319s ]
+---------------------------------------------------------------
+[2020-04-14T09:43:38+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/indexs/index
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007665s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005607s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005134s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007385s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_banner` [ RunTime:0.005419s ]
+[ sql ] [ SQL ] SELECT `id`,cover img FROM `consult_banner` WHERE  `type` = '2'  AND `status` = '1'  AND `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇' ORDER BY `sort` DESC [ RunTime:0.004960s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007446s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_cls` [ RunTime:0.005318s ]
+[ sql ] [ SQL ] SELECT `id`,`title`,`icon` FROM `consult_cls` WHERE  `type` = '2'  AND `pid` = 0  AND `status` = '1'  AND `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇'  AND `town_show` = 1 ORDER BY `sort` DESC [ RunTime:0.005100s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007505s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `pid` IN (548)  AND `status` = '1'  AND `type` = '2'  AND `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇'  AND `town_show` = 1 [ RunTime:0.005223s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007486s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `type` = '2'  AND `pid` = 0  AND `fg` = '1'  AND `fg_type` = '4'  AND `shows` = '1' [ RunTime:0.005148s ]
+---------------------------------------------------------------
+[2020-04-14T09:45:44+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007465s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005713s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005173s ]
+---------------------------------------------------------------
+[2020-04-14T09:45:45+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007629s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005598s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005124s ]
+---------------------------------------------------------------
+[2020-04-14T09:45:45+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/indexs/index
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007409s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005362s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005022s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007220s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_banner` [ RunTime:0.005258s ]
+[ sql ] [ SQL ] SELECT `id`,cover img FROM `consult_banner` WHERE  `type` = '2'  AND `status` = '1'  AND `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇' ORDER BY `sort` DESC [ RunTime:0.004893s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007434s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_cls` [ RunTime:0.005313s ]
+[ sql ] [ SQL ] SELECT `id`,`title`,`icon` FROM `consult_cls` WHERE  `type` = '2'  AND `pid` = 0  AND `status` = '1'  AND `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇'  AND `town_show` = 1 ORDER BY `sort` DESC [ RunTime:0.005027s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007318s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `pid` IN (548)  AND `status` = '1'  AND `type` = '2'  AND `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇'  AND `town_show` = 1 [ RunTime:0.005019s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007438s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `type` = '2'  AND `pid` = 0  AND `fg` = '1'  AND `fg_type` = '4'  AND `shows` = '1' [ RunTime:0.005077s ]
+---------------------------------------------------------------
+[2020-04-14T09:45:48+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/user/balance
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007641s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005589s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005043s ]
+---------------------------------------------------------------
+[2020-04-14T09:45:50+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/index/cls
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007548s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005474s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005007s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007343s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_cls` [ RunTime:0.005417s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon` FROM `consult_cls` WHERE  `type` = '2'  AND `status` = '1'  AND `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇'  AND `town_show` = 1 ORDER BY `sort` DESC [ RunTime:0.006046s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007462s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon` FROM `consult_cls` WHERE  `fg` = '1'  AND `fg_type` = '4'  AND `shows` = '1'  AND `type` = '2' [ RunTime:0.005728s ]
+---------------------------------------------------------------
+[2020-04-14T09:45:52+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/user/balance
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007435s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005426s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.004996s ]
+---------------------------------------------------------------
+[2020-04-14T09:45:54+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007779s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005681s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005220s ]
+---------------------------------------------------------------
+[2020-04-14T09:45:54+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/index/cls
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007695s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005605s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005239s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007416s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_cls` [ RunTime:0.005297s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon` FROM `consult_cls` WHERE  `type` = '1'  AND `status` = '1'  AND `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇'  AND `town_show` = 1 ORDER BY `sort` DESC [ RunTime:0.005983s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007308s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon` FROM `consult_cls` WHERE  `fg` = '1'  AND `fg_type` = '4'  AND `shows` = '1'  AND `type` = '1' [ RunTime:0.005578s ]
+---------------------------------------------------------------
+[2020-04-14T09:45:54+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007656s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005660s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005278s ]
+---------------------------------------------------------------
+[2020-04-14T09:45:54+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/company/company
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007672s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005733s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005207s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007373s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_company` [ RunTime:0.005831s ]
+[ sql ] [ SQL ] SELECT c.res_time,c.uid,c.id,u.headimg,c.name,u.nickname,c.detail,c.visitors,c.comment,c.tel,
+            date_format(c.create_time,"%H:%i") time,c.create_time,concat_ws("",c.province,c.market,c.area,c.town) address FROM `consult_company` `c` INNER JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1'  AND `c`.`pcid` = '333'  AND `c`.`cid` = '335'  AND `c`.`province` = '浙江省'  AND `c`.`market` = '嘉兴市'  AND `c`.`area` = '桐乡市'  AND `c`.`town` = '濮院镇' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005556s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.008138s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_cls` [ RunTime:0.005493s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon` FROM `consult_cls` WHERE  ( pid <> "" )  AND `type` = '1'  AND `status` = '1'  AND `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇'  AND `town_show` = 1 ORDER BY `sort` DESC [ RunTime:0.006183s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007604s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `type` = '1'  AND `fg` = '1'  AND `fg_type` = '4'  AND `shows` = '1' [ RunTime:0.007138s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007775s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT c.res_time,c.uid,c.id,u.headimg,c.name,u.nickname,c.detail,c.visitors,c.comment,c.tel,
+            date_format(c.create_time,"%H:%i") time,c.create_time,concat_ws("",c.province,c.market,c.area,c.town) address FROM `consult_company` `c` INNER JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1'  AND `c`.`pcid` = '333'  AND `c`.`cid` = '335'  AND `c`.`province` = '浙江省'  AND `c`.`market` = '嘉兴市'  AND `c`.`area` = '桐乡市'  AND `c`.`town` = '濮院镇'  AND `c`.`cid` IN ('335','337','336','338','339','39836','39837')  AND `c`.`province` = '浙江省'  AND `c`.`market` = '嘉兴市'  AND `c`.`area` = '桐乡市'  AND `c`.`town` = '濮院镇' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005881s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007433s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT c.res_time,c.uid,c.id,u.headimg,c.name,u.nickname,c.detail,c.visitors,c.comment,c.tel,
+            date_format(c.create_time,"%H:%i") time,c.create_time,concat_ws("",c.province,c.market,c.area,c.town) address FROM `consult_company` `c` INNER JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1'  AND `c`.`pcid` = '333'  AND `c`.`cid` = '335'  AND `c`.`province` = '浙江省'  AND `c`.`market` = '嘉兴市'  AND `c`.`area` = '桐乡市'  AND `c`.`town` = '濮院镇'  AND `c`.`cid` IN ('335','337','336','338','339','39836','39837')  AND `c`.`province` = '浙江省'  AND `c`.`market` = '嘉兴市'  AND `c`.`area` = '桐乡市' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005456s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007686s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT c.res_time,c.uid,c.id,u.headimg,c.name,u.nickname,c.detail,c.visitors,c.comment,c.tel,
+            date_format(c.create_time,"%H:%i") time,c.create_time,concat_ws("",c.province,c.market,c.area,c.town) address FROM `consult_company` `c` INNER JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1'  AND `c`.`pcid` = '333'  AND `c`.`cid` = '335'  AND `c`.`province` = '浙江省'  AND `c`.`market` = '嘉兴市'  AND `c`.`area` = '桐乡市'  AND `c`.`town` = '濮院镇'  AND `c`.`cid` IN ('335','337','336','338','339','39836','39837')  AND `c`.`province` = '浙江省'  AND `c`.`market` = '嘉兴市' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005832s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007605s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT c.res_time,c.uid,c.id,u.headimg,c.name,u.nickname,c.detail,c.visitors,c.comment,c.tel,
+            date_format(c.create_time,"%H:%i") time,c.create_time,concat_ws("",c.province,c.market,c.area,c.town) address FROM `consult_company` `c` INNER JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1'  AND `c`.`pcid` = '333'  AND `c`.`cid` = '335'  AND `c`.`province` = '浙江省'  AND `c`.`market` = '嘉兴市'  AND `c`.`area` = '桐乡市'  AND `c`.`town` = '濮院镇'  AND `c`.`cid` IN ('335','337','336','338','339','39836','39837')  AND `c`.`province` = '浙江省' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005734s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.008027s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT c.res_time,c.uid,c.id,u.headimg,c.name,u.nickname,c.detail,c.visitors,c.comment,c.tel,
+            date_format(c.create_time,"%H:%i") time,c.create_time,concat_ws("",c.province,c.market,c.area,c.town) address FROM `consult_company` `c` INNER JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1'  AND `c`.`pcid` = '333'  AND `c`.`cid` = '335'  AND `c`.`province` = '浙江省'  AND `c`.`market` = '嘉兴市'  AND `c`.`area` = '桐乡市'  AND `c`.`town` = '濮院镇'  AND `c`.`cid` IN ('335','337','336','338','339','39836','39837') ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005772s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007779s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_collect` [ RunTime:0.005541s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_collect` WHERE  `uid` = 870  AND `type` = '1'  AND `status` = '1'  AND `cid` IN ('') [ RunTime:0.005408s ]
+---------------------------------------------------------------
+[2020-04-14T14:51:34+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007585s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005768s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005169s ]
+---------------------------------------------------------------
+[2020-04-14T14:51:34+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007822s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005684s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005119s ]
+---------------------------------------------------------------
+[2020-04-14T14:51:35+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/indexs/index
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007679s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005621s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005151s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007691s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_banner` [ RunTime:0.005605s ]
+[ sql ] [ SQL ] SELECT `id`,cover img FROM `consult_banner` WHERE  `type` = '2'  AND `status` = '1'  AND `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇' ORDER BY `sort` DESC [ RunTime:0.005103s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007402s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_cls` [ RunTime:0.005580s ]
+[ sql ] [ SQL ] SELECT `id`,`title`,`icon` FROM `consult_cls` WHERE  `type` = '2'  AND `pid` = 0  AND `status` = '1'  AND `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇'  AND `town_show` = 1 ORDER BY `sort` DESC [ RunTime:0.005008s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007390s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `pid` IN (548)  AND `status` = '1'  AND `type` = '2'  AND `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇'  AND `town_show` = 1 [ RunTime:0.005061s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007800s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `type` = '2'  AND `pid` = 0  AND `fg` = '1'  AND `fg_type` = '4'  AND `shows` = '1' [ RunTime:0.005253s ]
+---------------------------------------------------------------
+[2020-04-14T15:09:37+08:00] 113.118.184.201 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007532s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005571s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 57 LIMIT 1 [ RunTime:0.005036s ]
+---------------------------------------------------------------
+[2020-04-14T15:09:37+08:00] 113.118.184.201 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007501s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005545s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 57 LIMIT 1 [ RunTime:0.005089s ]
+---------------------------------------------------------------
+[2020-04-14T15:09:38+08:00] 113.118.184.201 POST chengzhenzixun.zx-xcx.com/api/information/information
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007472s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005508s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 57 LIMIT 1 [ RunTime:0.005996s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007381s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_information` [ RunTime:0.005548s ]
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005238s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007673s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_cls` [ RunTime:0.005542s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  ( pid <> "" )  AND `status` = '1'  AND `type` = '2'  AND `a_show` = 1 ORDER BY `sort` DESC [ RunTime:0.011416s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007468s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `type` = '2'  AND `fg` = '1'  AND `fg_type` = '1'  AND `shows` = '1' [ RunTime:0.007413s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007578s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1'  AND `c`.`cid` IN ('591','596','600','604','592','597','601','605','593','598','602','606','995','1399','563','568','572','576','564','569','573','577','565','570','574','578','566','529','534','538','542','530','535','539','543','531','536','540','544','532','514','501','506','510','515','502','507','511','512','516','503','508','504','471','476','480','484','472','477','481','485','473','478','482','486','474','443','448','452','456','444','449','453','457','445','450','454','458','446','1190','1195','1198','1202','1191','1196','1199','1203','1192','1200','1204','1193','1160','1166','1170','1174','1162','1167','1171','1175','1163','1168','1172','1176','1164','1130','1135','1140','1145','1131','1136','1141','1146','1132','1137','1142','1147','1133','413','418','422','426','414','419','423','427','415','420','424','428','416','1101','1106','1110','1114','1102','1107','1111','1115','1103','1108','1112','1116','1104','1073','1078','1082','1086','1074','1079','1083','1087','1075','1080','1084','1088','1076','1045','1050','1054','1058','1046','1051','1055','1059','1047','1052','1056','1060','1048','1026','1030','1017','1022','1027','1031','1018','1023','1024','1028','1032','1019','1020','988','993','997','1001','989','994','998','1002','990','999','1003','991','960','965','969','973','961','966','970','974','962','967','971','975','963','932','937','941','945','933','938','942','946','934','939','943','947','935','904','909','913','917','905','910','914','918','906','911','915','919','907','875','881','885','889','877','882','886','890','878','883','887','891','879','384','389','393','397','385','390','394','398','386','391','395','399','387','843','848','852','856','844','849','853','857','845','850','854','858','846','815','820','824','828','816','821','825','829','817','822','826','830','818','787','792','796','800','788','793','797','801','789','794','798','802','790','772','758','763','767','768','773','759','764','769','774','760','765','761','730','735','739','743','731','736','740','744','732','737','741','745','733','702','707','711','715','703','708','712','716','704','709','713','717','705','676','681','684','688','677','682','685','689','678','686','690','679','648','653','657','661','649','654','658','662','650','655','659','663','651','619','624','628','633','620','625','629','634','621','626','631','635','622','356','361','365','369','357','362','366','370','358','363','367','371','359','258','1294','273','1297','277','1301','1303','281','549','269','1295','274','1298','278','1302','1304','282','550','270','1296','275','1299','279','1305','283','271','1300','39847','39861','39842','39846','39851','39860','39866','39841','39845','39850','39859','39864','39867','39840','39844','39849','39858','39863','39868','39852','39853','39854','39855','39856') ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.010559s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007741s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_collect` [ RunTime:0.005613s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_collect` WHERE  `uid` = 57  AND `type` = '2'  AND `status` = '1'  AND `cid` IN (356,355,354,353,349,344) [ RunTime:0.005866s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007517s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_system` [ RunTime:0.005525s ]
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` LIMIT 1 [ RunTime:0.006935s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007369s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` LIMIT 1 [ RunTime:0.005070s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007661s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` LIMIT 1 [ RunTime:0.005049s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007366s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` LIMIT 1 [ RunTime:0.004906s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007595s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` LIMIT 1 [ RunTime:0.005009s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007645s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` LIMIT 1 [ RunTime:0.005137s ]
+---------------------------------------------------------------
+[2020-04-14T15:09:45+08:00] 113.118.184.201 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007911s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005970s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 57 LIMIT 1 [ RunTime:0.005338s ]
+---------------------------------------------------------------
+[2020-04-14T15:09:47+08:00] 113.118.184.201 POST chengzhenzixun.zx-xcx.com/api/information/information
+[ sql ] [ DB ] CONNECT:[ UseTime:0.008753s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005927s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 57 LIMIT 1 [ RunTime:0.011829s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.009026s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_information` [ RunTime:0.014415s ]
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.006359s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.012303s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_cls` [ RunTime:0.006406s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  ( pid <> "" )  AND `status` = '1'  AND `type` = '2'  AND `a_show` = 1 ORDER BY `sort` DESC [ RunTime:0.010326s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.008288s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `type` = '2'  AND `fg` = '1'  AND `fg_type` = '1'  AND `shows` = '1' [ RunTime:0.014760s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.013480s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1'  AND `c`.`cid` IN ('591','596','600','604','592','597','601','605','593','598','602','606','995','1399','563','568','572','576','564','569','573','577','565','570','574','578','566','529','534','538','542','530','535','539','543','531','536','540','544','532','514','501','506','510','515','502','507','511','512','516','503','508','504','471','476','480','484','472','477','481','485','473','478','482','486','474','443','448','452','456','444','449','453','457','445','450','454','458','446','1190','1195','1198','1202','1191','1196','1199','1203','1192','1200','1204','1193','1160','1166','1170','1174','1162','1167','1171','1175','1163','1168','1172','1176','1164','1130','1135','1140','1145','1131','1136','1141','1146','1132','1137','1142','1147','1133','413','418','422','426','414','419','423','427','415','420','424','428','416','1101','1106','1110','1114','1102','1107','1111','1115','1103','1108','1112','1116','1104','1073','1078','1082','1086','1074','1079','1083','1087','1075','1080','1084','1088','1076','1045','1050','1054','1058','1046','1051','1055','1059','1047','1052','1056','1060','1048','1026','1030','1017','1022','1027','1031','1018','1023','1024','1028','1032','1019','1020','988','993','997','1001','989','994','998','1002','990','999','1003','991','960','965','969','973','961','966','970','974','962','967','971','975','963','932','937','941','945','933','938','942','946','934','939','943','947','935','904','909','913','917','905','910','914','918','906','911','915','919','907','875','881','885','889','877','882','886','890','878','883','887','891','879','384','389','393','397','385','390','394','398','386','391','395','399','387','843','848','852','856','844','849','853','857','845','850','854','858','846','815','820','824','828','816','821','825','829','817','822','826','830','818','787','792','796','800','788','793','797','801','789','794','798','802','790','772','758','763','767','768','773','759','764','769','774','760','765','761','730','735','739','743','731','736','740','744','732','737','741','745','733','702','707','711','715','703','708','712','716','704','709','713','717','705','676','681','684','688','677','682','685','689','678','686','690','679','648','653','657','661','649','654','658','662','650','655','659','663','651','619','624','628','633','620','625','629','634','621','626','631','635','622','356','361','365','369','357','362','366','370','358','363','367','371','359','258','1294','273','1297','277','1301','1303','281','549','269','1295','274','1298','278','1302','1304','282','550','270','1296','275','1299','279','1305','283','271','1300','39847','39861','39842','39846','39851','39860','39866','39841','39845','39850','39859','39864','39867','39840','39844','39849','39858','39863','39868','39852','39853','39854','39855','39856') ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.011012s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.015923s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_collect` [ RunTime:0.006368s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_collect` WHERE  `uid` = 57  AND `type` = '2'  AND `status` = '1'  AND `cid` IN (356,355,354,353,349,344) [ RunTime:0.005343s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007748s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_system` [ RunTime:0.005659s ]
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` LIMIT 1 [ RunTime:0.005065s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007826s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` LIMIT 1 [ RunTime:0.005064s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007683s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` LIMIT 1 [ RunTime:0.005034s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007569s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` LIMIT 1 [ RunTime:0.005029s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007374s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` LIMIT 1 [ RunTime:0.004932s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007607s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` LIMIT 1 [ RunTime:0.005068s ]
+---------------------------------------------------------------
+[2020-04-14T15:09:55+08:00] 113.118.184.201 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007442s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005856s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 57 LIMIT 1 [ RunTime:0.005134s ]
+---------------------------------------------------------------
+[2020-04-14T15:09:56+08:00] 113.118.184.201 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007696s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005531s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 57 LIMIT 1 [ RunTime:0.005152s ]
+---------------------------------------------------------------
+[2020-04-14T15:09:56+08:00] 113.118.184.201 POST chengzhenzixun.zx-xcx.com/api/indexs/index
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007834s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005896s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 57 LIMIT 1 [ RunTime:0.005265s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007903s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_banner` [ RunTime:0.005849s ]
+[ sql ] [ SQL ] SELECT `id`,cover img FROM `consult_banner` WHERE  `type` = '2'  AND `status` = '1' ORDER BY `sort` DESC [ RunTime:0.005214s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007622s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_cls` [ RunTime:0.005670s ]
+[ sql ] [ SQL ] SELECT `id`,`title`,`icon` FROM `consult_cls` WHERE  `type` = '2'  AND `pid` = 0  AND `status` = '1'  AND `a_show` = 1 ORDER BY `sort` DESC [ RunTime:0.007441s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007520s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `pid` IN (590,595,599,603,562,567,571,575,528,533,537,541,500,505,509,513,470,475,479,483,442,447,451,455,1189,1194,1197,1201,1159,1165,1169,1173,1129,1134,1139,1144,412,417,421,425,1100,1105,1109,1113,1072,1077,1081,1085,1044,1049,1053,1057,1016,1021,1025,1029,987,992,996,1000,959,964,968,972,931,936,940,944,903,908,912,916,874,880,884,888,383,388,392,396,842,847,851,855,814,819,823,827,786,791,795,799,757,762,766,771,729,734,738,742,701,706,710,714,675,680,683,687,647,652,656,660,618,623,627,632,355,360,364,368,1290,1291,1292,1293,548,257,272,276,280,39865,39862,39857,39848,39843,39839)  AND `status` = '1'  AND `type` = '2'  AND `a_show` = 1 [ RunTime:0.010595s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007395s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `type` = '2'  AND `pid` = 0  AND `fg` = '1'  AND `fg_type` = '1'  AND `shows` = '1' [ RunTime:0.005019s ]
+---------------------------------------------------------------
+[2020-04-14T15:10:02+08:00] 113.118.184.201 POST chengzhenzixun.zx-xcx.com/api/information/detail
+[ sql ] [ DB ] CONNECT:[ UseTime:0.035841s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.017585s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 57 LIMIT 1 [ RunTime:0.009338s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.024537s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_information` [ RunTime:0.017375s ]
+[ sql ] [ SQL ] SELECT 
+            c.create_time,c.status,c.province,c.market,c.area,c.town,c.address,c.uid,c.id,c.res_time,
+            c.img,c.keyword,c.detail,c.visitors,c.comment,
+            case 
+            when c.pub_type=1 then a.username 
+            when c.pub_type=2 then u.nickname 
+            end nickname,
+            case 
+            when c.pub_type=1 then a.headimg 
+            when c.pub_type=2 then u.headimg 
+            end headimg,
+            c.tel,date_format("%m-%d %H:%i",c.create_time) time FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`estatus` = '1'  AND `c`.`id` = '353' LIMIT 1 [ RunTime:0.018781s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.009777s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] UPDATE `consult_information`  SET `visitors` = `visitors` + 1  WHERE  `id` = 353 [ RunTime:0.013690s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.010776s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_collect` [ RunTime:0.010432s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_collect` WHERE  `uid` = 57  AND `type` = '2'  AND `cid` = 353  AND `status` = '1' LIMIT 1 [ RunTime:0.011028s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.010219s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_system` [ RunTime:0.005797s ]
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` LIMIT 1 [ RunTime:0.005417s ]
+---------------------------------------------------------------
+[2020-04-14T15:10:04+08:00] 113.118.184.201 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007604s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005588s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 57 LIMIT 1 [ RunTime:0.005141s ]
+---------------------------------------------------------------
+[2020-04-14T15:10:04+08:00] 113.118.184.201 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007420s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005341s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 57 LIMIT 1 [ RunTime:0.004978s ]
+---------------------------------------------------------------
+[2020-04-14T15:10:04+08:00] 113.118.184.201 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007642s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005602s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 57 LIMIT 1 [ RunTime:0.005213s ]
+---------------------------------------------------------------
+[2020-04-14T15:10:09+08:00] 113.118.184.201 POST chengzhenzixun.zx-xcx.com/api/information/information
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007811s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005780s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 57 LIMIT 1 [ RunTime:0.005303s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007659s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_information` [ RunTime:0.005617s ]
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 6,6 [ RunTime:0.005734s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007585s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_cls` [ RunTime:0.005457s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  ( pid <> "" )  AND `status` = '1'  AND `type` = '2'  AND `a_show` = 1 ORDER BY `sort` DESC [ RunTime:0.010123s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007512s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `type` = '2'  AND `fg` = '1'  AND `fg_type` = '1'  AND `shows` = '1' [ RunTime:0.005060s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007387s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1'  AND `c`.`cid` IN ('591','596','600','604','592','597','601','605','593','598','602','606','995','1399','563','568','572','576','564','569','573','577','565','570','574','578','566','529','534','538','542','530','535','539','543','531','536','540','544','532','514','501','506','510','515','502','507','511','512','516','503','508','504','471','476','480','484','472','477','481','485','473','478','482','486','474','443','448','452','456','444','449','453','457','445','450','454','458','446','1190','1195','1198','1202','1191','1196','1199','1203','1192','1200','1204','1193','1160','1166','1170','1174','1162','1167','1171','1175','1163','1168','1172','1176','1164','1130','1135','1140','1145','1131','1136','1141','1146','1132','1137','1142','1147','1133','413','418','422','426','414','419','423','427','415','420','424','428','416','1101','1106','1110','1114','1102','1107','1111','1115','1103','1108','1112','1116','1104','1073','1078','1082','1086','1074','1079','1083','1087','1075','1080','1084','1088','1076','1045','1050','1054','1058','1046','1051','1055','1059','1047','1052','1056','1060','1048','1026','1030','1017','1022','1027','1031','1018','1023','1024','1028','1032','1019','1020','988','993','997','1001','989','994','998','1002','990','999','1003','991','960','965','969','973','961','966','970','974','962','967','971','975','963','932','937','941','945','933','938','942','946','934','939','943','947','935','904','909','913','917','905','910','914','918','906','911','915','919','907','875','881','885','889','877','882','886','890','878','883','887','891','879','384','389','393','397','385','390','394','398','386','391','395','399','387','843','848','852','856','844','849','853','857','845','850','854','858','846','815','820','824','828','816','821','825','829','817','822','826','830','818','787','792','796','800','788','793','797','801','789','794','798','802','790','772','758','763','767','768','773','759','764','769','774','760','765','761','730','735','739','743','731','736','740','744','732','737','741','745','733','702','707','711','715','703','708','712','716','704','709','713','717','705','676','681','684','688','677','682','685','689','678','686','690','679','648','653','657','661','649','654','658','662','650','655','659','663','651','619','624','628','633','620','625','629','634','621','626','631','635','622','356','361','365','369','357','362','366','370','358','363','367','371','359','258','1294','273','1297','277','1301','1303','281','549','269','1295','274','1298','278','1302','1304','282','550','270','1296','275','1299','279','1305','283','271','1300','39847','39861','39842','39846','39851','39860','39866','39841','39845','39850','39859','39864','39867','39840','39844','39849','39858','39863','39868','39852','39853','39854','39855','39856') ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 6,6 [ RunTime:0.008220s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007505s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_collect` [ RunTime:0.005418s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_collect` WHERE  `uid` = 57  AND `type` = '2'  AND `status` = '1'  AND `cid` IN (343,342,339,338,337,336) [ RunTime:0.005217s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007717s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_system` [ RunTime:0.005568s ]
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` LIMIT 1 [ RunTime:0.005130s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007497s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` LIMIT 1 [ RunTime:0.004984s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007667s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` LIMIT 1 [ RunTime:0.005019s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007551s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` LIMIT 1 [ RunTime:0.005093s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007608s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` LIMIT 1 [ RunTime:0.005079s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007719s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` LIMIT 1 [ RunTime:0.005067s ]
+---------------------------------------------------------------
+[2020-04-14T15:10:15+08:00] 113.118.184.201 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007662s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005547s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 57 LIMIT 1 [ RunTime:0.005171s ]
+---------------------------------------------------------------
+[2020-04-14T15:10:16+08:00] 113.118.184.201 POST chengzhenzixun.zx-xcx.com/api/indexs/index
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007961s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005900s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 57 LIMIT 1 [ RunTime:0.005084s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.008586s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_banner` [ RunTime:0.005810s ]
+[ sql ] [ SQL ] SELECT `id`,cover img FROM `consult_banner` WHERE  `type` = '2'  AND `status` = '1' ORDER BY `sort` DESC [ RunTime:0.005127s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007472s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_cls` [ RunTime:0.005263s ]
+[ sql ] [ SQL ] SELECT `id`,`title`,`icon` FROM `consult_cls` WHERE  `type` = '2'  AND `pid` = 0  AND `status` = '1'  AND `a_show` = 1 ORDER BY `sort` DESC [ RunTime:0.007306s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007534s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `pid` IN (590,595,599,603,562,567,571,575,528,533,537,541,500,505,509,513,470,475,479,483,442,447,451,455,1189,1194,1197,1201,1159,1165,1169,1173,1129,1134,1139,1144,412,417,421,425,1100,1105,1109,1113,1072,1077,1081,1085,1044,1049,1053,1057,1016,1021,1025,1029,987,992,996,1000,959,964,968,972,931,936,940,944,903,908,912,916,874,880,884,888,383,388,392,396,842,847,851,855,814,819,823,827,786,791,795,799,757,762,766,771,729,734,738,742,701,706,710,714,675,680,683,687,647,652,656,660,618,623,627,632,355,360,364,368,1290,1291,1292,1293,548,257,272,276,280,39865,39862,39857,39848,39843,39839)  AND `status` = '1'  AND `type` = '2'  AND `a_show` = 1 [ RunTime:0.010559s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007577s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `type` = '2'  AND `pid` = 0  AND `fg` = '1'  AND `fg_type` = '1'  AND `shows` = '1' [ RunTime:0.005226s ]
+---------------------------------------------------------------
+[2020-04-14T15:10:16+08:00] 113.118.184.201 POST chengzhenzixun.zx-xcx.com/api/information/information
+[ sql ] [ DB ] CONNECT:[ UseTime:0.008094s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005656s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 57 LIMIT 1 [ RunTime:0.005272s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007767s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_information` [ RunTime:0.005625s ]
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.006834s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007466s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_cls` [ RunTime:0.005428s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  ( pid <> "" )  AND `status` = '1'  AND `type` = '2'  AND `a_show` = 1 ORDER BY `sort` DESC [ RunTime:0.010133s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007616s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `type` = '2'  AND `fg` = '1'  AND `fg_type` = '1'  AND `shows` = '1' [ RunTime:0.005140s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007717s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1'  AND `c`.`cid` IN ('591','596','600','604','592','597','601','605','593','598','602','606','995','1399','563','568','572','576','564','569','573','577','565','570','574','578','566','529','534','538','542','530','535','539','543','531','536','540','544','532','514','501','506','510','515','502','507','511','512','516','503','508','504','471','476','480','484','472','477','481','485','473','478','482','486','474','443','448','452','456','444','449','453','457','445','450','454','458','446','1190','1195','1198','1202','1191','1196','1199','1203','1192','1200','1204','1193','1160','1166','1170','1174','1162','1167','1171','1175','1163','1168','1172','1176','1164','1130','1135','1140','1145','1131','1136','1141','1146','1132','1137','1142','1147','1133','413','418','422','426','414','419','423','427','415','420','424','428','416','1101','1106','1110','1114','1102','1107','1111','1115','1103','1108','1112','1116','1104','1073','1078','1082','1086','1074','1079','1083','1087','1075','1080','1084','1088','1076','1045','1050','1054','1058','1046','1051','1055','1059','1047','1052','1056','1060','1048','1026','1030','1017','1022','1027','1031','1018','1023','1024','1028','1032','1019','1020','988','993','997','1001','989','994','998','1002','990','999','1003','991','960','965','969','973','961','966','970','974','962','967','971','975','963','932','937','941','945','933','938','942','946','934','939','943','947','935','904','909','913','917','905','910','914','918','906','911','915','919','907','875','881','885','889','877','882','886','890','878','883','887','891','879','384','389','393','397','385','390','394','398','386','391','395','399','387','843','848','852','856','844','849','853','857','845','850','854','858','846','815','820','824','828','816','821','825','829','817','822','826','830','818','787','792','796','800','788','793','797','801','789','794','798','802','790','772','758','763','767','768','773','759','764','769','774','760','765','761','730','735','739','743','731','736','740','744','732','737','741','745','733','702','707','711','715','703','708','712','716','704','709','713','717','705','676','681','684','688','677','682','685','689','678','686','690','679','648','653','657','661','649','654','658','662','650','655','659','663','651','619','624','628','633','620','625','629','634','621','626','631','635','622','356','361','365','369','357','362','366','370','358','363','367','371','359','258','1294','273','1297','277','1301','1303','281','549','269','1295','274','1298','278','1302','1304','282','550','270','1296','275','1299','279','1305','283','271','1300','39847','39861','39842','39846','39851','39860','39866','39841','39845','39850','39859','39864','39867','39840','39844','39849','39858','39863','39868','39852','39853','39854','39855','39856') ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.008881s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007541s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_collect` [ RunTime:0.005420s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_collect` WHERE  `uid` = 57  AND `type` = '2'  AND `status` = '1'  AND `cid` IN (356,355,354,353,349,344) [ RunTime:0.005021s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007688s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_system` [ RunTime:0.005534s ]
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` LIMIT 1 [ RunTime:0.005070s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007975s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` LIMIT 1 [ RunTime:0.004960s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007556s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` LIMIT 1 [ RunTime:0.005034s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007344s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` LIMIT 1 [ RunTime:0.004825s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007654s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` LIMIT 1 [ RunTime:0.005115s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007714s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` LIMIT 1 [ RunTime:0.005497s ]
+---------------------------------------------------------------
+[2020-04-14T15:11:24+08:00] 113.118.184.201 POST chengzhenzixun.zx-xcx.com/api/information/information
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007394s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005377s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 57 LIMIT 1 [ RunTime:0.005052s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007395s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_information` [ RunTime:0.005388s ]
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005231s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007664s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_cls` [ RunTime:0.005582s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  ( pid <> "" )  AND `status` = '1'  AND `type` = '2'  AND `a_show` = 1 ORDER BY `sort` DESC [ RunTime:0.010317s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007317s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `type` = '2'  AND `fg` = '1'  AND `fg_type` = '1'  AND `shows` = '1' [ RunTime:0.005094s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007745s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1'  AND `c`.`cid` IN ('591','596','600','604','592','597','601','605','593','598','602','606','995','1399','563','568','572','576','564','569','573','577','565','570','574','578','566','529','534','538','542','530','535','539','543','531','536','540','544','532','514','501','506','510','515','502','507','511','512','516','503','508','504','471','476','480','484','472','477','481','485','473','478','482','486','474','443','448','452','456','444','449','453','457','445','450','454','458','446','1190','1195','1198','1202','1191','1196','1199','1203','1192','1200','1204','1193','1160','1166','1170','1174','1162','1167','1171','1175','1163','1168','1172','1176','1164','1130','1135','1140','1145','1131','1136','1141','1146','1132','1137','1142','1147','1133','413','418','422','426','414','419','423','427','415','420','424','428','416','1101','1106','1110','1114','1102','1107','1111','1115','1103','1108','1112','1116','1104','1073','1078','1082','1086','1074','1079','1083','1087','1075','1080','1084','1088','1076','1045','1050','1054','1058','1046','1051','1055','1059','1047','1052','1056','1060','1048','1026','1030','1017','1022','1027','1031','1018','1023','1024','1028','1032','1019','1020','988','993','997','1001','989','994','998','1002','990','999','1003','991','960','965','969','973','961','966','970','974','962','967','971','975','963','932','937','941','945','933','938','942','946','934','939','943','947','935','904','909','913','917','905','910','914','918','906','911','915','919','907','875','881','885','889','877','882','886','890','878','883','887','891','879','384','389','393','397','385','390','394','398','386','391','395','399','387','843','848','852','856','844','849','853','857','845','850','854','858','846','815','820','824','828','816','821','825','829','817','822','826','830','818','787','792','796','800','788','793','797','801','789','794','798','802','790','772','758','763','767','768','773','759','764','769','774','760','765','761','730','735','739','743','731','736','740','744','732','737','741','745','733','702','707','711','715','703','708','712','716','704','709','713','717','705','676','681','684','688','677','682','685','689','678','686','690','679','648','653','657','661','649','654','658','662','650','655','659','663','651','619','624','628','633','620','625','629','634','621','626','631','635','622','356','361','365','369','357','362','366','370','358','363','367','371','359','258','1294','273','1297','277','1301','1303','281','549','269','1295','274','1298','278','1302','1304','282','550','270','1296','275','1299','279','1305','283','271','1300','39847','39861','39842','39846','39851','39860','39866','39841','39845','39850','39859','39864','39867','39840','39844','39849','39858','39863','39868','39852','39853','39854','39855','39856') ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.009427s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007365s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_collect` [ RunTime:0.005389s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_collect` WHERE  `uid` = 57  AND `type` = '2'  AND `status` = '1'  AND `cid` IN (356,355,354,353,349,344) [ RunTime:0.004990s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007625s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_system` [ RunTime:0.005603s ]
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` LIMIT 1 [ RunTime:0.005086s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007452s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` LIMIT 1 [ RunTime:0.004812s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007550s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` LIMIT 1 [ RunTime:0.004984s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.008632s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` LIMIT 1 [ RunTime:0.005088s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007505s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` LIMIT 1 [ RunTime:0.004931s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007569s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` LIMIT 1 [ RunTime:0.005044s ]
+---------------------------------------------------------------
+[2020-04-14T15:23:38+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007812s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005735s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005240s ]
+---------------------------------------------------------------
+[2020-04-14T15:23:40+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/information/information
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007386s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005412s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005018s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007611s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_information` [ RunTime:0.005481s ]
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005273s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007458s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_cls` [ RunTime:0.005326s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  ( pid <> "" )  AND `status` = '1'  AND `type` = '2'  AND `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇'  AND `town_show` = 1 ORDER BY `sort` DESC [ RunTime:0.005067s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007268s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `type` = '2'  AND `fg` = '1'  AND `fg_type` = '4'  AND `shows` = '1' [ RunTime:0.004974s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007660s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1'  AND `c`.`cid` IN ('549','550','39839','39840','39841','39842','39843','39844','39845','39846','39847','39848','39857','39858','39859','39860','39861','39862','39863','39864','39865','39866','39867','39868')  AND `c`.`province` = '浙江省'  AND `c`.`market` = '嘉兴市'  AND `c`.`area` = '桐乡市'  AND `c`.`town` = '濮院镇' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.008540s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007661s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_collect` [ RunTime:0.005448s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_collect` WHERE  `uid` = 870  AND `type` = '2'  AND `status` = '1'  AND `cid` IN (356,353,349,333,332) [ RunTime:0.005180s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007593s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_system` [ RunTime:0.005465s ]
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` WHERE  `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇' LIMIT 1 [ RunTime:0.005160s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007302s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` WHERE  `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇' LIMIT 1 [ RunTime:0.004837s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007450s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` WHERE  `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇' LIMIT 1 [ RunTime:0.004890s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007301s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` WHERE  `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇' LIMIT 1 [ RunTime:0.004897s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007570s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` WHERE  `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇' LIMIT 1 [ RunTime:0.004984s ]
+---------------------------------------------------------------
+[2020-04-14T15:23:52+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007539s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005626s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005095s ]
+---------------------------------------------------------------
+[2020-04-14T15:27:26+08:00] 124.160.212.187 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007723s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005610s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005113s ]
+---------------------------------------------------------------
+[2020-04-14T15:27:39+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007615s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005651s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005090s ]
+---------------------------------------------------------------
+[2020-04-14T15:33:09+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/information/information
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007476s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005559s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005079s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007504s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_information` [ RunTime:0.005644s ]
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005187s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007452s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_cls` [ RunTime:0.005284s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  ( pid <> "" )  AND `status` = '1'  AND `type` = '2'  AND `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇'  AND `town_show` = 1 ORDER BY `sort` DESC [ RunTime:0.005130s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007294s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `type` = '2'  AND `fg` = '1'  AND `fg_type` = '4'  AND `shows` = '1' [ RunTime:0.005064s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007257s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1'  AND `c`.`cid` IN ('549','550','39839','39840','39841','39842','39843','39844','39845','39846','39847','39848','39857','39858','39859','39860','39861','39862','39863','39864','39865','39866','39867','39868')  AND `c`.`province` = '浙江省'  AND `c`.`market` = '嘉兴市'  AND `c`.`area` = '桐乡市'  AND `c`.`town` = '濮院镇' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005100s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007394s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_collect` [ RunTime:0.005228s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_collect` WHERE  `uid` = 870  AND `type` = '2'  AND `status` = '1'  AND `cid` IN (356,353,349,333,332) [ RunTime:0.004994s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007184s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_system` [ RunTime:0.005207s ]
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` WHERE  `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇' LIMIT 1 [ RunTime:0.004817s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007327s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` WHERE  `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇' LIMIT 1 [ RunTime:0.004971s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007594s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` WHERE  `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇' LIMIT 1 [ RunTime:0.005102s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007681s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` WHERE  `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇' LIMIT 1 [ RunTime:0.005166s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007488s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` WHERE  `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇' LIMIT 1 [ RunTime:0.004936s ]
+---------------------------------------------------------------
+[2020-04-14T15:35:08+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007462s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005496s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005053s ]
+---------------------------------------------------------------
+[2020-04-14T15:36:43+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007694s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005508s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005080s ]
+---------------------------------------------------------------
+[2020-04-14T15:44:45+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007801s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.006143s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005268s ]
+---------------------------------------------------------------
+[2020-04-14T15:44:45+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007530s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005541s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005084s ]
+---------------------------------------------------------------
+[2020-04-14T15:44:58+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007874s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005815s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005310s ]
+---------------------------------------------------------------
+[2020-04-14T15:44:59+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/indexs/index
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007856s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005659s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005270s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007611s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_banner` [ RunTime:0.005485s ]
+[ sql ] [ SQL ] SELECT `id`,cover img FROM `consult_banner` WHERE  `type` = '2'  AND `status` = '1'  AND `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇' ORDER BY `sort` DESC [ RunTime:0.005098s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007616s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_cls` [ RunTime:0.005561s ]
+[ sql ] [ SQL ] SELECT `id`,`title`,`icon` FROM `consult_cls` WHERE  `type` = '2'  AND `pid` = 0  AND `status` = '1'  AND `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇'  AND `town_show` = 1 ORDER BY `sort` DESC [ RunTime:0.005152s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007491s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `pid` IN (548)  AND `status` = '1'  AND `type` = '2'  AND `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇'  AND `town_show` = 1 [ RunTime:0.005070s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007797s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `type` = '2'  AND `pid` = 0  AND `fg` = '1'  AND `fg_type` = '4'  AND `shows` = '1' [ RunTime:0.005348s ]
+---------------------------------------------------------------
+[2020-04-14T16:12:31+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007651s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005632s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005047s ]
+---------------------------------------------------------------
+[2020-04-14T16:12:32+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007838s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005681s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005255s ]
+---------------------------------------------------------------
+[2020-04-14T16:12:32+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/information/information
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007544s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005498s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005110s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007623s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_information` [ RunTime:0.005577s ]
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005406s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007735s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_cls` [ RunTime:0.005502s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  ( pid <> "" )  AND `status` = '1'  AND `type` = '2'  AND `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇'  AND `town_show` = 1 ORDER BY `sort` DESC [ RunTime:0.005315s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007269s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `type` = '2'  AND `fg` = '1'  AND `fg_type` = '4'  AND `shows` = '1' [ RunTime:0.004949s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007269s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1'  AND `c`.`cid` IN ('549','550','39839','39840','39841','39842','39843','39844','39845','39846','39847','39848','39857','39858','39859','39860','39861','39862','39863','39864','39865','39866','39867','39868')  AND `c`.`province` = '浙江省'  AND `c`.`market` = '嘉兴市'  AND `c`.`area` = '桐乡市'  AND `c`.`town` = '濮院镇' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005141s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007401s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_collect` [ RunTime:0.005323s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_collect` WHERE  `uid` = 870  AND `type` = '2'  AND `status` = '1'  AND `cid` IN (356,353,349,333,332) [ RunTime:0.004978s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007580s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_system` [ RunTime:0.005493s ]
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` WHERE  `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇' LIMIT 1 [ RunTime:0.005055s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007402s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` WHERE  `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇' LIMIT 1 [ RunTime:0.004954s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007666s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` WHERE  `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇' LIMIT 1 [ RunTime:0.005191s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007459s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` WHERE  `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇' LIMIT 1 [ RunTime:0.005034s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007498s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` WHERE  `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇' LIMIT 1 [ RunTime:0.005053s ]
+---------------------------------------------------------------
+[2020-04-14T16:16:41+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007797s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005592s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005129s ]
+---------------------------------------------------------------
+[2020-04-14T16:16:42+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/information/information
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007449s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005476s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005034s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007366s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_information` [ RunTime:0.005365s ]
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005160s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007650s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_cls` [ RunTime:0.005501s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  ( pid <> "" )  AND `status` = '1'  AND `type` = '2'  AND `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇'  AND `town_show` = 1 ORDER BY `sort` DESC [ RunTime:0.005248s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007435s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `type` = '2'  AND `fg` = '1'  AND `fg_type` = '4'  AND `shows` = '1' [ RunTime:0.005071s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007640s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1'  AND `c`.`cid` IN ('549','550','39839','39840','39841','39842','39843','39844','39845','39846','39847','39848','39857','39858','39859','39860','39861','39862','39863','39864','39865','39866','39867','39868')  AND `c`.`province` = '浙江省'  AND `c`.`market` = '嘉兴市'  AND `c`.`area` = '桐乡市'  AND `c`.`town` = '濮院镇' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005568s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007497s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_collect` [ RunTime:0.005394s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_collect` WHERE  `uid` = 870  AND `type` = '2'  AND `status` = '1'  AND `cid` IN (356,353,349,333,332) [ RunTime:0.005035s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007532s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_system` [ RunTime:0.005546s ]
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` WHERE  `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇' LIMIT 1 [ RunTime:0.005123s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007716s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` WHERE  `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇' LIMIT 1 [ RunTime:0.005221s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007597s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` WHERE  `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇' LIMIT 1 [ RunTime:0.005097s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007548s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` WHERE  `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇' LIMIT 1 [ RunTime:0.005142s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007511s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` WHERE  `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇' LIMIT 1 [ RunTime:0.005091s ]
+---------------------------------------------------------------
+[2020-04-14T16:16:47+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007872s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005807s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005313s ]
+---------------------------------------------------------------
+[2020-04-14T16:16:48+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007649s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005520s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005047s ]
+---------------------------------------------------------------
+[2020-04-14T16:16:49+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/information/information
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007308s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005339s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.004966s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007480s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_information` [ RunTime:0.005517s ]
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005298s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007242s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_cls` [ RunTime:0.005181s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  ( pid <> "" )  AND `status` = '1'  AND `type` = '2'  AND `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇'  AND `town_show` = 1 ORDER BY `sort` DESC [ RunTime:0.005187s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007596s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `type` = '2'  AND `fg` = '1'  AND `fg_type` = '4'  AND `shows` = '1' [ RunTime:0.005047s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007742s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1'  AND `c`.`cid` IN ('549','550','39839','39840','39841','39842','39843','39844','39845','39846','39847','39848','39857','39858','39859','39860','39861','39862','39863','39864','39865','39866','39867','39868')  AND `c`.`province` = '浙江省'  AND `c`.`market` = '嘉兴市'  AND `c`.`area` = '桐乡市'  AND `c`.`town` = '濮院镇' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005504s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007499s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_collect` [ RunTime:0.005401s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_collect` WHERE  `uid` = 870  AND `type` = '2'  AND `status` = '1'  AND `cid` IN (356,353,349,333,332) [ RunTime:0.005067s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007433s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_system` [ RunTime:0.005361s ]
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` WHERE  `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇' LIMIT 1 [ RunTime:0.004900s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007716s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` WHERE  `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇' LIMIT 1 [ RunTime:0.005172s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007569s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` WHERE  `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇' LIMIT 1 [ RunTime:0.004972s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007596s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` WHERE  `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇' LIMIT 1 [ RunTime:0.005104s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007494s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` WHERE  `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '濮院镇' LIMIT 1 [ RunTime:0.004943s ]
+---------------------------------------------------------------
+[2020-04-14T16:17:03+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/indexs/index
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007633s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005713s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005209s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007444s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_banner` [ RunTime:0.005653s ]
+[ sql ] [ SQL ] SELECT `id`,cover img FROM `consult_banner` WHERE  `type` = '2'  AND `status` = '1'  AND `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '屠甸镇' ORDER BY `sort` DESC [ RunTime:0.005016s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007458s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `id`,cover img FROM `consult_banner` WHERE  `province` = '1'  AND `type` = '2'  AND `status` = '1' ORDER BY `sort` DESC [ RunTime:0.005109s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007749s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_cls` [ RunTime:0.005793s ]
+[ sql ] [ SQL ] SELECT `id`,`title`,`icon` FROM `consult_cls` WHERE  `type` = '2'  AND `pid` = 0  AND `status` = '1'  AND `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '屠甸镇'  AND `town_show` = 1 ORDER BY `sort` DESC [ RunTime:0.005223s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007664s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `id`,`title`,`icon` FROM `consult_cls` WHERE  `type` = '2'  AND `pid` = 0  AND `status` = '1'  AND `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `area_show` = 1 ORDER BY `sort` DESC [ RunTime:0.005095s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007801s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `pid` IN (548)  AND `status` = '1'  AND `type` = '2'  AND `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `area_show` = 1 [ RunTime:0.005238s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007363s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `type` = '2'  AND `pid` = 0  AND `fg` = '1'  AND `fg_type` = '4'  AND `shows` = '1' [ RunTime:0.005064s ]
+---------------------------------------------------------------
+[2020-04-14T16:17:03+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/information/information
+[ sql ] [ DB ] CONNECT:[ UseTime:0.009845s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005791s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005229s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007784s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_information` [ RunTime:0.005680s ]
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005628s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.008874s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_cls` [ RunTime:0.005778s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  ( pid <> "" )  AND `status` = '1'  AND `type` = '2'  AND `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '屠甸镇'  AND `town_show` = 1 ORDER BY `sort` DESC [ RunTime:0.005251s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007532s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `type` = '2'  AND `fg` = '1'  AND `fg_type` = '4'  AND `shows` = '1' [ RunTime:0.005159s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007850s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1'  AND `c`.`cid` IN ('39839','39840','39841','39842','39843','39844','39845','39846','39847','39848','39857','39858','39859','39860','39861','39862','39863','39864','39865','39866','39867','39868')  AND `c`.`province` = '浙江省'  AND `c`.`market` = '嘉兴市'  AND `c`.`area` = '桐乡市'  AND `c`.`town` = '屠甸镇' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005519s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007553s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_collect` [ RunTime:0.005368s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_collect` WHERE  `uid` = 870  AND `type` = '2'  AND `status` = '1'  AND `cid` IN (355) [ RunTime:0.004940s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007551s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_system` [ RunTime:0.005382s ]
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` WHERE  `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `town` = '屠甸镇' LIMIT 1 [ RunTime:0.004998s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007480s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` WHERE  `province` = '' LIMIT 1 [ RunTime:0.005117s ]
+---------------------------------------------------------------
+[2020-04-14T16:17:11+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007717s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005721s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005257s ]
+---------------------------------------------------------------
+[2020-04-14T16:17:11+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/indexs/index
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007770s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005940s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005268s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007305s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_banner` [ RunTime:0.005210s ]
+[ sql ] [ SQL ] SELECT `id`,cover img FROM `consult_banner` WHERE  `type` = '2'  AND `status` = '1'  AND `province` = '浙江省'  AND `market` = '温州市' ORDER BY `sort` DESC [ RunTime:0.005156s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007389s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_cls` [ RunTime:0.005236s ]
+[ sql ] [ SQL ] SELECT `id`,`title`,`icon` FROM `consult_cls` WHERE  `type` = '2'  AND `pid` = 0  AND `status` = '1'  AND `province` = '浙江省'  AND `market` = '温州市'  AND `mar_show` = 1 ORDER BY `sort` DESC [ RunTime:0.005758s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007622s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `pid` IN (1290,1291,1292,1293)  AND `status` = '1'  AND `type` = '2'  AND `province` = '浙江省'  AND `market` = '温州市'  AND `mar_show` = 1 [ RunTime:0.005439s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007410s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `type` = '2'  AND `pid` = 0  AND `fg` = '1'  AND `fg_type` = '2'  AND `shows` = '1' [ RunTime:0.005964s ]
+---------------------------------------------------------------
+[2020-04-14T16:17:17+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007717s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005545s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005133s ]
+---------------------------------------------------------------
+[2020-04-14T16:17:18+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007656s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005540s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005162s ]
+---------------------------------------------------------------
+[2020-04-14T16:17:18+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007653s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005548s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005147s ]
+---------------------------------------------------------------
+[2020-04-14T16:17:19+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/index/cls
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007528s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005399s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005037s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007685s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_cls` [ RunTime:0.005437s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon` FROM `consult_cls` WHERE  `type` = '2'  AND `status` = '1'  AND `province` = '浙江省'  AND `market` = '温州市'  AND `area` = '龙湾区'  AND `area_show` = 1 ORDER BY `sort` DESC [ RunTime:0.005994s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007607s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon` FROM `consult_cls` WHERE  `type` = '2'  AND `status` = '1'  AND `province` = '浙江省'  AND `market` = '温州市'  AND `mar_show` = 1 ORDER BY `sort` DESC [ RunTime:0.005961s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007689s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon` FROM `consult_cls` WHERE  `fg` = '1'  AND `fg_type` = '3'  AND `shows` = '1'  AND `type` = '2' [ RunTime:0.005798s ]
+---------------------------------------------------------------
+[2020-04-14T16:17:33+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007778s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005656s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005154s ]
+---------------------------------------------------------------
+[2020-04-14T16:17:33+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007892s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005709s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005394s ]
+---------------------------------------------------------------
+[2020-04-14T16:17:34+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/information/information
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007587s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005456s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005074s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007510s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_information` [ RunTime:0.005504s ]
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005797s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007781s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_cls` [ RunTime:0.006098s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  ( pid <> "" )  AND `status` = '1'  AND `type` = '2'  AND `province` = '安徽省'  AND `pro_show` = 1 ORDER BY `sort` DESC [ RunTime:0.006295s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007722s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `type` = '2'  AND `fg` = '1'  AND `fg_type` = '1'  AND `shows` = '1' [ RunTime:0.005077s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007270s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1'  AND `c`.`cid` IN ('995','988','993','997','1001','989','994','998','1002','990','999','1003','991','39852','39853','39854','39855','39856')  AND `c`.`province` = '安徽省' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005572s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007564s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1'  AND `c`.`cid` IN ('995','988','993','997','1001','989','994','998','1002','990','999','1003','991','39852','39853','39854','39855','39856') ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005655s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007580s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_collect` [ RunTime:0.005510s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_collect` WHERE  `uid` = 870  AND `type` = '2'  AND `status` = '1'  AND `cid` IN ('') [ RunTime:0.005093s ]
+---------------------------------------------------------------
+[2020-04-14T16:17:35+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007342s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005368s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.004954s ]
+---------------------------------------------------------------
+[2020-04-14T16:17:35+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/information/information
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007837s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005510s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005160s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007472s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_information` [ RunTime:0.005358s ]
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005295s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007311s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_cls` [ RunTime:0.005312s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  ( pid <> "" )  AND `status` = '1'  AND `type` = '2'  AND `province` = '安徽省'  AND `market` = '芜湖市'  AND `mar_show` = 1 ORDER BY `sort` DESC [ RunTime:0.006034s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007613s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `type` = '2'  AND `fg` = '1'  AND `fg_type` = '2'  AND `shows` = '1' [ RunTime:0.005186s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007440s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1'  AND `c`.`cid` IN ('')  AND `c`.`province` = '安徽省'  AND `c`.`market` = '芜湖市' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005528s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007337s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1'  AND `c`.`cid` IN ('')  AND `c`.`province` = '安徽省' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005401s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007511s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1'  AND `c`.`cid` IN ('') ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005143s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007219s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_collect` [ RunTime:0.005179s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_collect` WHERE  `uid` = 870  AND `type` = '2'  AND `status` = '1'  AND `cid` IN ('') [ RunTime:0.004808s ]
+---------------------------------------------------------------
+[2020-04-14T16:17:36+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007865s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005919s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005441s ]
+---------------------------------------------------------------
+[2020-04-14T16:17:41+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/index/cls
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007338s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005414s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005031s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007662s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_cls` [ RunTime:0.005509s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon` FROM `consult_cls` WHERE  `type` = '1'  AND `status` = '1'  AND `province` = '安徽省'  AND `market` = '芜湖市'  AND `area` = '镜湖区'  AND `area_show` = 1 ORDER BY `sort` DESC [ RunTime:0.006066s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007437s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon` FROM `consult_cls` WHERE  `type` = '1'  AND `status` = '1'  AND `province` = '安徽省'  AND `market` = '芜湖市'  AND `mar_show` = 1 ORDER BY `sort` DESC [ RunTime:0.005804s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007463s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon` FROM `consult_cls` WHERE  `type` = '1'  AND `status` = '1'  AND `province` = '安徽省'  AND `pro_show` = 1 ORDER BY `sort` DESC [ RunTime:0.005789s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007248s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon` FROM `consult_cls` WHERE  `fg` = '1'  AND `fg_type` = '3'  AND `shows` = '1'  AND `type` = '1' [ RunTime:0.005608s ]
+---------------------------------------------------------------
+[2020-04-14T16:17:41+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/company/company
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007689s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005621s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005293s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007730s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_company` [ RunTime:0.005921s ]
+[ sql ] [ SQL ] SELECT c.res_time,c.uid,c.id,u.headimg,c.name,u.nickname,c.detail,c.visitors,c.comment,c.tel,
+            date_format(c.create_time,"%H:%i") time,c.create_time,concat_ws("",c.province,c.market,c.area,c.town) address FROM `consult_company` `c` INNER JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1'  AND `c`.`pcid` = '980'  AND `c`.`cid` = '981'  AND `c`.`province` = '安徽省'  AND `c`.`market` = '芜湖市'  AND `c`.`area` = '镜湖区' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005491s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007639s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_cls` [ RunTime:0.005458s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon` FROM `consult_cls` WHERE  ( pid <> "" )  AND `type` = '1'  AND `status` = '1'  AND `province` = '安徽省'  AND `market` = '芜湖市'  AND `area` = '镜湖区'  AND `area_show` = 1 ORDER BY `sort` DESC [ RunTime:0.005997s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007423s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon` FROM `consult_cls` WHERE  ( pid <> "" )  AND `type` = '1'  AND `status` = '1'  AND `province` = '安徽省'  AND `market` = '芜湖市'  AND `mar_show` = 1 ORDER BY `sort` DESC [ RunTime:0.005835s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007453s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon` FROM `consult_cls` WHERE  ( pid <> "" )  AND `type` = '1'  AND `status` = '1'  AND `province` = '安徽省'  AND `pro_show` = 1 ORDER BY `sort` DESC [ RunTime:0.005859s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007399s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `type` = '1'  AND `fg` = '1'  AND `fg_type` = '3'  AND `shows` = '1' [ RunTime:0.006202s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007729s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT c.res_time,c.uid,c.id,u.headimg,c.name,u.nickname,c.detail,c.visitors,c.comment,c.tel,
+            date_format(c.create_time,"%H:%i") time,c.create_time,concat_ws("",c.province,c.market,c.area,c.town) address FROM `consult_company` `c` INNER JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1'  AND `c`.`pcid` = '980'  AND `c`.`cid` = '981'  AND `c`.`province` = '安徽省'  AND `c`.`market` = '芜湖市'  AND `c`.`area` = '镜湖区'  AND `c`.`cid` IN ('981','985','982','986','983')  AND `c`.`province` = '安徽省'  AND `c`.`market` = '芜湖市'  AND `c`.`area` = '镜湖区' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005498s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007843s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT c.res_time,c.uid,c.id,u.headimg,c.name,u.nickname,c.detail,c.visitors,c.comment,c.tel,
+            date_format(c.create_time,"%H:%i") time,c.create_time,concat_ws("",c.province,c.market,c.area,c.town) address FROM `consult_company` `c` INNER JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1'  AND `c`.`pcid` = '980'  AND `c`.`cid` = '981'  AND `c`.`province` = '安徽省'  AND `c`.`market` = '芜湖市'  AND `c`.`area` = '镜湖区'  AND `c`.`cid` IN ('981','985','982','986','983')  AND `c`.`province` = '安徽省'  AND `c`.`market` = '芜湖市' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005501s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.008087s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT c.res_time,c.uid,c.id,u.headimg,c.name,u.nickname,c.detail,c.visitors,c.comment,c.tel,
+            date_format(c.create_time,"%H:%i") time,c.create_time,concat_ws("",c.province,c.market,c.area,c.town) address FROM `consult_company` `c` INNER JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1'  AND `c`.`pcid` = '980'  AND `c`.`cid` = '981'  AND `c`.`province` = '安徽省'  AND `c`.`market` = '芜湖市'  AND `c`.`area` = '镜湖区'  AND `c`.`cid` IN ('981','985','982','986','983')  AND `c`.`province` = '安徽省' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005346s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007495s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT c.res_time,c.uid,c.id,u.headimg,c.name,u.nickname,c.detail,c.visitors,c.comment,c.tel,
+            date_format(c.create_time,"%H:%i") time,c.create_time,concat_ws("",c.province,c.market,c.area,c.town) address FROM `consult_company` `c` INNER JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1'  AND `c`.`pcid` = '980'  AND `c`.`cid` = '981'  AND `c`.`province` = '安徽省'  AND `c`.`market` = '芜湖市'  AND `c`.`area` = '镜湖区'  AND `c`.`cid` IN ('981','985','982','986','983') ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005309s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007321s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_collect` [ RunTime:0.005217s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_collect` WHERE  `uid` = 870  AND `type` = '1'  AND `status` = '1'  AND `cid` IN ('') [ RunTime:0.004961s ]
+---------------------------------------------------------------
+[2020-04-14T16:17:42+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/index/cls
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007679s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005836s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005190s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007619s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_cls` [ RunTime:0.005448s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon` FROM `consult_cls` WHERE  `type` = '2'  AND `status` = '1'  AND `province` = '安徽省'  AND `market` = '芜湖市'  AND `area` = '镜湖区'  AND `area_show` = 1 ORDER BY `sort` DESC [ RunTime:0.006044s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007710s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon` FROM `consult_cls` WHERE  `type` = '2'  AND `status` = '1'  AND `province` = '安徽省'  AND `market` = '芜湖市'  AND `mar_show` = 1 ORDER BY `sort` DESC [ RunTime:0.006440s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007535s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon` FROM `consult_cls` WHERE  `type` = '2'  AND `status` = '1'  AND `province` = '安徽省'  AND `pro_show` = 1 ORDER BY `sort` DESC [ RunTime:0.005836s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007784s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon` FROM `consult_cls` WHERE  `fg` = '1'  AND `fg_type` = '3'  AND `shows` = '1'  AND `type` = '2' [ RunTime:0.005143s ]
+---------------------------------------------------------------
+[2020-04-14T17:15:26+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/information/information
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007567s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005445s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005059s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007632s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_information` [ RunTime:0.005754s ]
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005424s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007627s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_cls` [ RunTime:0.005469s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  ( pid <> "" )  AND `status` = '1'  AND `type` = '2'  AND `province` = '安徽省'  AND `market` = '芜湖市'  AND `area` = '镜湖区'  AND `area_show` = 1 ORDER BY `sort` DESC [ RunTime:0.005224s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007460s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `type` = '2'  AND `fg` = '1'  AND `fg_type` = '3'  AND `shows` = '1' [ RunTime:0.005081s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007625s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1'  AND `c`.`cid` IN ('')  AND `c`.`province` = '安徽省'  AND `c`.`market` = '芜湖市'  AND `c`.`area` = '镜湖区' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005317s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007548s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1'  AND `c`.`cid` IN ('')  AND `c`.`province` = '安徽省'  AND `c`.`market` = '芜湖市' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005181s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007397s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1'  AND `c`.`cid` IN ('')  AND `c`.`province` = '安徽省' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005165s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007549s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1'  AND `c`.`cid` IN ('') ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005232s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007607s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_collect` [ RunTime:0.005659s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_collect` WHERE  `uid` = 870  AND `type` = '2'  AND `status` = '1'  AND `cid` IN ('') [ RunTime:0.005096s ]
+---------------------------------------------------------------
+[2020-04-14T17:15:58+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007933s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005671s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005303s ]
+---------------------------------------------------------------
+[2020-04-14T17:15:59+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007663s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005703s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005164s ]
+---------------------------------------------------------------
+[2020-04-14T17:15:59+08:00] 122.238.119.70 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007778s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005684s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005130s ]
+---------------------------------------------------------------
+[2020-04-14T17:35:11+08:00] 110.184.133.58 POST chengzhenzixun.zx-xcx.com/api/index/reverse
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007789s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005782s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 899 LIMIT 1 [ RunTime:0.005361s ]
+---------------------------------------------------------------
+[2020-04-14T18:20:27+08:00] 122.238.117.12 POST chengzhenzixun.zx-xcx.com/api/information/information
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007653s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005591s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 870 LIMIT 1 [ RunTime:0.005222s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007676s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_information` [ RunTime:0.005955s ]
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005522s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007353s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_cls` [ RunTime:0.005373s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  ( pid <> "" )  AND `status` = '1'  AND `type` = '2'  AND `province` = '安徽省'  AND `market` = '芜湖市'  AND `area` = '镜湖区'  AND `area_show` = 1 ORDER BY `sort` DESC [ RunTime:0.005007s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007770s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `type` = '2'  AND `fg` = '1'  AND `fg_type` = '3'  AND `shows` = '1' [ RunTime:0.005247s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007572s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1'  AND `c`.`cid` IN ('')  AND `c`.`province` = '安徽省'  AND `c`.`market` = '芜湖市'  AND `c`.`area` = '镜湖区' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005977s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007481s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1'  AND `c`.`cid` IN ('')  AND `c`.`province` = '安徽省'  AND `c`.`market` = '芜湖市' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005696s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007952s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1'  AND `c`.`cid` IN ('')  AND `c`.`province` = '安徽省' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005743s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007573s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1'  AND `c`.`cid` IN ('') ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005250s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007515s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_collect` [ RunTime:0.005418s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_collect` WHERE  `uid` = 870  AND `type` = '2'  AND `status` = '1'  AND `cid` IN ('') [ RunTime:0.005037s ]
+---------------------------------------------------------------
+[2020-04-14T19:08:20+08:00] 122.238.118.253 POST chengzhenzixun.zx-xcx.com/api/index/reverse
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007633s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005677s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 900 LIMIT 1 [ RunTime:0.006087s ]
+---------------------------------------------------------------
+[2020-04-14T19:08:23+08:00] 122.238.118.253 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007976s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005874s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 900 LIMIT 1 [ RunTime:0.005300s ]
+---------------------------------------------------------------
+[2020-04-14T19:08:31+08:00] 122.238.118.253 POST chengzhenzixun.zx-xcx.com/api/indexs/index
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007577s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005728s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 900 LIMIT 1 [ RunTime:0.005246s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007518s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] UPDATE `consult_user`  SET `province` = '浙江省' , `market` = '嘉兴市' , `area` = '桐乡市' , `town` = ''  WHERE  `id` = 900 [ RunTime:0.008448s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007577s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_banner` [ RunTime:0.005730s ]
+[ sql ] [ SQL ] SELECT `id`,cover img FROM `consult_banner` WHERE  `type` = '2'  AND `status` = '1'  AND `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市' ORDER BY `sort` DESC [ RunTime:0.005140s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007660s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_cls` [ RunTime:0.005479s ]
+[ sql ] [ SQL ] SELECT `id`,`title`,`icon` FROM `consult_cls` WHERE  `type` = '2'  AND `pid` = 0  AND `status` = '1'  AND `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `area_show` = 1 ORDER BY `sort` DESC [ RunTime:0.005157s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007501s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `pid` IN (548)  AND `status` = '1'  AND `type` = '2'  AND `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `area_show` = 1 [ RunTime:0.005261s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007848s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `type` = '2'  AND `pid` = 0  AND `fg` = '1'  AND `fg_type` = '3'  AND `shows` = '1' [ RunTime:0.005405s ]
+---------------------------------------------------------------
+[2020-04-14T19:08:31+08:00] 122.238.118.253 POST chengzhenzixun.zx-xcx.com/api/information/information
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007793s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005777s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 900 LIMIT 1 [ RunTime:0.005304s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007464s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_information` [ RunTime:0.005441s ]
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005406s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007480s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_cls` [ RunTime:0.005545s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  ( pid <> "" )  AND `status` = '1'  AND `type` = '2'  AND `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `area_show` = 1 ORDER BY `sort` DESC [ RunTime:0.005182s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007247s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `type` = '2'  AND `fg` = '1'  AND `fg_type` = '3'  AND `shows` = '1' [ RunTime:0.004890s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007836s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT c.uid,c.id,c.keyword,c.detail,c.visitors,c.comment,c.tel,date_format(c.create_time,"%H:%i") time,c.create_time,c.pub_type,
+                case c.pub_type 
+                when 2 then u.nickname
+                when 1 then a.username
+                end nickname,
+                case c.pub_type 
+                when 2 then u.headimg
+                when 1 then a.headimg
+                end headimg,
+                c.res_time,concat_ws("",c.province,c.market,c.area,c.town) address
+             FROM `consult_information` `c` LEFT JOIN `consult_user` `u` ON `u`.`id`=`c`.`uid` LEFT JOIN `consult_admin` `a` ON `a`.`id`=`c`.`uid` WHERE  `c`.`status` = '1'  AND `c`.`estatus` = '1'  AND `c`.`cid` IN ('549','550')  AND `c`.`province` = '浙江省'  AND `c`.`market` = '嘉兴市'  AND `c`.`area` = '桐乡市' ORDER BY `c`.`sort` DESC,`c`.`create_time` DESC LIMIT 0,6 [ RunTime:0.005559s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007257s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_collect` [ RunTime:0.005368s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_collect` WHERE  `uid` = 900  AND `type` = '2'  AND `status` = '1'  AND `cid` IN (303) [ RunTime:0.004835s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007567s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_system` [ RunTime:0.005501s ]
+[ sql ] [ SQL ] SELECT `infor_visitors` FROM `consult_system` WHERE  `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市' LIMIT 1 [ RunTime:0.005080s ]
+---------------------------------------------------------------
+[2020-04-14T19:09:33+08:00] 122.238.118.253 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007748s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005754s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 900 LIMIT 1 [ RunTime:0.005095s ]
+---------------------------------------------------------------
+[2020-04-14T19:09:34+08:00] 122.238.118.253 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007883s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005684s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 900 LIMIT 1 [ RunTime:0.005239s ]
+---------------------------------------------------------------
+[2020-04-14T19:09:52+08:00] 122.238.118.253 POST chengzhenzixun.zx-xcx.com/api/index/cls
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007590s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005502s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 900 LIMIT 1 [ RunTime:0.005132s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007587s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_cls` [ RunTime:0.005528s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon` FROM `consult_cls` WHERE  `type` = '1'  AND `status` = '1'  AND `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `area_show` = 1 ORDER BY `sort` DESC [ RunTime:0.006062s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007520s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon` FROM `consult_cls` WHERE  `fg` = '1'  AND `fg_type` = '3'  AND `shows` = '1'  AND `type` = '1' [ RunTime:0.005097s ]
+---------------------------------------------------------------
+[2020-04-14T19:09:52+08:00] 122.238.118.253 POST chengzhenzixun.zx-xcx.com/api/indexs/index
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007681s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005710s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 900 LIMIT 1 [ RunTime:0.005221s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007853s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] UPDATE `consult_user`  SET `province` = '浙江省' , `market` = '嘉兴市' , `area` = '桐乡市' , `town` = ''  WHERE  `id` = 900 [ RunTime:0.008068s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007735s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_banner` [ RunTime:0.005611s ]
+[ sql ] [ SQL ] SELECT `id`,cover img FROM `consult_banner` WHERE  `type` = '1'  AND `status` = '1'  AND `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市' ORDER BY `sort` DESC [ RunTime:0.005362s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007611s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_cls` [ RunTime:0.005355s ]
+[ sql ] [ SQL ] SELECT `id`,`title`,`icon` FROM `consult_cls` WHERE  `type` = '1'  AND `pid` = 0  AND `status` = '1'  AND `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `area_show` = 1 ORDER BY `sort` DESC [ RunTime:0.006066s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007627s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `pid` IN (333,334)  AND `status` = '1'  AND `type` = '1'  AND `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `area_show` = 1 [ RunTime:0.005428s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007942s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `type` = '1'  AND `pid` = 0  AND `fg` = '1'  AND `fg_type` = '3'  AND `shows` = '1' [ RunTime:0.005312s ]
+---------------------------------------------------------------
+[2020-04-14T19:10:03+08:00] 122.238.118.253 POST chengzhenzixun.zx-xcx.com/api/indexs/address
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007734s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005667s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 900 LIMIT 1 [ RunTime:0.005216s ]
+---------------------------------------------------------------
+[2020-04-14T19:10:08+08:00] 122.238.118.253 POST chengzhenzixun.zx-xcx.com/api/indexs/index
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007543s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_user` [ RunTime:0.005698s ]
+[ sql ] [ SQL ] SELECT * FROM `consult_user` WHERE  `id` = 900 LIMIT 1 [ RunTime:0.005088s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007862s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] UPDATE `consult_user`  SET `province` = '浙江省' , `market` = '嘉兴市' , `area` = '桐乡市' , `town` = ''  WHERE  `id` = 900 [ RunTime:0.010382s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007476s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_banner` [ RunTime:0.005353s ]
+[ sql ] [ SQL ] SELECT `id`,cover img FROM `consult_banner` WHERE  `type` = '1'  AND `status` = '1'  AND `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市' ORDER BY `sort` DESC [ RunTime:0.005022s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007594s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `consult_cls` [ RunTime:0.005450s ]
+[ sql ] [ SQL ] SELECT `id`,`title`,`icon` FROM `consult_cls` WHERE  `type` = '1'  AND `pid` = 0  AND `status` = '1'  AND `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `area_show` = 1 ORDER BY `sort` DESC [ RunTime:0.005076s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007450s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `pid` IN (333,334)  AND `status` = '1'  AND `type` = '1'  AND `province` = '浙江省'  AND `market` = '嘉兴市'  AND `area` = '桐乡市'  AND `area_show` = 1 [ RunTime:0.004990s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007427s ] mysql:host=39.104.207.2;dbname=chengzhenzixun_;charset=utf8
+[ sql ] [ SQL ] SELECT * FROM `consult_cls` WHERE  `type` = '1'  AND `pid` = 0  AND `fg` = '1'  AND `fg_type` = '3'  AND `shows` = '1' [ RunTime:0.004979s ]

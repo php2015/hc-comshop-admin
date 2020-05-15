@@ -1,0 +1,101 @@
+{template '_header'}
+<div class="page-header">当前位置：<span class="text-primary">供应商提现</span></div>
+<div class="page-content">
+	<form action="" method="post" class="form-horizontal form-validate" enctype="multipart/form-data" >
+		
+		
+		<div class="form-group">
+            <label class="col-lg control-label">打款类型</label>
+            <div class="col-sm-9 col-xs-12">
+                <label class='radio-inline'>
+                    <input type='radio' name='supply_apply_type' value=1 {if $last_tixian_order['bankname'] == '微信'}checked{/if} /> 微信
+                </label>
+                <label class='radio-inline'>
+                    <input type='radio' name='supply_apply_type' value=2  {if $last_tixian_order['bankname'] == '支付宝'}checked{/if} /> 支付宝
+                </label>
+				 <label class='radio-inline'>
+                    <input type='radio' name='supply_apply_type' value=3  {if $last_tixian_order['bankname'] != '微信' && $last_tixian_order['bankname'] != '支付宝'}checked{/if} /> 银行卡
+                </label>
+            </div>
+        </div>
+		
+		<div id="weixin" {if $last_tixian_order['bankname'] != '微信'} style="display:none;"{/if}>
+			<div class="form-group">
+				<label class="col-lg control-label must">微信号</label>
+				<div class="col-sm-9 col-xs-12">
+					<input type="text" name="weixin_account" data-rule-required="true" class="form-control" value="{$last_tixian_order['bankaccount']}"  />
+					<span class='help-block'></span>
+				</div>
+			</div>
+		</div>
+		<div id="alpay" {if $last_tixian_order['bankname'] != '支付宝'} style="display:none;"{/if}>
+			<div class="form-group">
+				<label class="col-lg control-label must">支付宝账号</label>
+				<div class="col-sm-9 col-xs-12">
+					<input type="text" name="alipay_account" data-rule-required="true" class="form-control" value="{$last_tixian_order['bankaccount']}"  />
+					<span class='help-block'></span>
+				</div>
+			</div>
+		</div>
+		<div id="iccard" {if $last_tixian_order['bankname'] == '支付宝' || $last_tixian_order['bankname'] == '微信' } style="display:none;"{/if}>
+			<div class="form-group">
+				<label class="col-lg control-label must">银行名称</label>
+				<div class="col-sm-9 col-xs-12">
+					<input type="text" name="card_name" data-rule-required="true" class="form-control" value="{$last_tixian_order['bankname']}"  />
+					<span class='help-block'></span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg control-label must">银行卡账户</label>
+				<div class="col-sm-9 col-xs-12">
+					<input type="text" name="card_account" data-rule-required="true" class="form-control" value="{$last_tixian_order['bankaccount']}"  />
+					<span class='help-block'></span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg control-label must">持卡人姓名</label>
+				<div class="col-sm-9 col-xs-12">
+					<input type="text" name="card_username" data-rule-required="true" class="form-control" value="{$last_tixian_order['bankusername']}"  />
+					<span class='help-block'></span>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg control-label must">提现金额</label>
+			<div class="col-sm-9 col-xs-12">
+				<input type="text" name="ti_money" data-rule-required="true" class="form-control" value="{$supply_commiss['money']}"  />
+				<span class='help-block'>最低提现金额 {$supply_min_apply_money}</span>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-lg control-label"></label>
+			<div class="col-sm-9 col-xs-12">
+				<input type="submit" value="提交" class="btn btn-primary"  />
+			</div>
+		</div>
+	</form>
+</div>
+<script>
+$(function(){
+	$('input[name=supply_apply_type]').click(function(){
+		var s_type = $(this).val();
+		
+		if(s_type == 1)
+		{
+			$('#alpay').hide();
+			$('#iccard').hide();
+			$('#weixin').show();
+		}else if(s_type == 2){
+			$('#weixin').hide();
+			$('#iccard').hide();
+			$('#alpay').show();
+		}else if( s_type == 3){
+			$('#weixin').hide();
+			$('#alpay').hide();
+			$('#iccard').show();
+		}
+	})
+})
+</script>
+{template '_footer'}

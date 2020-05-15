@@ -1,0 +1,153 @@
+{template '_header'}
+
+<style>
+.table-hd {
+    margin: 0;
+    line-height: 30px;
+    background: #f8f8f8;
+    padding: 0 20px;
+    font-size: 14px;
+    margin-top: 20px;
+    font-weight: bold;
+}
+.table-hd {
+    margin-bottom: 20px;
+}
+</style>
+<div class="page-header">
+	当前位置：<span class="text-primary">{if !empty($item['id'])}编辑{else}添加{/if}供应商 <small>{if !empty($item['id'])}修改【{$item['shopname']}】{/if}</small></span>
+
+</div>
+
+<div class="page-content">
+	
+	<form action="" method='post' class='form-horizontal form-validate'>
+	<input type="hidden" name="id" value="{$item['id']}">
+
+
+	<div class="page-content">
+		<div class="page-content">
+			
+			
+			<div class="form-group">
+				<label class="col-lg control-label must">供应商名称</label>
+				<div class="col-sm-9 col-xs-12">
+					<input type="text" name="shopname" data-rule-required="true" class="form-control" value="{$item['shopname']}"  />
+					<span class='help-block'></span>
+				</div>
+			</div>
+			 <div class="form-group"> 
+                        <label class="col-lg  control-label ">供应商标志</label>
+                        <div class="col-sm-9 col-xs-12">
+							{php echo tpl_form_field_image2('logo', $item['logo'])}
+                        </div>
+             </div>
+			<div class="form-group">
+				<label class="col-lg control-label must">供应商联系人</label>
+				<div class="col-sm-9 col-xs-12">
+					<input type="text" name="name" data-rule-required="true" class="form-control" value="{$item['name']}"  />
+					<span class='help-block'></span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg control-label must"> 供应商手机号</label>
+				<div class="col-sm-9 col-xs-12">
+					<input type="text" name="mobile" class="form-control" value="{$item['mobile']}" data-rule-required="true"  />
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-lg control-label">是否审核</label>
+				<div class="col-sm-9 col-xs-12" >
+					
+					<label class="radio-inline coupon-radio">
+						<input type="radio" name="state" value="1" {if $item['state'] == 1 || empty($item)}checked="true"{/if}  /> 是
+					</label>
+					<label class="radio-inline coupon-radio">
+						<input type="radio" name="state" value="0" {if $item['state'] == 0 && !empty($item)}checked="true"{/if}  /> 否
+					</label>
+					
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg control-label">供应商类型</label>
+				<div class="col-sm-9 col-xs-12" >
+					<label class="radio-inline coupon-radio">
+						<input type="radio" name="type" value="0" {if $item['type'] == 0 || empty($item)}checked="true"{/if}  />平台供应商
+					</label>
+					<label class="radio-inline coupon-radio">
+						<input type="radio" name="type" value="1" {if !empty($item) && $item['type'] == 1}checked="true"{/if}  />独立供应商
+					</label>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg control-label must"> 技术服务费</label>
+				<div class="col-sm-9 col-xs-12">
+					<input type="text" name="commiss_bili" class="form-control" value="{$item['commiss_bili']}" data-rule-required="true"  />
+					<span class='help-block'>请填写百分比,例如：6  那么平台抽成是6%。实付金额的百分比，扣除此比例 再扣除团长佣金，剩余货款归供应商</span>
+				</div>
+			</div>
+			
+
+			<h3 class="table-hd">登录信息</h3>
+			<div class="form-group">
+				<label class="col-lg control-label must">登录账户</label>
+				<div class="col-sm-9 col-xs-12">
+					<input type="text" name="login_name" class="form-control" value="{$item['login_name']}"   />
+					<span class='help-block'></span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg control-label must">登录密码</label>
+				<div class="col-sm-9 col-xs-12">
+					<input type="text" name="login_password" class="form-control" value=""   />
+					<span class='help-block'>留空则不修改密码</span>
+				</div>
+			</div>
+			
+		</div>
+		
+	</div>
+
+
+	<div class="form-group"></div>
+	<div class="form-group">
+		<label class="col-lg control-label"></label>
+		<div class="col-sm-9 col-xs-12">
+			
+			<input type="submit" name="submit" value="提交" class="btn btn-primary col-lg-1"  />
+
+			
+			<input type="button" name="back" onclick='history.back()' style='margin-left:10px;' value="返回列表" class="btn btn-default" />
+		</div>
+	</div>
+
+
+	</form>
+</div>
+
+<script language='javascript'>
+	$(function(){
+	   
+	});
+      require(['bootstrap'],function(){
+             $('#myTab a').click(function (e) {
+                 e.preventDefault();
+                $('#tab').val( $(this).attr('href'));
+                 $(this).tab('show');
+             })
+     });
+
+    function showbacktype(type){
+
+        $('.backtype').hide();
+        $('.backtype' + type).show();
+    }
+	$(function(){
+
+		
+
+	})
+</script>
+
+{template '_footer'}

@@ -1,0 +1,115 @@
+ {template '_header'}
+ <div class="page-header">
+     当前位置：<span class="text-primary">秒杀时间段</span>
+</div>
+ <div class="page-content">
+ 
+     <div class="page-table-header">
+     	 <input type='checkbox' />
+         <span class='pull-right'>
+            <a class='btn btn-primary btn-sm' data-toggle='ajaxModal' href="{php echo shopUrl('application.spike.modifytimeslot')}"><i class="fa fa-plus"></i> 添加新时间段</a>
+		 </span>
+		 <div class="btn-group">
+				<button class="btn btn-default btn-sm  btn-operation" type="button" data-toggle='batch' data-href="{php echo shopUrl('application.spike.change',array('state'=>1))}">
+	                   <i class='icow icow-shangjia2'></i> 启用
+	            </button>
+	            <button class="btn btn-default btn-sm  btn-operation" type="button" data-toggle='batch'  data-href="{php echo shopUrl('application.spike.change',array('state'=>0))}">
+	                   <i class='icow icow-xiajia3'></i> 禁用
+	            </button>      
+	            <button class="btn btn-default btn-sm  btn-operation" type="button" data-toggle='batch-remove' data-confirm="确认要删除吗?" data-href="{php echo shopUrl('application.spike.deltimeslot')}">
+						<i class='icow icow-shanchu1'></i> 删除
+				</button>  	
+	      </div>
+      </div>
+    
+            <table class="table table-responsive table-hover">
+                <thead>
+                    <tr>
+                    	<th style="width:25px;"></th>
+                       <th style='width:160px;'>时间段名称</th>
+                       <th>开始时</th>
+                       <th>开始分</th>
+                       <th>开始秒</th>
+                       <th>结束时</th>
+                       <th>结束分</th>
+                       <th>结束秒</th>
+                       <th>状态</th>
+                       <th style="width: 65px;">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {loop $list $row}
+                    <tr >
+                    	<td>
+							<input type='checkbox'  value="{$item['id']}"/>
+						</td>
+                        <td>{$row['name']}</td>
+                        <td>{$row['hour']}</td>
+                        <td>{$row['minute']}</td>
+                        <td>{$row['second']}</td>
+                        <td>{$row['endhour']}</td>
+                        <td>{$row['endminute']}</td>
+                        <td>{$row['endsecond']}</td>
+                        <td>	
+                          	<span class='label a {if $row['state']==1}label-primary{else}label-default{/if}'
+	                          data-toggle='ajaxSwitch'
+	                          data-confirm = "确认是{if $row['state']==0}启用{else}禁用{/if}？"
+	                          data-switch-refresh='false'
+	                          data-switch-value='{$row['state']}'
+	                          data-switch-value0='0|禁用|label label-default|{php echo shopUrl('application.spike.change',array('state'=>1,'id'=>$row['id']))}'
+	                          data-switch-value1='1|启用|label label-success|{php echo shopUrl('application.spike.change',array('state'=>0,'id'=>$row['id']))}'
+	                          >
+	                          {if $row['state']==1}启用{else}禁用{/if}
+							</span>
+							
+                        </td>
+                        <td>
+                            <a class='btn btn-default btn-sm btn-op btn-operation' data-toggle='ajaxModal'  href="{php echo shopUrl('application.spike.modifytimeslot', array('id' => $row['id']))}">
+                                <span data-toggle="tooltip" data-placement="top" title="" data-original-title="编辑">
+                                   
+                                    <i class='icow icow-bianji2'></i>
+                                   
+                               </span>
+                            </a>
+                            
+							<a class='btn btn-default btn-sm btn-op btn-operation' data-toggle='ajaxRemove'  href="{php echo shopUrl('application.spike.deltimeslot', array('id' => $row['id']))}" data-confirm="确认删除吗？">
+                                    <span data-toggle="tooltip" data-placement="top" title="" data-original-title="删除">
+                                    <i class='icow icow-shanchu1'></i>
+                               </span>
+                                </a>
+						</td>
+                    </tr>
+                    {/loop}
+                
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5">
+							<div class="page-table-header">
+								<input type="checkbox">
+								<div class="btn-group">
+									<button class="btn btn-default btn-sm  btn-operation" type="button" data-toggle='batch' data-href="{php echo shopUrl('application.spike.change',array('state'=>1))}">
+										<i class='icow icow-shangjia2'></i> 启用
+									</button>
+									<button class="btn btn-default btn-sm  btn-operation" type="button" data-toggle='batch'  data-href="{php echo shopUrl('application.spike.change',array('state'=>1))}">
+										<i class='icow icow-xiajia3'></i> 禁用
+									</button>
+									
+									   
+									<button class="btn btn-default btn-sm  btn-operation" type="button" data-toggle='batch-remove' data-confirm="确认要删除吗?" data-href="{php echo shopUrl('application.spike.deltimeslot')}">
+										<i class='icow icow-shanchu1'></i> 删除
+									</button>
+											
+								</div>
+							</div>
+                        </td>
+                        <td colspan="2" style="text-align: right">
+                            {$pager}
+                        </td>
+                    </tr>
+                    </tfoot>
+            </table>
+ </div>
+ {template '_footer'}
+
+

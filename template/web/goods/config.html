@@ -1,0 +1,73 @@
+{template '_header'}
+<div class="page-header">当前位置：<span class="text-primary">商品设置</span></div>
+<div class="page-content">
+	<form action="" method="post" class="form-horizontal form-validate" enctype="multipart/form-data" >
+		<div class="form-group">
+			<label class="col-lg control-label">商品库存预警</label>
+			<div class="col-sm-9 col-xs-12">
+				<input type="text" name="parameter[goods_stock_notice]" class="form-control" value="{$data['goods_stock_notice']}" />
+			</div>
+		</div>
+		<div class="form-group">
+            <label class="col-lg control-label">购买记录</label>
+            <div class="col-sm-9 col-xs-12">
+                <label class='radio-inline'>
+                    <input type='radio' name='parameter[is_show_buy_record]' value='0' {if !empty($data) && $data['is_show_buy_record'] ==0 }checked {/if} /> 不显示
+                </label>
+                <label class='radio-inline'>
+                    <input type='radio' name='parameter[is_show_buy_record]' value='1' {if empty($data) || $data['is_show_buy_record'] ==1 }checked {/if} /> 显示
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg control-label">商品评价</label>
+            <div class="col-sm-9 col-xs-12">
+                <label class='radio-inline'>
+                    <input type='radio' name='parameter[is_show_comment_list]' value='0' {if !empty($data) && $data['is_show_comment_list'] ==0 }checked {/if} /> 不显示
+                </label>
+                <label class='radio-inline'>
+                    <input type='radio' name='parameter[is_show_comment_list]' value='1' {if empty($data) || $data['is_show_comment_list'] ==1 }checked {/if} /> 显示
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg control-label">首页商品倒计时</label>
+            <div class="col-sm-9 col-xs-12">
+                <label class='radio-inline'>
+                    <input type='radio' name='parameter[is_show_list_timer]' value='0' {if !empty($data) && $data['is_show_list_timer'] ==0 }checked {/if} /> 不显示
+                </label>
+                <label class='radio-inline'>
+                    <input type='radio' name='parameter[is_show_list_timer]' value='1' {if empty($data) || $data['is_show_list_timer'] ==1 }checked {/if} /> 显示
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg control-label">首页商品销量</label>
+            <div class="col-sm-9 col-xs-12">
+                <label class='radio-inline'>
+                    <input type='radio' name='parameter[is_show_list_count]' value='0' {if !empty($data) && $data['is_show_list_count'] ==0 }checked {/if} /> 不显示
+                </label>
+                <label class='radio-inline'>
+                    <input type='radio' name='parameter[is_show_list_count]' value='1' {if empty($data) || $data['is_show_list_count'] ==1 }checked {/if} /> 显示
+                </label>
+            </div>
+        </div>
+		<div class="form-group">
+			<label class="col-lg control-label">服务说明</label>
+		    <div class="col-sm-9 col-xs-12">
+		        <div class="">
+		            {php echo tpl_ueditor('parameter[instructions]',$data['instructions'],array('height'=>'300'))}
+		        </div>
+		    </div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-lg control-label"></label>
+			<div class="col-sm-9 col-xs-12">
+				<input type="submit" value="提交" class="btn btn-primary"  />
+			</div>
+		</div>
+	</form>
+</div>
+
+{template '_footer'}

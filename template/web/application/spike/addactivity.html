@@ -1,0 +1,74 @@
+{template '_header'}
+<div class="page-header">
+    当前位置：
+    <span class="text-primary">
+      	添加新活动 
+    </span>
+</div>
+<div class="page-content">
+    <form action="" method="post" class="form-horizontal form-validate" enctype="multipart/form-data" >
+    	<input type="hidden" name="id" value="{$item['id']}" />
+		<div class="form-group">
+            <label class="col-lg control-label">活动名称</label>
+            <div class="col-sm-9 subtitle">
+                <input type="text" name="title" class="form-control" value="{$item['title']}" />
+                <div class="help-block"></div>
+            </div>
+        </div>
+		<div class="form-group">
+			<label class="col-lg control-label">选择秒杀商品</label>
+			<div class="col-sm-9 col-xs-12">
+				{php echo tpl_selector('goods_id',array('key'=>'gid','multi' =>1,  'text'=>'goodsname', 'thumb'=>'thumb','placeholder'=>'选择商品','buttontext'=>'请选择 ', 'items'=>$saler,'url'=>shopUrl('goods/query', array('is_normal' => 3)) ))}
+				<span class='help-block'></span>
+			</div>
+		</div>
+		<div class="form-group">
+            <label class="col-lg control-label">时间段</label>
+             <div class="col-sm-9 subtitle">
+             	<?php if(!empty($slot_list)){ ?>
+             	<?php foreach($slot_list as $slot){ ?>
+             	<label class="checkbox-inline"><input type="checkbox" name="open_time[]" {if !empty($item) && !empty($item['slot_ids']) && in_array($slot['id'], $item['slot_ids'])}checked{/if} value="<?php echo $slot['id']; ?>"> <?php echo $slot['hour'].':'.$slot['minute'].':'.$slot['second']; ?>~<?php echo $slot['endhour'].':'.$slot['endminute'].':'.$slot['endsecond']; ?></label>
+             	<?php }} ?>
+             </div>
+        </div>
+		<div class="form-group" >
+			<label class="col-lg control-label">活动开始时间</label>
+			<div class="col-sm-9 col-xs-12"> 
+				<span class="input-group-btn">
+                    {php echo tpl_form_field_date('begin_time', $begin_time,false);}
+                </span>
+			</div>
+		</div>
+		<div class="form-group" >
+			<label class="col-lg control-label">活动结束时间</label>
+			<div class="col-sm-9 col-xs-12"> 
+				<span class="input-group-btn">
+                    {php echo tpl_form_field_date('end_time', $end_time,false);}
+                </span>
+			</div>
+		</div>
+		
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label">是否启用</label>
+			<div class="col-sm-9 col-xs-12">
+				<label class="radio-inline"><input type="radio" name="state" value="1" {if empty($item) || ($item['state'] == 1)}checked="checked"{/if}> 启用</label>
+				<label class="radio-inline"><input type="radio" name="state" value="0" {if !empty($item) && ($item['state'] == 0)}checked="checked"{/if}> 禁用</label>
+				<span class="help-block"></span>
+			</div>
+		</div>
+				
+        <div class="form-group">
+            <label class="col-lg control-label"></label>
+            <div class="col-sm-9 col-xs-12">
+                
+                    <input type="submit" value="提交" class="btn btn-primary"  />
+               <a href="{php echo shopUrl('application.spike.activity')}" style='margin-left:10px;' value="返回列表" class="btn btn-default">返回列表</a>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+
+</script>
+{template '_footer'}

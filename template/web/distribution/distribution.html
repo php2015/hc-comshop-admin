@@ -1,0 +1,362 @@
+{template '_header'}
+<style>
+    .popover{
+        width:170px;
+        font-size:12px;
+        line-height: 21px;
+        color: #0d0706;
+    }
+    .popover span{
+        color: #b9b9b9;
+    }
+    .nickname{
+        display: inline-block;
+        max-width:200px;
+        overflow: hidden;
+        text-overflow:ellipsis;
+        white-space: nowrap;
+        vertical-align: middle;
+    }
+    .tooltip-inner{
+        border:none;
+    }
+</style>
+<div class="page-header">
+    当前位置：<span class="text-primary">分销商列表</span>
+</div>
+<div class="page-content">
+    <form action="" method="get" class="form-horizontal form-search" role="form">
+		<input type="hidden" name="c" value="site" />
+        <input type="hidden" name="a" value="entry" />
+        <input type="hidden" name="m" value="lionfish_comshop" />
+        <input type="hidden" name="do" value="admin" />
+        <input type="hidden" name="controller"  value="distribution.distribution" />
+        <div class="page-toolbar m-b-sm m-t-sm">
+            <span class="pull-left">{php echo tpl_daterange('time', array('sm'=>true, 'placeholder'=>'成为分销商时间'),true);}</span>
+            <div class="input-group">
+				<div class="input-group-select">
+					<select name='comsiss_state' class='form-control' style="width:80px;"  >
+						<option value=''>状态</option>
+						<option value='0' {if $_GPC['comsiss_state']=='0'}selected{/if}>未审核</option>
+						<option value='1' {if $_GPC['comsiss_state']=='1'}selected{/if}>已审核</option>
+					</select>
+				</div>
+				
+				<div class="input-group-select">
+					<select name='commission_level_id' class='form-control' style="width:100px;"  >
+						<option value=''>分销等级</option>
+						<?php foreach($keys_level as $key => $level){ ?>
+						<option value='{$key}' {if $_GPC['commission_level_id'] != '' && $_GPC['commission_level_id']==$key}selected{/if}>{$level}</option>
+						<?php } ?>
+					</select>
+				</div>
+				
+				  <input type="text" class="form-control input-sm"  name="keyword" value="{$_GPC['keyword']}" placeholder="昵称/姓名/手机号"/>
+				 <span class="input-group-btn">
+					<button class="btn  btn-primary" type="submit"> 搜索</button>
+					
+					<button type="submit" name="export" value="1" class="btn btn-success ">导出</button>
+					
+				</span>
+			</div>
+        </div>
+    </form>
+    <form action="" method="post" >
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-table-header">
+                    <input type='checkbox' />
+					
+                    <div class="btn-group">
+								
+						<a class='btn btn-default btn-sm btn-op btn-operation'  data-toggle='batch' data-href="{php echo shopUrl('distribution/agent_check',array('status'=>1))}"  data-confirm='确认要审核通过?'>
+							<i class="icow icow-shenhetongguo"></i>审核通过
+						</a>
+						<a class='btn btn-default btn-sm btn-op btn-operation'  data-toggle='batch' data-href="{php echo shopUrl('distribution/agent_check',array('status'=>0))}" data-confirm='确认要取消审核?'>
+							<i class="icow icow-yiquxiao"></i>取消审核</a>
+						
+						<a class="btn btn-default btn-sm btn-op btn-operation" type="button" data-toggle='batch-remove' data-confirm="确认要删除?" data-href="{php echo shopUrl('distribution/agent_delete')}">
+							<i class='icow icow-shanchu1'></i> 删除
+						</a>
+						
+					</div>
+                </div>
+                <table class="table table-responsive">
+                    <thead>
+                    <tr>
+						<th style="width:25px;"></th>
+						<th style="width:60px;">ID</th>
+                        <th style="width: 250px;">用户名</th>
+                        <th style="">等级</th>
+						<th style='width:80px;'>累计佣金<br/>打款佣金</th>
+						<th style='width:80px;'>推荐人</th>
+						<th style='width:80px;'>上级用户</th>
+						<th style='width:80px;'>下级用户</th>
+                        <th style="">注册时间</br>审核时间</th>
+						<th style='width:70px;'>状态</th>
+                        <th style="width: 400px;text-align: center;">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+					{loop $list $row}
+						<tr>
+                            <td style="position: relative; ">
+                                <input type='checkbox' value="{$row['member_id']}" class="checkone"/>
+							</td>
+							<td>
+								{$row['member_id']}
+							</td>
+							
+			
+                            <td style="overflow: visible">
+                                <div rel="pop" style="display: flex"  data-content=" <span>推荐人：</span> 
+								{if empty($row['share_parent_info'])}
+                                  {if $row['comsiss_state']==0}
+                                      总店
+                                  {else}
+                                     暂无
+                                  {/if}
+                                {else}
+                                {if !empty($row['share_parent_info'])}
+                                 <img src='{$row['share_parent_info']['avatar']}' style='width:20px;height:20px;padding1px;border:1px solid #ccc' />
+                               {/if}
+                               [{$row['agentid']}]{if empty($row['share_parent_info']['username'])}未更新{else}{$row['share_parent_info']['username']}{/if}
+                               {/if}
+                               <br/>
+                                 <span>真实姓名：</span> {if empty($row['realname'])}未填写{else}{$row['realname']}{/if}
+                                <br/>
+                               <span>手机号：</span>{if !empty($row['telephone'])}{$row['telephone']}{else}未绑定{/if} <br/>
+                               <span>状态:</span>  {if $row['isblack']==1}未启用{else}正常{/if} ">
+
+                                   <img class="img-40" src="{php echo tomedia($row['avatar'])}" style='border-radius:50%;border:1px solid #efefef;' />
+                                   <span style="display: flex;flex-direction: column;justify-content: center;align-items: flex-start;padding-left: 5px">
+                                       <span class="nickname">
+                                           {if empty($row['username'])}未更新{else}{$row['username']}{/if}
+                                       </span>
+                                       {if $row['isblack']==1}
+                                            <span class="text-danger">未启用<i class="icow icow-heimingdan1"style="color: #db2228;margin-left: 2px;font-size: 13px;"></i></span>
+                                       {/if}
+                                   </span>
+
+                                </div>
+                            </td>
+
+                            <td> 
+							{$row['commission_level_name']}
+                            </td>
+							
+                            <td>
+								 <span class="text-danger">{$row['commission_info']['commission_total']}</span><br/>
+								 <span class="text-warning">{$row['commission_info']['getmoney']}</span>
+							</td>
+							<td>
+							
+			
+								{if empty($row['share_parent_info'])}
+                                  {if $row['isagent']==0}
+                                      总店
+                                  {else}
+                                     暂无
+                                  {/if}
+                                {else}
+
+                                {if !empty($row['share_parent_info']['avatar'])}
+                                 <img src='{$row['share_parent_info']['avatar']}' style='width:20px;height:20px;padding1px;border:1px solid #ccc' />
+								{/if}
+								[{$row['share_parent_info']['member_id']}]{if empty($row['share_parent_info']['username'])}未更新{else}{$row['share_parent_info']['username']}{/if}
+                               {/if}
+							</td>
+							
+							<td>
+								{if empty($row['parent_info'])}
+                                  {if $row['isagent']==0}
+                                      总店
+                                  {else}
+                                     暂无
+                                  {/if}
+                                {else}
+
+                                {if !empty($row['parent_info']['avatar'])}
+                                 <img src='{$row['share_parent_info']['avatar']}' style='width:20px;height:20px;padding1px;border:1px solid #ccc' />
+								{/if}
+								[{$row['parent_info']['member_id']}]{if empty($row['parent_info']['username'])}未更新{else}{$row['parent_info']['username']}{/if}
+                               {/if}
+							</td>
+			
+                            <td>
+								{$row['next_member_count']}
+							</td>
+                           
+							<td>{php echo date("Y-m-d",$row['create_time'])}<br/>{php echo date("H:i:s",$row['createtime'])}
+                            <br/>222 
+							{if !empty($row['comsiss_time'])}
+								{php echo date("Y-m-d",$row['comsiss_time'])}<br/>{php echo date("H:i:s",$row['comsiss_time'])}
+							{/if}
+							</td>
+							<td>
+							<span class='label {if $row['comsiss_state']==1}label-primary{else}label-default{/if}'
+										  data-toggle='ajaxSwitch'   data-confirm ='确认要{if $row['comsiss_state']==1}取消审核{else}审核通过{/if}?'
+										  data-switch-value='{$row['comsiss_state']}'
+										  data-switch-value0='0|未审核|label label-default|{php echo shopUrl('distribution/agent_check',array('comsiss_state'=>1,'id'=>$row['member_id']))}'  
+										  data-switch-value1='1|已审核|label label-primary|{php echo shopUrl('distribution/agent_check',array('comsiss_state'=>0,'id'=>$row['member_id']))}'
+										  
+										>
+										  {if $row['comsiss_state']==1}已审核{else}未审核{/if}</span>
+							<br/>
+							</td>
+							
+							<td style="overflow:visible;text-align: center;">
+                                <div class="btn-group">
+									<a class="btn  btn-op btn-operation" href="{php echo shopUrl('order/order',array('agentid' => $row['member_id']));}"  target='_blank'>
+										<span data-toggle="tooltip" data-placement="top" title="" data-original-title="推广订单">
+											<i class='icow icow-tuiguang'></i>推广订单
+										</span>
+									</a>
+								
+									<a class="btn  btn-op btn-operation" href="{php echo shopUrl('user/detail',array('id' => $row['member_id']));}" title="">
+										<span data-toggle="tooltip" data-placement="top" title="" data-original-title="会员详情">
+											<i class='icow icow-bianji2'></i>会员详情
+										</span>
+									</a>
+									<a class="btn  btn-op btn-operation" href="{php echo shopUrl('order/order', array('searchfield'=>'member','keyword'=>$row['username']))}"
+									   title=''> 
+										   <span data-toggle="tooltip" data-placement="top" title="" data-original-title="会员订单">
+											   <i class='icow icow-dingdan2'></i>会员订单
+											</span>
+									</a>
+									<a class="btn  btn-op btn-operation" data-toggle="ajaxModal"
+										   href="{php echo shopUrl('user/recharge', array('type'=>'score','id'=>$row['member_id']))}"
+										   title=''>
+										<span data-toggle="tooltip" data-placement="top" title="" data-original-title="充值">
+										   <i class='icow icow-31'></i>充值
+										</span>
+									</a>
+									<a class="btn btn-op btn-operation" data-toggle='ajaxRemove' href="{php echo shopUrl('user/deleteuser',array('id' => $row['member_id']));}" data-confirm="确定要删除该会员吗？">
+										 <span data-toggle="tooltip" data-placement="top" title="" data-original-title="删除会员">
+										   <i class='icow icow-shanchu1'></i>删除会员
+										</span>
+									</a>
+                                </div>
+                            </td>
+                        </tr>
+					{/loop}
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="5">
+                            <input type="checkbox">
+							<div class="btn-group">
+								
+								<a class='btn btn-default btn-sm btn-op btn-operation'  data-toggle='batch' data-href="{php echo shopUrl('distribution/agent_check',array('status'=>1))}"  data-confirm='确认要审核通过?'>
+									<i class="icow icow-shenhetongguo"></i>审核通过
+								</a>
+								<a class='btn btn-default btn-sm btn-op btn-operation'  data-toggle='batch' data-href="{php echo shopUrl('distribution/agent_check',array('status'=>0))}" data-confirm='确认要取消审核?'>
+									<i class="icow icow-yiquxiao"></i>取消审核</a>
+								
+								<a class="btn btn-default btn-sm btn-op btn-operation" type="button" data-toggle='batch-remove' data-confirm="确认要删除?" data-href="{php echo shopUrl('distribution/agent_delete')}">
+									<i class='icow icow-shanchu1'></i> 删除
+								</a>
+								
+							</div>
+			
+                        </td>
+                        <td colspan="2" style="text-align: right">
+                            {$pager}
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script language="javascript">
+    
+    require(['bootstrap'], function () {
+        $("[rel=pop]").popover({
+            trigger: 'manual',
+            placement: 'right',
+            title: $(this).data('title'),
+            html: 'true',
+            content: $(this).data('content'),
+            animation: false
+        }).on("mouseenter", function () {
+            var _this = this;
+            $(this).popover("show");
+            $(this).siblings(".popover").on("mouseleave", function () {
+                $(_this).popover('hide');
+            });
+        }).on("mouseleave", function () {
+            var _this = this;
+            setTimeout(function () {
+                if (!$(".popover:hover").length) {
+                    $(_this).popover("hide")
+                }
+            }, 100);
+        });
+    });
+   
+
+    $("[data-toggle='batch-group'], [data-toggle='batch-level']").click(function () {
+        var toggle = $(this).data('toggle');
+        $("#modal-change .modal-title").text(toggle=='batch-group'?"批量修改分组":"批量修改会员等级");
+        $("#modal-change").find("."+toggle).show().siblings().hide();
+        $("#modal-change-btn").attr('data-toggle', toggle=='batch-group'?'group':'level');
+        $("#modal-change").modal();
+    });
+    $("#modal-change-btn").click(function () {
+        var _this = $(this);
+        if(_this.attr('stop')){
+            return;
+        }
+        var toggle = $(this).data('toggle');
+        var ids = [];
+        $(".checkone").each(function () {
+            var checked = $(this).is(":checked");
+            var id = $(this).val();
+            if(checked && id){
+                ids.push(id);
+            }
+        });
+        if(ids.length<1){
+            tip.msgbox.suc("请选择要批量操作的会员");
+            return;
+        }
+        var option = $("#modal-change .batch-"+toggle+" option:selected");
+        level = '';
+        if (toggle=='group'){
+            for(i=0;i<option.length;i++){
+                if (level == ''){
+                    level += $(option[i]).val();
+                }else{
+                    level += ','+$(option[i]).val();
+                }
+            }
+        }else{
+            var level = option.val();
+        }
+
+        var levelname = option.text();
+        tip.confirm("确定要将选中会员移动到 "+levelname+" 吗？", function () {
+            _this.attr('stop', 1).text("操作中...");
+            $.post(biz.url('user/changelevel'),{
+                level: level,
+                ids: ids,
+                toggle: toggle
+            }, function (ret) {
+                $("#modal-change").modal('hide');
+                if(ret.status==1){
+                    tip.msgbox.suc("操作成功");
+                    setTimeout(function () {
+                        location.reload();
+                    },1000);
+                }else{
+                    tip.msgbox.err(ret.result.message);
+                }
+            }, 'json')
+        });
+    });
+</script>
+{template '_footer'}
+

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <?php $shoname_name = load_model_class('Front')->get_config_by_name('shoname'); ?>
+  <title>{if !empty($shoname_name)}{$shoname_name}{/if}</title>
+  <link rel="shortcut icon" href="{$_W['siteroot']}{$_W['config']['upload']['attachdir']}/{if !empty($_W['setting']['copyright']['icon'])}{$_W['setting']['copyright']['icon']}{else}images/global/wechat.jpg{/if}" />
+        
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+  <link rel="stylesheet" href="{php echo SNAILFISH_LOCAL}/template/layuiadmin/style/admin.css" media="all">
+  <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+  <!--[if lt IE 9]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  <link href="./resource/css/bootstrap.min.css?v=201903260001" rel="stylesheet">
+  <link href="./resource/css/common.css?v=201903260001" rel="stylesheet">
+  <script type="text/javascript">
+      window.sysinfo = {
+        {if !empty($_W['uniacid'])}'uniacid': '{$_W['uniacid']}',{/if}
+        {if !empty($_W['acid'])}'acid': '{$_W['acid']}',{/if}
+        {if !empty($_W['openid'])}'openid': '{$_W['openid']}',{/if}
+        {if !empty($_W['uid'])}'uid': '{$_W['uid']}',{/if}
+        'isfounder': {if !empty($_W['isfounder'])}1{else}0{/if},
+        'siteroot': '{$_W['siteroot']}',
+        'siteurl': '{$_W['siteurl']}',
+        'attachurl': '{$_W['attachurl']}',
+        'attachurl_local': '{$_W['attachurl_local']}',
+        'attachurl_remote': '{$_W['attachurl_remote']}',
+        'module': {'url' : '{if defined('MODULE_URL')}{MODULE_URL}{/if}', 'name' : '{if defined('IN_MODULE')}{IN_MODULE}{/if}'},
+        'cookie': {'pre': '{$_W['config']['cookie']['pre']}'},
+        'account': {php echo json_encode($_W['account'])},
+      };
+  </script>
+        
+  <script type="text/javascript" src="./resource/js/lib/jquery-1.11.1.min.js"></script>
+  <script type="text/javascript" src="./resource/js/lib/bootstrap.min.js"></script>
+  <script type="text/javascript" src="./resource/js/app/util.js?v=201903260001"></script>
+  <script type="text/javascript" src="./resource/js/app/common.min.js?v=201903260001"></script>
+  <script type="text/javascript" src="./resource/js/require.js?v=201903260001"></script>
+  <script type="text/javascript" src="./resource/js/lib/jquery.nice-select.js?v=201903260001"></script>
+  <link rel="stylesheet" href="{php echo SNAILFISH_LOCAL}/template/layuiadmin/layui/css/layui.css" media="all">
+  <link href="{php echo SNAILFISH_LOCAL}static/css/snailfish.css" rel="stylesheet">
+  <style type="text/css">
+      .layui-btn-sm { line-height: 34px;height: 34px; }
+      .layui-btn-group .layui-btn:first-child {border-radius: 0;}
+      .text-green { color: #15d2b9 !important; }
+	  .daterangepicker select.ampmselect, .daterangepicker select.hourselect, .daterangepicker select.minuteselect {
+			width: auto!important;
+		}
+		
+		.send_list_div{width:80%;overflow-x:auto;}
+		.mt20 {
+			margin-top: 20px!important;
+		}
+		.mr50 {
+			margin-right: 50px !important;
+		}
+		.pl5 {
+				padding-left: 5px;
+		}
+		.top_head {
+			width: 100%;
+			text-align: center;
+			font-weight: 600;
+			font-size: 20px;
+			color: black;
+			margin: 10px 0;
+		}
+	 .table2 {
+		margin: 0;
+		background-color: #fff;
+		color: #494e52;
+		font-size: 12px;
+		border: 1px solid #f4f7f9;
+		table-layout: fixed;
+		width:100%;
+	}
+	.table2>tbody>tr>td {
+		vertical-align: middle;
+		text-align: center;
+		word-wrap: break-word;
+		border: 1px solid #ddd !important;
+		}
+		.table tbody tr td:first-child {
+		vertical-align: middle;
+	}
+	.table2>tbody>tr>td {
+		padding: 2px !important;
+	}
+	.w150 {
+		width: 150px!important;
+	}
+  </style>
+</head>
+<body layadmin-themealias="default">
+
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-card-header layui-elem-quote">当前位置：<span class="line-text">配送单查询</span></div>
+        <div class="layui-card-body" style="padding:15px;">
+        <div class="page-content">
+            <form action="" method="post" class="form-horizontal form-search layui-form" role="form" id="search">
+        		<input type="hidden" name="c" value="site" />
+                <input type="hidden" name="a" value="entry" />
+                <input type="hidden" name="m" value="lionfish_comshop" />
+				
+				<input type="hidden" name="do" value="admin" />
+                <input type="hidden" name="controller"  value="delivery.search_delivery_list" />
+                <input type="hidden" name="ok" value="1" />
+                <div class="page-toolbar">
+                    <div class="layui-form-item">
+    					<span class="layui-input-inline">
+    						<select name='searchtime' class='form-control' style="width:100px;padding:0 5px;"  id="searchtime">
+    							<option value='create_time' {if $_GPC['searchtime']=='create_time'}selected{/if}>创建订单时间</option>
+    							<option value='pay_time' {if $_GPC['searchtime']=='pay_time'}selected{/if}>订单支付时间</option>
+    							<option value='express_time' {if $_GPC['searchtime']=='express_time'}selected{/if}>配送时间</option>
+    							<option value='head_get_time' {if $_GPC['searchtime']=='head_get_time'}selected{/if}>送达时间</option>
+    						</select>
+    					</span>
+    					<span class="layui-input-inline" style="width: 285px;">
+    						{php echo tpl_form_field_daterange('time', array('starttime'=>date('Y-m-d H:i', $starttime_time),'endtime'=>date('Y-m-d H:i', $endtime_time)),true);}
+    					</span>
+						
+						<div class="layui-input-inline">
+                            <div class="input-group " style="margin: 0;">
+                                <input type="text" disabled value="{$head_name}" class="form-control valid" name="head_dan_name" placeholder="" id="head_dan_name">
+                                <input  value="{$head_dan_id}" name="head_dan_id" id="head_dan_id" type="hidden" />
+                                <span class="input-group-btn">
+                                    <span data-input="#head_id" id="chose_head_id"  class="btn btn-default">选择团长</span>
+                                </span>
+                            </div>
+            			</div>
+						<span class="layui-input-inline">
+    						<select name='line_id' class='form-control' style="width:100px;padding:0 5px;"  id="line_id">
+    							<option value=''>所属线路</option>
+								<?php foreach($all_lines as $val ){ ?>
+    							<option value='<?php echo $val['id']; ?>' {if $_GPC['line_id']== $val['id']}selected{/if}>{$val['name']}</option>
+								<?php } ?>
+    						</select>
+    					</span>
+                    </div>
+					<div class="layui-form-item" style="margin-top:10px;">
+						<span class="layui-input-inline">
+    						<select name='order_status_id' class='form-control' style="width:100px;padding:0 5px;"  id="order_status_id">
+    							<option value=''>订单状态</option>
+    							<option value='1' {if $_GPC['order_status_id']==1}selected{/if}>待发货</option>
+    							<option value='14' {if $_GPC['order_status_id']==14}selected{/if}>待团长收货</option>
+    							<option value='4' {if $_GPC['order_status_id']==4}selected{/if}>待用户取货</option>
+    							<option value='11' {if $_GPC['order_status_id']=='11'}selected{/if}>已完成</option>
+    						</select>
+    					</span>
+						<span class="layui-input-inline">
+    						<select name='delivery' class='form-control' style="width:100px;padding:0 5px;"  id="delivery">
+    							<option value=''>配送类型</option>
+    							<option value='pickup' {if $_GPC['delivery']=='pickup'}selected{/if}>到点自提</option>
+    							<option value='tuanz_send' {if $_GPC['delivery']=='tuanz_send'}selected{/if}>团长配送</option>
+    							<option value='express' {if $_GPC['delivery']=='express'}selected{/if}>快递配送</option>
+    						</select>
+    					</span>
+						<span class="layui-input-inline">
+    						<select name='loadtype' class='form-control' style="width:100px;padding:0 5px;"  id="loadtype">
+    							<option value=''>清单类型</option>
+    							<option value='send_total_order' {if $_GPC['loadtype']=='send_total_order'}selected{/if}>配送总单</option>
+    							<option value='tuanz_relative_order' {if $_GPC['loadtype']=='tuanz_relative_order'}selected{/if}>团长相关订单</option>
+    							<option value='goods_need_order' {if $_GPC['loadtype']=='goods_need_order'}selected{/if}>商品采购单</option>
+    						</select>
+    					</span>
+                        <div class="layui-btn-group">
+                            <button class="layui-btn btn-submit layui-btn-sm" data-export="0" type="submit"> 搜索</button>
+    						<button data-export="1" type="submit" class="layui-btn layui-btn-sm btn-submit layui-btn-primary">导出</button>
+                        </div>
+					</div>
+					
+					<div class="layui-form-item" style="margin-top:10px;">
+					*筛选清单中，不包含未处理的售后订单
+					</div>
+                </div>
+            </form>
+	
+            <form action="" method="post" class="layui-form" role="form">
+                <div class="row">
+                    <div class="col-md-12">
+						
+						<?php if( $loadtype == 'send_total_order' ){ ?>
+						<div class="send_list_div">
+							<div style="text-align: left;color: #47B34F" class="mt20">
+								<span class="mr50 pl5">配货单(横版)</span>
+							</div>
+							<div class="mt20">
+								<div class="top_head">
+									<span class="mr50">下单时间：{$starttime_date} ~ {$endtime_date}</span>
+									<span class="mr50">下单状态：{$order_status_id_str}</span>
+								</div>
+							</div>
+							<table class="table2 mb20">
+								<tr>
+									<td class="ff-arail w150">配送路线</td>
+									<td class="ff-arail w150">小区--团长</td>
+									<?php foreach( $show_goods_list as $goods ){ ?>
+									<td class="ff-arail w150">{$goods['name']}{$goods['sku_name']}</td>
+									<?php } ?>
+								</tr>
+								<tr style="color:red">
+									<td class="ff-arail w150"></td>
+									<td class="ff-arail w150">合计</td>
+									<?php foreach( $show_goods_list as $goods ){ ?>
+									<td class="ff-arail w150">{$goods['quantity']}</td>
+									<?php } ?>
+								</tr>
+								<?php foreach( $need_head_list as  $head_info ){ 
+								
+								?>
+								<tr>
+									<td class="w150">{$head_info['info']['line_info']}</td>
+									<td class="w150">{$head_info['info']['community_name']}--{$head_info['info']['head_name']}</td>
+									
+									<?php foreach( $show_goods_list as $key => $goods ){ ?>
+									<td class="w150">
+									
+									<?php if( in_array($key, array_keys($head_info['goods']) ) ){ ?>
+										{$head_info['goods'][$key]['quantity']}
+									<?php } ?>
+									</td>
+									<?php } ?>
+									
+								</tr>
+								<?php } ?>
+								
+							</table>
+							
+						</div>
+						<?php } ?>
+                        
+						
+						
+                    </div>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script src="{php echo SNAILFISH_LOCAL}/template/layuiadmin/layui/layui.js"></script>
+
+<script>
+    layui.config({
+        base: '{php echo SNAILFISH_LOCAL}/template/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use('index');
+</script>
+
+<script>
+var layer = layui.layer;
+var $;
+var cur_open_div;
+
+
+layui.use(['jquery', 'layer','form'], function(){ 
+    $ = layui.$;
+    var form = layui.form;
+  
+	
+	$('#chose_head_id').click(function(){
+		cur_open_div = $(this).attr('data-input');
+		$.post("{php echo shopUrl('communityhead/lineheadquery', array('is_delivery' => 1))}", {}, function(shtml){
+		 layer.open({
+			type: 1,
+			area: '930px',
+			content: shtml //注意，如果str是object，那么需要字符拼接。
+		  });
+		});
+	})
+		
+		
+    //监听提交
+    form.on('submit(formDemo)', function(data){
+        $.ajax({
+            url: data.form.action,
+            type: data.form.method,
+            data: data.field,
+            dataType:'json',
+            success: function (info) {
+              
+                if(info.status == 0)
+                {
+                    layer.msg(info.result.message,{icon: 1,time: 2000});
+                }else if(info.status == 1){
+                    var go_url = location.href;
+                    if( info.result.hasOwnProperty("url") )
+                    {
+                        go_url = info.result.url;
+                    }
+                    
+                    layer.msg('操作成功',{time: 1000,
+                        end:function(){
+                            location.href = info.result.url;
+                        }
+                    }); 
+                }
+            }
+        });
+        return false;
+    });
+})
+
+</script>  
+
+<script>
+	$(function () {
+        $('.btn-submit').click(function () {
+            var e = $(this).data('export');
+			
+			var loadtype = $('#loadtype').val();
+			
+			if( loadtype == '' )
+			{
+				 layer.msg('请先选择清单类型!');
+                 return false;
+			}
+			
+            if(e>0 ){
+                if($('#keyword').val() !='' ){
+                    $('#export').val(e);
+                    $('#search').submit();
+                }else if($('#searchtime').val()!=''){
+                    $('#export').val(e);
+                    $('#search').submit();
+                }else{
+                    layer.msg('请先选择时间段!');
+                    return false;
+                }
+            }else{
+                $('#export').val(0);
+                $('#search').submit();
+            }
+        })
+    })
+</script>
+</body>
+</html>

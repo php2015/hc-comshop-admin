@@ -1,0 +1,192 @@
+{template '_header'}
+<link rel="stylesheet" href="{php echo SNAILFISH_LOCAL}static/css/jquery.minicolors.css">
+<div class="page-header">当前位置：<span class="text-primary">商城设置</span></div>
+<div class="page-content">
+	<form action="" method="post" class="form-horizontal form-validate" enctype="multipart/form-data" >
+		<div class="form-group">
+			<label class="col-lg control-label">商城名称</label>
+			<div class="col-sm-9 col-xs-12">
+				<input type="text" name="parameter[shoname]" class="form-control" value="{$data['shoname']}" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg control-label">商城LOGO</label>
+			<div class="col-sm-9 col-xs-12">
+				{php echo tpl_form_field_image2('parameter[shoplogo]', $data['shoplogo'])}
+				<span class='help-block'>正方型图片</span>
+			</div>
+		</div>
+		<div class="form-group" style="display:none;">
+			<label class="col-lg control-label">商城简介</label>
+			<div class="col-sm-9 col-xs-12">
+				<textarea name="parameter[shop_summary]" class="form-control richtext"rows="5">{$data['shop_summary']}</textarea>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg control-label">首页分享标题</label>
+			<div class="col-sm-9 col-xs-12">
+				<input type="text" name="parameter[shop_index_share_title]" class="form-control" value="{$data['shop_index_share_title']}" />
+				<span class='help-block'>未填写将默认使用商城名称作为分享标题</span>
+			</div>
+		</div>
+		
+		<div class="form-group" >
+			<label class="col-lg control-label">首页分享图片</label>
+			<div class="col-sm-9 col-xs-12">
+				{php echo tpl_form_field_image2('parameter[shop_index_share_image]', $data['shop_index_share_image'])}
+				<span class='help-block'>支持PNG及JPG，显示图片长宽比是 5:4。</span>
+			</div>
+		</div>
+
+		<div class="form-group">
+            <label class="col-lg control-label">首页商品排列</label>
+            <div class="col-sm-9 col-xs-12">
+                <label class='radio-inline'>
+                    <input type='radio' name='parameter[index_list_theme_type]' value='0' {if !empty($data) && $data['index_list_theme_type'] ==0 }checked {/if} /> 小图
+                </label>
+                <label class='radio-inline'>
+                    <input type='radio' name='parameter[index_list_theme_type]' value='1' {if empty($data) || $data['index_list_theme_type'] ==1 }checked {/if} /> 大图
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+			<label class="col-lg control-label">页面导航条背景颜色</label>
+			<div class="col-sm-9 col-xs-12">
+				<input type="text" name="parameter[nav_bg_color]" class="form-control minicolors" value="{$data['nav_bg_color']}" />
+				<span class='help-block'>背景颜色值，有效值为十六进制颜色。默认色值：<font color="#F75451">#F75451</font></span>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-lg control-label">页面导航条前景颜色</label>
+			<div class="col-sm-9 col-xs-12">
+				<label class='radio-inline'>
+                    <input type='radio' name='parameter[nav_font_color]' value='#ffffff' {if !empty($data) && $data['nav_font_color'] =='#ffffff' }checked {/if} /> 白色
+                </label>
+                <label class='radio-inline'>
+                    <input type='radio' name='parameter[nav_font_color]' value='#000000' {if empty($data) || $data['nav_font_color'] =='#000000' }checked {/if} /> 黑色
+                </label>
+				<span class='help-block'>前景颜色值，包括按钮、标题、状态栏的颜色，仅支持 #ffffff 和 #000000 <br/>为避免重复请求，采用缓存机制，有效时长为十分钟，如需马上生效可删除小程序重新进入</span>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-lg control-label">腾讯地图AppKey</label>
+			<div class="col-sm-9 col-xs-12">
+				<input type="text" name="parameter[tx_map_key]" class="form-control" value="{$data['tx_map_key']}" />
+				<span class='help-block'><a href="https://lbs.qq.com/console/key.html" class="text-primary" target="_blank">点击申请</a>&nbsp;用于地图定位、显示社区团长位置
+				
+				<a href="../addons/lionfish_comshop/static/images/tx_key_demo.png" class="text-primary" title="点击查看" target="_balnk">地图申请示例</a>
+				<a href="../addons/lionfish_comshop/static/images/tx_map_request_demo.png" class="text-primary" title="点击查看" target="_balnk">小程序域名设置示例</a>
+				</span>
+			</div>
+				
+		</div>
+
+		<div class="form-group">
+			<label class="col-lg control-label">群体名称</label>
+			<div class="col-sm-9 col-xs-12">
+				<input type="text" name="parameter[group_name]" class="form-control" value="{$data['group_name']}" />
+				<span class='help-block'>默认：社区</span>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-lg control-label">群主名称</label>
+			<div class="col-sm-9 col-xs-12">
+				<input type="text" name="parameter[owner_name]" class="form-control" value="{$data['owner_name']}" />
+				<span class='help-block'>默认：团长</span>
+			</div>
+		</div>
+
+		<div class="form-group">
+            <label class="col-lg control-label">首页分享按钮</label>
+            <div class="col-sm-9 col-xs-12">
+                <label class='radio-inline'>
+                    <input type='radio' name='parameter[index_share_switch]' value='0' {if !empty($data) && $data['index_share_switch'] ==0 }checked {/if} /> 隐藏
+                </label>
+                <label class='radio-inline'>
+                    <input type='radio' name='parameter[index_share_switch]' value='1' {if empty($data) || $data['index_share_switch'] ==1 }checked {/if} /> 显示
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg control-label">首页抢购切换</label>
+            <div class="col-sm-9 col-xs-12">
+                <label class='radio-inline'>
+                    <input type='radio' name='parameter[index_change_cate_btn]' value='0' {if !empty($data) && $data['index_change_cate_btn'] ==0 }checked {/if} /> 开启
+                </label>
+                <label class='radio-inline'>
+                    <input type='radio' name='parameter[index_change_cate_btn]' value='1' {if empty($data) || $data['index_change_cate_btn'] ==1 }checked {/if} /> 关闭
+                </label>
+            </div>
+        </div>
+		
+		<div class="form-group" style="display:none;">
+			<label class="col-lg control-label">首页DIY布局</label>
+			<div class="col-sm-9 col-xs-12">
+				<label class="radio-inline"><input type="radio" <?php if(isset($data['open_diy_index_page']) && $data['open_diy_index_page'] == 1){ echo 'checked';} ?> name="parameter[open_diy_index_page]" value="1" checked="checked"> 开启</label>
+				<label class="radio-inline"><input type="radio" <?php if(!isset($data['open_diy_index_page']) || $data['open_diy_index_page'] == 0){ echo 'checked';} ?> name="parameter[open_diy_index_page]" value="0"> 关闭</label>
+				<span class="help-block"></span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg control-label"> </label>
+			<div class="col-sm-9 col-xs-12">
+				<input type="submit" value="提交" class="btn btn-primary"  />
+			</div>
+		</div>
+	</form>
+</div>
+
+<script src="{php echo SNAILFISH_LOCAL}static/js/jquery.minicolors.js"></script>
+<script language="javascript">
+    require(['bootstrap'], function () {
+        $("[rel=pop]").popover({
+            trigger: 'manual',
+            placement: 'top',
+            title: $(this).data('title'),
+            html: 'true',
+            content: $(this).data('content'),
+            animation: false
+        }).on("mouseenter", function () {
+            var _this = this;
+            $(this).popover("show");
+            $(this).siblings(".popover").on("mouseleave", function () {
+                $(_this).popover('hide');
+            });
+        }).on("mouseleave", function () {
+            var _this = this;
+            setTimeout(function () {
+                if (!$(".popover:hover").length) {
+                    $(_this).popover("hide")
+                }
+            }, 100);
+        });
+    });
+
+    $('input.minicolors').minicolors({
+        control: $(this).attr('data-control') || 'hue',
+        defaultValue: $(this).attr('data-defaultValue') || '',
+        inline: $(this).attr('data-inline') === 'true',
+        letterCase: $(this).attr('data-letterCase') || 'lowercase',
+        opacity: $(this).attr('data-opacity'),
+        position: $(this).attr('data-position') || 'bottom left',
+        change: function(hex, opacity) {
+            if (!hex)
+                return;
+            if (opacity)
+                hex += ', ' + opacity;
+            try {
+                console.log(hex);
+            } catch (e) {
+            }
+        },
+        theme: 'bootstrap'
+    });
+
+	
+</script>
+{template '_footer'}

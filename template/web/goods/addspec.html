@@ -1,0 +1,89 @@
+{template '_header'}
+<div class="page-header">
+    当前位置：
+    <span class="text-primary">
+        {if !empty($item['id'])}编辑{else}添加{/if}商品规格 <small>{if !empty($item['id'])}修改【{$item['name']}】{/if}</small>
+    </span>
+</div>
+<div class="page-content">
+    <div class="page-sub-toolbar">
+        <span class=''>
+            <a class="btn btn-primary btn-sm" href="{php echo shopUrl('goods/addspec')}">添加新商品规格</a>
+		</span>
+    </div>
+    <form action="" method="post" class="form-horizontal form-validate" enctype="multipart/form-data" >
+		<input type="hidden" name="data[id]" value="{$item['id']}" />
+        <div class="form-group">
+            <label class="col-lg control-label must">规格名称</label>
+            <div class="col-sm-9 col-xs-12">
+                <input type="text" name="data[name]" class="form-control" value="{$item['name']}" data-rule-required="true" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg control-label">规格值</label>
+            <div class="col-sm-9 col-xs-12">
+                <table class="table table-responsive" style="margin:0;">
+                    <tbody id='tbody-items' style="border-top:none;">
+                    {loop $labelname $row}
+                    <tr>
+                        <td>
+                            <input type="text" class="form-control" name="data[value][]" value="{$row}" >
+                        </td>
+                        <td style="width: 45px;">
+                            <a href="javascript:void(0);" class="btn btn-default btn-del btn-op btn-operation" data-confirm="确认删除此标签?">
+                                <span data-toggle="tooltip" data-placement="top" title="" data-original-title="删除">
+                                    <i class="icow icow-shanchu1"></i>
+                                </span>
+                            </a>
+                        </td>
+                    </tr>
+                    {/loop}
+                    </tbody>
+                </table>
+                
+                <input name="button" type="button" class="btn btn-default" value="添加规格" onclick='addCategory()'>
+                
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="col-lg control-label"></label>
+            <div class="col-sm-9 col-xs-12">
+                
+                <input type="submit" value="提交" class="btn btn-primary"  />
+				<a href="{php echo shopUrl('goods/goodsspec')}" style='margin-left:10px;' value="返回列表" class="btn btn-default">返回列表</a>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+
+    
+    require(['jquery.ui'],function(){
+        $('#tbody-items').sortable();
+    })
+    
+
+    function addCategory(){
+        var html ='<tr>';
+        html+='<td style="width:200px;">';
+        html+='<input type="text" class="form-control" name="data[value][]" value="">';
+        html+='</td>';
+		html+='<td style="width: 45px;">';
+		html+='		<a href="javascript:void(0);" class="btn btn-default btn-del btn-op btn-operation" data-confirm="确认删除此标签?">';
+		html+='<span data-toggle="tooltip" data-placement="top" title="" data-original-title="删除">';
+		html+='<i class="icow icow-shanchu1"></i>';
+		html+='</span>';
+		html+='</a>';
+         html+='</td>';
+        html+='</tr>';
+        $('#tbody-items').append(html);
+    }
+    $(function(){
+		$(document).delegate('.btn-del','click',function(){
+			var $btntr = $(this).parents('tr');
+			$btntr.remove();
+		})
+    });
+</script>
+{template '_footer'}

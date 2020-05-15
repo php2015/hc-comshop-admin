@@ -1,0 +1,143 @@
+{template '_header'}
+<style>
+    .popover{
+        width:170px;
+        font-size:12px;
+        line-height: 21px;
+        color: #0d0706;
+    }
+    .popover span{
+        color: #b9b9b9;
+    }
+    .nickname{
+        display: inline-block;
+        max-width:200px;
+        overflow: hidden;
+        text-overflow:ellipsis;
+        white-space: nowrap;
+        vertical-align: middle;
+    }
+    .tooltip-inner{
+        border:none;
+    }
+</style>
+<div class="page-header">
+    当前位置：<span class="text-primary">提现列表</span>
+</div>
+<div class="page-content">
+    <div class="summary_box">
+		<div class="summary_title">
+			<div class="title_inner">
+				已提现金额：{$supply_commiss['getmoney']}&nbsp;&nbsp;提现中金额：{php echo $supply_commiss['dongmoney']<0 ?0:$supply_commiss['dongmoney']}&nbsp;&nbsp;未提现金额：<span class="text-danger">{$supply_commiss['money']}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="{php echo shopUrl('supply/apply_money')}" class="btn btn-primary">点击申请提现</a>
+			</div>
+			
+		</div>
+	</div>
+
+
+    <form action="" method="post" >
+        <div class="row">
+            <div class="col-md-12">
+                
+                <table class="table table-responsive">
+                    <thead>
+                    <tr>
+						<th style="width:25px;"></th>
+						<th style="width:60px;">ID</th>
+						
+						<th style="">账户信息</th>
+						<th style="">提现金额</th>
+						
+						<th style="display:none;">手续费</th>
+						<th style="">到账金额</th>
+						
+						<th style='width:150px;'>状态</th>
+						
+						<th style=''>提现申请时间/处理时间</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+					{loop $list $row}
+						<tr>
+                            <td style="position: relative; ">
+                               
+							</td>
+							<td>
+								{$row['id']}
+							</td>
+							<td>
+								{php echo '转账类型：'.$row['bankname']}<br/>
+								{php echo '账户：'.$row['bankaccount']}<br/>
+								{php echo empty($row['bankusername']) ? '': '持卡人姓名：'.$row['bankaccount']}<br/>
+							</td>
+							<td > 
+								{$row['money']}
+                            </td>
+							<td style="display:none;">
+								{$row['service_charge']}
+							</td>
+							<td> 
+								{$row['money']}
+                            </td>
+							<td>
+								{if $row['state'] ==2 }
+									提现失败
+								{elseif $row['state'] ==1 }
+									<text class="text-green">提现成功，已打款</text>
+								{else}
+									<text class='text-danger'>提现中</text>
+								{/if}
+							</td>
+								<td>
+							
+							{php echo date('Y-m-d H:i:s', $row['addtime'])}<br/>
+							{php echo empty($row['shentime']) ? '': date('Y-m-d H:i:s', $row['shentime'])}<br/>
+							
+							</td>
+                        </tr>
+					{/loop}
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="5" style="text-align: right">
+                            {$pager}
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script language="javascript">
+    
+    require(['bootstrap'], function () {
+        $("[rel=pop]").popover({
+            trigger: 'manual',
+            placement: 'right',
+            title: $(this).data('title'),
+            html: 'true',
+            content: $(this).data('content'),
+            animation: false
+        }).on("mouseenter", function () {
+            var _this = this;
+            $(this).popover("show");
+            $(this).siblings(".popover").on("mouseleave", function () {
+                $(_this).popover('hide');
+            });
+        }).on("mouseleave", function () {
+            var _this = this;
+            setTimeout(function () {
+                if (!$(".popover:hover").length) {
+                    $(_this).popover("hide")
+                }
+            }, 100);
+        });
+    });
+   
+
+</script>
+{template '_footer'}
+

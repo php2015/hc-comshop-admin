@@ -1,0 +1,361 @@
+<div class="region-goods-details row">
+    <div class="region-goods-left col-sm-2">
+        基本信息
+    </div>
+    <div class="region-goods-right col-sm-10">
+		<div class="form-group">
+            <label class="col-sm-2 control-label must">商品名称</label>
+          
+            <div class="col-sm-9 col-xs-12"  style="padding-right:0;" >
+                <input type="text" name="goodsname" id="goodsname" class="form-control" value="{$item['goodsname']}" data-rule-required="true" />
+            </div>
+            
+        </div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">商品分类</label>
+			<div class="col-sm-9 col-xs-12">
+				<select id="cates"  name='cates[]' class="form-control select2"  multiple='' >
+					{loop $category $c}
+					<option value="{$c['id']}" {if is_array($item['cates']) &&  in_array($c['id'],$item['cates'])}selected{/if} >{$c['name']}</option>
+					{/loop}
+				</select>
+				
+			</div>
+		</div>
+		<div class="form-group">
+            <label class="col-sm-2 control-label">商品简介</label>
+            <div class="col-sm-9 subtitle">
+                <textarea  name="subtitle" id="subtitle" rows="5"  class="form-control" data-parent=".subtitle" maxlength="100" data-rule-maxlength="100">{$item['subtitle']}</textarea>
+                <div class="help-block">副标题的长度请控制在100字以内</div>
+            </div>
+        </div>
+
+		<div class="form-group">
+            <label class="col-sm-2 control-label">商品简短标题</label>
+            <div class="col-sm-9 subtitle">
+				<input type="text" name="print_sub_title" id="print_sub_title" class="form-control" value="{$item['print_sub_title']}" />
+				<div class="help-block">小票打印机使用，请控制字数，未填写默认截取商品标题(无须打印的可以不填写)</div>
+            </div>
+        </div>
+		
+		
+        <div class="form-group">
+			<label class="col-sm-2 control-label must">首页商品（大图）</label>
+			<div class="col-sm-9 col-xs-12 gimgs">
+				{php echo tpl_form_field_image2('big_img',$item['big_img'])}
+				<span class="help-block image-block">此图为首页商品大图模式封面图，尺寸建议为710*400或同比例</span>
+			</div>
+		</div>
+	
+		<div class="form-group">
+			<label class="col-sm-2 control-label must">商品图片</label>
+			<div class="col-sm-9 col-xs-12 gimgs">
+				
+				{php echo tpl_form_field_multi_image3('thumbs',$item['piclist'])}
+				
+				<span class="help-block image-block">第一张为缩略图，建议为正方型图片，其他为详情页面图片，尺寸建议宽度为640，并保持图片大小一致</span>
+				
+				<span class="help-block">您可以拖动图片改变其显示顺序 </span>
+				
+			</div>
+		</div>
+		
+		
+		<div class="form-group">
+            <label class="col-sm-2 control-label">分享标题</label>
+            <div class="col-sm-9 subtitle">
+                <input type="text" name="share_title" class="form-control" value="{$item['share_title']}" />
+                <div class="help-block"></div>
+            </div>
+        </div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label ">分享图片</label>
+			<div class="col-sm-9 col-xs-12 gimgs">
+				{php echo tpl_form_field_image2('goods_share_image',$item['goods_share_image'])}
+				<span class="help-block image-block">此图为商品详情页分享图片（比例为长宽比5:4）</span>
+			</div>
+		</div>
+		
+		<div class="form-group">
+            <label class="col-sm-2 control-label">商品状态</label>
+            <div class="col-sm-9 col-xs-12">
+                <label class="radio-inline"><input type="radio" name="grounding" value="1" {if !isset($item['grounding']) || $item['grounding'] == 1}checked="true"{/if}  /> 上架</label>
+                <label class="radio-inline"><input type="radio" name="grounding" value="0" {if isset($item['grounding']) && $item['grounding'] == 0}checked="true"{/if} /> 下架</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">首页推荐</label>
+            <div class="col-sm-9 col-xs-12">
+                <label class="radio-inline"><input type="radio" name="is_index_show" value="1" {if !isset($item['is_index_show']) || $item['is_index_show'] == 1}checked="true"{/if}  /> 是</label>
+                <label class="radio-inline"><input type="radio" name="is_index_show" value="0" {if isset($item['is_index_show']) && $item['is_index_show'] == 0}checked="true"{/if} /> 否</label>
+            </div>
+        </div>
+		
+		<div class="form-group" style="display:none;">
+            <label class="col-sm-2 control-label">分享描述</label>
+            <div class="col-sm-9 subtitle">
+                <input type="text" name="share_description" class="form-control" value="{$item['share_description']}" />
+                <div class="help-block">公众号才有的，小程序没有这个描述</div>
+            </div>
+        </div>
+		<div class="form-group price" >
+			<label class="col-sm-2 control-label">商品价格</label>
+			<div class="col-sm-9 col-xs-12">
+				
+				<div class="input-group">
+					<input type="text" name="price" id="price" class="form-control" value="{$item['price']}" />
+					<span class="input-group-addon">元 原价</span>
+					<input type="text" name="productprice" id="productprice" class="form-control" value="{$item['productprice']}" />
+					<span class="input-group-addon">元 </span>
+				</div>
+				<span class='help-block'></span>
+				
+			</div>
+		</div>
+		
+		<div class="form-group" >
+			<label class="col-sm-2 control-label">已出售数</label>
+			<div class="col-sm-6 col-xs-12">
+				<div class="input-group">
+					<input type="text" name="sales" id="sales" class="form-control" value="{$item['sales']}" />
+					<span class="input-group-addon">备注：前台销量=虚拟销量+实际销量</span>
+				</div>
+			</div>
+        </div>
+        <div class="form-group" >
+			<label class="col-sm-2 control-label">提货时间</label>
+			<div class="col-sm-10 col-xs-12" id="radPickupDateTip"> 
+				<?php $item['pick_up_type'] = isset($item['pick_up_type']) ? $item['pick_up_type'] : 1; ?>
+				<label class="radio-inline"><input type="radio"  name="pick_up_type" {if !isset($item['pick_up_type']) || $item['pick_up_type'] ==0 } checked {/if} value="0" /><span class="fake-radio"></span>当日达</label>
+				<label  class="radio-inline"><input type="radio"  name="pick_up_type" {if isset($item['pick_up_type']) && $item['pick_up_type'] ==1 } checked {/if} value="1" /><span class="fake-radio"></span>次日达</label>
+				<label  class="radio-inline"><input type="radio"  name="pick_up_type" {if isset($item['pick_up_type']) && $item['pick_up_type'] ==2 } checked {/if} value="2" /><span class="fake-radio"></span>隔日达</label>
+				<label  class="radio-inline"><input type="radio"  name="pick_up_type" {if isset($item['pick_up_type']) && $item['pick_up_type'] ==3 } checked {/if} value="3" /><span class="fake-radio"></span>自定义</label>
+				
+				<input class="form-control " id="txtPickupDateTip" name="pick_up_modify" style="vertical-align: sub; {if isset($item['pick_up_type']) && $item['pick_up_type'] ==3}display:inline-block;{else}display: none;{/if}width: 120px;" type="text" value="{$item['pick_up_modify']}">
+				
+              
+				
+				<span class="help-block">系统会根据当前日期自动生成具体提货时间，或直接显示自定义内容</span>
+			</div>
+        </div>
+        
+        <div class="form-group" style="display:none;">
+            <label class="col-sm-2 control-label"></label>
+            <div class="col-sm-9 col-xs-12">
+                <label class="checkbox-inline"><input type="checkbox" name="showsales" value="1" {if $item['showsales'] == 1}checked="true"{/if}   /> 显示销量</label>
+                <span class="help-block"></span>
+            </div>
+        </div>
+		<div class="form-group" style="display:none;">
+			<label class="col-sm-2 control-label">标签</label>
+			<div class="col-sm-9 col-xs-12">
+				<label class="checkbox-inline"><input type="checkbox" name="quality" value="1" {if !empty($item['quality'])}checked="true"{/if}   /> 正品保证</label>
+				<label class="checkbox-inline"><input type="checkbox" name="seven" value="1" {if !empty($item['seven'])}checked="true"{/if}   /> 7天无理由退换</label>
+				<label class="checkbox-inline"><input type="checkbox" name="repair" value="1" {if !empty($item['repair'])}checked="true"{/if}   /> 保修</label>
+			</div>
+		</div>
+		
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label">自定义标签</label>
+			<div class="col-sm-9 col-xs-12">
+				<?php echo tpl_selector('labelname',
+					array('key'=>'id',
+					'text'=>'tagname',
+					'type'=>'text',
+					'placeholder'=>'自定义标签名称',
+					'buttontext'=>'选择标签',
+					'items'=>$item['label'],
+					'nokeywords'=>1,
+					'autosearch'=>1,
+					'url'=>shopUrl('goods/labelquery')))?>
+			</div>
+		</div>
+		{if $delivery_type_express == 1}
+		<div class="form-group dispatch_info">
+			<label class="col-sm-2 control-label">运费设置</label>
+			<div class="col-sm-6 col-xs-6" style='padding-left:0'>
+				
+				<div class="input-group">
+					<span class='input-group-addon' style='border:none'><label class="radio-inline" style='margin-top:-7px;' ><input type="radio" name="dispatchtype" value="0" {if empty($item['dispatchtype'])}checked="true"{/if}   /> 运费模板</label></span>
+					<select class="form-control tpl-category-parent select2" id="dispatchid" name="dispatchid">
+						
+						{loop $dispatch_data $dispatch_item}
+						<option value="{$dispatch_item['id']}" {if $item['dispatchid'] == $dispatch_item['id']}selected="true"{/if}>{$dispatch_item['name']}</option>
+						{/loop}
+					</select>
+				</div>
+				
+			</div>
+		</div>
+		<div class="form-group dispatch_info">
+			<label class="col-sm-2 control-label"></label>
+			<div class="col-sm-6 col-xs-6" style='padding-left:0'>
+				<div class="input-group">
+					<span class='input-group-addon' style='border:none'><label class="radio-inline"  style='margin-top:-7px;' >
+					<input type="radio"name="dispatchtype" value="1" {if $item['dispatchtype'] == 1}checked="true"{/if}  /> 统一邮费</label></span>
+					<input type="text" name="dispatchprice" id="dispatchprice" class="form-control" value="{$item['dispatchprice']}" />
+					<span class="input-group-addon">元</span>
+				</div>
+
+			</div>
+		</div>
+		{/if}
+		
+		<?php if(!empty($is_open_fullreduction) && $is_open_fullreduction == 1){ ?>
+		<div class="form-group" >
+			<label class="col-sm-2 control-label">满减活动</label>
+			<div class="col-sm-10 col-xs-12"> 
+				<label class="radio-inline"><input type="radio"  name="is_take_fullreduction" {if !isset($item['is_take_fullreduction']) || $item['is_take_fullreduction'] ==1 } checked {/if} value="1" /><span class="fake-radio"></span>参与</label>
+				<label  class="radio-inline"><input type="radio"  name="is_take_fullreduction" {if isset($item['is_take_fullreduction']) && $item['is_take_fullreduction'] ==0 } checked {/if} value="0" /><span class="fake-radio"></span>不参与</label>
+			</div>
+		</div>
+		<?php } ?>
+	</div>
+	
+    
+</div>
+
+
+
+
+<div class="region-goods-details row">
+	<div class="region-goods-left col-sm-2">
+	      	团购时间
+    </div>
+    <div class="region-goods-right col-sm-10">
+    	
+    	<div class="form-group">
+            <label class="col-sm-2 control-label">团购时间</label>
+            <div class="col-sm-9 subtitle">
+            	{php echo tpl_form_field_daterange('time', array('starttime'=>date('Y-m-d H:i', $item['begin_time']),'endtime'=>date('Y-m-d H:i', $item['end_time'])),true);}
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<div class="region-goods-details row">
+	<div class="region-goods-left col-sm-2">
+	      	限购设置
+    </div>
+    <div class="region-goods-right col-sm-10">
+    	
+    	<div class="form-group">
+            <label class="col-sm-2 control-label">单次限购</label>
+            <div class="col-sm-9 subtitle">
+            	
+                <input type="text" name="one_limit_count" class="form-control " value="{$item['one_limit_count']}" />
+                
+                <div class="help-block">用户单次提交订单最多可购买数，默认为0表示不限制</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">历史限购</label>
+            <div class="col-sm-9 subtitle">
+            	
+                <input type="text" name="total_limit_count" class="form-control" value="{$item['total_limit_count']}" />
+                
+                <div class="help-block">用户历史累积最多可购买数，默认为0表示不限制</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="region-goods-details row">
+	<div class="region-goods-left col-sm-2" style="margin-top:10px;">
+	      团长
+    </div> 
+    <div class="region-goods-right col-sm-10">
+    	<div class="form-group">
+           <label class="col-sm-2 control-label">团长提成</label>
+            <div class="col-sm-10 ">
+               	<div class="input-group">
+					<input type="text" name="community_head_commission" id="community_head_commission" class="form-control valid" value="{if empty($item)}{$communityhead_commission}{else}{$item['community_head_commission']}{/if}" />
+					<span class="input-group-addon">% </span>
+				</div>
+				<div class="help-block">预计团长可得佣金¥<font id="precommiss_head_money_tip">{if isset($item['community_head_commission'])}{php echo round( ($item['community_head_commission']*$item['price'])/100 ,2) }{else}0.00{/if}</font>，将根据商品最终的成交价格来计算佣金</div>	
+            </div>
+        </div>
+		
+		<div class="form-group">
+           <label class="col-sm-2 control-label">所有团长可销售</label>
+            <div class="col-sm-10 ">
+               	<input type="checkbox" name="is_all_sale" class="form-control valid" {if empty($item) || $item['is_all_sale'] ==1 || !isset($item['is_all_sale'])}checked{/if} value="1" />
+					
+            </div>
+        </div>
+		
+	
+		
+    </div>
+</div>
+
+{if $_W['role'] != 'agenter'}			
+<div class="region-goods-details row">
+	<div class="region-goods-left col-sm-2" style="margin-top:10px;">
+	      供应商
+    </div> 
+    <div class="region-goods-right col-sm-10">
+    	<div class="form-group">
+           <label class="col-sm-2 control-label">选择供应商</label>
+            <div class="col-sm-10 ">
+          
+					{php echo tpl_selector('supply_id',array('key'=>'supply_id', 'autosearch' => 1, 'thumb'=>'logo', 'text'=>'shopname','placeholder'=>'供应商名称/供应商联系人/手机号','buttontext'=>'选择供应商 ', 'items'=>$item['supply_info'],'url'=>shopUrl('supply/zhenquery') ))}
+					
+				<div class="help-block"></div>	
+            </div>
+        </div>
+    </div>
+</div>	    
+{/if}    
+<script language="javascript">
+    require(['jquery.ui'],function(){
+        $('.multi-img-details').sortable({scroll:'false'});
+        $('.multi-img-details').sortable('option', 'scroll', false);
+        
+    })
+    $(function () {
+		$('#price').blur(function(){
+			var price = parseFloat( $("#price").val() );
+
+	  		  var community_head_commission = parseFloat( $("#community_head_commission").val() );
+	  		  if(price > 0 && community_head_commission >0)
+	  		  {
+	    			$('#precommiss_head_money_tip').html( ( (price * community_head_commission) /100 ).toFixed(2) );
+	  		  }else{
+				$('#precommiss_head_money_tip').html('0.00');
+	  	  	  }
+		})
+        
+    	$("#community_head_commission").blur(function(){
+  		  var price = parseFloat( $("#price").val() );
+
+  		  var community_head_commission = parseFloat( $(this).val() );
+  		  if(price > 0 && community_head_commission >0)
+  		  {
+    			$('#precommiss_head_money_tip').html( ( (price * community_head_commission) /100 ).toFixed(2) );
+  		  }else{
+			$('#precommiss_head_money_tip').html('0.00');
+  	  	  }
+  		  
+  		});
+  		
+        $('#radPickupDateTip input[type=radio]').click(function(){
+			var s_val = $(this).val();
+			if(s_val == 3)
+			{
+				$('#txtPickupDateTip').css('display','inline-block');
+			}else{
+				$('#txtPickupDateTip').css('display', 'none');
+			}
+         })
+        $("input[name=isstatustime]").off('click').on('click',function () {
+            if($(this).val()==1){
+                $("#shelves").show()
+            }else{
+                $("#shelves").hide();
+            }
+        })
+    })
+</script>

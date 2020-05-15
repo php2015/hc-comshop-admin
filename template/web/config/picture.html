@@ -1,0 +1,211 @@
+{template '_header'}
+<link rel="stylesheet" href="{php echo SNAILFISH_LOCAL}static/css/jquery.minicolors.css">
+<div class="page-header">当前位置：<span class="text-primary">图片设置</span></div>
+<div class="page-content">
+	<form action="" method="post" class="form-horizontal form-validate" enctype="multipart/form-data" >
+		<div class="form-group" style="display:none;">
+			<label class="col-lg control-label">后台登录图片</label>
+			<div class="col-sm-9 col-xs-12">
+				{php echo tpl_form_field_image2('parameter[admin_login_image]', $data['admin_login_image'])}
+			</div>
+		</div>
+		<div class="form-group" style="display:none;">
+            <label class="col-lg control-label">已售罄图片</label>
+            <div class="col-sm-9 col-xs-12">
+               {php echo tpl_form_field_image2('parameter[saleout]', $data['saleout'])}
+            </div>
+        </div>
+        <div class="form-group" >
+            <label class="col-lg control-label">首页商品列表加载图片</label>
+            <div class="col-sm-9 col-xs-12">
+            	{php echo tpl_form_field_image2('parameter[loading]', $data['loading'])}
+            	<span class='help-block'>未加载图片时显示的背景图（小图模式为1:1图片，大图模式为670*400）</span>
+            </div>
+        </div>
+        <div class="form-group" >
+            <label class="col-lg control-label">商品详情价格区域背景图</label>
+            <div class="col-sm-9 col-xs-12">
+                {php echo tpl_form_field_image2('parameter[goods_details_price_bg]', $data['goods_details_price_bg'])}
+                <span class='help-block'>未设置将使用默认，尺寸：710*100。</span>
+            </div>
+        </div>
+		
+		<div class="form-group" >
+            <label class="col-lg control-label">首页分享二维码背景图片</label>
+            <div class="col-sm-9 col-xs-12">
+            	{php echo tpl_form_field_image2('parameter[index_share_qrcode_bg]', $data['index_share_qrcode_bg'])}
+            	<span class='help-block'>不传则使用系统默认<b style="color:red">（请传jpg类型图片）</b>，尺寸：750*1334</span>
+            </div>
+        </div>
+		
+		<div class="form-group" >
+            <label class="col-lg control-label">二维码颜色</label>
+            <div class="col-sm-9 col-xs-12">
+            	<input type="text" name="parameter[qrcode_rgb]" class="form-control minicolors" value="{$data['qrcode_rgb']}" />
+            	<span class='help-block'>二维码颜色自定义，不设置则默认红色<b style="color:red"></b></span>
+            </div>
+        </div>
+		<div class="form-group" >
+            <label class="col-lg control-label">海报头像圆角填充颜色</label>
+            <div class="col-sm-9 col-xs-12">
+            	<input type="text" name="parameter[avatar_rgb]" class="form-control minicolors_avatar_rgb" value="{$data['avatar_rgb']}" />
+            	<span class='help-block'>二维码颜色自定义，不设置则默认黄色<b style="color:red"></b></span>
+            </div>
+        </div>
+		<div class="form-group">
+			<label class="col-lg control-label">首页二维码自定义时分</label>
+			<div class="col-sm-9 col-xs-12">
+				<input type="text" name="parameter[modify_index_share_time]" class="form-control" value="{$data['modify_index_share_time']}" />
+				<span class='help-block'>例如：08:00，用于首页海报显示的固定时分，日期随着每天改变</span>
+			</div>
+		</div>
+		
+		<div class="form-group" style="">
+            <label class="col-lg control-label">首页底部图片</label>
+            <div class="col-sm-9 col-xs-12">
+            	{php echo tpl_form_field_image2('parameter[index_bottom_image]', $data['index_bottom_image'])}
+				<span class='help-block'>原尺寸：250*56</span>
+            </div>
+        </div>
+        <div class="form-group" style="">
+            <label class="col-lg control-label">首页商品列表顶部图</label>
+            <div class="col-sm-9 col-xs-12">
+                {php echo tpl_form_field_image2('parameter[index_list_top_image]', $data['index_list_top_image'])}
+                <span class='help-block'>原尺寸：332*88</span>
+                <label class="col-lg control-label" style="width: auto;padding-left: 0;">关闭默认</label>
+                <div class="col-sm-9 col-xs-12">
+                    <label class='radio-inline'>
+                        <input type='radio' name='parameter[index_list_top_image_on]' value='0' {if !empty($data) && $data['index_list_top_image_on'] ==0 }checked {/if} /> 否
+                    </label>
+                    <label class='radio-inline'>
+                        <input type='radio' name='parameter[index_list_top_image_on]' value='1' {if empty($data) || $data['index_list_top_image_on'] ==1 }checked {/if} /> 是
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" style="">
+            <label class="col-lg control-label">商品详情页声明顶上图</label>
+            <div class="col-sm-9 col-xs-12">
+                {php echo tpl_form_field_image2('parameter[goods_details_middle_image]', $data['goods_details_middle_image'])}
+                <span class='help-block'>原尺寸：184*48</span>
+            </div>
+        </div>
+		
+        <div class="form-group" style="display:none;">
+            <label class="col-lg control-label">砍价页面首图</label>
+            <div class="col-sm-9 col-xs-12">
+            	{php echo tpl_form_field_image2('parameter[kanjia_index_image]', $data['kanjia_index_image'])}
+            </div>
+        </div>
+        <div class="form-group" style="display:none;">
+            <label class="col-lg control-label">抽奖团页面首图</label>
+            <div class="col-sm-9 col-xs-12">
+            	{php echo tpl_form_field_image2('parameter[pintuan_index_image]', $data['pintuan_index_image'])}
+            </div>
+        </div>
+        <div class="form-group" style="display:none;">
+            <label class="col-lg control-label">新人团页面首图</label>
+            <div class="col-sm-9 col-xs-12">
+            	{php echo tpl_form_field_image2('parameter[new_group_index_image]', $data['new_group_index_image'])}
+            </div>
+        </div>
+        <div class="form-group" style="display:none;">
+            <label class="col-lg control-label">分销申请页面首图</label>
+            <div class="col-sm-9 col-xs-12">
+            	{php echo tpl_form_field_image2('parameter[fenxiao_apply_index_image]', $data['fenxiao_apply_index_image'])}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg control-label">首页引导加入我的小程序</label>
+            <div class="col-sm-9 col-xs-12">
+                {php echo tpl_form_field_image2('parameter[index_lead_image]', $data['index_lead_image'])}
+                <span class='help-block'>原尺寸：750*1208</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg control-label">是否显示引导</label>
+            <div class="col-sm-9 col-xs-12">
+                <label class='radio-inline'>
+                    <input type='radio' name='parameter[is_show_index_lead_image]' value='0' {if !empty($data) && $data['is_show_index_lead_image'] ==0 }checked {/if} /> 否
+                </label>
+                <label class='radio-inline'>
+                    <input type='radio' name='parameter[is_show_index_lead_image]' value='1' {if empty($data) || $data['is_show_index_lead_image'] ==1 }checked {/if} /> 是
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg control-label">页头公共背景图</label>
+            <div class="col-sm-9 col-xs-12">
+                {php echo tpl_form_field_image2('parameter[common_header_backgroundimage]', $data['common_header_backgroundimage'])}
+                <span class='help-block'>尺寸：750*340</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg control-label">授权登录背景</label>
+            <div class="col-sm-9 col-xs-12">
+                {php echo tpl_form_field_image2('parameter[auth_bg_image]', $data['auth_bg_image'])}
+                <span class='help-block'>建议尺寸：750*1500</span>
+            </div>
+        </div>
+		
+		<div class="form-group" >
+            <label class="col-lg control-label">更新会员核销二维码</label>
+            <div class="col-sm-9 col-xs-12" style="padding-top:7px;">
+            	<a id="clear_qrcode" data-toggle='ajaxPost'  href="{php echo shopUrl('config/clearqrcode')}" data-confirm="确认更新会员核销二维码吗？"  class="text-primary"  target="_balnk">立即更新</a>
+            </div>
+        </div>
+		<div class="form-group">
+			<label class="col-lg control-label"></label>
+			<div class="col-sm-9 col-xs-12">
+				<input type="submit" value="提交" class="btn btn-primary"  />
+			</div>
+		</div>
+	</form>
+</div>
+<script src="{php echo SNAILFISH_LOCAL}static/js/jquery.minicolors.js"></script>
+<script>
+	$('input.minicolors').minicolors({
+        control: $(this).attr('data-control') || 'hue',
+        defaultValue: $(this).attr('data-defaultValue') || '',
+        inline: $(this).attr('data-inline') === 'true',
+        letterCase: $(this).attr('data-letterCase') || 'lowercase',
+        opacity: $(this).attr('data-opacity'),
+        position: $(this).attr('data-position') || 'bottom left',
+        change: function(hex, opacity) {
+            if (!hex)
+                return;
+            if (opacity)
+                hex += ', ' + opacity;
+            try {
+                console.log(hex);
+            } catch (e) {
+            }
+        },
+        theme: 'bootstrap'
+    });
+	$('input.minicolors_avatar_rgb').minicolors({
+        control: $(this).attr('data-control') || 'hue',
+        defaultValue: $(this).attr('data-defaultValue') || '',
+        inline: $(this).attr('data-inline') === 'true',
+        letterCase: $(this).attr('data-letterCase') || 'lowercase',
+        opacity: $(this).attr('data-opacity'),
+        position: $(this).attr('data-position') || 'bottom left',
+        change: function(hex, opacity) {
+            if (!hex)
+                return;
+            if (opacity)
+                hex += ', ' + opacity;
+            try {
+                console.log(hex);
+            } catch (e) {
+            }
+        },
+        theme: 'bootstrap'
+    });
+	
+	
+</script>
+{template '_footer'}

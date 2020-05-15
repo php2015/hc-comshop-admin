@@ -1,0 +1,159 @@
+{template '_header'}
+<style>
+    .popover{
+        width:170px;
+        font-size:12px;
+        line-height: 21px;
+        color: #0d0706;
+    }
+    .popover span{
+        color: #b9b9b9;
+    }
+    .nickname{
+        display: inline-block;
+        max-width:200px;
+        overflow: hidden;
+        text-overflow:ellipsis;
+        white-space: nowrap;
+        vertical-align: middle;
+    }
+    .tooltip-inner{
+        border:none;
+    }
+</style>
+<div class="page-header">
+    当前位置：<span class="text-primary">供应商提现列表</span>
+</div>
+<div class="page-content">
+    
+
+
+    <form action="" method="post" >
+		<div class="page-table-header">
+			<input type='checkbox' />
+			<div class="btn-group">
+						
+				<a class='btn btn-default btn-sm btn-op btn-operation'  data-toggle='batch' data-href="{php echo shopUrl('supply/agent_tixian',array('state'=>1))}"  data-confirm='确认要审核通过，确定已经打款给供应商?'>
+					<i class="icow icow-shenhetongguo"></i>审核通过
+				</a>
+				<a class='btn btn-default btn-sm btn-op btn-operation'  data-toggle='batch' data-href="{php echo shopUrl('supply/agent_tixian',array('state'=>0))}" data-confirm='确认要取消审核，申请中的金额将退回供应商账户?'>
+					<i class="icow icow-yiquxiao"></i>取消审核</a>
+				
+				
+			</div>
+		</div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-table-header">
+                    <input type='checkbox' />
+                </div>
+                <table class="table table-responsive">
+                    <thead>
+                    <tr>
+						<th style="width:25px;"></th>
+						<th style="width:60px;">ID</th>
+						<th style="">供应商</th>
+						<th style="">账户信息</th>
+						<th style="">提现金额</th>
+						<th style="display:none;">手续费</th>
+						<th style="">到账金额</th>
+						
+						<th style='width:150px;'>状态</th>
+						<th style=''>提现申请时间/处理时间</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+					{loop $list $row}
+						<tr>
+                            <td style="position: relative; ">
+                                <input type='checkbox' value="{$row['id']}" class="checkone"/>
+							</td>
+							<td>
+								{$row['id']}
+							</td>
+							<td > 
+								{$row['supper_info']['shopname']}
+                            </td>
+							<td>
+								{php echo '转账类型：'.$row['bankname']}<br/>
+								{php echo '账户：'.$row['bankaccount']}<br/>
+								{php echo empty($row['bankusername']) ? '': '持卡人姓名：'.$row['bankaccount']}<br/>
+							</td>
+							<td > 
+								{$row['money']}
+                            </td>
+							<td style="display:none;">
+								{$row['service_charge']}
+							</td>
+							<td> 
+								{$row['money']}
+                            </td>
+							<td>
+								{if $row['state'] ==2 }
+									拒绝提现
+								{elseif $row['state'] ==1 }
+									<text class='text-danger'>提现成功，已打款</text>
+								{else}
+								<span class='label {if $row['state']==1}label-primary{else}label-default{/if}'
+										  data-toggle='ajaxSwitch'   data-confirm ='确认要{if $row['state']==1 }取消审核{else}审核通过?已经打款给供应商{/if}?'
+										  data-switch-value='{$row['state']}'
+										  data-switch-value0='0|未审核|label label-default|{php echo shopUrl('supply/agent_tixian',array('state'=>1,'id'=>$row['id']))}'  
+										  data-switch-value1='1|已审核|label label-primary|{php echo shopUrl('supply/agent_tixian',array('state'=>0,'id'=>$row['id']))}'
+										 
+										>
+										  {if $row['state']==1}已审核{elseif $row['state']==2}已拒绝{else}未审核{/if}</span>
+								{/if}
+							</td>
+							
+							<td>
+							
+							{php echo date('Y-m-d H:i:s', $row['addtime'])}<br/>
+							{php echo empty($row['shentime']) ? '': date('Y-m-d H:i:s', $row['shentime'])}<br/>
+							
+							</td>
+                        </tr>
+					{/loop}
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="5" style="text-align: right">
+                            {$pager}
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script language="javascript">
+    
+    require(['bootstrap'], function () {
+        $("[rel=pop]").popover({
+            trigger: 'manual',
+            placement: 'right',
+            title: $(this).data('title'),
+            html: 'true',
+            content: $(this).data('content'),
+            animation: false
+        }).on("mouseenter", function () {
+            var _this = this;
+            $(this).popover("show");
+            $(this).siblings(".popover").on("mouseleave", function () {
+                $(_this).popover('hide');
+            });
+        }).on("mouseleave", function () {
+            var _this = this;
+            setTimeout(function () {
+                if (!$(".popover:hover").length) {
+                    $(_this).popover("hide")
+                }
+            }, 100);
+        });
+    });
+   
+
+</script>
+{template '_footer'}
+

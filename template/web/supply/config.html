@@ -1,0 +1,24 @@
+{template '_header'}
+<div class="page-header">当前位置：<span class="text-primary">申请页面设置</span></div>
+<div class="page-content">
+	<form action="" method="post" class="form-horizontal form-validate" enctype="multipart/form-data" >
+		
+		<div class="form-group">
+            <label class="col-lg control-label">供应商申请页面内容</label>
+            <div class="col-sm-9 col-xs-12 fixmore-input-group">
+                <div class="">
+                    {php echo tpl_ueditor('data[supply_apply_page]',$data['supply_apply_page'],array('height'=>'300'))}
+                </div>
+            </div>
+        </div>
+		
+		<div class="form-group">
+			<label class="col-lg control-label"></label>
+			<div class="col-sm-9 col-xs-12">
+				<input type="submit" value="提交" class="btn btn-primary"  />
+			</div>
+		</div>
+	</form>
+</div>
+
+{template '_footer'}

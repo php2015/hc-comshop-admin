@@ -1,0 +1,168 @@
+{template '_header'}
+<style>
+    tbody tr td{
+        position: relative;
+    }
+    tbody tr  .icow-weibiaoti--{
+        visibility: hidden;
+        display: inline-block;
+        color: #fff;
+        height:18px;
+        width:18px;
+        background: #e0e0e0;
+        text-align: center;
+        line-height: 18px;
+        vertical-align: middle;
+    }
+    tbody tr:hover .icow-weibiaoti--{
+        visibility: visible;
+    }
+    tbody tr  .icow-weibiaoti--.hidden{
+        visibility: hidden !important;
+    }
+    .full .icow-weibiaoti--{
+        margin-left:10px;
+    }
+    .full>span{
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        vertical-align: middle;
+        align-items: center;
+    }
+    tbody tr .label{
+        margin: 5px 0;
+    }
+    .goods_attribute a{
+        cursor: pointer;
+    }
+    .newgoodsflag{
+        width: 22px;height: 16px;
+        background-color: #ff0000;
+        color: #fff;
+        text-align: center;
+        position: absolute;
+        bottom: 70px;
+        left: 57px;
+        font-size: 12px;
+    }
+	.a{cursor: pointer;}
+</style>
+<div class="page-header">
+    当前位置：<span class="text-primary">配送人员管理</span>
+</div>
+<div class="page-content">
+	
+    <form action="" method="get" class="form-horizontal form-search" role="form">
+		<input type="hidden" name="c" value="site" />
+        <input type="hidden" name="a" value="entry" />
+        <input type="hidden" name="m" value="lionfish_comshop" />
+        <input type="hidden" name="do" value="admin" />
+        <input type="hidden" name="controller"  value="delivery.delivery_clerk" />
+        <div class="page-toolbar">
+             <div class="col-sm-8">
+                <div class="input-group">
+                      
+					  <input type="text" class="input-sm form-control" name='keyword' value="{$_GPC['keyword']}" placeholder="输入关键词然后回车">
+                      <span class="input-group-btn">
+                          <button class="btn btn-primary" type="submit"> 搜索</button>
+                      </span>
+                </div>
+            </div>
+        </div>
+    </form>
+	
+    <form action="" method="post" >
+       
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-table-header">
+                    <input type='checkbox' />
+					<span class="pull-right">
+						<a href="{php echo shopUrl('delivery.adddelivery_clerk')}" class="btn btn-primary"><i class="fa fa-plus"></i> 添加配送人员</a>
+					</span>
+                    <div class="btn-group">
+						
+                        <button class="btn btn-default btn-sm  btn-operation" type="button" data-toggle='batch-remove' data-confirm="确认要删除吗，删除后商品将进入回收站?" data-href="{php echo shopUrl('delivery/deldelivery_clerk')}">
+                            <i class='icow icow-shanchu1'></i> 删除
+						</button>
+                    </div>
+                </div>
+                <table class="table table-responsive">
+                    <thead>
+                     <tr>
+						<th style="width:25px;"></th>
+						<th style="width:80px;">ID</th>
+						<th style="">姓名</th>
+						<th style="width: 200px;">手机号</th>
+						
+						<th style="width: 100px;">操作</th>
+					</tr>
+                    </thead>
+                    <tbody>
+                    {loop $list $item}
+                    <tr>
+					<td style="width:25px;">
+						<input type='checkbox' value="{$item['id']}"/>
+					</td>
+					<td>
+						{$item['id']}
+					</td>
+					<td>
+						<div style="display: flex">
+						   <img class="img-40" src="{php echo tomedia($item['logo'])}" style='border-radius:50%;border:1px solid #efefef;' />
+						   <span style="display: flex;flex-direction: column;justify-content: center;align-items: flex-start;padding-left: 5px">
+							   <span class="nickname">
+								   {$item['name']}
+							   </span>
+						   </span>
+						</div>
+					</td>
+					<td>
+						{$item['mobile']}
+					</td>
+					
+						<td  style="overflow:visible;position:relative">
+							<a  class='btn btn-op btn-operation' href="{php echo shopUrl('delivery/adddelivery_clerk', array('id' => $item['id']))}" >
+								<span data-toggle="tooltip" data-placement="top" title="" data-original-title="编辑">
+									<i class="icow icow-bianji2"></i>编辑
+								</span>
+							</a>
+                            <a  class='btn  btn-op btn-operation' data-toggle='ajaxRemove' href="{php echo shopUrl('delivery/deldelivery_clerk',array('id' => $item['id']))}" data-confirm='确认要删除吗?'>
+                                <span data-toggle="tooltip" data-placement="top" title="" data-original-title="删除">
+                                    <i class='icow icow-shanchu1'></i>删除
+                                </span>
+                            </a>
+                        </td>
+                    </tr>
+                    {/loop}
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="3" style="padding-left: 0;">
+							<div class="page-table-header">
+								<input type="checkbox">
+								<div class="btn-group">
+									<button class="btn btn-default btn-sm  btn-operation" type="button" data-toggle='batch-remove' data-confirm="确认要删除吗，删除后商品将进入回收站?" data-href="{php echo shopUrl('delivery/deldelivery_clerk')}">
+										<i class='icow icow-shanchu1'></i> 删除
+									</button>
+								</div>
+							</div>
+                        </td>
+                        <td colspan="2" style="text-align: right">
+                            {$pager}
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        
+    </form>
+</div>
+{template '_footer'}
+<script>
+    
+	
+</script>

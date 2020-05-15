@@ -1,0 +1,185 @@
+{template '_header_base'}
+
+	{php $sysmenus = load_class('menu')->getMenu(true)}
+<div class="wb-header" style="position: fixed;">
+    <div class="logo {if !empty($system['foldnav'])}small{/if}">
+		<?php $shoplogo = load_model_class('front')->get_config_by_name('shoplogo'); ?>
+       {if empty($shoplogo)}
+            <img class='logo-img' src="../addons/lionfish_comshop/static/images/default-pic.jpg" />
+       {else} 
+			<img class='logo-img' src="{php echo tomedia( $shoplogo)}" />
+	   {/if}
+    </div>
+    <ul>
+        <li>
+            <a href="{php echo shopUrl()}" data-toggle="tooltip" data-placement="bottom" title="管理首页"><i class="icow icow-homeL"></i></a>
+        </li>
+        <li class="wb-shortcut"><a id="showmenu"><i class="icow icow-list"></i></a></li>
+    </ul>
+    
+    <div class="wb-header-flex"></div>
+
+
+    <ul>
+        {if $system['right_menu']['system']}
+            <li data-toggle="tooltip" data-placement="bottom" title="系统管理">
+                <a href="{php echo shopUrl('system')}"><i class="icow icow-syssetL"></i></a>
+            </li>
+        {/if}
+        <li class="dropdown auto"> 
+            <a class="javascript:;">
+				<?php 
+					if( $_W['role'] == 'agenter' )
+					{
+						$supper_info = json_decode(base64_decode($_GPC['__lionfish_comshop_agent']), true);
+						echo $supper_info['shopname'];
+					}else{
+					echo load_model_class('front')->get_config_by_name('shoname');
+					}
+				?>
+			<span></span></a>
+          
+        </li>
+		
+		{if $_W['role'] == 'agenter'  }
+		 <li data-toggle="tooltip" data-placement="bottom" title="退出登录" data-href="{php echo shopUrl('user/logout')}">
+            <a class="wb-header-logout"><i class="icow icow-exit"></i></a>
+        </li>
+		{else}
+		 <li data-toggle="tooltip" data-placement="bottom" title="退出登录" data-href="./index.php?c=user&a=logout&">
+            <a class="wb-header-logout"><i class="icow icow-exit"></i></a>
+        </li>
+		{/if}
+					
+       
+    </ul>
+
+    <div class="fast-nav {if !empty($system['foldnav'])}indent{/if}">
+        {if !empty($system['history'])}
+            <div class="fast-list history">
+                <span class="title">最近访问</span>
+                {loop $system['history'] $history_item}
+                    <a href="{$history_item['url']}">{$history_item['title']}</a>
+                {/loop}
+                <a href="javascript:;" id="btn-clear-history" {if $system['merch']} data-merch="1"{/if}>清除最近访问</a>
+            </div>
+        {/if}
+        <div class="fast-list menu">
+            <span class="title">全部导航</span>
+            {loop $sysmenus['shopmenu'] $index $shopmenu}
+                <a href="javascript:;" {if $index==0}class="active"{/if} data-tab="tab-{$index}">{$shopmenu['title']}</a>
+            {/loop}
+            {if !empty($system['funbar']['open']) && empty($system['merch'])}
+                <a href="javascript:;" class="bold" data-tab="funbar">自定义快捷导航</a>
+            {/if}
+        </div>
+        <div class="fast-list list">
+            {loop $sysmenus['shopmenu'] $index $shopmenu}
+                <div class="list-inner {if $index==0}in{/if}" data-tab="tab-{$index}">
+                    {loop $shopmenu['items'] $shopmenu_item}
+                        <a href="{$shopmenu_item['url']}">{$shopmenu_item['title']}</a>
+                    {/loop}
+                </div>
+            {/loop}
+            {if !empty($system['funbar']['open']) && empty($system['merch'])}
+                <div class="list-inner" data-tab="funbar" id="funbar-list">
+                    {loop $system['funbar']['data'] $funbar_item}
+                        <a href="{$funbar_item['href']}" style="{if $funbar_item['bold']}font-weight: bold;{/if} color: {$funbar_item['color']};">{$funbar_item['text']}</a>
+                    {/loop}
+                    <a href="javascript:;" class="text-center funbar-add-btn"><i class="fa fa-plus"></i> 添加快捷导航</a>
+                    {if !empty($system['funbar']['data'])}
+                        <a href="{php echo shopUrl('sysset/funbar')}" class="text-center funbar-add-btn"><i class="fa fa-edit"></i> 编辑快捷导航</a>
+                    {/if}
+                    {template 'funbar'}
+                </div>
+            {/if}
+        </div>
+    </div>
+</div>
+
+	<!-- 一级导航 -->
+    <div class="wb-nav {if !empty($system['foldnav'])}fold{/if}">
+        <p class="wb-nav-fold"><i class="icow icow-zhedie"></i></p>
+        <ul>
+            {loop $sysmenus['menu'] $sysmenu}
+                <li {if $sysmenu['active']}class="active"{/if}>
+                    <a href="{php echo empty($sysmenu['index'])? shopUrl($sysmenu['route']): shopUrl($sysmenu['route']. '.'. $sysmenu['index'])}">
+                        {if $sysmenu['route']=='plugins'}
+                        <svg class="iconplug" aria-hidden="true">
+                            <use xlink:href="#icow-yingyong3"></use>
+                        </svg>
+                        {else}
+                            {if !empty($sysmenu['icon'])}
+                                <i class="snailfishicon snailfishicon-{$sysmenu['icon']}"></i>
+                            {/if}
+                        {/if}
+                        <span class="wb-nav-title">{$sysmenu['text']}</span>
+                    </a>
+                    <span class="wb-nav-tip">{$sysmenu['text']}</span>
+                </li>
+            {/loop}
+        </ul>
+    </div>
+
+    <!-- 二级导航 -->
+    {if !empty($sysmenus['submenu']['items']) && empty($is_hide_nav)}
+        <div class="wb-subnav">
+          <div style="width: 100%;height: 100%;overflow-y: auto">
+				<div class="subnav-scene">
+					{if empty($sysmenus['submenu']['route']) && !$sysmenus['submenu']['main']}
+						{$sysmenus['submenu']['subtitle']}
+					{else}
+						<a href="{php echo webUrl($sysmenus['submenu']['route'])}">{$sysmenus['submenu']['subtitle']}</a>
+					{/if}
+				</div>
+
+				{if !empty($sysmenus['submenu']['items'])}
+					{loop $sysmenus['submenu']['items'] $submenu}
+						{if !empty($submenu['items'])}
+							<div  class='menu-header {if $submenu['active'] || empty($submenu['is_show_list'])}active data-active{/if}'><div class="menu-icon fa fa-caret-{if $submenu['active'] || empty($submenu['is_show_list']) }down{else}right{/if}"></div>{$submenu['title']}</div>
+							<ul {if $submenu['active'] || empty($submenu['is_show_list']) }style="display: block"{/if}>
+								{loop $submenu['items'] $threemenu}
+									<li {if $threemenu['active']}class="active"{/if}><a href="{$threemenu['url']}" style="cursor: pointer;" data-route="{$threemenu['route']}">{$threemenu['title']}</a>
+								{/loop}
+							</ul>
+						{else}
+							<ul class="single">
+								<li {if $submenu['active']}class="active"{/if} style=" position: relative"><a href="{$submenu['url']}" style="cursor: pointer;" data-route="{$submenu['route']}">{$submenu['title']}</a></li>
+							</ul>
+						{/if}
+					{/loop}
+				{/if}
+              <div class="wb-subnav-fold icow"></div>
+          </div>
+        </div>
+    {/if}
+	<div class="wb-panel in" style="display:none;" id="auth_upgrade">
+         <div class="panel-group" id="panel-accordion">
+			<div class="panel panel-default">
+				<div class="panel-heading" role="tab" id="headingFive" data-toggle="collapse" data-parent="#panel-accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseThree">
+					<h4 class="panel-title">
+						<i class="icow icow-lingdang1"></i> <a style="position:relative;">系统提示 <i class="systips"></i></a> <span></span>
+					</h4>
+				</div>
+				<div id="collapseFive" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFour">
+					<ul class="panel-body">
+						<li class="panel-list">
+							<div class="panel-list-text nomsg">暂无消息提醒</div>
+							<div class="panel-list-text upmsg" style="display: none; max-height: none;">
+								<div>检测到更新</div>
+								<div>新版本 <span id="sysversion">------</span></div>
+								<div>新版本 <span id="sysrelease">------</span></div>
+								<div>
+									<a class="text-primary" href="{php echo shopUrl('system/auth_upgrade')}">立即更新</a>
+									<a class="text-warning" href="javascript:check_check_upgrade_hide();" style="margin-left: 15px;">暂不提醒</a>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+   </div>
+
+   
+   <div class="wb-container {if !empty($system['foldpanel'])}right-panel{/if}">

@@ -1,0 +1,81 @@
+{template '_header'}
+<div class="page-header">当前位置：<span class="text-primary">圈子设置</span></div>
+<div class="page-content">
+	<form action="" method="post" class="form-horizontal form-validate" enctype="multipart/form-data" >
+		
+		
+		<div class="form-group">
+			<label class="col-lg control-label">圈子名称</label>
+			<div class="col-sm-9 col-xs-12 fixmore-input-group">
+				<div class='input-group' >
+					<input type="text" name="data[title]" class="form-control" value="{php echo empty($data['title'])?'':$data['title']}"  />
+					
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg control-label">圈子分享标题</label>
+			<div class="col-sm-9 col-xs-12 fixmore-input-group">
+				<div class='input-group' >
+					<input type="text" name="data[quan_share]" class="form-control" value="{php echo empty($data['quan_share'])?'':$data['quan_share']}"  />
+					
+				</div>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-lg control-label">圈子状态</label>
+			<div class="col-sm-9 col-xs-12">
+				
+				<label class="radio-inline"><input type="radio"  name="data[quan_status]" value="0" {if $data['status'] ==1} checked="checked"{/if} /> 开启</label>
+				<label class="radio-inline"><input type="radio"  name="data[quan_status]" value="1" {if $data['status'] ==0 || empty($data) } checked="checked"{/if} /> 关闭</label>
+				<span class="help-block"></span>
+				
+			</div>
+        </div>
+		<div class="form-group" >
+			<label class="col-lg control-label"> 限制发布会员 </label>
+			<div class="col-sm-9 col-xs-12">
+				
+				<label class="radio-inline"><input type="radio"  name="data[limit_send_member]" value="1" {if $data['limit_send_member'] ==1} checked="checked"{/if} /> 限制</label>
+				<label class="radio-inline"><input type="radio"  name="data[limit_send_member]" value="0" {if $data['limit_send_member'] ==0} checked="checked"{/if} /> 不限制</label>
+				<span class="help-block">授权用户才能发布圈子内容</span>
+			   
+			</div>
+        </div>
+		
+		 <div class="form-group">
+			<label class="col-lg control-label must">选择会员</label>
+			<div class="col-sm-9 col-xs-12">
+				{php echo tpl_selector('member_id',array('key'=>'member_id','multi' =>1, 'required'=>false, 'text'=>'nickname', 'thumb'=>'avatar','placeholder'=>'昵称/姓名/手机号','buttontext'=>'选择会员 ', 'items'=>$saler,'url'=>shopUrl('user/zhenquery') ))}
+			</div>
+		</div>
+		
+		 
+		  
+		
+		<div class="form-group">
+			<label class="col-lg control-label"></label>
+			<div class="col-sm-9 col-xs-12">
+				<input type="submit" value="提交" class="btn btn-primary"  />
+			</div>
+		</div>
+	</form>
+</div>
+<script>
+$(function(){
+	
+	
+	$('#clear_member_qrcode').click(function(){
+		$.ajax({
+			url:"{php echo shopUrl('distribution/clear_user_member_qrcode')}",
+			type:'get',
+			dataType:'json',
+			success:function(){
+				tip.msgbox.suc('清空成功');
+			}
+		})
+	})
+})
+</script>
+{template '_footer'}

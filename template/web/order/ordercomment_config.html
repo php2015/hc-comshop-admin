@@ -1,0 +1,34 @@
+{template '_header'}
+<div class="page-header">当前位置：<span class="text-primary">评价设置</span></div>
+<div class="page-content">
+	<form action="" method="post" class="form-horizontal form-validate" enctype="multipart/form-data" >
+		
+		
+		<div class="form-group">
+            <label class="col-lg control-label">评价审核：</label>
+            <div class="col-sm-9 col-xs-12">
+                <div class="input-group fixsingle-input-group">
+						
+                    <label class='radio-inline'><input type='radio' name='data[open_comment_shenhe]' value='1' {if !empty($data) &&  $data['open_comment_shenhe']=='1'}checked{/if} /> 开启</label>
+
+					<label class='radio-inline'><input type='radio' name='data[open_comment_shenhe]' value='0' {if empty($data['open_comment_shenhe']) || $data['open_comment_shenhe'] ==0 }checked{/if}  /> 关闭</label>
+					<span class='help-block'>审核：审核通过才显示。不审核，评价完成直接显示</span>
+                </div>
+            </div>
+        </div>
+		
+		
+		
+		
+		
+		
+		<div class="form-group">
+			<label class="col-lg control-label"> </label>
+			<div class="col-sm-9 col-xs-12">
+				<input type="submit" value="提交" class="btn btn-primary"  />
+			</div>
+		</div>
+	</form>
+</div>
+
+{template '_footer'}

@@ -1,0 +1,63 @@
+    <form action="" method="post"  class="form-horizontal form-validate" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="{$timeslot['id']}" />
+		 <input type="hidden" name="controller" value="application.spike.modifytimeslot" />
+		
+		
+	  <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">{if !empty($timeslot)}编辑{else}添加{/if}秒杀时间段</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label must">时间段名称</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="name" class="form-control" value="{$timeslot['name']}" data-rule-required='true'/>
+                    </div>
+                </div>
+               
+                 
+               <div class="form-group">
+                    <label class="col-sm-2 control-label">每日开始时间</label>
+                     <div class="col-sm-9 col-xs-12">
+                
+                          <div class="input-group short-row">
+                          
+                          <input name="hour" placeholder="时" value="{if empty($timeslot)}0{else}{$timeslot['hour']}{/if}" class="form-control"> <span class="input-group-addon">时</span>
+                          <input name="minute" placeholder="分" value="{if empty($timeslot)}0{else}{$timeslot['minute']}{/if}" class="form-control"> <span class="input-group-addon">分</span>
+                          <input name="second" placeholder="秒" value="{if empty($timeslot)}0{else}{$timeslot['second']}{/if}" class="form-control"> <span class="input-group-addon">秒</span>
+                          
+                          </div>
+                         
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">每日结束时间</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <div class="input-group short-row">
+                          
+                          <input name="endhour" placeholder="时" value="{if empty($timeslot)}0{else}{$timeslot['endhour']}{/if}" class="form-control"> <span class="input-group-addon">时</span>
+                          <input name="endminute" placeholder="分" value="{if empty($timeslot)}0{else}{$timeslot['endminute']}{/if}" class="form-control"> <span class="input-group-addon">分</span>
+                          <input name="endsecond" placeholder="秒" value="{if empty($timeslot)}0{else}{$timeslot['endsecond']}{/if}" class="form-control"> <span class="input-group-addon">秒</span>
+                          
+                        </div>
+                    </div>
+                </div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">是否启用</label>
+					<div class="col-sm-9 col-xs-12">
+						<label class="radio-inline"><input type="radio" name="state" value="1" {if empty($timeslot) || ($timeslot['state'] == 1)}checked="checked"{/if}> 启用</label>
+						<label class="radio-inline"><input type="radio" name="state" value="0" {if !empty($timeslot) && ($timeslot['state'] == 0)}checked="checked"{/if}> 禁用</label>
+						<span class="help-block"></span>
+					</div>
+				</div>
+				
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="submit">提交</button>
+                <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+            </div>
+        </div>
+</form>
+

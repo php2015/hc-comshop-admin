@@ -1,0 +1,162 @@
+{template '_header'}
+<div class="page-header">
+    当前位置：<span class="text-primary">商品评价管理</span>
+</div>
+<div class="page-content">
+	
+    <form action="" method="get" class="form-horizontal form-search" role="form">
+		<input type="hidden" name="c" value="site" />
+        <input type="hidden" name="a" value="entry" />
+        <input type="hidden" name="m" value="lionfish_comshop" />
+        <input type="hidden" name="do" value="admin" />
+        <input type="hidden" name="controller"  value="order.ordercomment" />
+        <div class="page-toolbar">
+             <div class="col-sm-4">
+                <div class="input-group">
+                      <input type="text" class="input-sm form-control" name='keyword' value="{$_GPC['keyword']}" placeholder="请输入关键词">
+                      <span class="input-group-btn">
+                          <button class="btn btn-primary" type="submit"> 搜索</button>
+                      </span>
+                </div>
+            </div>
+        </div>
+    </form>
+    <form action="" method="post" >
+       
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-table-header">
+                    <input type='checkbox' />
+					<span class="pull-right">
+						<a href="{php echo shopUrl('goods/addvircomment')}" class="btn btn-primary"><i class="fa fa-plus"></i> 添加虚拟评价</a>
+					</span>
+                    <div class="btn-group">
+                        
+                        <button class="btn btn-default btn-sm btn-operation" type="button" data-toggle='batch' data-href="{php echo shopUrl('goods/commentstate',array('state'=>1))}">
+                            <i class='icow icow-qiyong'></i>启用
+                        </button>
+                        <button class="btn btn-default btn-sm btn-operation" type="button" data-toggle='batch'  data-href="{php echo shopUrl('goods/commentstate',array('state'=>0))}">
+                            <i class='icow icow-jinyong'></i> 禁用
+                        </button>
+                        
+                        
+                        <button class="btn btn-default btn-sm btn-operation" type="button" data-toggle='batch-remove' data-confirm="确认要删除?" data-href="{php echo shopUrl('goods/deletecomment')}">
+                            <i class="icow icow-shanchu1"></i>删除
+                         
+                    </div>
+					
+                </div>
+                <table class="table table-responsive">
+                    <thead>
+                    <tr>
+                        <th style="width:25px;"></th>
+                        <th style="width:250px;">商品/订单编号</th>
+                        <th style="">评价者</th>
+                        <th >评价内容</th>
+                        <th >评价图片</th>
+						<th >星级</th>
+                        <th >评价时间</th>
+                        <th >审核状态</th>
+                        <th style="width:65px;text-align: center;">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {loop $label $row}
+                    <tr>
+                        <td>
+                            <input type='checkbox' value="{$row['comment_id']}"/>
+                        </td>
+                        <td>
+							<div rel="pop" style="display: flex" title="">
+							   <img class="img-40" src="{php echo tomedia($row['goods_image']);}" style="border-radius:50%;border:1px solid #efefef;">
+							   <span style="display: flex;flex-direction: column;justify-content: center;align-items: flex-start;padding-left: 5px">
+									<span class="nickname">
+									  {$row['goods_name']}   &nbsp;
+									  {$row['order_num_alias']}  
+									  
+									</span>
+								</span>
+							</div>
+						</td>
+						<td>
+							<div rel="pop" style="display: flex" title="">
+							   <img class="img-40" src="{php echo tomedia($row['avatar']);}" style="border-radius:50%;border:1px solid #efefef;">
+							   <span style="display: flex;flex-direction: column;justify-content: center;align-items: flex-start;padding-left: 5px">
+									<span class="nickname">
+									  {$row['user_name']}                                       
+									</span>
+								</span>
+							</div>
+						</td>
+						<td>
+							{$row['content']}         
+						</td>
+						<td>
+							<?php 
+								$images_str = unserialize($row['images']);
+								$images_arr = explode(',', $images_str);
+							
+							?>
+							{loop $images_arr $img}
+							<?php  if($img != 'undefined' && !empty($img) ){ ?>
+							 <img class="img-40" src="{php echo tomedia($img);}" style="border-radius:50%;border:1px solid #efefef;">
+							 <?php } ?>
+							{/loop}	
+						</td>
+						<td>
+							描述等级:{$row['star']}<br/>
+							价格合理等级:{$row['star2']}<br/>
+							质量满意等级:{$row['star3']}<br/>
+						</td>
+						<td>
+							{php echo date('Y-m-d H:i:s',$row['add_time']);}
+						</td>
+                        <td>
+                            <span class='label {if $row['state']==1}label-primary{else}label-default{/if}'
+                             data-toggle='ajaxSwitch'
+                            data-switch-value='{$row['state']}'
+                            data-switch-value0='0|未审核|label label-default|{php echo shopUrl('goods/commentstate',array('state'=>1,'id'=>$row['comment_id']))}'
+                            data-switch-value1='1|审核|label label-primary|{php echo shopUrl('goods/commentstate',array('state'=>0,'id'=>$row['comment_id']))}'
+                            '>{if $row['state']==1}审核{else}未审核{/if}</span>
+                        </td>
+                        <td style="text-align: center;">
+							<a data-toggle='ajaxRemove' href="{php echo shopUrl('goods/deletecomment', array('id' => $row['comment_id']))}"class="btn btn-default btn-sm btn-operation btn-op" data-confirm='确认要删除此标签组吗?'>
+								<span data-toggle="tooltip" data-placement="top" title="" data-original-title="删除">
+								 <i class="icow icow-shanchu1"></i>
+							</span>
+							</a>
+                        </td>
+                    </tr>
+                    {/loop}
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="2">
+                            <input type="checkbox">
+                            <div class="btn-group">
+                               
+                                <button class="btn btn-default btn-sm btn-operation" type="button" data-toggle='batch' data-href="{php echo shopUrl('goods/commentstate',array('state'=>1))}">
+                                    <i class='icow icow-qiyong'></i>启用
+                                </button>
+                                <button class="btn btn-default btn-sm btn-operation" type="button" data-toggle='batch'  data-href="{php echo shopUrl('goods/commentstate',array('state'=>0))}">
+                                    <i class='icow icow-jinyong'></i> 禁用
+                                </button>
+                                <button class="btn btn-default btn-sm btn-operation" type="button" data-toggle='batch-remove' data-confirm="确认要删除?" data-href="{php echo shopUrl('goods/deletecomment')}">
+                                    <i class="icow icow-shanchu1"></i>删除
+								</button>
+                            </div>
+                        </td>
+                        <td colspan="2" style="text-align: right">
+                            {$pager}
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        
+    </form>
+</div>
+
+{template '_footer'}
+

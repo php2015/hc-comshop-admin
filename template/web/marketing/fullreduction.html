@@ -1,0 +1,52 @@
+{template '_header'}
+<div class="page-header">当前位置：<span class="text-primary">满减设置</span></div>
+<div class="page-content">
+	<form action="" method="post" class="form-horizontal form-validate" enctype="multipart/form-data" >
+		
+		<div class="form-group">
+            <label class="col-lg control-label">是否开启</label>
+            <div class="col-sm-9 col-xs-12">
+                <label class='radio-inline'>
+                    <input type='radio' id="close_fullreduction" name='parameter[is_open_fullreduction]' value='0' {if empty($data) || $data['is_open_fullreduction'] ==0 }checked {/if} /> 关闭
+                </label>
+                <label class='radio-inline'>
+                    <input type='radio' id="open_fullreduction" name='parameter[is_open_fullreduction]' value='1' {if !empty($data) && $data['is_open_fullreduction'] ==1 }checked {/if} /> 开启
+                </label>
+            </div>
+        </div>
+		
+		<div class="form-group price" id="operate_fullreduction" {if empty($data) || $data['is_open_fullreduction'] ==0 }style="display:none;"{/if}>
+			<label class="col-sm-2 control-label">满</label>
+			<div class="col-sm-9 col-xs-12">
+				
+				<div class="input-group">
+					<input type="text" name="parameter[full_money]"  class="form-control valid" value="{$data['full_money']}" aria-invalid="false">
+					<span class="input-group-addon">元 减</span>
+					<input type="text" name="parameter[full_reducemoney]" class="form-control" value="{$data['full_reducemoney']}">
+					<span class="input-group-addon">元 </span>
+				</div>
+				<span class="help-block"></span>
+				
+			</div>
+		</div>
+		
+		
+		<div class="form-group">
+			<label class="col-lg control-label"></label>
+			<div class="col-sm-9 col-xs-12">
+				<input type="submit" value="提交" class="btn btn-primary"  />
+			</div>
+		</div>
+	</form>
+</div>
+<script>
+	$(function(){
+		$('#close_fullreduction').click(function(){
+			$('#operate_fullreduction').hide();
+		})
+		$('#open_fullreduction').click(function(){
+			$('#operate_fullreduction').show();
+		})
+	})
+</script>
+{template '_footer'}

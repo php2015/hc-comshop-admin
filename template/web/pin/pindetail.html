@@ -1,0 +1,219 @@
+{template '_header'}
+<style>
+   table td{
+       border:none !important;
+    }
+</style>
+<div class="page-header">
+    当前位置：<span class="text-primary">拼团详情</span>
+</div>
+<div class="page-content">
+<div class="tab-content">
+    
+    <div class="step-region" >
+        <ul class="ui-step ui-step-3" >
+            <li {if 0<$teaminfo['pay_time'] }class="ui-step-done"{/if}>
+            <div class="ui-step-number" >1</div>
+            <div class="ui-step-title" >团长开团</div>
+            <div class="ui-step-meta" >{if 0<$teaminfo['pay_time']}{php echo date('Y-m-d',$teaminfo['pay_time'])}<br/>{php echo date('H:i:s',$teaminfo['pay_time'])}{/if}</div>
+            </li>
+            <li class="ui-step-done">
+            <div class="ui-step-number">2</div>
+            <div class="ui-step-title">拼团进行中</div>
+            <div class="ui-step-meta">{if !empty($teaminfo['paytime']) && 0==$teaminfo['state'] && $teaminfo['end_time'] > time()}正在召集小伙伴{/if}</div>
+            </li>
+
+            <li {if $teaminfo['state'] >= 1 }class="ui-step-done"{/if}>
+            <div class="ui-step-number" >3</div>
+            <div class="ui-step-title">{if $teaminfo['state'] == 1}拼团成功{elseif $teaminfo['state'] == 2}拼团失败{else}拼团完成{/if}</div>
+            <div class="ui-step-meta"></div>
+            </li>
+        </ul>
+    </div>
+    
+	
+    {if !empty($teaminfo['gid'])}
+    <div class="panel panel-default">
+        <div class="panel-default">
+            <div class="table-responsive">
+                <table class="table table-hover" style="margin:0;">
+                    <thead>
+                    <tr>
+                        <th style="width:80px;">商品图</th>
+                        <th style="width:180px;">商品名</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr data-toggle="popover" data-trigger="hover" data-placement="left" class="js-goods-img">
+                        <td>
+                            <img class="scrollLoading" src="{php echo tomedia($teaminfo['thumb'])}" height="50" width="50" style="border:1px solid #ddd;" >
+                        </td>
+                        <td class="line-feed">{$teaminfo['title']}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {else}
+    <div style="padding:0 0 10px 0;"><strong>商品不存在或已删除</strong></div>
+    {/if}
+    <div class="panel panel-default">
+        <div class="panel-body col-xs-6 col-sm-6 col-md-6">
+            <div class="form-group" style="margin:0;height:30px;">
+                <label class="col-xs-12 col-sm-3 col-md-3 control-label">团状态:</label>
+                <div class="col-sm-9 col-xs-12">
+                    <p class="">
+						<?php if($teaminfo['state'] == 0 && $teaminfo['end_time'] > time() ){ ?>
+							<span class="label label-info">拼 团 中</span>
+						<?php } ?>
+						{if $teaminfo['state']==1}<span class="label label-success">拼团成功</span>{/if}
+						
+						<?php if( ($teaminfo['state'] == 0 && $teaminfo['end_time'] < time()) || $teaminfo['state'] ==2 ){ ?>
+							<span class="label label-danger">拼团失败</span>
+						<?php } ?>
+                    </p>
+                </div>
+                <div style="clear:both;"></div>
+            </div>
+            <div class="form-group" style="margin:0;height:30px;">
+                <label class="col-xs-12 col-sm-3 col-md-3 control-label">团ID :</label>
+                <div class="col-sm-9 col-xs-12">
+                    <p class="">{$teaminfo['pin_id']}</p>
+                </div>
+                <div style="clear:both;"></div>
+            </div>
+            <div class="form-group" style="margin:0;height:30px;">
+                <label class="col-xs-12 col-sm-3 col-md-3 control-label">团购进度 :</label>
+                <div class="col-sm-9 col-xs-12">
+                    <p class=""><span style="color:red;">{$teaminfo['buy_count']}</span>/{$teaminfo['need_count']}</p>
+					
+					<?php if($teaminfo['is_jiqi'] ==1){ ?>
+					<p class=""><span class="label label-danger">机器人成团</span></p>
+					<?php } ?>
+                </div>
+                <div style="clear:both;"></div>
+            </div>
+        </div>
+        <div class="panel-body col-xs-6 col-sm-6 col-md-6">
+            <div class="form-group" style="margin:0;height:60px;">
+                <label class="col-xs-12 col-sm-3 col-md-3 control-label">团长头像:</label>
+                <div class="col-sm-9 col-xs-12">
+                    <p class="">
+                        <img class="scrollLoading" src="{php echo tomedia($member['avatar'])}" 
+                             height="50" width="50" style="border:1px solid #ddd;">
+                    </p>
+                </div>
+                <div style="clear:both;"></div>
+            </div>
+            <div class="form-group" style="margin:0;height:30px;">
+                <label class="col-xs-12 col-sm-3 col-md-3 control-label">团长昵称 :</label>
+                <div class="col-sm-9 col-xs-12">
+                    <p class="">{$member['username']}</p>
+                </div>
+                <div style="clear:both;"></div>
+            </div>
+            <div class="form-group" style="margin:0;height:30px;display:none;" >
+                <label class="col-xs-12 col-sm-3 col-md-3 control-label">团长优惠 :</label>
+                <div class="col-sm-9 col-xs-12">
+                    <p class="text-danger">
+                        {if $teaminfo['discount']}- ¥{$teaminfo['discount']}{else}暂无优惠{/if}
+                    </p>
+                </div>
+                <div style="clear:both;"></div>
+            </div>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    <div class="panel panel-default">
+        <div class="table-responsive">
+            <table class='table table-responsive' style='table-layout: fixed;overflow: hidden'>
+                <tr style='background:#f8f8f8'>
+                    <td style='width:60px;border-left:1px solid #f2f2f2;'>买家</td>
+                    <td style='width:150px;'></td>
+                    <td style='width:100px;text-align: center;'>状态</td>
+                    <td style='width:100px;text-align: center;'>金额</td>
+                    <td style='width:100px;text-align: center;'>操作</td>
+                </tr>
+                {loop $orders $item}
+                <tr ><td colspan='5' style='height:20px;padding:0;border-top:none;'>&nbsp;</td></tr>
+                <tr class='trorder'>
+                    <td colspan='5' >
+                       <span style="font-weight: bold">{php echo date('Y-m-d',$item['date_added'])} {php echo date('H:i:s',$item['date_added'])}</span> 订单编号:  {$item['order_num_alias']}
+                    </td>
+                </tr>
+                <tr class='trbody'>
+                    <td style='overflow:hidden;'>
+                        <img src="{php echo tomedia($item['avatar'])}"  style='width:50px;height:50px;border:1px solid #ccc; padding:1px;'>
+                    </td>
+                    <td style='text-align: left;overflow:hidden;border-left:none;'>
+                        
+                        <a href="{php echo shopUrl('member/detail',array('id'=>$item['member_id']))}"> {$item['nickname']}</a>
+                        <br/>{$item['shipping_tel']}
+                    </td>
+                    <td style='text-align:center;' >
+                        {if $item['payment_code']=='weixin'}
+                        <span> <i class="icow icow-weixinzhifu text-success" style="font-size: 17px"></i>微信支付</span>
+                        {elseif $item['payment_code']=='yuer'}
+                        <span> <i class="icow icow-yue text-warning" style="font-size: 17px;"></i><span>余额支付</span></span>
+                        {elseif $item['pay_type']=='admin'}
+                        <span> <i class="icow icow-kuajingzhifuiconfukuan text-danger" style="font-size: 17px"></i>后台付款</span>
+                        {/if}
+						
+                        <br />
+                        <span class='label label-default'>{$order_status_arr[$item['order_status_id']]}</span>
+                       
+                    </td>
+                    <td style='text-align:center' >
+					
+						￥{php echo number_format($item['total'],2)}
+						{if $item['shipping_fare']>0}
+						<br/>(含运费:￥{php echo number_format( $item['shipping_fare'],2)})
+						{/if}
+                    </td>
+                    <td style='text-align:center' > 
+                        <a class='op text-primary'  href="{php echo shopUrl('order/detail', array('id' => $item['order_id']))}" >查看详情</a>
+                    </td>
+                    
+                </tr>
+                <tr style="border-bottom:none;background:#f9f9f9;">
+                    <td colspan='5' style='text-align:left;height:0;padding:0'></td>
+                </tr>
+                {/loop}
+				{loop $jia_list $item}
+				<tr ><td colspan='5' style='height:20px;padding:0;border-top:none;'>&nbsp;</td></tr>
+                <tr class='trorder'>
+                    <td colspan='5' >
+                       <span style="font-weight: bold">{php echo date('Y-m-d',$item['addtime'])} {php echo date('H:i:s',$item['addtime'])}</span> 
+                    </td>
+                </tr>
+                <tr class='trbody'>
+                    <td style='overflow:hidden;'>
+                        <img src="{php echo tomedia($item['avatar'])}"  style='width:50px;height:50px;border:1px solid #ccc; padding:1px;'>
+                    </td>
+                    <td style='text-align: left;overflow:hidden;border-left:none;'>
+                        {$item['uname']}&nbsp;&nbsp;<span class="label label-danger">(机器人)</span>
+                    </td>
+                    <td style='text-align:center;' >
+                       
+                       
+                    </td>
+                    <td style='text-align:center' >
+					
+						
+                    </td>
+                    <td style='text-align:center' > 
+                      
+                    </td>
+                    
+                </tr>
+                <tr style="border-bottom:none;background:#f9f9f9;">
+                    <td colspan='5' style='text-align:left;height:0;padding:0'></td>
+                </tr>
+				{/loop}
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+{template '_footer'}

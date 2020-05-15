@@ -1,0 +1,75 @@
+
+
+
+{template '_header'}
+<div class="page-header">当前位置：<span class="text-primary">提现申请</span></div>
+<div class="page-content">
+	<form action="" method="post" class="form-horizontal form-validate" enctype="multipart/form-data" >
+		
+		<div class="form-group" style="display:none;">
+			<label class="col-lg control-label">提现方式</label>
+			<div class="col-sm-9 col-xs-12" >
+				
+				<label for="cashcredit" class="checkbox-inline">
+					<input type="checkbox" name="data[commiss_cashcredit]" value="1" id="cashcredit" {if !empty($data['commiss_cashcredit'])}checked="true"{/if} /> 提现到商城余额
+				</label>
+				<label for="cashweixin" class="checkbox-inline">
+					<input type="checkbox" name="data[commiss_cashweixin]" value="1" id="cashweixin" {if !empty($data['commiss_cashweixin'])}checked="true"{/if} /> 提现到微信钱包
+				</label>
+				<label for="cashother" class="checkbox-inline">
+					<input type="checkbox" name="data[commiss_cashother]" value="1" id="cashother" {if !empty($data['commiss_cashother'])}checked="true"{/if} /> 其他提现方式
+				</label>
+				<div class='help-block'>提示: 提现方式支持多选</div>
+				
+				{if $data['cashcredit']==1}提现到商城余额; {/if}
+				{if $data['cashweixin']==1}提现到微信钱包; {/if}
+				{if $data['cashother']==1}其他提现方式; {/if}
+			</div>
+				
+		</div>
+
+		<div class="form-group cashother-group" style="display: none;" {if empty($data['commiss_cashother'])}style="display: none;"{/if}>
+			<label class="col-lg control-label">其他提现方式</label>
+			<div class="col-sm-9 col-xs-12" >
+				
+				<label for="cashalipay" class="checkbox-inline">
+					<input type="checkbox" name="data[commiss_cashalipay]" value="1" id="cashalipay" {if !empty($data['commiss_cashalipay'])}checked="true"{/if} /> 手动提现到支付宝
+				</label>
+				<label for="cashcard" class="checkbox-inline">
+					<input type="checkbox" name="data[commiss_cashcard]" value="1" id="cashcard" {if !empty($data['commiss_cashcard'])}checked="true"{/if} /> 手动提现到银行卡
+				</label>
+				<div class='help-block'></div>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-lg control-label">最小提现金额</label>
+			<div class="col-sm-9 col-xs-12 fixmore-input-group">
+				<div class='input-group' >
+					<input type="text" name="data[commiss_min_money]" class="form-control" value="{php echo empty($data['commiss_min_money'])?1:$data['commiss_min_money']}"  />
+					<div class="input-group-addon">元</div>
+				</div>
+				<span class="help-block">分销商的佣金达到此额度时才能提现,最低1元</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg control-label">每日提现上限</label>
+			<div class="col-sm-9 col-xs-12 fixmore-input-group">
+				<div class='input-group' >
+					<input type="text" name="data[commiss_day_max_money]" class="form-control" value="{php echo empty($data['commiss_day_max_money'])?1:$data['commiss_day_max_money']}"  />
+					<div class="input-group-addon">元</div>
+				</div>
+				<span class="help-block">0元表示不限制每日提现金额</span>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-lg control-label"></label>
+			<div class="col-sm-9 col-xs-12">
+				<input type="submit" value="提交" class="btn btn-primary"  />
+			</div>
+		</div>
+	</form>
+</div>
+
+{template '_footer'}

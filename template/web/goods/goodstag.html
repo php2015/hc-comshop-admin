@@ -1,0 +1,121 @@
+{template '_header'}
+<div class="page-header">
+    当前位置：<span class="text-primary">标签管理</span>
+</div>
+<div class="page-content">
+	
+    <form action="" method="get" class="form-horizontal form-search" role="form">
+		<input type="hidden" name="c" value="site" />
+        <input type="hidden" name="a" value="entry" />
+        <input type="hidden" name="m" value="lionfish_comshop" />
+        <input type="hidden" name="do" value="admin" />
+        <input type="hidden" name="controller"  value="goods.goodstag" />
+        <div class="page-toolbar">
+             <div class="col-sm-4">
+                <div class="input-group">
+                      <input type="text" class="input-sm form-control" name='keyword' value="{$_GPC['keyword']}" placeholder="请输入关键词">
+                      <span class="input-group-btn">
+                          <button class="btn btn-primary" type="submit"> 搜索</button>
+                      </span>
+                </div>
+            </div>
+        </div>
+    </form>
+    <form action="" method="post" >
+       
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-table-header">
+                    <input type='checkbox' />
+					<span class="pull-right">
+						<a href="{php echo shopUrl('goods/addtags')}" class="btn btn-primary"><i class="fa fa-plus"></i> 添加新标签</a>
+					</span>
+                    <div class="btn-group">
+                        <button class="btn btn-default btn-sm btn-operation" type="button" data-toggle='batch' data-href="{php echo shopUrl('goods/tagsstate',array('state'=>1))}">
+                            <i class='icow icow-qiyong'></i>启用
+                        </button>
+                        <button class="btn btn-default btn-sm btn-operation" type="button" data-toggle='batch'  data-href="{php echo shopUrl('goods/tagsstate',array('state'=>0))}">
+                            <i class='icow icow-jinyong'></i> 禁用
+                        </button>
+                        <button class="btn btn-default btn-sm btn-operation" type="button" data-toggle='batch-remove' data-confirm="确认要删除?" data-href="{php echo shopUrl('goods/deletetags')}">
+                            <i class="icow icow-shanchu1"></i>删除
+                    </div>
+                </div>
+                <table class="table table-responsive">
+                    <thead>
+                    <tr>
+                        <th style="width:25px;"></th>
+                        <th>标签名称</th>
+                        <th>标签内容</th>
+                        <th style="width:80px;">状态</th>
+                        <th style="width:65px;text-align: center;">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {loop $label $row}
+                    <tr>
+                        <td>
+                            {if $row['id']!='default'}
+                            <input type='checkbox' value="{$row['id']}"/>
+                            {/if}
+                        </td>
+                        <td>{$row['tagname']}</td>
+                        {if $row['type']==0}
+                            <td>{$row['tagcontent']}</td>
+                        {else}
+                            <td><img style="width: 30px;" src="{php echo tomedia($row['tagcontent'])}"></td>
+                        {/if}
+                        <td>
+                            <span class='label {if $row['state']==1}label-primary{else}label-default{/if}'
+                             data-toggle='ajaxSwitch'
+                            data-switch-value='{$row['state']}'
+                            data-switch-value0='0|禁用|label label-default|{php echo shopUrl('goods/tagsstate',array('state'=>1,'id'=>$row['id']))}'
+                            data-switch-value1='1|启用|label label-primary|{php echo shopUrl('goods/tagsstate',array('state'=>0,'id'=>$row['id']))}'
+                            '>{if $row['state']==1}启用{else}禁用{/if}</span>
+                        </td>
+                        <td style="text-align: center;">
+                            <a href="{php echo shopUrl('goods/edittags', array('id' => $row['id']))}" class="btn btn-default btn-sm btn-operation btn-op">
+                                 <span data-toggle="tooltip" data-placement="top" title="" data-original-title="  修改">
+                                     <i class="icow icow-bianji2"></i>
+                                </span>
+                            </a>
+                            {if $row['id']!='default'}
+                                <a data-toggle='ajaxRemove' href="{php echo shopUrl('goods/deletetags', array('id' => $row['id']))}"class="btn btn-default btn-sm btn-operation btn-op" data-confirm='确认要删除此标签组吗?'>
+                                    <span data-toggle="tooltip" data-placement="top" title="" data-original-title="删除">
+                                     <i class="icow icow-shanchu1"></i>
+                                </span>
+                                </a>
+                            {/if}
+                        </td>
+                    </tr>
+                    {/loop}
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="2">
+                            <input type="checkbox">
+                            <div class="btn-group">
+                                <button class="btn btn-default btn-sm btn-operation" type="button" data-toggle='batch' data-href="{php echo shopUrl('goods/tagsstate',array('state'=>1))}">
+                                    <i class='icow icow-qiyong'></i>启用
+                                </button>
+                                <button class="btn btn-default btn-sm btn-operation" type="button" data-toggle='batch'  data-href="{php echo shopUrl('goods/tagsstate',array('state'=>0))}">
+                                    <i class='icow icow-jinyong'></i> 禁用
+                                </button>
+                                <button class="btn btn-default btn-sm btn-operation" type="button" data-toggle='batch-remove' data-confirm="确认要删除?" data-href="{php echo shopUrl('goods/deletetags')}">
+                                    <i class="icow icow-shanchu1"></i>删除
+                            </div>
+                        </td>
+                        <td colspan="3" style="text-align: right">
+                            {$pager}
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        
+    </form>
+</div>
+
+{template '_footer'}
+

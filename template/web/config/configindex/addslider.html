@@ -1,0 +1,104 @@
+{template '_header'}
+
+<div class="page-header">
+    当前位置：<span class="text-primary">{if !empty($item['id'])}编辑{else}添加{/if}幻灯片{if !empty($item['id'])}({$item['advname']}){/if}</span>
+</div>
+
+<div class="page-content">
+    <form action="" method="post" class="form-horizontal form-validate" enctype="multipart/form-data">
+        <input type="hidden" name="data[id]" value="{$item['id']}"/>
+        <div class="form-group">
+            <label class="col-lg control-label must">幻灯片名称</label>
+            <div class="col-sm-9 col-xs-12 ">
+                <input type="text" id='advname' name="data[advname]" class="form-control" value="{$item['advname']}" data-rule-required="true"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg control-label">图片</label>
+            <div class="col-sm-9 col-xs-12">
+                {php echo tpl_form_field_image2('data[thumb]', $item['thumb'])}
+                <span class='help-block'>建议尺寸:710 * 320或同比例, 请将所有幻灯片图片尺寸保持一致</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg control-label">链接类型</label>
+            <div class="col-sm-9 col-xs-12">
+                <label class='radio-inline'>
+                    <input type='radio' name='data[linktype]' value=0 {if $item['linktype']==0 || empty($item)}checked{/if} /> webview外链
+                </label>
+                <label class='radio-inline'>
+                    <input type='radio' name='data[linktype]' value=1 {if $item['linktype']==1 && !empty($item) }checked{/if} /> 本小程序链接
+                </label>
+                <label class='radio-inline'>
+                    <input type='radio' name='data[linktype]' value=2 {if $item['linktype']==2 && !empty($item) }checked{/if} /> 外部小程序链接
+                </label>
+            </div>
+        </div>
+        <div class="form-group" style="{if $item['linktype']!=2}display: none;{/if}" id="typeGroup">
+            <label class="col-lg control-label">外链小程序appid</label>
+            <div class="col-sm-9 col-xs-12 ">
+                <input type="text" id='appid' name="data[appid]" class="form-control" value="{$item['appid']}" maxlength="32"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg control-label">链接</label>
+            <div class="col-sm-9 col-xs-12">
+                <div class="input-group form-group" style="margin: 0;">
+                    <input type="text" value="{$item['link']}" class="form-control valid" name="data[link]" placeholder="" id="advlink">
+                    <span class="input-group-btn">
+                        <span data-input="#advlink" data-toggle="selectUrl" class="btn btn-default">选择链接</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+		<div class="form-group">
+            <label class="col-lg control-label">排序</label>
+            <div class="col-sm-9 col-xs-12">
+                <input type="text" name="data[displayorder]" class="form-control" value="{$item['displayorder']}"/>
+                <span class='help-block'>数字越大，排名越靠前</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg control-label">状态</label>
+            <div class="col-sm-9 col-xs-12">
+                <label class='radio-inline'>
+                    <input type='radio' name='data[enabled]' value=1 {if $item['enabled']==1 || empty($item)}checked{/if} /> 显示
+                </label>
+                <label class='radio-inline'>
+                    <input type='radio' name='data[enabled]' value=0 {if $item['enabled']==0 && !empty($item) }checked{/if} /> 隐藏
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg control-label"></label>
+            <div class="col-sm-9 col-xs-12">
+               
+                <input type="submit" value="提交" class="btn btn-primary"/>
+               
+                <input type="button" name="back" onclick='history.back()' style='margin-left:10px;' value="返回列表" class="btn btn-default" />
+            </div>
+        </div>
+    </form>
+</div>
+
+<script language='javascript'>
+    function formcheck() {
+        if ($("#advname").isEmpty()) {
+            Tip.focus("advname", "请填写幻灯片名称!");
+            return false;
+        }
+        return true;
+    }
+
+    $(document).ready(function() {
+        $('input[type=radio][name="data[linktype]"]').change(function() {
+            if (this.value == 2) {
+                $('#typeGroup').show();
+            } else {
+                $('#typeGroup').hide();
+            }
+        });
+    });
+</script>
+
+{template '_footer'}

@@ -1,0 +1,127 @@
+{template '_header'}
+<div class="page-header">
+    当前位置：<span class="text-primary">会员等级</span>
+</div>
+<div class="page-content">
+	
+    <form action="" method="get" class="form-horizontal form-search" role="form">
+		<input type="hidden" name="c" value="site" />
+        <input type="hidden" name="a" value="entry" />
+        <input type="hidden" name="m" value="lionfish_comshop" />
+        <input type="hidden" name="do" value="admin" />
+        <input type="hidden" name="controller"  value="user.userlevel" />
+        <div class="page-toolbar">
+             <div class="col-sm-4">
+                <div class="input-group">
+                      <input type="text" class="input-sm form-control" name='keyword' value="{$_GPC['keyword']}" placeholder="请输入关键词">
+                      <span class="input-group-btn">
+                          <button class="btn btn-primary" type="submit"> 搜索</button>
+                      </span>
+                </div>
+            </div>
+        </div>
+    </form>
+    <form action="" method="post" >
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-table-header">
+                    <input type='checkbox' />
+					<span class="pull-right">
+						<a data-toggle="ajaxModal" href="{php echo shopUrl('user/adduserlevel')}" class="btn btn-primary"><i class="fa fa-plus"></i> 添加会员等级</a>
+					</span>
+                    <div class="btn-group">
+                        <button class="btn btn-default btn-sm btn-operation" type="button" data-toggle='batch-remove' data-confirm="确认要删除?" data-href="{php echo shopUrl('user/deleteuserlevel')}">
+                            <i class="icow icow-shanchu1"></i>删除
+                        </button>
+                    </div>
+					
+                </div>
+                <table class="table table-responsive">
+                    <thead>
+                    <tr>
+                        <th style="width:25px;"></th>
+						 <th style="width:60px;">ID</th>
+                        <th style="width:60px;">等级</th>
+                        <th>等级名称</th>
+						<th style="width:100px;">等级logo</th>
+                        <th style="width:80px;">折扣</th>
+                        <th>会员升级金额</th>
+						<th style="width:100px;">会员数量</th>
+                        <th style="width: 260px">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {loop $list $row}
+                            <tr {if $row['id']=='default'}style='background:#eee;'{/if}>
+                                <td>
+                                    {if $row['id']!='default'}
+                                        <input type='checkbox' value="{$row['id']}"/>
+                                    {/if}
+                                </td>
+								 <td>
+									{if $row['id']!='default'}
+                                       {$row['id']}
+									{else}
+										0
+                                    {/if}
+                                </td>
+                                <td style="cursor: pointer;" onclick='location="{php echo shopUrl("user/user")}"'>{$row['level']}</td>
+                                <td style="cursor: pointer;" onclick='location="{php echo shopUrl("user/user")}"'>{$row['levelname']}</td>
+								<td style="cursor: pointer;" >
+									<img src="{php echo tomedia($row['logo'])}" style="width:60px;" />
+								</td>
+								<td >{$row['discount']}%</td>
+								<td >{$row['level_money']}</td>
+								<td >{$row['membercount']}</td>
+								<td>
+                                    
+									<a class='btn btn-op btn-operation' href="{php echo shopUrl('user/user', array('level_id' => $row['id']))}">
+										<span data-toggle="tooltip" data-placement="top" data-original-title="等级会员">
+												<i class='icow icow-member'></i>等级会员
+											</span>
+									</a>
+                                    
+                                    {if $row['id']!='default'}
+                                       
+											<a data-toggle="ajaxModal" class="btn btn-op btn-operation" href="{php echo shopUrl('user/adduserlevel', array('id' => $row['id']))}">
+												 <span data-toggle="tooltip" data-placement="top" title="" data-original-title="编辑">
+													<i class="icow icow-bianji2"></i>编辑
+												 </span>
+											</a>
+							
+											
+                                            <a data-toggle='ajaxRemove' href="{php echo shopUrl('user/deleteuserlevel', array('id' => $row['id']))}"class="btn btn-op btn-operation" data-confirm='确认要删除此分组吗?'>
+                                                <span data-toggle="tooltip" data-placement="top" data-original-title="删除">
+                                                   <i class='icow icow-shanchu1'></i>删除
+                                                </span>
+                                            </a>
+                                       
+                                    {/if}
+                                </td>
+                            </tr>
+                        {/loop}
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="2">
+                            <input type="checkbox">
+                            <div class="btn-group">
+								<button class="btn btn-default btn-sm btn-operation" type="button" data-toggle='batch-remove' data-confirm="确认要删除?" data-href="{php echo shopUrl('user/deleteuserlevel')}">
+									<i class="icow icow-shanchu1"></i>删除
+								</button>
+                            </div>
+                        </td>
+                        <td colspan="2" style="text-align: right">
+                            {$pager}
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        
+    </form>
+</div>
+
+{template '_footer'}
+

@@ -1,0 +1,102 @@
+{template '_header'}
+<div class="page-header">当前位置：<span class="text-primary">团长设置</span></div>
+<div class="page-content">
+	<form action="" method="post" class="form-horizontal form-validate" enctype="multipart/form-data" >
+		<div class="form-group">
+			<label class="col-lg control-label">团长提成比例</label>
+			<div class="col-sm-9 col-xs-12 fixmore-input-group">
+				<div class="input-group">
+					<input type="text" name="data[default_comunity_money]" class="form-control valid" value="{php echo empty($data['default_comunity_money'])?0:$data['default_comunity_money']}" />
+					<span class="input-group-addon">% </span>
+				</div>
+				<div class="help-block">预计团长可得佣金 = 商品最终的成交价格 * 比例%</div>	
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg control-label">社区距离限制</label>
+			<div class="col-sm-9 col-xs-12 fixmore-input-group">
+				<div class="input-group">
+					<input type="text" name="data[default_comunity_limit_mile]" class="form-control valid" value="{php echo empty($data['default_comunity_limit_mile'])?0:$data['default_comunity_limit_mile']}" />
+					<span class="input-group-addon">公里 </span>
+				</div>
+				<div class="help-block">社区列表限制某个距离内显示, 0代表不限制</div>	
+			</div>
+		</div>
+		
+		<div class="form-group">
+            <label class="col-lg control-label">前端添加核销会员</label>
+            <div class="col-sm-9 col-xs-12">
+                <label class='radio-inline'>
+                    <input type='radio' name='data[open_community_addhexiaomember]' value='0' {if !empty($data) && $data['open_community_addhexiaomember'] ==0 }checked {/if} /> 关闭
+                </label>
+                <label class='radio-inline'>
+                    <input type='radio' name='data[open_community_addhexiaomember]' value='1' {if empty($data) || $data['open_community_addhexiaomember'] ==1 }checked {/if} /> 开启
+                </label>
+            </div>
+        </div>
+		
+		<div class="form-group" style="display:none;">
+            <label class="col-lg control-label">团长二维码背景</label>
+            <div class="col-sm-9 col-xs-12">
+            	{php echo tpl_form_field_image2('data[user_qrcode_image]', $data['user_qrcode_image'])}
+            	<span class='help-block'>超级团长二维码，用于分享邀请会员&nbsp;&nbsp;<a href="javascript:;" id="clear_member_qrcode" class="btn btn-primary">清空会员二维码</a></span>
+            </div>
+        </div>
+		<div class="form-group" style="display:none;">
+			<label class="col-lg control-label">二维码X坐标</label>
+			<div class="col-sm-9 col-xs-12 fixmore-input-group">
+				<div class='input-group' >
+					<input type="text" name="data[user_qrcode_x]" class="form-control" value="{php echo empty($data['user_qrcode_x'])?0:$data['user_qrcode_x']}"  />
+					
+				</div>
+				<span class="help-block">背景图中放置的二维码位置，距离左上角的X坐标</span>
+			</div>
+		</div>
+		<div class="form-group" style="display:none;">
+			<label class="col-lg control-label">二维码Y坐标</label>
+			<div class="col-sm-9 col-xs-12 fixmore-input-group">
+				<div class='input-group' >
+					<input type="text" name="data[user_qrcode_y]" class="form-control" value="{php echo empty($data['user_qrcode_y'])?0:$data['user_qrcode_y']}"  />
+					
+				</div>
+				<span class="help-block">背景图中放置的二维码位置，距离左上角的Y坐标</span>
+			</div>
+		</div>
+		<div class="form-group">
+            <label class="col-lg control-label">团长申请页面内容</label>
+            <div class="col-sm-9 col-xs-12 fixmore-input-group">
+                <div class="">
+                    {php echo tpl_ueditor('data[communityhead_apply_page]',$data['communityhead_apply_page'],array('height'=>'300'))}
+                </div>
+            </div>
+        </div>
+		
+		
+		 
+		  
+		
+		<div class="form-group">
+			<label class="col-lg control-label"></label>
+			<div class="col-sm-9 col-xs-12">
+				<input type="submit" value="提交" class="btn btn-primary"  />
+			</div>
+		</div>
+	</form>
+</div>
+<script>
+$(function(){
+	
+	
+	$('#clear_member_qrcode').click(function(){
+		$.ajax({
+			url:"{php echo shopUrl('distribution/clear_user_member_qrcode')}",
+			type:'get',
+			dataType:'json',
+			success:function(){
+				tip.msgbox.suc('清空成功');
+			}
+		})
+	})
+})
+</script>
+{template '_footer'}
