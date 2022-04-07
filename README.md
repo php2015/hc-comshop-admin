@@ -1,2 +1,3 @@
 # hc-comshop-admin
-社区团购 后台项目
+v12.4 狮子鱼社区团购 后台项目 layui规格
+hc-comshop-admin/template/default/points/addgoods.html
